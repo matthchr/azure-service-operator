@@ -11,9 +11,10 @@ import (
 
 	kerrors "k8s.io/apimachinery/pkg/util/errors"
 
-	"github.com/Azure/azure-service-operator/hack/generator/pkg/astmodel"
 	"github.com/pkg/errors"
 	"k8s.io/klog/v2"
+
+	"github.com/Azure/azure-service-operator/hack/generator/pkg/astmodel"
 )
 
 // removeTypeAliases creates a pipeline stage removing type aliases
