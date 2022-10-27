@@ -129,7 +129,6 @@ typeTransformers:
         value:
           name: string
     because: Tags is defined as map[string]interface{} when it should be map[string]string
-
   - group: cache
     name: RedisProperties_Status
     property: AccessKeys
@@ -647,6 +646,10 @@ objectModelConfiguration:
           - HostName
           - Port
           - SSLPort
+# TODO: Does this need to be uncommented
+#      RedisCreateProperties:
+#        SubnetId:
+#          $armReference: true
       Redis_FirewallRule:
         $exportAs: RedisFirewallRule
         $supportedFrom: v2.0.0-alpha.4
@@ -1317,6 +1320,146 @@ objectModelConfiguration:
       SignalR:
         $export: true
         $supportedFrom: v2.0.0-alpha.4
+  sql:
+    2021-11-01:
+      ManagedInstance:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Administrator: -- for some reason can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_Database:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_Databases_BackupLongTermRetentionPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_Databases_BackupShortTermRetentionPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_Databases_SecurityAlertPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Databases_TransparentDataEncryption:  -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_DistributedAvailabilityGroup:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_DnsAliase: # TODO: Name fix
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_EncryptionProtector: -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_SecurityAlertPolicy: -- Cant find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_ServerTrustCertificate:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      ManagedInstances_VulnerabilityAssessment:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Server:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_Administrator: -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+#      Servers_AdvancedThreatProtectionSetting: -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_AuditingSetting:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_AzureADOnlyAuthentication:  -- can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_ConnectionPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Database:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_AdvancedThreatProtectionSetting: -- can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_AuditingSetting:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_BackupLongTermRetentionPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_BackupShortTermRetentionPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_DataMaskingPolicy: -- Cant find status -- there's also a "Rules" subresource here
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_ExtendedAuditingSetting:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_Extension: -- Testing removing this
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_GeoBackupPolicy: -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_MaintenanceWindow: -- Can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_SecurityAlertPolicy:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_SyncGroup:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_SyncGroups_SyncMember:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+#      Servers_Databases_TransparentDataEncryption: -- can't find status
+#        $export: true
+#        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_VulnerabilityAssessment:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_WorkloadGroup:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Databases_WorkloadGroups_WorkloadClassifier:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_DnsAliase: # TODO: Name fix
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_ElasticPool:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_FailoverGroup:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_FirewallRule:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_Ipv6FirewallRule:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_JobAgent:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_OutboundFirewallRule:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_SyncAgent:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_VirtualNetworkRule:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
+      Servers_VulnerabilityAssessment:
+        $export: true
+        $supportedFrom: v2.0.0-beta.4
   storage:
     2021-04-01:
       EncryptionIdentity:

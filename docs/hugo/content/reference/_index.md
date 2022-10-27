@@ -281,6 +281,44 @@ Existing instances of *Single Server* can be migrated to *Azure Database for MyS
 | [SignalR](https://azure.github.io/azure-service-operator/reference/signalrservice/v1beta20211001/#signalrservice.azure.com/v1beta20211001.SignalR)           | 2021-10-01  | v1beta20211001      | v2.0.0-beta.0  | [View](https://github.com/Azure/azure-service-operator/tree/main/v2/samples/signalrservice/v1beta/v1beta20211001_signalr.yaml)           |
 | [SignalR](https://azure.github.io/azure-service-operator/reference/signalrservice/v1alpha1api20211001/#signalrservice.azure.com/v1alpha1api20211001.SignalR) | 2021-10-01  | v1alpha1api20211001 | v2.0.0-alpha.4 | [View](https://github.com/Azure/azure-service-operator/tree/main/v2/samples/signalrservice/v1alpha1api/v1alpha1api20211001_signalr.yaml) |
 
+## Sql
+
+| Resource                                                  | ARM Version | CRD Version    | Supported From | Sample |
+|-----------------------------------------------------------|-------------|----------------|----------------|--------|
+| ManagedInstance                                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_Database                                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_Databases_BackupLongTermRetentionPolicy  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_Databases_BackupShortTermRetentionPolicy | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_Databases_SecurityAlertPolicy            | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_DistributedAvailabilityGroup             | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_DnsAliase                                | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_ServerTrustCertificate                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ManagedInstances_VulnerabilityAssessment                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Server                                                    | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_AuditingSetting                                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_ConnectionPolicy                                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Database                                          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_AuditingSetting                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_BackupLongTermRetentionPolicy           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_BackupShortTermRetentionPolicy          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_ExtendedAuditingSetting                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_SecurityAlertPolicy                     | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_SyncGroup                               | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_SyncGroups_SyncMember                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_VulnerabilityAssessment                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_WorkloadGroup                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Databases_WorkloadGroups_WorkloadClassifier       | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_DnsAliase                                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_ElasticPool                                       | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_FailoverGroup                                     | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_FirewallRule                                      | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_Ipv6FirewallRule                                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_JobAgent                                          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_OutboundFirewallRule                              | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_SyncAgent                                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_VirtualNetworkRule                                | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Servers_VulnerabilityAssessment                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+
 ## Storage
 
 | Resource                                                                                                                                                                                                 | ARM Version | CRD Version         | Supported From | Sample                                                                                                                                                                     |

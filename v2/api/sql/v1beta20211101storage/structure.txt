@@ -1,0 +1,1146 @@
+github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101storage
+├── APIVersion: Enum (1 value)
+│   └── "2021-11-01"
+├── ManagedInstance: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/resources/v1betav20191001.ResourceGroup
+│   ├── Spec: Object (31 properties)
+│   │   ├── AdministratorLogin: *string
+│   │   ├── AdministratorLoginPassword: *genruntime.SecretReference
+│   │   ├── Administrators: *Object (7 properties)
+│   │   │   ├── AdministratorType: *string
+│   │   │   ├── AzureADOnlyAuthentication: *bool
+│   │   │   ├── Login: *string
+│   │   │   ├── PrincipalType: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Sid: *string
+│   │   │   └── TenantId: *string
+│   │   ├── AzureName: string
+│   │   ├── Collation: *string
+│   │   ├── DnsZonePartnerReference: *genruntime.ResourceReference
+│   │   ├── Identity: *Object (2 properties)
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Type: *string
+│   │   ├── InstancePoolId: *string
+│   │   ├── KeyId: *string
+│   │   ├── LicenseType: *string
+│   │   ├── Location: *string
+│   │   ├── MaintenanceConfigurationId: *string
+│   │   ├── ManagedInstanceCreateMode: *string
+│   │   ├── MinimalTlsVersion: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PrimaryUserAssignedIdentityReference: *genruntime.ResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── ProxyOverride: *string
+│   │   ├── PublicDataEndpointEnabled: *bool
+│   │   ├── RequestedBackupStorageRedundancy: *string
+│   │   ├── RestorePointInTime: *string
+│   │   ├── ServicePrincipal: *Object (2 properties)
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Type: *string
+│   │   ├── Sku: *Object (6 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   ├── SourceManagedInstanceReference: *genruntime.ResourceReference
+│   │   ├── StorageSizeInGB: *int
+│   │   ├── SubnetReference: *genruntime.ResourceReference
+│   │   ├── Tags: map[string]string
+│   │   ├── TimezoneId: *string
+│   │   ├── VCores: *int
+│   │   └── ZoneRedundant: *bool
+│   └── Status: Object (37 properties)
+│       ├── AdministratorLogin: *string
+│       ├── Administrators: *Object (7 properties)
+│       │   ├── AdministratorType: *string
+│       │   ├── AzureADOnlyAuthentication: *bool
+│       │   ├── Login: *string
+│       │   ├── PrincipalType: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Sid: *string
+│       │   └── TenantId: *string
+│       ├── Collation: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── CurrentBackupStorageRedundancy: *string
+│       ├── DnsZone: *string
+│       ├── DnsZonePartner: *string
+│       ├── FullyQualifiedDomainName: *string
+│       ├── Id: *string
+│       ├── Identity: *Object (5 properties)
+│       │   ├── PrincipalId: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── TenantId: *string
+│       │   ├── Type: *string
+│       │   └── UserAssignedIdentities: map[string]Object (3 properties)
+│       │       ├── ClientId: *string
+│       │       ├── PrincipalId: *string
+│       │       └── PropertyBag: genruntime.PropertyBag
+│       ├── InstancePoolId: *string
+│       ├── KeyId: *string
+│       ├── LicenseType: *string
+│       ├── Location: *string
+│       ├── MaintenanceConfigurationId: *string
+│       ├── ManagedInstanceCreateMode: *string
+│       ├── MinimalTlsVersion: *string
+│       ├── Name: *string
+│       ├── PrimaryUserAssignedIdentityId: *string
+│       ├── PrivateEndpointConnections: Object (3 properties)[]
+│       │   ├── Id: *string
+│       │   ├── Properties: *Object (4 properties)
+│       │   │   ├── PrivateEndpoint: *Object (2 properties)
+│       │   │   │   ├── Id: *string
+│       │   │   │   └── PropertyBag: genruntime.PropertyBag
+│       │   │   ├── PrivateLinkServiceConnectionState: *Object (4 properties)
+│       │   │   │   ├── ActionsRequired: *string
+│       │   │   │   ├── Description: *string
+│       │   │   │   ├── PropertyBag: genruntime.PropertyBag
+│       │   │   │   └── Status: *string
+│       │   │   ├── PropertyBag: genruntime.PropertyBag
+│       │   │   └── ProvisioningState: *string
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ProvisioningState: *string
+│       ├── ProxyOverride: *string
+│       ├── PublicDataEndpointEnabled: *bool
+│       ├── RequestedBackupStorageRedundancy: *string
+│       ├── RestorePointInTime: *string
+│       ├── ServicePrincipal: *Object (5 properties)
+│       │   ├── ClientId: *string
+│       │   ├── PrincipalId: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── TenantId: *string
+│       │   └── Type: *string
+│       ├── Sku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── SourceManagedInstanceId: *string
+│       ├── State: *string
+│       ├── StorageSizeInGB: *int
+│       ├── SubnetId: *string
+│       ├── Tags: map[string]string
+│       ├── TimezoneId: *string
+│       ├── Type: *string
+│       ├── VCores: *int
+│       └── ZoneRedundant: *bool
+├── ManagedInstances_Database: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstance
+│   ├── Spec: Object (18 properties)
+│   │   ├── AutoCompleteRestore: *bool
+│   │   ├── AzureName: string
+│   │   ├── CatalogCollation: *string
+│   │   ├── Collation: *string
+│   │   ├── CreateMode: *string
+│   │   ├── LastBackupName: *string
+│   │   ├── Location: *string
+│   │   ├── LongTermRetentionBackupResourceReference: *genruntime.ResourceReference
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── RecoverableDatabaseReference: *genruntime.ResourceReference
+│   │   ├── RestorableDroppedDatabaseReference: *genruntime.ResourceReference
+│   │   ├── RestorePointInTime: *string
+│   │   ├── SourceDatabaseReference: *genruntime.ResourceReference
+│   │   ├── StorageContainerSasToken: *string
+│   │   ├── StorageContainerUri: *string
+│   │   └── Tags: map[string]string
+│   └── Status: Object (24 properties)
+│       ├── AutoCompleteRestore: *bool
+│       ├── CatalogCollation: *string
+│       ├── Collation: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreateMode: *string
+│       ├── CreationDate: *string
+│       ├── DefaultSecondaryLocation: *string
+│       ├── EarliestRestorePoint: *string
+│       ├── FailoverGroupId: *string
+│       ├── Id: *string
+│       ├── LastBackupName: *string
+│       ├── Location: *string
+│       ├── LongTermRetentionBackupResourceId: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RecoverableDatabaseId: *string
+│       ├── RestorableDroppedDatabaseId: *string
+│       ├── RestorePointInTime: *string
+│       ├── SourceDatabaseId: *string
+│       ├── Status: *string
+│       ├── StorageContainerSasToken: *string
+│       ├── StorageContainerUri: *string
+│       ├── Tags: map[string]string
+│       └── Type: *string
+├── ManagedInstances_Databases_BackupLongTermRetentionPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstances_Database
+│   ├── Spec: Object (7 properties)
+│   │   ├── MonthlyRetention: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── WeekOfYear: *int
+│   │   ├── WeeklyRetention: *string
+│   │   └── YearlyRetention: *string
+│   └── Status: Object (9 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── MonthlyRetention: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── Type: *string
+│       ├── WeekOfYear: *int
+│       ├── WeeklyRetention: *string
+│       └── YearlyRetention: *string
+├── ManagedInstances_Databases_BackupShortTermRetentionPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstances_Database
+│   ├── Spec: Object (4 properties)
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── RetentionDays: *int
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RetentionDays: *int
+│       └── Type: *string
+├── ManagedInstances_Databases_SecurityAlertPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstances_Database
+│   ├── Spec: Object (10 properties)
+│   │   ├── DisabledAlerts: string[]
+│   │   ├── EmailAccountAdmins: *bool
+│   │   ├── EmailAddresses: string[]
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *string
+│   │   ├── StorageAccountAccessKey: *string
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (13 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── DisabledAlerts: string[]
+│       ├── EmailAccountAdmins: *bool
+│       ├── EmailAddresses: string[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RetentionDays: *int
+│       ├── State: *string
+│       ├── StorageAccountAccessKey: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── ManagedInstances_DistributedAvailabilityGroup: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstance
+│   ├── Spec: Object (9 properties)
+│   │   ├── AzureName: string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PrimaryAvailabilityGroupName: *string
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── ReplicationMode: *string
+│   │   ├── SecondaryAvailabilityGroupName: *string
+│   │   ├── SourceEndpoint: *string
+│   │   └── TargetDatabase: *string
+│   └── Status: Object (15 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── DistributedAvailabilityGroupId: *string
+│       ├── Id: *string
+│       ├── LastHardenedLsn: *string
+│       ├── LinkState: *string
+│       ├── Name: *string
+│       ├── PrimaryAvailabilityGroupName: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ReplicationMode: *string
+│       ├── SecondaryAvailabilityGroupName: *string
+│       ├── SourceEndpoint: *string
+│       ├── SourceReplicaId: *string
+│       ├── TargetDatabase: *string
+│       ├── TargetReplicaId: *string
+│       └── Type: *string
+├── ManagedInstances_DnsAliase: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstance
+│   ├── Spec: Object (5 properties)
+│   │   ├── AzureName: string
+│   │   ├── CreateDnsRecord: *bool
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── PropertyBag: genruntime.PropertyBag
+│   └── Status: Object (7 properties)
+│       ├── AzureDnsRecord: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── PublicAzureDnsRecord: *string
+│       └── Type: *string
+├── ManagedInstances_ServerTrustCertificate: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstance
+│   ├── Spec: Object (5 properties)
+│   │   ├── AzureName: string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── PublicBlob: *string
+│   └── Status: Object (8 properties)
+│       ├── CertificateName: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── PublicBlob: *string
+│       ├── Thumbprint: *string
+│       └── Type: *string
+├── ManagedInstances_VulnerabilityAssessment: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.ManagedInstance
+│   ├── Spec: Object (7 properties)
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── RecurringScans: *Object (4 properties)
+│   │   │   ├── EmailSubscriptionAdmins: *bool
+│   │   │   ├── Emails: string[]
+│   │   │   ├── IsEnabled: *bool
+│   │   │   └── PropertyBag: genruntime.PropertyBag
+│   │   ├── StorageAccountAccessKey: *string
+│   │   ├── StorageContainerPath: *string
+│   │   └── StorageContainerSasKey: *string
+│   └── Status: Object (9 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RecurringScans: *Object (4 properties)
+│       │   ├── EmailSubscriptionAdmins: *bool
+│       │   ├── Emails: string[]
+│       │   ├── IsEnabled: *bool
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── StorageAccountAccessKey: *string
+│       ├── StorageContainerPath: *string
+│       ├── StorageContainerSasKey: *string
+│       └── Type: *string
+├── Server: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/resources/v1betav20191001.ResourceGroup
+│   ├── Spec: Object (17 properties)
+│   │   ├── AdministratorLogin: *string
+│   │   ├── AdministratorLoginPassword: *genruntime.SecretReference
+│   │   ├── Administrators: *Object (7 properties)
+│   │   │   ├── AdministratorType: *string
+│   │   │   ├── AzureADOnlyAuthentication: *bool
+│   │   │   ├── Login: *string
+│   │   │   ├── PrincipalType: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Sid: *string
+│   │   │   └── TenantId: *string
+│   │   ├── AzureName: string
+│   │   ├── FederatedClientId: *string
+│   │   ├── Identity: *Object (2 properties)
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Type: *string
+│   │   ├── KeyId: *string
+│   │   ├── Location: *string
+│   │   ├── MinimalTlsVersion: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PrimaryUserAssignedIdentityReference: *genruntime.ResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── PublicNetworkAccess: *string
+│   │   ├── RestrictOutboundNetworkAccess: *string
+│   │   ├── Tags: map[string]string
+│   │   └── Version: *string
+│   └── Status: Object (22 properties)
+│       ├── AdministratorLogin: *string
+│       ├── Administrators: *Object (7 properties)
+│       │   ├── AdministratorType: *string
+│       │   ├── AzureADOnlyAuthentication: *bool
+│       │   ├── Login: *string
+│       │   ├── PrincipalType: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Sid: *string
+│       │   └── TenantId: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── FederatedClientId: *string
+│       ├── FullyQualifiedDomainName: *string
+│       ├── Id: *string
+│       ├── Identity: *Object (5 properties)
+│       │   ├── PrincipalId: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── TenantId: *string
+│       │   ├── Type: *string
+│       │   └── UserAssignedIdentities: map[string]Object (3 properties)
+│       │       ├── ClientId: *string
+│       │       ├── PrincipalId: *string
+│       │       └── PropertyBag: genruntime.PropertyBag
+│       ├── KeyId: *string
+│       ├── Kind: *string
+│       ├── Location: *string
+│       ├── MinimalTlsVersion: *string
+│       ├── Name: *string
+│       ├── PrimaryUserAssignedIdentityId: *string
+│       ├── PrivateEndpointConnections: Object (3 properties)[]
+│       │   ├── Id: *string
+│       │   ├── Properties: *Object (5 properties)
+│       │   │   ├── GroupIds: string[]
+│       │   │   ├── PrivateEndpoint: *Object (2 properties)
+│       │   │   │   ├── Id: *string
+│       │   │   │   └── PropertyBag: genruntime.PropertyBag
+│       │   │   ├── PrivateLinkServiceConnectionState: *Object (4 properties)
+│       │   │   │   ├── ActionsRequired: *string
+│       │   │   │   ├── Description: *string
+│       │   │   │   ├── PropertyBag: genruntime.PropertyBag
+│       │   │   │   └── Status: *string
+│       │   │   ├── PropertyBag: genruntime.PropertyBag
+│       │   │   └── ProvisioningState: *string
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── PublicNetworkAccess: *string
+│       ├── RestrictOutboundNetworkAccess: *string
+│       ├── State: *string
+│       ├── Tags: map[string]string
+│       ├── Type: *string
+│       ├── Version: *string
+│       └── WorkspaceFeature: *string
+├── Servers_AuditingSetting: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (14 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsDevopsAuditEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *string
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageAccountSubscriptionId: *string
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (15 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsDevopsAuditEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *string
+│       ├── StorageAccountSubscriptionId: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── Servers_ConnectionPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── ConnectionType: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── PropertyBag: genruntime.PropertyBag
+│   └── Status: Object (8 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── ConnectionType: *string
+│       ├── Id: *string
+│       ├── Kind: *string
+│       ├── Location: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       └── Type: *string
+├── Servers_Database: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (33 properties)
+│   │   ├── AutoPauseDelay: *int
+│   │   ├── AzureName: string
+│   │   ├── CatalogCollation: *string
+│   │   ├── Collation: *string
+│   │   ├── CreateMode: *string
+│   │   ├── ElasticPoolReference: *genruntime.ResourceReference
+│   │   ├── FederatedClientId: *string
+│   │   ├── HighAvailabilityReplicaCount: *int
+│   │   ├── Identity: *Object (2 properties)
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Type: *string
+│   │   ├── IsLedgerOn: *bool
+│   │   ├── LicenseType: *string
+│   │   ├── Location: *string
+│   │   ├── LongTermRetentionBackupResourceReference: *genruntime.ResourceReference
+│   │   ├── MaintenanceConfigurationId: *string
+│   │   ├── MaxSizeBytes: *int
+│   │   ├── MinCapacity: *float64
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── ReadScale: *string
+│   │   ├── RecoverableDatabaseReference: *genruntime.ResourceReference
+│   │   ├── RecoveryServicesRecoveryPointReference: *genruntime.ResourceReference
+│   │   ├── RequestedBackupStorageRedundancy: *string
+│   │   ├── RestorableDroppedDatabaseReference: *genruntime.ResourceReference
+│   │   ├── RestorePointInTime: *string
+│   │   ├── SampleName: *string
+│   │   ├── SecondaryType: *string
+│   │   ├── Sku: *Object (6 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   ├── SourceDatabaseDeletionDate: *string
+│   │   ├── SourceDatabaseReference: *genruntime.ResourceReference
+│   │   ├── SourceResourceReference: *genruntime.ResourceReference
+│   │   ├── Tags: map[string]string
+│   │   └── ZoneRedundant: *bool
+│   └── Status: Object (50 properties)
+│       ├── AutoPauseDelay: *int
+│       ├── CatalogCollation: *string
+│       ├── Collation: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreateMode: *string
+│       ├── CreationDate: *string
+│       ├── CurrentBackupStorageRedundancy: *string
+│       ├── CurrentServiceObjectiveName: *string
+│       ├── CurrentSku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── DatabaseId: *string
+│       ├── DefaultSecondaryLocation: *string
+│       ├── EarliestRestoreDate: *string
+│       ├── ElasticPoolId: *string
+│       ├── FailoverGroupId: *string
+│       ├── FederatedClientId: *string
+│       ├── HighAvailabilityReplicaCount: *int
+│       ├── Id: *string
+│       ├── Identity: *Object (4 properties)
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── TenantId: *string
+│       │   ├── Type: *string
+│       │   └── UserAssignedIdentities: map[string]Object (3 properties)
+│       │       ├── ClientId: *string
+│       │       ├── PrincipalId: *string
+│       │       └── PropertyBag: genruntime.PropertyBag
+│       ├── IsInfraEncryptionEnabled: *bool
+│       ├── IsLedgerOn: *bool
+│       ├── Kind: *string
+│       ├── LicenseType: *string
+│       ├── Location: *string
+│       ├── LongTermRetentionBackupResourceId: *string
+│       ├── MaintenanceConfigurationId: *string
+│       ├── ManagedBy: *string
+│       ├── MaxLogSizeBytes: *int
+│       ├── MaxSizeBytes: *int
+│       ├── MinCapacity: *float64
+│       ├── Name: *string
+│       ├── PausedDate: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ReadScale: *string
+│       ├── RecoverableDatabaseId: *string
+│       ├── RecoveryServicesRecoveryPointId: *string
+│       ├── RequestedBackupStorageRedundancy: *string
+│       ├── RequestedServiceObjectiveName: *string
+│       ├── RestorableDroppedDatabaseId: *string
+│       ├── RestorePointInTime: *string
+│       ├── ResumedDate: *string
+│       ├── SampleName: *string
+│       ├── SecondaryType: *string
+│       ├── Sku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── SourceDatabaseDeletionDate: *string
+│       ├── SourceDatabaseId: *string
+│       ├── SourceResourceId: *string
+│       ├── Status: *string
+│       ├── Tags: map[string]string
+│       ├── Type: *string
+│       └── ZoneRedundant: *bool
+├── Servers_Databases_AuditingSetting: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (13 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *string
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageAccountSubscriptionId: *string
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (15 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── Kind: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *string
+│       ├── StorageAccountSubscriptionId: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── Servers_Databases_BackupLongTermRetentionPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (7 properties)
+│   │   ├── MonthlyRetention: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── WeekOfYear: *int
+│   │   ├── WeeklyRetention: *string
+│   │   └── YearlyRetention: *string
+│   └── Status: Object (9 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── MonthlyRetention: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── Type: *string
+│       ├── WeekOfYear: *int
+│       ├── WeeklyRetention: *string
+│       └── YearlyRetention: *string
+├── Servers_Databases_BackupShortTermRetentionPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (5 properties)
+│   │   ├── DiffBackupIntervalInHours: *int
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── RetentionDays: *int
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── DiffBackupIntervalInHours: *int
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RetentionDays: *int
+│       └── Type: *string
+├── Servers_Databases_ExtendedAuditingSetting: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (14 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PredicateExpression: *string
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *string
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageAccountSubscriptionId: *string
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (15 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── Name: *string
+│       ├── PredicateExpression: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *string
+│       ├── StorageAccountSubscriptionId: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── Servers_Databases_SecurityAlertPolicy: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (10 properties)
+│   │   ├── DisabledAlerts: string[]
+│   │   ├── EmailAccountAdmins: *bool
+│   │   ├── EmailAddresses: string[]
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *string
+│   │   ├── StorageAccountAccessKey: *string
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (14 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── DisabledAlerts: string[]
+│       ├── EmailAccountAdmins: *bool
+│       ├── EmailAddresses: string[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RetentionDays: *int
+│       ├── State: *string
+│       ├── StorageAccountAccessKey: *string
+│       ├── StorageEndpoint: *string
+│       ├── SystemData: *Object (7 properties)
+│       │   ├── CreatedAt: *string
+│       │   ├── CreatedBy: *string
+│       │   ├── CreatedByType: *string
+│       │   ├── LastModifiedAt: *string
+│       │   ├── LastModifiedBy: *string
+│       │   ├── LastModifiedByType: *string
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       └── Type: *string
+├── Servers_Databases_SyncGroup: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (14 properties)
+│   │   ├── AzureName: string
+│   │   ├── ConflictLoggingRetentionInDays: *int
+│   │   ├── ConflictResolutionPolicy: *string
+│   │   ├── EnableConflictLogging: *bool
+│   │   ├── HubDatabasePassword: *genruntime.SecretReference
+│   │   ├── HubDatabaseUserName: *string
+│   │   ├── Interval: *int
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── Schema: *Object (3 properties)
+│   │   │   ├── MasterSyncMemberName: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Tables: Object (3 properties)[]
+│   │   │       ├── Columns: Object (4 properties)[]
+│   │   │       │   ├── DataSize: *string
+│   │   │       │   ├── DataType: *string
+│   │   │       │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │       │   └── QuotedName: *string
+│   │   │       ├── PropertyBag: genruntime.PropertyBag
+│   │   │       └── QuotedName: *string
+│   │   ├── Sku: *Object (6 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   ├── SyncDatabaseReference: *genruntime.ResourceReference
+│   │   └── UsePrivateLinkConnection: *bool
+│   └── Status: Object (17 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── ConflictLoggingRetentionInDays: *int
+│       ├── ConflictResolutionPolicy: *string
+│       ├── EnableConflictLogging: *bool
+│       ├── HubDatabaseUserName: *string
+│       ├── Id: *string
+│       ├── Interval: *int
+│       ├── LastSyncTime: *string
+│       ├── Name: *string
+│       ├── PrivateEndpointName: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── Schema: *Object (3 properties)
+│       │   ├── MasterSyncMemberName: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   └── Tables: Object (3 properties)[]
+│       │       ├── Columns: Object (4 properties)[]
+│       │       │   ├── DataSize: *string
+│       │       │   ├── DataType: *string
+│       │       │   ├── PropertyBag: genruntime.PropertyBag
+│       │       │   └── QuotedName: *string
+│       │       ├── PropertyBag: genruntime.PropertyBag
+│       │       └── QuotedName: *string
+│       ├── Sku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── SyncDatabaseId: *string
+│       ├── SyncState: *string
+│       ├── Type: *string
+│       └── UsePrivateLinkConnection: *bool
+├── Servers_Databases_SyncGroups_SyncMember: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Databases_SyncGroup
+│   ├── Spec: Object (14 properties)
+│   │   ├── AzureName: string
+│   │   ├── DatabaseName: *string
+│   │   ├── DatabaseType: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── Password: *string
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── ServerName: *string
+│   │   ├── SqlServerDatabaseId: *string
+│   │   ├── SyncAgentReference: *genruntime.ResourceReference
+│   │   ├── SyncDirection: *string
+│   │   ├── SyncMemberAzureDatabaseResourceReference: *genruntime.ResourceReference
+│   │   ├── UsePrivateLinkConnection: *bool
+│   │   └── UserName: *string
+│   └── Status: Object (17 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── DatabaseName: *string
+│       ├── DatabaseType: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── Password: *string
+│       ├── PrivateEndpointName: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ServerName: *string
+│       ├── SqlServerDatabaseId: *string
+│       ├── SyncAgentId: *string
+│       ├── SyncDirection: *string
+│       ├── SyncMemberAzureDatabaseResourceId: *string
+│       ├── SyncState: *string
+│       ├── Type: *string
+│       ├── UsePrivateLinkConnection: *bool
+│       └── UserName: *string
+├── Servers_Databases_VulnerabilityAssessment: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (7 properties)
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── RecurringScans: *Object (4 properties)
+│   │   │   ├── EmailSubscriptionAdmins: *bool
+│   │   │   ├── Emails: string[]
+│   │   │   ├── IsEnabled: *bool
+│   │   │   └── PropertyBag: genruntime.PropertyBag
+│   │   ├── StorageAccountAccessKey: *string
+│   │   ├── StorageContainerPath: *string
+│   │   └── StorageContainerSasKey: *string
+│   └── Status: Object (9 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── RecurringScans: *Object (4 properties)
+│       │   ├── EmailSubscriptionAdmins: *bool
+│       │   ├── Emails: string[]
+│       │   ├── IsEnabled: *bool
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── StorageAccountAccessKey: *string
+│       ├── StorageContainerPath: *string
+│       ├── StorageContainerSasKey: *string
+│       └── Type: *string
+├── Servers_Databases_WorkloadGroup: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Database
+│   ├── Spec: Object (10 properties)
+│   │   ├── AzureName: string
+│   │   ├── Importance: *string
+│   │   ├── MaxResourcePercent: *int
+│   │   ├── MaxResourcePercentPerRequest: *float64
+│   │   ├── MinResourcePercent: *int
+│   │   ├── MinResourcePercentPerRequest: *float64
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── QueryExecutionTimeout: *int
+│   └── Status: Object (11 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Importance: *string
+│       ├── MaxResourcePercent: *int
+│       ├── MaxResourcePercentPerRequest: *float64
+│       ├── MinResourcePercent: *int
+│       ├── MinResourcePercentPerRequest: *float64
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── QueryExecutionTimeout: *int
+│       └── Type: *string
+├── Servers_Databases_WorkloadGroups_WorkloadClassifier: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Servers_Databases_WorkloadGroup
+│   ├── Spec: Object (10 properties)
+│   │   ├── AzureName: string
+│   │   ├── Context: *string
+│   │   ├── EndTime: *string
+│   │   ├── Importance: *string
+│   │   ├── Label: *string
+│   │   ├── MemberName: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── StartTime: *string
+│   └── Status: Object (11 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Context: *string
+│       ├── EndTime: *string
+│       ├── Id: *string
+│       ├── Importance: *string
+│       ├── Label: *string
+│       ├── MemberName: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── StartTime: *string
+│       └── Type: *string
+├── Servers_DnsAliase: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── AzureName: string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── PropertyBag: genruntime.PropertyBag
+│   └── Status: Object (6 properties)
+│       ├── AzureDnsRecord: *string
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       └── Type: *string
+├── Servers_ElasticPool: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (14 properties)
+│   │   ├── AzureName: string
+│   │   ├── HighAvailabilityReplicaCount: *int
+│   │   ├── LicenseType: *string
+│   │   ├── Location: *string
+│   │   ├── MaintenanceConfigurationId: *string
+│   │   ├── MaxSizeBytes: *int
+│   │   ├── MinCapacity: *float64
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PerDatabaseSettings: *Object (3 properties)
+│   │   │   ├── MaxCapacity: *float64
+│   │   │   ├── MinCapacity: *float64
+│   │   │   └── PropertyBag: genruntime.PropertyBag
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── Sku: *Object (6 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   ├── Tags: map[string]string
+│   │   └── ZoneRedundant: *bool
+│   └── Status: Object (18 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationDate: *string
+│       ├── HighAvailabilityReplicaCount: *int
+│       ├── Id: *string
+│       ├── Kind: *string
+│       ├── LicenseType: *string
+│       ├── Location: *string
+│       ├── MaintenanceConfigurationId: *string
+│       ├── MaxSizeBytes: *int
+│       ├── MinCapacity: *float64
+│       ├── Name: *string
+│       ├── PerDatabaseSettings: *Object (3 properties)
+│       │   ├── MaxCapacity: *float64
+│       │   ├── MinCapacity: *float64
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── Sku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── State: *string
+│       ├── Tags: map[string]string
+│       ├── Type: *string
+│       └── ZoneRedundant: *bool
+├── Servers_FailoverGroup: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (9 properties)
+│   │   ├── AzureName: string
+│   │   ├── Databases: string[]
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PartnerServers: Object (2 properties)[]
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   └── Reference: *genruntime.ResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── ReadOnlyEndpoint: *Object (2 properties)
+│   │   │   ├── FailoverPolicy: *string
+│   │   │   └── PropertyBag: genruntime.PropertyBag
+│   │   ├── ReadWriteEndpoint: *Object (3 properties)
+│   │   │   ├── FailoverPolicy: *string
+│   │   │   ├── FailoverWithDataLossGracePeriodMinutes: *int
+│   │   │   └── PropertyBag: genruntime.PropertyBag
+│   │   └── Tags: map[string]string
+│   └── Status: Object (13 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Databases: string[]
+│       ├── Id: *string
+│       ├── Location: *string
+│       ├── Name: *string
+│       ├── PartnerServers: Object (4 properties)[]
+│       │   ├── Id: *string
+│       │   ├── Location: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   └── ReplicationRole: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ReadOnlyEndpoint: *Object (2 properties)
+│       │   ├── FailoverPolicy: *string
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── ReadWriteEndpoint: *Object (3 properties)
+│       │   ├── FailoverPolicy: *string
+│       │   ├── FailoverWithDataLossGracePeriodMinutes: *int
+│       │   └── PropertyBag: genruntime.PropertyBag
+│       ├── ReplicationRole: *string
+│       ├── ReplicationState: *string
+│       ├── Tags: map[string]string
+│       └── Type: *string
+├── Servers_FirewallRule: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (6 properties)
+│   │   ├── AzureName: string
+│   │   ├── EndIpAddress: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── StartIpAddress: *string
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── EndIpAddress: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── StartIpAddress: *string
+│       └── Type: *string
+├── Servers_Ipv6FirewallRule: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (6 properties)
+│   │   ├── AzureName: string
+│   │   ├── EndIPv6Address: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── StartIPv6Address: *string
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── EndIPv6Address: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── StartIPv6Address: *string
+│       └── Type: *string
+├── Servers_JobAgent: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (8 properties)
+│   │   ├── AzureName: string
+│   │   ├── DatabaseReference: *genruntime.ResourceReference
+│   │   ├── Location: *string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── Sku: *Object (6 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   └── Tags: map[string]string
+│   └── Status: Object (10 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── DatabaseId: *string
+│       ├── Id: *string
+│       ├── Location: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── Sku: *Object (6 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── PropertyBag: genruntime.PropertyBag
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── State: *string
+│       ├── Tags: map[string]string
+│       └── Type: *string
+├── Servers_OutboundFirewallRule: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── AzureName: string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── PropertyBag: genruntime.PropertyBag
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── ProvisioningState: *string
+│       └── Type: *string
+├── Servers_SyncAgent: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (5 properties)
+│   │   ├── AzureName: string
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── SyncDatabaseReference: *genruntime.ResourceReference
+│   └── Status: Object (12 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── ExpiryTime: *string
+│       ├── Id: *string
+│       ├── IsUpToDate: *bool
+│       ├── LastAliveTime: *string
+│       ├── Name: *string
+│       ├── PropertiesName: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── State: *string
+│       ├── SyncDatabaseId: *string
+│       ├── Type: *string
+│       └── Version: *string
+├── Servers_VirtualNetworkRule: Resource
+│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+│   ├── Spec: Object (6 properties)
+│   │   ├── AzureName: string
+│   │   ├── IgnoreMissingVnetServiceEndpoint: *bool
+│   │   ├── OriginalVersion: string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── VirtualNetworkSubnetReference: *genruntime.ResourceReference
+│   └── Status: Object (8 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IgnoreMissingVnetServiceEndpoint: *bool
+│       ├── Name: *string
+│       ├── PropertyBag: genruntime.PropertyBag
+│       ├── State: *string
+│       ├── Type: *string
+│       └── VirtualNetworkSubnetId: *string
+└── Servers_VulnerabilityAssessment: Resource
+    ├── Owner: github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101.Server
+    ├── Spec: Object (7 properties)
+    │   ├── OriginalVersion: string
+    │   ├── Owner: *genruntime.KnownResourceReference
+    │   ├── PropertyBag: genruntime.PropertyBag
+    │   ├── RecurringScans: *Object (4 properties)
+    │   │   ├── EmailSubscriptionAdmins: *bool
+    │   │   ├── Emails: string[]
+    │   │   ├── IsEnabled: *bool
+    │   │   └── PropertyBag: genruntime.PropertyBag
+    │   ├── StorageAccountAccessKey: *string
+    │   ├── StorageContainerPath: *string
+    │   └── StorageContainerSasKey: *string
+    └── Status: Object (9 properties)
+        ├── Conditions: conditions.Condition[]
+        ├── Id: *string
+        ├── Name: *string
+        ├── PropertyBag: genruntime.PropertyBag
+        ├── RecurringScans: *Object (4 properties)
+        │   ├── EmailSubscriptionAdmins: *bool
+        │   ├── Emails: string[]
+        │   ├── IsEnabled: *bool
+        │   └── PropertyBag: genruntime.PropertyBag
+        ├── StorageAccountAccessKey: *string
+        ├── StorageContainerPath: *string
+        ├── StorageContainerSasKey: *string
+        └── Type: *string
