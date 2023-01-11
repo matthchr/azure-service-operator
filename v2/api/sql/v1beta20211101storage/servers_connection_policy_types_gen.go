@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_connectionpolicies,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_connectionpolicies/status,servers_connectionpolicies/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversconnectionpolicies,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversconnectionpolicies/status,serversconnectionpolicies/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_ConnectionPolicy
+// Storage version of v1beta20211101.ServersConnectionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ServerConnectionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/default
-type Servers_ConnectionPolicy struct {
+type ServersConnectionPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_ConnectionPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_ConnectionPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_ConnectionPolicy{}
+var _ conditions.Conditioner = &ServersConnectionPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_ConnectionPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersConnectionPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_ConnectionPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersConnectionPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_ConnectionPolicy{}
+var _ genruntime.KubernetesResource = &ServersConnectionPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_ConnectionPolicy) AzureName() string {
+func (policy *ServersConnectionPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_ConnectionPolicy) GetAPIVersion() string {
+func (policy ServersConnectionPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_ConnectionPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersConnectionPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_ConnectionPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersConnectionPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_ConnectionPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersConnectionPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/connectionPolicies"
-func (policy *Servers_ConnectionPolicy) GetType() string {
+func (policy *ServersConnectionPolicy) GetType() string {
 	return "Microsoft.Sql/servers/connectionPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_ConnectionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersConnectionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_ConnectionPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_ConnectionPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersConnectionPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (policy *Servers_ConnectionPolicy) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_ConnectionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersConnectionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_ConnectionPolicy_STATUS); ok {
 		policy.Status = *st
@@ -110,27 +110,27 @@ func (policy *Servers_ConnectionPolicy) SetStatus(status genruntime.ConvertibleS
 	return nil
 }
 
-// Hub marks that this Servers_ConnectionPolicy is the hub type for conversion
-func (policy *Servers_ConnectionPolicy) Hub() {}
+// Hub marks that this ServersConnectionPolicy is the hub type for conversion
+func (policy *ServersConnectionPolicy) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_ConnectionPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersConnectionPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion,
-		Kind:    "Servers_ConnectionPolicy",
+		Kind:    "ServersConnectionPolicy",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_ConnectionPolicy
+// Storage version of v1beta20211101.ServersConnectionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ServerConnectionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/default
-type Servers_ConnectionPolicyList struct {
+type ServersConnectionPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_ConnectionPolicy `json:"items"`
+	Items           []ServersConnectionPolicy `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_ConnectionPolicy_Spec
@@ -199,5 +199,5 @@ func (policy *Servers_ConnectionPolicy_STATUS) ConvertStatusTo(destination genru
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_ConnectionPolicy{}, &Servers_ConnectionPolicyList{})
+	SchemeBuilder.Register(&ServersConnectionPolicy{}, &ServersConnectionPolicyList{})
 }

@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_Databases_ExtendedAuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersDatabasesExtendedAuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_Databases_ExtendedAuditingSetting via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_Databases_ExtendedAuditingSetting, Servers_Databases_ExtendedAuditingSettingGenerator()))
+		"Round trip of ServersDatabasesExtendedAuditingSetting via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesExtendedAuditingSetting, ServersDatabasesExtendedAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_Databases_ExtendedAuditingSetting runs a test to see if a specific instance of Servers_Databases_ExtendedAuditingSetting round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_Databases_ExtendedAuditingSetting(subject Servers_Databases_ExtendedAuditingSetting) string {
+// RunJSONSerializationTestForServersDatabasesExtendedAuditingSetting runs a test to see if a specific instance of ServersDatabasesExtendedAuditingSetting round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesExtendedAuditingSetting(subject ServersDatabasesExtendedAuditingSetting) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_Databases_ExtendedAuditingSetting(subjec
 	}
 
 	// Deserialize back into memory
-	var actual Servers_Databases_ExtendedAuditingSetting
+	var actual ServersDatabasesExtendedAuditingSetting
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_Databases_ExtendedAuditingSetting(subjec
 	return ""
 }
 
-// Generator of Servers_Databases_ExtendedAuditingSetting instances for property testing - lazily instantiated by
-// Servers_Databases_ExtendedAuditingSettingGenerator()
-var servers_Databases_ExtendedAuditingSettingGenerator gopter.Gen
+// Generator of ServersDatabasesExtendedAuditingSetting instances for property testing - lazily instantiated by
+// ServersDatabasesExtendedAuditingSettingGenerator()
+var serversDatabasesExtendedAuditingSettingGenerator gopter.Gen
 
-// Servers_Databases_ExtendedAuditingSettingGenerator returns a generator of Servers_Databases_ExtendedAuditingSetting instances for property testing.
-func Servers_Databases_ExtendedAuditingSettingGenerator() gopter.Gen {
-	if servers_Databases_ExtendedAuditingSettingGenerator != nil {
-		return servers_Databases_ExtendedAuditingSettingGenerator
+// ServersDatabasesExtendedAuditingSettingGenerator returns a generator of ServersDatabasesExtendedAuditingSetting instances for property testing.
+func ServersDatabasesExtendedAuditingSettingGenerator() gopter.Gen {
+	if serversDatabasesExtendedAuditingSettingGenerator != nil {
+		return serversDatabasesExtendedAuditingSettingGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_Databases_ExtendedAuditingSetting(generators)
-	servers_Databases_ExtendedAuditingSettingGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_ExtendedAuditingSetting{}), generators)
+	AddRelatedPropertyGeneratorsForServersDatabasesExtendedAuditingSetting(generators)
+	serversDatabasesExtendedAuditingSettingGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesExtendedAuditingSetting{}), generators)
 
-	return servers_Databases_ExtendedAuditingSettingGenerator
+	return serversDatabasesExtendedAuditingSettingGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_Databases_ExtendedAuditingSetting is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_Databases_ExtendedAuditingSetting(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersDatabasesExtendedAuditingSetting is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersDatabasesExtendedAuditingSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_Databases_ExtendedAuditingSetting_SpecGenerator()
 	gens["Status"] = Servers_Databases_ExtendedAuditingSetting_STATUSGenerator()
 }

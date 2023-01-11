@@ -18,32 +18,32 @@ import (
 	"testing"
 )
 
-func Test_Servers_Databases_AuditingSetting_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersDatabasesAuditingSetting_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	parameters.MinSuccessfulTests = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_Databases_AuditingSetting to hub returns original",
-		prop.ForAll(RunResourceConversionTestForServers_Databases_AuditingSetting, Servers_Databases_AuditingSettingGenerator()))
+		"Round trip from ServersDatabasesAuditingSetting to hub returns original",
+		prop.ForAll(RunResourceConversionTestForServersDatabasesAuditingSetting, ServersDatabasesAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunResourceConversionTestForServers_Databases_AuditingSetting tests if a specific instance of Servers_Databases_AuditingSetting round trips to the hub storage version and back losslessly
-func RunResourceConversionTestForServers_Databases_AuditingSetting(subject Servers_Databases_AuditingSetting) string {
+// RunResourceConversionTestForServersDatabasesAuditingSetting tests if a specific instance of ServersDatabasesAuditingSetting round trips to the hub storage version and back losslessly
+func RunResourceConversionTestForServersDatabasesAuditingSetting(subject ServersDatabasesAuditingSetting) string {
 	// Copy subject to make sure conversion doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Convert to our hub version
-	var hub v20211101s.Servers_Databases_AuditingSetting
+	var hub v20211101s.ServersDatabasesAuditingSetting
 	err := copied.ConvertTo(&hub)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Convert from our hub version
-	var actual Servers_Databases_AuditingSetting
+	var actual ServersDatabasesAuditingSetting
 	err = actual.ConvertFrom(&hub)
 	if err != nil {
 		return err.Error()
@@ -61,32 +61,32 @@ func RunResourceConversionTestForServers_Databases_AuditingSetting(subject Serve
 	return ""
 }
 
-func Test_Servers_Databases_AuditingSetting_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersDatabasesAuditingSetting_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_Databases_AuditingSetting to Servers_Databases_AuditingSetting via AssignProperties_To_Servers_Databases_AuditingSetting & AssignProperties_From_Servers_Databases_AuditingSetting returns original",
-		prop.ForAll(RunPropertyAssignmentTestForServers_Databases_AuditingSetting, Servers_Databases_AuditingSettingGenerator()))
+		"Round trip from ServersDatabasesAuditingSetting to ServersDatabasesAuditingSetting via AssignProperties_To_ServersDatabasesAuditingSetting & AssignProperties_From_ServersDatabasesAuditingSetting returns original",
+		prop.ForAll(RunPropertyAssignmentTestForServersDatabasesAuditingSetting, ServersDatabasesAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunPropertyAssignmentTestForServers_Databases_AuditingSetting tests if a specific instance of Servers_Databases_AuditingSetting can be assigned to v1beta20211101storage and back losslessly
-func RunPropertyAssignmentTestForServers_Databases_AuditingSetting(subject Servers_Databases_AuditingSetting) string {
+// RunPropertyAssignmentTestForServersDatabasesAuditingSetting tests if a specific instance of ServersDatabasesAuditingSetting can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForServersDatabasesAuditingSetting(subject ServersDatabasesAuditingSetting) string {
 	// Copy subject to make sure assignment doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Use AssignPropertiesTo() for the first stage of conversion
-	var other v20211101s.Servers_Databases_AuditingSetting
-	err := copied.AssignProperties_To_Servers_Databases_AuditingSetting(&other)
+	var other v20211101s.ServersDatabasesAuditingSetting
+	err := copied.AssignProperties_To_ServersDatabasesAuditingSetting(&other)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Use AssignPropertiesFrom() to convert back to our original type
-	var actual Servers_Databases_AuditingSetting
-	err = actual.AssignProperties_From_Servers_Databases_AuditingSetting(&other)
+	var actual ServersDatabasesAuditingSetting
+	err = actual.AssignProperties_From_ServersDatabasesAuditingSetting(&other)
 	if err != nil {
 		return err.Error()
 	}
@@ -103,20 +103,20 @@ func RunPropertyAssignmentTestForServers_Databases_AuditingSetting(subject Serve
 	return ""
 }
 
-func Test_Servers_Databases_AuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersDatabasesAuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_Databases_AuditingSetting via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_Databases_AuditingSetting, Servers_Databases_AuditingSettingGenerator()))
+		"Round trip of ServersDatabasesAuditingSetting via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesAuditingSetting, ServersDatabasesAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_Databases_AuditingSetting runs a test to see if a specific instance of Servers_Databases_AuditingSetting round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Servers_Databases_AuditingSetting) string {
+// RunJSONSerializationTestForServersDatabasesAuditingSetting runs a test to see if a specific instance of ServersDatabasesAuditingSetting round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesAuditingSetting(subject ServersDatabasesAuditingSetting) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -124,7 +124,7 @@ func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Server
 	}
 
 	// Deserialize back into memory
-	var actual Servers_Databases_AuditingSetting
+	var actual ServersDatabasesAuditingSetting
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -142,25 +142,25 @@ func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Server
 	return ""
 }
 
-// Generator of Servers_Databases_AuditingSetting instances for property testing - lazily instantiated by
-// Servers_Databases_AuditingSettingGenerator()
-var servers_Databases_AuditingSettingGenerator gopter.Gen
+// Generator of ServersDatabasesAuditingSetting instances for property testing - lazily instantiated by
+// ServersDatabasesAuditingSettingGenerator()
+var serversDatabasesAuditingSettingGenerator gopter.Gen
 
-// Servers_Databases_AuditingSettingGenerator returns a generator of Servers_Databases_AuditingSetting instances for property testing.
-func Servers_Databases_AuditingSettingGenerator() gopter.Gen {
-	if servers_Databases_AuditingSettingGenerator != nil {
-		return servers_Databases_AuditingSettingGenerator
+// ServersDatabasesAuditingSettingGenerator returns a generator of ServersDatabasesAuditingSetting instances for property testing.
+func ServersDatabasesAuditingSettingGenerator() gopter.Gen {
+	if serversDatabasesAuditingSettingGenerator != nil {
+		return serversDatabasesAuditingSettingGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting(generators)
-	servers_Databases_AuditingSettingGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_AuditingSetting{}), generators)
+	AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting(generators)
+	serversDatabasesAuditingSettingGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesAuditingSetting{}), generators)
 
-	return servers_Databases_AuditingSettingGenerator
+	return serversDatabasesAuditingSettingGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_Databases_AuditingSetting_SpecGenerator()
 	gens["Status"] = Servers_Databases_AuditingSetting_STATUSGenerator()
 }

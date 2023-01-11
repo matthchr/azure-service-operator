@@ -133,6 +133,12 @@ type ServerList struct {
 	Items           []Server `json:"items"`
 }
 
+// Storage version of v1beta20211101.APIVersion
+// +kubebuilder:validation:Enum={"2021-11-01"}
+type APIVersion string
+
+const APIVersion_Value = APIVersion("2021-11-01")
+
 // Storage version of v1beta20211101.Server_Spec
 type Server_Spec struct {
 	AdministratorLogin         *string                      `json:"administratorLogin,omitempty"`
@@ -231,6 +237,23 @@ func (server *Server_STATUS) ConvertStatusTo(destination genruntime.ConvertibleS
 	return destination.ConvertStatusFrom(server)
 }
 
+// Storage version of v1beta20211101.ResourceIdentity
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity struct {
+	PropertyBag genruntime.PropertyBag `json:"$propertyBag,omitempty"`
+	Type        *string                `json:"type,omitempty"`
+}
+
+// Storage version of v1beta20211101.ResourceIdentity_STATUS
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity_STATUS struct {
+	PrincipalId            *string                        `json:"principalId,omitempty"`
+	PropertyBag            genruntime.PropertyBag         `json:"$propertyBag,omitempty"`
+	TenantId               *string                        `json:"tenantId,omitempty"`
+	Type                   *string                        `json:"type,omitempty"`
+	UserAssignedIdentities map[string]UserIdentity_STATUS `json:"userAssignedIdentities,omitempty"`
+}
+
 // Storage version of v1beta20211101.ServerExternalAdministrator
 // Properties of a active directory administrator.
 type ServerExternalAdministrator struct {
@@ -271,6 +294,14 @@ type PrivateEndpointConnectionProperties_STATUS struct {
 	PrivateLinkServiceConnectionState *PrivateLinkServiceConnectionStateProperty_STATUS `json:"privateLinkServiceConnectionState,omitempty"`
 	PropertyBag                       genruntime.PropertyBag                            `json:"$propertyBag,omitempty"`
 	ProvisioningState                 *string                                           `json:"provisioningState,omitempty"`
+}
+
+// Storage version of v1beta20211101.UserIdentity_STATUS
+// Azure Active Directory identity configuration for a resource.
+type UserIdentity_STATUS struct {
+	ClientId    *string                `json:"clientId,omitempty"`
+	PrincipalId *string                `json:"principalId,omitempty"`
+	PropertyBag genruntime.PropertyBag `json:"$propertyBag,omitempty"`
 }
 
 // Storage version of v1beta20211101.PrivateEndpointProperty_STATUS

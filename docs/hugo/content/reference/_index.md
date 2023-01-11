@@ -283,41 +283,32 @@ Existing instances of *Single Server* can be migrated to *Azure Database for MyS
 
 ## Sql
 
-| Resource                                                  | ARM Version | CRD Version    | Supported From | Sample |
-|-----------------------------------------------------------|-------------|----------------|----------------|--------|
-| ManagedInstance                                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_Database                                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_Databases_BackupLongTermRetentionPolicy  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_Databases_BackupShortTermRetentionPolicy | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_Databases_SecurityAlertPolicy            | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_DistributedAvailabilityGroup             | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_DnsAliase                                | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_ServerTrustCertificate                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| ManagedInstances_VulnerabilityAssessment                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Server                                                    | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_AuditingSetting                                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_ConnectionPolicy                                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Database                                          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_AuditingSetting                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_BackupLongTermRetentionPolicy           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_BackupShortTermRetentionPolicy          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_ExtendedAuditingSetting                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_SecurityAlertPolicy                     | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_SyncGroup                               | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_SyncGroups_SyncMember                   | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_VulnerabilityAssessment                 | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_WorkloadGroup                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Databases_WorkloadGroups_WorkloadClassifier       | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_DnsAliase                                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_ElasticPool                                       | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_FailoverGroup                                     | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_FirewallRule                                      | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_Ipv6FirewallRule                                  | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_JobAgent                                          | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_OutboundFirewallRule                              | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_SyncAgent                                         | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_VirtualNetworkRule                                | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
-| Servers_VulnerabilityAssessment                           | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| Resource                                        | ARM Version | CRD Version    | Supported From | Sample |
+|-------------------------------------------------|-------------|----------------|----------------|--------|
+| Server                                          | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersAdministrator                            | 2021-11-01  | v1beta20211101 | v2.0.0-beta.4  | -      |
+| ServersAdvancedThreatProtectionSetting          | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersAuditingSetting                          | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersAzureADOnlyAuthentication                | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersConnectionPolicy                         | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabase                                 | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesAdvancedThreatProtectionSetting | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesAuditingSetting                 | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesBackupLongTermRetentionPolicy   | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesBackupShortTermRetentionPolicy  | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesExtendedAuditingSetting         | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesGeoBackupPolicy                 | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesSecurityAlertPolicy             | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesTransparentDataEncryption       | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersDatabasesVulnerabilityAssessment         | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersElasticPool                              | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersFailoverGroup                            | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersFirewallRule                             | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersIPV6FirewallRule                         | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersOutboundFirewallRule                     | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersSecurityAlertPolicy                      | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersVirtualNetworkRule                       | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
+| ServersVulnerabilityAssessment                  | 2021-11-01  | v1beta20211101 | v2.0.0         | -      |
 
 ## Storage
 

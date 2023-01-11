@@ -16,3 +16,18 @@ type Servers_Databases_BackupLongTermRetentionPolicy_STATUS_ARM struct {
 	// Type: Resource type.
 	Type *string `json:"type,omitempty"`
 }
+
+// Properties of a long term retention policy
+type BaseLongTermRetentionPolicyProperties_STATUS_ARM struct {
+	// MonthlyRetention: The monthly retention policy for an LTR backup in an ISO 8601 format.
+	MonthlyRetention *string `json:"monthlyRetention,omitempty"`
+
+	// WeekOfYear: The week of year to take the yearly backup in an ISO 8601 format.
+	WeekOfYear *int `json:"weekOfYear,omitempty"`
+
+	// WeeklyRetention: The weekly retention policy for an LTR backup in an ISO 8601 format.
+	WeeklyRetention *string `json:"weeklyRetention,omitempty"`
+
+	// YearlyRetention: The yearly retention policy for an LTR backup in an ISO 8601 format.
+	YearlyRetention *string `json:"yearlyRetention,omitempty"`
+}

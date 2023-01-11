@@ -220,6 +220,24 @@ type DatabaseProperties_STATUS_ARM struct {
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
 }
 
+// An ARM Resource SKU.
+type Sku_STATUS_ARM struct {
+	// Capacity: Capacity of the particular SKU.
+	Capacity *int `json:"capacity,omitempty"`
+
+	// Family: If the service has different generations of hardware, for the same SKU, then that can be captured here.
+	Family *string `json:"family,omitempty"`
+
+	// Name: The name of the SKU, typically, a letter + Number code, e.g. P3.
+	Name *string `json:"name,omitempty"`
+
+	// Size: Size of the particular SKU
+	Size *string `json:"size,omitempty"`
+
+	// Tier: The tier or edition of the particular SKU, e.g. Basic, Premium.
+	Tier *string `json:"tier,omitempty"`
+}
+
 type DatabaseIdentity_Type_STATUS string
 
 const (

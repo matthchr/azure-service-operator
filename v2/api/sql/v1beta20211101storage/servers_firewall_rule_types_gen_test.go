@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_FirewallRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersFirewallRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_FirewallRule via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_FirewallRule, Servers_FirewallRuleGenerator()))
+		"Round trip of ServersFirewallRule via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersFirewallRule, ServersFirewallRuleGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_FirewallRule runs a test to see if a specific instance of Servers_FirewallRule round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_FirewallRule(subject Servers_FirewallRule) string {
+// RunJSONSerializationTestForServersFirewallRule runs a test to see if a specific instance of ServersFirewallRule round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersFirewallRule(subject ServersFirewallRule) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_FirewallRule(subject Servers_FirewallRul
 	}
 
 	// Deserialize back into memory
-	var actual Servers_FirewallRule
+	var actual ServersFirewallRule
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_FirewallRule(subject Servers_FirewallRul
 	return ""
 }
 
-// Generator of Servers_FirewallRule instances for property testing - lazily instantiated by
-// Servers_FirewallRuleGenerator()
-var servers_FirewallRuleGenerator gopter.Gen
+// Generator of ServersFirewallRule instances for property testing - lazily instantiated by
+// ServersFirewallRuleGenerator()
+var serversFirewallRuleGenerator gopter.Gen
 
-// Servers_FirewallRuleGenerator returns a generator of Servers_FirewallRule instances for property testing.
-func Servers_FirewallRuleGenerator() gopter.Gen {
-	if servers_FirewallRuleGenerator != nil {
-		return servers_FirewallRuleGenerator
+// ServersFirewallRuleGenerator returns a generator of ServersFirewallRule instances for property testing.
+func ServersFirewallRuleGenerator() gopter.Gen {
+	if serversFirewallRuleGenerator != nil {
+		return serversFirewallRuleGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_FirewallRule(generators)
-	servers_FirewallRuleGenerator = gen.Struct(reflect.TypeOf(Servers_FirewallRule{}), generators)
+	AddRelatedPropertyGeneratorsForServersFirewallRule(generators)
+	serversFirewallRuleGenerator = gen.Struct(reflect.TypeOf(ServersFirewallRule{}), generators)
 
-	return servers_FirewallRuleGenerator
+	return serversFirewallRuleGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_FirewallRule is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_FirewallRule(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersFirewallRule is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersFirewallRule(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_FirewallRule_SpecGenerator()
 	gens["Status"] = Servers_FirewallRule_STATUSGenerator()
 }

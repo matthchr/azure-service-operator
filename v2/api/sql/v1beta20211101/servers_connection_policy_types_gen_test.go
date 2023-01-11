@@ -18,32 +18,32 @@ import (
 	"testing"
 )
 
-func Test_Servers_ConnectionPolicy_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersConnectionPolicy_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	parameters.MinSuccessfulTests = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_ConnectionPolicy to hub returns original",
-		prop.ForAll(RunResourceConversionTestForServers_ConnectionPolicy, Servers_ConnectionPolicyGenerator()))
+		"Round trip from ServersConnectionPolicy to hub returns original",
+		prop.ForAll(RunResourceConversionTestForServersConnectionPolicy, ServersConnectionPolicyGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunResourceConversionTestForServers_ConnectionPolicy tests if a specific instance of Servers_ConnectionPolicy round trips to the hub storage version and back losslessly
-func RunResourceConversionTestForServers_ConnectionPolicy(subject Servers_ConnectionPolicy) string {
+// RunResourceConversionTestForServersConnectionPolicy tests if a specific instance of ServersConnectionPolicy round trips to the hub storage version and back losslessly
+func RunResourceConversionTestForServersConnectionPolicy(subject ServersConnectionPolicy) string {
 	// Copy subject to make sure conversion doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Convert to our hub version
-	var hub v20211101s.Servers_ConnectionPolicy
+	var hub v20211101s.ServersConnectionPolicy
 	err := copied.ConvertTo(&hub)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Convert from our hub version
-	var actual Servers_ConnectionPolicy
+	var actual ServersConnectionPolicy
 	err = actual.ConvertFrom(&hub)
 	if err != nil {
 		return err.Error()
@@ -61,32 +61,32 @@ func RunResourceConversionTestForServers_ConnectionPolicy(subject Servers_Connec
 	return ""
 }
 
-func Test_Servers_ConnectionPolicy_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersConnectionPolicy_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_ConnectionPolicy to Servers_ConnectionPolicy via AssignProperties_To_Servers_ConnectionPolicy & AssignProperties_From_Servers_ConnectionPolicy returns original",
-		prop.ForAll(RunPropertyAssignmentTestForServers_ConnectionPolicy, Servers_ConnectionPolicyGenerator()))
+		"Round trip from ServersConnectionPolicy to ServersConnectionPolicy via AssignProperties_To_ServersConnectionPolicy & AssignProperties_From_ServersConnectionPolicy returns original",
+		prop.ForAll(RunPropertyAssignmentTestForServersConnectionPolicy, ServersConnectionPolicyGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunPropertyAssignmentTestForServers_ConnectionPolicy tests if a specific instance of Servers_ConnectionPolicy can be assigned to v1beta20211101storage and back losslessly
-func RunPropertyAssignmentTestForServers_ConnectionPolicy(subject Servers_ConnectionPolicy) string {
+// RunPropertyAssignmentTestForServersConnectionPolicy tests if a specific instance of ServersConnectionPolicy can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForServersConnectionPolicy(subject ServersConnectionPolicy) string {
 	// Copy subject to make sure assignment doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Use AssignPropertiesTo() for the first stage of conversion
-	var other v20211101s.Servers_ConnectionPolicy
-	err := copied.AssignProperties_To_Servers_ConnectionPolicy(&other)
+	var other v20211101s.ServersConnectionPolicy
+	err := copied.AssignProperties_To_ServersConnectionPolicy(&other)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Use AssignPropertiesFrom() to convert back to our original type
-	var actual Servers_ConnectionPolicy
-	err = actual.AssignProperties_From_Servers_ConnectionPolicy(&other)
+	var actual ServersConnectionPolicy
+	err = actual.AssignProperties_From_ServersConnectionPolicy(&other)
 	if err != nil {
 		return err.Error()
 	}
@@ -103,20 +103,20 @@ func RunPropertyAssignmentTestForServers_ConnectionPolicy(subject Servers_Connec
 	return ""
 }
 
-func Test_Servers_ConnectionPolicy_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersConnectionPolicy_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_ConnectionPolicy via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_ConnectionPolicy, Servers_ConnectionPolicyGenerator()))
+		"Round trip of ServersConnectionPolicy via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersConnectionPolicy, ServersConnectionPolicyGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_ConnectionPolicy runs a test to see if a specific instance of Servers_ConnectionPolicy round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_ConnectionPolicy(subject Servers_ConnectionPolicy) string {
+// RunJSONSerializationTestForServersConnectionPolicy runs a test to see if a specific instance of ServersConnectionPolicy round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersConnectionPolicy(subject ServersConnectionPolicy) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -124,7 +124,7 @@ func RunJSONSerializationTestForServers_ConnectionPolicy(subject Servers_Connect
 	}
 
 	// Deserialize back into memory
-	var actual Servers_ConnectionPolicy
+	var actual ServersConnectionPolicy
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -142,25 +142,25 @@ func RunJSONSerializationTestForServers_ConnectionPolicy(subject Servers_Connect
 	return ""
 }
 
-// Generator of Servers_ConnectionPolicy instances for property testing - lazily instantiated by
-// Servers_ConnectionPolicyGenerator()
-var servers_ConnectionPolicyGenerator gopter.Gen
+// Generator of ServersConnectionPolicy instances for property testing - lazily instantiated by
+// ServersConnectionPolicyGenerator()
+var serversConnectionPolicyGenerator gopter.Gen
 
-// Servers_ConnectionPolicyGenerator returns a generator of Servers_ConnectionPolicy instances for property testing.
-func Servers_ConnectionPolicyGenerator() gopter.Gen {
-	if servers_ConnectionPolicyGenerator != nil {
-		return servers_ConnectionPolicyGenerator
+// ServersConnectionPolicyGenerator returns a generator of ServersConnectionPolicy instances for property testing.
+func ServersConnectionPolicyGenerator() gopter.Gen {
+	if serversConnectionPolicyGenerator != nil {
+		return serversConnectionPolicyGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_ConnectionPolicy(generators)
-	servers_ConnectionPolicyGenerator = gen.Struct(reflect.TypeOf(Servers_ConnectionPolicy{}), generators)
+	AddRelatedPropertyGeneratorsForServersConnectionPolicy(generators)
+	serversConnectionPolicyGenerator = gen.Struct(reflect.TypeOf(ServersConnectionPolicy{}), generators)
 
-	return servers_ConnectionPolicyGenerator
+	return serversConnectionPolicyGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_ConnectionPolicy is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_ConnectionPolicy(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersConnectionPolicy is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersConnectionPolicy(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_ConnectionPolicy_SpecGenerator()
 	gens["Status"] = Servers_ConnectionPolicy_STATUSGenerator()
 }

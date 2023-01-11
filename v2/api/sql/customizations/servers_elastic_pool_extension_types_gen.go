@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_ElasticPoolExtension struct {
+type ServersElasticPoolExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_ElasticPoolExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersElasticPoolExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_ElasticPool{},
-		&v20211101s.Servers_ElasticPool{}}
+		&v20211101.ServersElasticPool{},
+		&v20211101s.ServersElasticPool{}}
 }

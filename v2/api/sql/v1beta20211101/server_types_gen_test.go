@@ -424,6 +424,235 @@ func AddRelatedPropertyGeneratorsForServer_STATUS(gens map[string]gopter.Gen) {
 	gens["PrivateEndpointConnections"] = gen.SliceOf(ServerPrivateEndpointConnection_STATUSGenerator())
 }
 
+func Test_ResourceIdentity_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MaxSize = 10
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip from ResourceIdentity to ResourceIdentity via AssignProperties_To_ResourceIdentity & AssignProperties_From_ResourceIdentity returns original",
+		prop.ForAll(RunPropertyAssignmentTestForResourceIdentity, ResourceIdentityGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
+}
+
+// RunPropertyAssignmentTestForResourceIdentity tests if a specific instance of ResourceIdentity can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForResourceIdentity(subject ResourceIdentity) string {
+	// Copy subject to make sure assignment doesn't modify it
+	copied := subject.DeepCopy()
+
+	// Use AssignPropertiesTo() for the first stage of conversion
+	var other v20211101s.ResourceIdentity
+	err := copied.AssignProperties_To_ResourceIdentity(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Use AssignPropertiesFrom() to convert back to our original type
+	var actual ResourceIdentity
+	err = actual.AssignProperties_From_ResourceIdentity(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for a match
+	match := cmp.Equal(subject, actual)
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+func Test_ResourceIdentity_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ResourceIdentity via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForResourceIdentity, ResourceIdentityGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForResourceIdentity runs a test to see if a specific instance of ResourceIdentity round trips to JSON and back losslessly
+func RunJSONSerializationTestForResourceIdentity(subject ResourceIdentity) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ResourceIdentity
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ResourceIdentity instances for property testing - lazily instantiated by ResourceIdentityGenerator()
+var resourceIdentityGenerator gopter.Gen
+
+// ResourceIdentityGenerator returns a generator of ResourceIdentity instances for property testing.
+func ResourceIdentityGenerator() gopter.Gen {
+	if resourceIdentityGenerator != nil {
+		return resourceIdentityGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForResourceIdentity(generators)
+	resourceIdentityGenerator = gen.Struct(reflect.TypeOf(ResourceIdentity{}), generators)
+
+	return resourceIdentityGenerator
+}
+
+// AddIndependentPropertyGeneratorsForResourceIdentity is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForResourceIdentity(gens map[string]gopter.Gen) {
+	gens["Type"] = gen.PtrOf(gen.OneConstOf(
+		ResourceIdentity_Type_None,
+		ResourceIdentity_Type_SystemAssigned,
+		ResourceIdentity_Type_SystemAssignedUserAssigned,
+		ResourceIdentity_Type_UserAssigned))
+}
+
+func Test_ResourceIdentity_STATUS_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MaxSize = 10
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip from ResourceIdentity_STATUS to ResourceIdentity_STATUS via AssignProperties_To_ResourceIdentity_STATUS & AssignProperties_From_ResourceIdentity_STATUS returns original",
+		prop.ForAll(RunPropertyAssignmentTestForResourceIdentity_STATUS, ResourceIdentity_STATUSGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
+}
+
+// RunPropertyAssignmentTestForResourceIdentity_STATUS tests if a specific instance of ResourceIdentity_STATUS can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForResourceIdentity_STATUS(subject ResourceIdentity_STATUS) string {
+	// Copy subject to make sure assignment doesn't modify it
+	copied := subject.DeepCopy()
+
+	// Use AssignPropertiesTo() for the first stage of conversion
+	var other v20211101s.ResourceIdentity_STATUS
+	err := copied.AssignProperties_To_ResourceIdentity_STATUS(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Use AssignPropertiesFrom() to convert back to our original type
+	var actual ResourceIdentity_STATUS
+	err = actual.AssignProperties_From_ResourceIdentity_STATUS(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for a match
+	match := cmp.Equal(subject, actual)
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+func Test_ResourceIdentity_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 80
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ResourceIdentity_STATUS via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForResourceIdentity_STATUS, ResourceIdentity_STATUSGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForResourceIdentity_STATUS runs a test to see if a specific instance of ResourceIdentity_STATUS round trips to JSON and back losslessly
+func RunJSONSerializationTestForResourceIdentity_STATUS(subject ResourceIdentity_STATUS) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ResourceIdentity_STATUS
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ResourceIdentity_STATUS instances for property testing - lazily instantiated by
+// ResourceIdentity_STATUSGenerator()
+var resourceIdentity_STATUSGenerator gopter.Gen
+
+// ResourceIdentity_STATUSGenerator returns a generator of ResourceIdentity_STATUS instances for property testing.
+// We first initialize resourceIdentity_STATUSGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
+func ResourceIdentity_STATUSGenerator() gopter.Gen {
+	if resourceIdentity_STATUSGenerator != nil {
+		return resourceIdentity_STATUSGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForResourceIdentity_STATUS(generators)
+	resourceIdentity_STATUSGenerator = gen.Struct(reflect.TypeOf(ResourceIdentity_STATUS{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForResourceIdentity_STATUS(generators)
+	AddRelatedPropertyGeneratorsForResourceIdentity_STATUS(generators)
+	resourceIdentity_STATUSGenerator = gen.Struct(reflect.TypeOf(ResourceIdentity_STATUS{}), generators)
+
+	return resourceIdentity_STATUSGenerator
+}
+
+// AddIndependentPropertyGeneratorsForResourceIdentity_STATUS is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForResourceIdentity_STATUS(gens map[string]gopter.Gen) {
+	gens["PrincipalId"] = gen.PtrOf(gen.AlphaString())
+	gens["TenantId"] = gen.PtrOf(gen.AlphaString())
+	gens["Type"] = gen.PtrOf(gen.OneConstOf(
+		ResourceIdentity_Type_STATUS_None,
+		ResourceIdentity_Type_STATUS_SystemAssigned,
+		ResourceIdentity_Type_STATUS_SystemAssignedUserAssigned,
+		ResourceIdentity_Type_STATUS_UserAssigned))
+}
+
+// AddRelatedPropertyGeneratorsForResourceIdentity_STATUS is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForResourceIdentity_STATUS(gens map[string]gopter.Gen) {
+	gens["UserAssignedIdentities"] = gen.MapOf(gen.AlphaString(), UserIdentity_STATUSGenerator())
+}
+
 func Test_ServerExternalAdministrator_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -879,6 +1108,110 @@ func AddIndependentPropertyGeneratorsForPrivateEndpointConnectionProperties_STAT
 func AddRelatedPropertyGeneratorsForPrivateEndpointConnectionProperties_STATUS(gens map[string]gopter.Gen) {
 	gens["PrivateEndpoint"] = gen.PtrOf(PrivateEndpointProperty_STATUSGenerator())
 	gens["PrivateLinkServiceConnectionState"] = gen.PtrOf(PrivateLinkServiceConnectionStateProperty_STATUSGenerator())
+}
+
+func Test_UserIdentity_STATUS_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MaxSize = 10
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip from UserIdentity_STATUS to UserIdentity_STATUS via AssignProperties_To_UserIdentity_STATUS & AssignProperties_From_UserIdentity_STATUS returns original",
+		prop.ForAll(RunPropertyAssignmentTestForUserIdentity_STATUS, UserIdentity_STATUSGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
+}
+
+// RunPropertyAssignmentTestForUserIdentity_STATUS tests if a specific instance of UserIdentity_STATUS can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForUserIdentity_STATUS(subject UserIdentity_STATUS) string {
+	// Copy subject to make sure assignment doesn't modify it
+	copied := subject.DeepCopy()
+
+	// Use AssignPropertiesTo() for the first stage of conversion
+	var other v20211101s.UserIdentity_STATUS
+	err := copied.AssignProperties_To_UserIdentity_STATUS(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Use AssignPropertiesFrom() to convert back to our original type
+	var actual UserIdentity_STATUS
+	err = actual.AssignProperties_From_UserIdentity_STATUS(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for a match
+	match := cmp.Equal(subject, actual)
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+func Test_UserIdentity_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 80
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of UserIdentity_STATUS via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForUserIdentity_STATUS, UserIdentity_STATUSGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForUserIdentity_STATUS runs a test to see if a specific instance of UserIdentity_STATUS round trips to JSON and back losslessly
+func RunJSONSerializationTestForUserIdentity_STATUS(subject UserIdentity_STATUS) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual UserIdentity_STATUS
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of UserIdentity_STATUS instances for property testing - lazily instantiated by
+// UserIdentity_STATUSGenerator()
+var userIdentity_STATUSGenerator gopter.Gen
+
+// UserIdentity_STATUSGenerator returns a generator of UserIdentity_STATUS instances for property testing.
+func UserIdentity_STATUSGenerator() gopter.Gen {
+	if userIdentity_STATUSGenerator != nil {
+		return userIdentity_STATUSGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForUserIdentity_STATUS(generators)
+	userIdentity_STATUSGenerator = gen.Struct(reflect.TypeOf(UserIdentity_STATUS{}), generators)
+
+	return userIdentity_STATUSGenerator
+}
+
+// AddIndependentPropertyGeneratorsForUserIdentity_STATUS is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForUserIdentity_STATUS(gens map[string]gopter.Gen) {
+	gens["ClientId"] = gen.PtrOf(gen.AlphaString())
+	gens["PrincipalId"] = gen.PtrOf(gen.AlphaString())
 }
 
 func Test_PrivateEndpointProperty_STATUS_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {

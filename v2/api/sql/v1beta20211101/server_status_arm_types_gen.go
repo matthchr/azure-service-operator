@@ -30,6 +30,22 @@ type Server_STATUS_ARM struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity_STATUS_ARM struct {
+	// PrincipalId: The Azure Active Directory principal id.
+	PrincipalId *string `json:"principalId,omitempty"`
+
+	// TenantId: The Azure Active Directory tenant id.
+	TenantId *string `json:"tenantId,omitempty"`
+
+	// Type: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active
+	// Directory principal for the resource.
+	Type *ResourceIdentity_Type_STATUS `json:"type,omitempty"`
+
+	// UserAssignedIdentities: The resource ids of the user assigned identities to use
+	UserAssignedIdentities map[string]UserIdentity_STATUS_ARM `json:"userAssignedIdentities,omitempty"`
+}
+
 // The properties of a server.
 type ServerProperties_STATUS_ARM struct {
 	// AdministratorLogin: Administrator username for the server. Once created it cannot be changed.
@@ -74,6 +90,15 @@ type ServerProperties_STATUS_ARM struct {
 	WorkspaceFeature *ServerProperties_WorkspaceFeature_STATUS `json:"workspaceFeature,omitempty"`
 }
 
+type ResourceIdentity_Type_STATUS string
+
+const (
+	ResourceIdentity_Type_STATUS_None                       = ResourceIdentity_Type_STATUS("None")
+	ResourceIdentity_Type_STATUS_SystemAssigned             = ResourceIdentity_Type_STATUS("SystemAssigned")
+	ResourceIdentity_Type_STATUS_SystemAssignedUserAssigned = ResourceIdentity_Type_STATUS("SystemAssigned,UserAssigned")
+	ResourceIdentity_Type_STATUS_UserAssigned               = ResourceIdentity_Type_STATUS("UserAssigned")
+)
+
 // Properties of a active directory administrator.
 type ServerExternalAdministrator_STATUS_ARM struct {
 	// AdministratorType: Type of the sever administrator.
@@ -102,6 +127,15 @@ type ServerPrivateEndpointConnection_STATUS_ARM struct {
 
 	// Properties: Private endpoint connection properties
 	Properties *PrivateEndpointConnectionProperties_STATUS_ARM `json:"properties,omitempty"`
+}
+
+// Azure Active Directory identity configuration for a resource.
+type UserIdentity_STATUS_ARM struct {
+	// ClientId: The Azure Active Directory client id.
+	ClientId *string `json:"clientId,omitempty"`
+
+	// PrincipalId: The Azure Active Directory principal id.
+	PrincipalId *string `json:"principalId,omitempty"`
 }
 
 // Properties of a private endpoint connection.

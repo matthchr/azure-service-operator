@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/OutboundFirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/outboundFirewallRules/{outboundRuleFqdn}
-type Servers_OutboundFirewallRule struct {
+type ServersOutboundFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_OutboundFirewallRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_OutboundFirewallRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_OutboundFirewallRule{}
+var _ conditions.Conditioner = &ServersOutboundFirewallRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_OutboundFirewallRule) GetConditions() conditions.Conditions {
+func (rule *ServersOutboundFirewallRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_OutboundFirewallRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersOutboundFirewallRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_OutboundFirewallRule{}
+var _ conversion.Convertible = &ServersOutboundFirewallRule{}
 
-// ConvertFrom populates our Servers_OutboundFirewallRule from the provided hub Servers_OutboundFirewallRule
-func (rule *Servers_OutboundFirewallRule) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_OutboundFirewallRule)
+// ConvertFrom populates our ServersOutboundFirewallRule from the provided hub ServersOutboundFirewallRule
+func (rule *ServersOutboundFirewallRule) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersOutboundFirewallRule)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_OutboundFirewallRule but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersOutboundFirewallRule but received %T instead", hub)
 	}
 
-	return rule.AssignProperties_From_Servers_OutboundFirewallRule(source)
+	return rule.AssignProperties_From_ServersOutboundFirewallRule(source)
 }
 
-// ConvertTo populates the provided hub Servers_OutboundFirewallRule from our Servers_OutboundFirewallRule
-func (rule *Servers_OutboundFirewallRule) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_OutboundFirewallRule)
+// ConvertTo populates the provided hub ServersOutboundFirewallRule from our ServersOutboundFirewallRule
+func (rule *ServersOutboundFirewallRule) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersOutboundFirewallRule)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_OutboundFirewallRule but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersOutboundFirewallRule but received %T instead", hub)
 	}
 
-	return rule.AssignProperties_To_Servers_OutboundFirewallRule(destination)
+	return rule.AssignProperties_To_ServersOutboundFirewallRule(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_outboundfirewallrule,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_outboundfirewallrules,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_outboundfirewallrules.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversoutboundfirewallrule,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversoutboundfirewallrules,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversoutboundfirewallrules.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_OutboundFirewallRule{}
+var _ admission.Defaulter = &ServersOutboundFirewallRule{}
 
-// Default applies defaults to the Servers_OutboundFirewallRule resource
-func (rule *Servers_OutboundFirewallRule) Default() {
+// Default applies defaults to the ServersOutboundFirewallRule resource
+func (rule *ServersOutboundFirewallRule) Default() {
 	rule.defaultImpl()
 	var temp interface{} = rule
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -82,54 +82,54 @@ func (rule *Servers_OutboundFirewallRule) Default() {
 }
 
 // defaultAzureName defaults the Azure name of the resource to the Kubernetes name
-func (rule *Servers_OutboundFirewallRule) defaultAzureName() {
+func (rule *ServersOutboundFirewallRule) defaultAzureName() {
 	if rule.Spec.AzureName == "" {
 		rule.Spec.AzureName = rule.Name
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_OutboundFirewallRule resource
-func (rule *Servers_OutboundFirewallRule) defaultImpl() { rule.defaultAzureName() }
+// defaultImpl applies the code generated defaults to the ServersOutboundFirewallRule resource
+func (rule *ServersOutboundFirewallRule) defaultImpl() { rule.defaultAzureName() }
 
-var _ genruntime.KubernetesResource = &Servers_OutboundFirewallRule{}
+var _ genruntime.KubernetesResource = &ServersOutboundFirewallRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_OutboundFirewallRule) AzureName() string {
+func (rule *ServersOutboundFirewallRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_OutboundFirewallRule) GetAPIVersion() string {
+func (rule ServersOutboundFirewallRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_OutboundFirewallRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersOutboundFirewallRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_OutboundFirewallRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersOutboundFirewallRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_OutboundFirewallRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersOutboundFirewallRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/outboundFirewallRules"
-func (rule *Servers_OutboundFirewallRule) GetType() string {
+func (rule *ServersOutboundFirewallRule) GetType() string {
 	return "Microsoft.Sql/servers/outboundFirewallRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_OutboundFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersOutboundFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_OutboundFirewallRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_OutboundFirewallRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersOutboundFirewallRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -139,7 +139,7 @@ func (rule *Servers_OutboundFirewallRule) Owner() *genruntime.ResourceReference 
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_OutboundFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersOutboundFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_OutboundFirewallRule_STATUS); ok {
 		rule.Status = *st
@@ -157,12 +157,12 @@ func (rule *Servers_OutboundFirewallRule) SetStatus(status genruntime.Convertibl
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_outboundfirewallrule,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_outboundfirewallrules,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_outboundfirewallrules.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversoutboundfirewallrule,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversoutboundfirewallrules,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversoutboundfirewallrules.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_OutboundFirewallRule{}
+var _ admission.Validator = &ServersOutboundFirewallRule{}
 
 // ValidateCreate validates the creation of the resource
-func (rule *Servers_OutboundFirewallRule) ValidateCreate() error {
+func (rule *ServersOutboundFirewallRule) ValidateCreate() error {
 	validations := rule.createValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -179,7 +179,7 @@ func (rule *Servers_OutboundFirewallRule) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (rule *Servers_OutboundFirewallRule) ValidateDelete() error {
+func (rule *ServersOutboundFirewallRule) ValidateDelete() error {
 	validations := rule.deleteValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -196,7 +196,7 @@ func (rule *Servers_OutboundFirewallRule) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (rule *Servers_OutboundFirewallRule) ValidateUpdate(old runtime.Object) error {
+func (rule *ServersOutboundFirewallRule) ValidateUpdate(old runtime.Object) error {
 	validations := rule.updateValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -213,17 +213,17 @@ func (rule *Servers_OutboundFirewallRule) ValidateUpdate(old runtime.Object) err
 }
 
 // createValidations validates the creation of the resource
-func (rule *Servers_OutboundFirewallRule) createValidations() []func() error {
+func (rule *ServersOutboundFirewallRule) createValidations() []func() error {
 	return []func() error{rule.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (rule *Servers_OutboundFirewallRule) deleteValidations() []func() error {
+func (rule *ServersOutboundFirewallRule) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (rule *Servers_OutboundFirewallRule) updateValidations() []func(old runtime.Object) error {
+func (rule *ServersOutboundFirewallRule) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return rule.validateResourceReferences()
@@ -232,7 +232,7 @@ func (rule *Servers_OutboundFirewallRule) updateValidations() []func(old runtime
 }
 
 // validateResourceReferences validates all resource references
-func (rule *Servers_OutboundFirewallRule) validateResourceReferences() error {
+func (rule *ServersOutboundFirewallRule) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&rule.Spec)
 	if err != nil {
 		return err
@@ -241,8 +241,8 @@ func (rule *Servers_OutboundFirewallRule) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (rule *Servers_OutboundFirewallRule) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_OutboundFirewallRule)
+func (rule *ServersOutboundFirewallRule) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersOutboundFirewallRule)
 	if !ok {
 		return nil
 	}
@@ -250,8 +250,8 @@ func (rule *Servers_OutboundFirewallRule) validateWriteOnceProperties(old runtim
 	return genruntime.ValidateWriteOnceProperties(oldObj, rule)
 }
 
-// AssignProperties_From_Servers_OutboundFirewallRule populates our Servers_OutboundFirewallRule from the provided source Servers_OutboundFirewallRule
-func (rule *Servers_OutboundFirewallRule) AssignProperties_From_Servers_OutboundFirewallRule(source *v20211101s.Servers_OutboundFirewallRule) error {
+// AssignProperties_From_ServersOutboundFirewallRule populates our ServersOutboundFirewallRule from the provided source ServersOutboundFirewallRule
+func (rule *ServersOutboundFirewallRule) AssignProperties_From_ServersOutboundFirewallRule(source *v20211101s.ServersOutboundFirewallRule) error {
 
 	// ObjectMeta
 	rule.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -276,8 +276,8 @@ func (rule *Servers_OutboundFirewallRule) AssignProperties_From_Servers_Outbound
 	return nil
 }
 
-// AssignProperties_To_Servers_OutboundFirewallRule populates the provided destination Servers_OutboundFirewallRule from our Servers_OutboundFirewallRule
-func (rule *Servers_OutboundFirewallRule) AssignProperties_To_Servers_OutboundFirewallRule(destination *v20211101s.Servers_OutboundFirewallRule) error {
+// AssignProperties_To_ServersOutboundFirewallRule populates the provided destination ServersOutboundFirewallRule from our ServersOutboundFirewallRule
+func (rule *ServersOutboundFirewallRule) AssignProperties_To_ServersOutboundFirewallRule(destination *v20211101s.ServersOutboundFirewallRule) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *rule.ObjectMeta.DeepCopy()
@@ -303,11 +303,11 @@ func (rule *Servers_OutboundFirewallRule) AssignProperties_To_Servers_OutboundFi
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_OutboundFirewallRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersOutboundFirewallRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion(),
-		Kind:    "Servers_OutboundFirewallRule",
+		Kind:    "ServersOutboundFirewallRule",
 	}
 }
 
@@ -315,10 +315,10 @@ func (rule *Servers_OutboundFirewallRule) OriginalGVK() *schema.GroupVersionKind
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/OutboundFirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/outboundFirewallRules/{outboundRuleFqdn}
-type Servers_OutboundFirewallRuleList struct {
+type ServersOutboundFirewallRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_OutboundFirewallRule `json:"items"`
+	Items           []ServersOutboundFirewallRule `json:"items"`
 }
 
 type Servers_OutboundFirewallRule_Spec struct {
@@ -645,5 +645,5 @@ func (rule *Servers_OutboundFirewallRule_STATUS) AssignProperties_To_Servers_Out
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_OutboundFirewallRule{}, &Servers_OutboundFirewallRuleList{})
+	SchemeBuilder.Register(&ServersOutboundFirewallRule{}, &ServersOutboundFirewallRuleList{})
 }

@@ -37,6 +37,13 @@ func (server *Server_Spec_ARM) GetType() string {
 	return "Microsoft.Sql/servers"
 }
 
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity_ARM struct {
+	// Type: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active
+	// Directory principal for the resource.
+	Type *ResourceIdentity_Type `json:"type,omitempty"`
+}
+
 // The properties of a server.
 type ServerProperties_ARM struct {
 	// AdministratorLogin: Administrator username for the server. Once created it cannot be changed.
@@ -69,6 +76,16 @@ type ServerProperties_ARM struct {
 	// Version: The version of the server.
 	Version *string `json:"version,omitempty"`
 }
+
+// +kubebuilder:validation:Enum={"None","SystemAssigned","SystemAssigned,UserAssigned","UserAssigned"}
+type ResourceIdentity_Type string
+
+const (
+	ResourceIdentity_Type_None                       = ResourceIdentity_Type("None")
+	ResourceIdentity_Type_SystemAssigned             = ResourceIdentity_Type("SystemAssigned")
+	ResourceIdentity_Type_SystemAssignedUserAssigned = ResourceIdentity_Type("SystemAssigned,UserAssigned")
+	ResourceIdentity_Type_UserAssigned               = ResourceIdentity_Type("UserAssigned")
+)
 
 // Properties of a active directory administrator.
 type ServerExternalAdministrator_ARM struct {

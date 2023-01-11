@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ElasticPools.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}
-type Servers_ElasticPool struct {
+type ServersElasticPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_ElasticPool_Spec   `json:"spec,omitempty"`
 	Status            Servers_ElasticPool_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_ElasticPool{}
+var _ conditions.Conditioner = &ServersElasticPool{}
 
 // GetConditions returns the conditions of the resource
-func (pool *Servers_ElasticPool) GetConditions() conditions.Conditions {
+func (pool *ServersElasticPool) GetConditions() conditions.Conditions {
 	return pool.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (pool *Servers_ElasticPool) SetConditions(conditions conditions.Conditions) {
+func (pool *ServersElasticPool) SetConditions(conditions conditions.Conditions) {
 	pool.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_ElasticPool{}
+var _ conversion.Convertible = &ServersElasticPool{}
 
-// ConvertFrom populates our Servers_ElasticPool from the provided hub Servers_ElasticPool
-func (pool *Servers_ElasticPool) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_ElasticPool)
+// ConvertFrom populates our ServersElasticPool from the provided hub ServersElasticPool
+func (pool *ServersElasticPool) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersElasticPool)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_ElasticPool but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersElasticPool but received %T instead", hub)
 	}
 
-	return pool.AssignProperties_From_Servers_ElasticPool(source)
+	return pool.AssignProperties_From_ServersElasticPool(source)
 }
 
-// ConvertTo populates the provided hub Servers_ElasticPool from our Servers_ElasticPool
-func (pool *Servers_ElasticPool) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_ElasticPool)
+// ConvertTo populates the provided hub ServersElasticPool from our ServersElasticPool
+func (pool *ServersElasticPool) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersElasticPool)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_ElasticPool but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersElasticPool but received %T instead", hub)
 	}
 
-	return pool.AssignProperties_To_Servers_ElasticPool(destination)
+	return pool.AssignProperties_To_ServersElasticPool(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_elasticpool,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_elasticpools,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_elasticpools.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serverselasticpool,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serverselasticpools,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serverselasticpools.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_ElasticPool{}
+var _ admission.Defaulter = &ServersElasticPool{}
 
-// Default applies defaults to the Servers_ElasticPool resource
-func (pool *Servers_ElasticPool) Default() {
+// Default applies defaults to the ServersElasticPool resource
+func (pool *ServersElasticPool) Default() {
 	pool.defaultImpl()
 	var temp interface{} = pool
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -82,54 +82,54 @@ func (pool *Servers_ElasticPool) Default() {
 }
 
 // defaultAzureName defaults the Azure name of the resource to the Kubernetes name
-func (pool *Servers_ElasticPool) defaultAzureName() {
+func (pool *ServersElasticPool) defaultAzureName() {
 	if pool.Spec.AzureName == "" {
 		pool.Spec.AzureName = pool.Name
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_ElasticPool resource
-func (pool *Servers_ElasticPool) defaultImpl() { pool.defaultAzureName() }
+// defaultImpl applies the code generated defaults to the ServersElasticPool resource
+func (pool *ServersElasticPool) defaultImpl() { pool.defaultAzureName() }
 
-var _ genruntime.KubernetesResource = &Servers_ElasticPool{}
+var _ genruntime.KubernetesResource = &ServersElasticPool{}
 
 // AzureName returns the Azure name of the resource
-func (pool *Servers_ElasticPool) AzureName() string {
+func (pool *ServersElasticPool) AzureName() string {
 	return pool.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (pool Servers_ElasticPool) GetAPIVersion() string {
+func (pool ServersElasticPool) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (pool *Servers_ElasticPool) GetResourceScope() genruntime.ResourceScope {
+func (pool *ServersElasticPool) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (pool *Servers_ElasticPool) GetSpec() genruntime.ConvertibleSpec {
+func (pool *ServersElasticPool) GetSpec() genruntime.ConvertibleSpec {
 	return &pool.Spec
 }
 
 // GetStatus returns the status of this resource
-func (pool *Servers_ElasticPool) GetStatus() genruntime.ConvertibleStatus {
+func (pool *ServersElasticPool) GetStatus() genruntime.ConvertibleStatus {
 	return &pool.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/elasticPools"
-func (pool *Servers_ElasticPool) GetType() string {
+func (pool *ServersElasticPool) GetType() string {
 	return "Microsoft.Sql/servers/elasticPools"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (pool *Servers_ElasticPool) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (pool *ServersElasticPool) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_ElasticPool_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (pool *Servers_ElasticPool) Owner() *genruntime.ResourceReference {
+func (pool *ServersElasticPool) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(pool.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -139,7 +139,7 @@ func (pool *Servers_ElasticPool) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (pool *Servers_ElasticPool) SetStatus(status genruntime.ConvertibleStatus) error {
+func (pool *ServersElasticPool) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_ElasticPool_STATUS); ok {
 		pool.Status = *st
@@ -157,12 +157,12 @@ func (pool *Servers_ElasticPool) SetStatus(status genruntime.ConvertibleStatus) 
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_elasticpool,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_elasticpools,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_elasticpools.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serverselasticpool,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serverselasticpools,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serverselasticpools.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_ElasticPool{}
+var _ admission.Validator = &ServersElasticPool{}
 
 // ValidateCreate validates the creation of the resource
-func (pool *Servers_ElasticPool) ValidateCreate() error {
+func (pool *ServersElasticPool) ValidateCreate() error {
 	validations := pool.createValidations()
 	var temp interface{} = pool
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -179,7 +179,7 @@ func (pool *Servers_ElasticPool) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (pool *Servers_ElasticPool) ValidateDelete() error {
+func (pool *ServersElasticPool) ValidateDelete() error {
 	validations := pool.deleteValidations()
 	var temp interface{} = pool
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -196,7 +196,7 @@ func (pool *Servers_ElasticPool) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (pool *Servers_ElasticPool) ValidateUpdate(old runtime.Object) error {
+func (pool *ServersElasticPool) ValidateUpdate(old runtime.Object) error {
 	validations := pool.updateValidations()
 	var temp interface{} = pool
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -213,17 +213,17 @@ func (pool *Servers_ElasticPool) ValidateUpdate(old runtime.Object) error {
 }
 
 // createValidations validates the creation of the resource
-func (pool *Servers_ElasticPool) createValidations() []func() error {
+func (pool *ServersElasticPool) createValidations() []func() error {
 	return []func() error{pool.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (pool *Servers_ElasticPool) deleteValidations() []func() error {
+func (pool *ServersElasticPool) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (pool *Servers_ElasticPool) updateValidations() []func(old runtime.Object) error {
+func (pool *ServersElasticPool) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return pool.validateResourceReferences()
@@ -232,7 +232,7 @@ func (pool *Servers_ElasticPool) updateValidations() []func(old runtime.Object) 
 }
 
 // validateResourceReferences validates all resource references
-func (pool *Servers_ElasticPool) validateResourceReferences() error {
+func (pool *ServersElasticPool) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&pool.Spec)
 	if err != nil {
 		return err
@@ -241,8 +241,8 @@ func (pool *Servers_ElasticPool) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (pool *Servers_ElasticPool) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_ElasticPool)
+func (pool *ServersElasticPool) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersElasticPool)
 	if !ok {
 		return nil
 	}
@@ -250,8 +250,8 @@ func (pool *Servers_ElasticPool) validateWriteOnceProperties(old runtime.Object)
 	return genruntime.ValidateWriteOnceProperties(oldObj, pool)
 }
 
-// AssignProperties_From_Servers_ElasticPool populates our Servers_ElasticPool from the provided source Servers_ElasticPool
-func (pool *Servers_ElasticPool) AssignProperties_From_Servers_ElasticPool(source *v20211101s.Servers_ElasticPool) error {
+// AssignProperties_From_ServersElasticPool populates our ServersElasticPool from the provided source ServersElasticPool
+func (pool *ServersElasticPool) AssignProperties_From_ServersElasticPool(source *v20211101s.ServersElasticPool) error {
 
 	// ObjectMeta
 	pool.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -276,8 +276,8 @@ func (pool *Servers_ElasticPool) AssignProperties_From_Servers_ElasticPool(sourc
 	return nil
 }
 
-// AssignProperties_To_Servers_ElasticPool populates the provided destination Servers_ElasticPool from our Servers_ElasticPool
-func (pool *Servers_ElasticPool) AssignProperties_To_Servers_ElasticPool(destination *v20211101s.Servers_ElasticPool) error {
+// AssignProperties_To_ServersElasticPool populates the provided destination ServersElasticPool from our ServersElasticPool
+func (pool *ServersElasticPool) AssignProperties_To_ServersElasticPool(destination *v20211101s.ServersElasticPool) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *pool.ObjectMeta.DeepCopy()
@@ -303,11 +303,11 @@ func (pool *Servers_ElasticPool) AssignProperties_To_Servers_ElasticPool(destina
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (pool *Servers_ElasticPool) OriginalGVK() *schema.GroupVersionKind {
+func (pool *ServersElasticPool) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: pool.Spec.OriginalVersion(),
-		Kind:    "Servers_ElasticPool",
+		Kind:    "ServersElasticPool",
 	}
 }
 
@@ -315,10 +315,10 @@ func (pool *Servers_ElasticPool) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ElasticPools.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}
-type Servers_ElasticPoolList struct {
+type ServersElasticPoolList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_ElasticPool `json:"items"`
+	Items           []ServersElasticPool `json:"items"`
 }
 
 type Servers_ElasticPool_Spec struct {
@@ -1502,5 +1502,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_ElasticPool{}, &Servers_ElasticPoolList{})
+	SchemeBuilder.Register(&ServersElasticPool{}, &ServersElasticPoolList{})
 }

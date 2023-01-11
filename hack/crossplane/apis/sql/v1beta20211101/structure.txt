@@ -32,7 +32,7 @@ github.com/Azure/azure-service-operator/hack/crossplane/apis/sql/v1beta20211101
     │       ├── Location: *string
     │       ├── MinimalTlsVersion: *string
     │       ├── Name: string
-    │       ├── PrimaryUserAssignedIdentityId: *string
+    │       ├── PrimaryUserAssignedIdentityId: Validated<*string> (0 rules)
     │       ├── PublicNetworkAccess: *Enum (2 values)
     │       │   ├── "Disabled"
     │       │   └── "Enabled"

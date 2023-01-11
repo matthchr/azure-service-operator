@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}
-type Servers_FirewallRule struct {
+type ServersFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_FirewallRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_FirewallRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_FirewallRule{}
+var _ conditions.Conditioner = &ServersFirewallRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_FirewallRule) GetConditions() conditions.Conditions {
+func (rule *ServersFirewallRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_FirewallRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersFirewallRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_FirewallRule{}
+var _ conversion.Convertible = &ServersFirewallRule{}
 
-// ConvertFrom populates our Servers_FirewallRule from the provided hub Servers_FirewallRule
-func (rule *Servers_FirewallRule) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_FirewallRule)
+// ConvertFrom populates our ServersFirewallRule from the provided hub ServersFirewallRule
+func (rule *ServersFirewallRule) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersFirewallRule)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_FirewallRule but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersFirewallRule but received %T instead", hub)
 	}
 
-	return rule.AssignProperties_From_Servers_FirewallRule(source)
+	return rule.AssignProperties_From_ServersFirewallRule(source)
 }
 
-// ConvertTo populates the provided hub Servers_FirewallRule from our Servers_FirewallRule
-func (rule *Servers_FirewallRule) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_FirewallRule)
+// ConvertTo populates the provided hub ServersFirewallRule from our ServersFirewallRule
+func (rule *ServersFirewallRule) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersFirewallRule)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_FirewallRule but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersFirewallRule but received %T instead", hub)
 	}
 
-	return rule.AssignProperties_To_Servers_FirewallRule(destination)
+	return rule.AssignProperties_To_ServersFirewallRule(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_firewallrule,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_firewallrules,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_firewallrules.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversfirewallrule,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversfirewallrules,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversfirewallrules.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_FirewallRule{}
+var _ admission.Defaulter = &ServersFirewallRule{}
 
-// Default applies defaults to the Servers_FirewallRule resource
-func (rule *Servers_FirewallRule) Default() {
+// Default applies defaults to the ServersFirewallRule resource
+func (rule *ServersFirewallRule) Default() {
 	rule.defaultImpl()
 	var temp interface{} = rule
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -82,54 +82,54 @@ func (rule *Servers_FirewallRule) Default() {
 }
 
 // defaultAzureName defaults the Azure name of the resource to the Kubernetes name
-func (rule *Servers_FirewallRule) defaultAzureName() {
+func (rule *ServersFirewallRule) defaultAzureName() {
 	if rule.Spec.AzureName == "" {
 		rule.Spec.AzureName = rule.Name
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_FirewallRule resource
-func (rule *Servers_FirewallRule) defaultImpl() { rule.defaultAzureName() }
+// defaultImpl applies the code generated defaults to the ServersFirewallRule resource
+func (rule *ServersFirewallRule) defaultImpl() { rule.defaultAzureName() }
 
-var _ genruntime.KubernetesResource = &Servers_FirewallRule{}
+var _ genruntime.KubernetesResource = &ServersFirewallRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_FirewallRule) AzureName() string {
+func (rule *ServersFirewallRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_FirewallRule) GetAPIVersion() string {
+func (rule ServersFirewallRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_FirewallRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersFirewallRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_FirewallRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersFirewallRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_FirewallRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersFirewallRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/firewallRules"
-func (rule *Servers_FirewallRule) GetType() string {
+func (rule *ServersFirewallRule) GetType() string {
 	return "Microsoft.Sql/servers/firewallRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_FirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_FirewallRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_FirewallRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersFirewallRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -139,7 +139,7 @@ func (rule *Servers_FirewallRule) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_FirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_FirewallRule_STATUS); ok {
 		rule.Status = *st
@@ -157,12 +157,12 @@ func (rule *Servers_FirewallRule) SetStatus(status genruntime.ConvertibleStatus)
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_firewallrule,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_firewallrules,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_firewallrules.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversfirewallrule,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversfirewallrules,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversfirewallrules.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_FirewallRule{}
+var _ admission.Validator = &ServersFirewallRule{}
 
 // ValidateCreate validates the creation of the resource
-func (rule *Servers_FirewallRule) ValidateCreate() error {
+func (rule *ServersFirewallRule) ValidateCreate() error {
 	validations := rule.createValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -179,7 +179,7 @@ func (rule *Servers_FirewallRule) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (rule *Servers_FirewallRule) ValidateDelete() error {
+func (rule *ServersFirewallRule) ValidateDelete() error {
 	validations := rule.deleteValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -196,7 +196,7 @@ func (rule *Servers_FirewallRule) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (rule *Servers_FirewallRule) ValidateUpdate(old runtime.Object) error {
+func (rule *ServersFirewallRule) ValidateUpdate(old runtime.Object) error {
 	validations := rule.updateValidations()
 	var temp interface{} = rule
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -213,17 +213,17 @@ func (rule *Servers_FirewallRule) ValidateUpdate(old runtime.Object) error {
 }
 
 // createValidations validates the creation of the resource
-func (rule *Servers_FirewallRule) createValidations() []func() error {
+func (rule *ServersFirewallRule) createValidations() []func() error {
 	return []func() error{rule.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (rule *Servers_FirewallRule) deleteValidations() []func() error {
+func (rule *ServersFirewallRule) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (rule *Servers_FirewallRule) updateValidations() []func(old runtime.Object) error {
+func (rule *ServersFirewallRule) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return rule.validateResourceReferences()
@@ -232,7 +232,7 @@ func (rule *Servers_FirewallRule) updateValidations() []func(old runtime.Object)
 }
 
 // validateResourceReferences validates all resource references
-func (rule *Servers_FirewallRule) validateResourceReferences() error {
+func (rule *ServersFirewallRule) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&rule.Spec)
 	if err != nil {
 		return err
@@ -241,8 +241,8 @@ func (rule *Servers_FirewallRule) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (rule *Servers_FirewallRule) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_FirewallRule)
+func (rule *ServersFirewallRule) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersFirewallRule)
 	if !ok {
 		return nil
 	}
@@ -250,8 +250,8 @@ func (rule *Servers_FirewallRule) validateWriteOnceProperties(old runtime.Object
 	return genruntime.ValidateWriteOnceProperties(oldObj, rule)
 }
 
-// AssignProperties_From_Servers_FirewallRule populates our Servers_FirewallRule from the provided source Servers_FirewallRule
-func (rule *Servers_FirewallRule) AssignProperties_From_Servers_FirewallRule(source *v20211101s.Servers_FirewallRule) error {
+// AssignProperties_From_ServersFirewallRule populates our ServersFirewallRule from the provided source ServersFirewallRule
+func (rule *ServersFirewallRule) AssignProperties_From_ServersFirewallRule(source *v20211101s.ServersFirewallRule) error {
 
 	// ObjectMeta
 	rule.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -276,8 +276,8 @@ func (rule *Servers_FirewallRule) AssignProperties_From_Servers_FirewallRule(sou
 	return nil
 }
 
-// AssignProperties_To_Servers_FirewallRule populates the provided destination Servers_FirewallRule from our Servers_FirewallRule
-func (rule *Servers_FirewallRule) AssignProperties_To_Servers_FirewallRule(destination *v20211101s.Servers_FirewallRule) error {
+// AssignProperties_To_ServersFirewallRule populates the provided destination ServersFirewallRule from our ServersFirewallRule
+func (rule *ServersFirewallRule) AssignProperties_To_ServersFirewallRule(destination *v20211101s.ServersFirewallRule) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *rule.ObjectMeta.DeepCopy()
@@ -303,11 +303,11 @@ func (rule *Servers_FirewallRule) AssignProperties_To_Servers_FirewallRule(desti
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_FirewallRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersFirewallRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion(),
-		Kind:    "Servers_FirewallRule",
+		Kind:    "ServersFirewallRule",
 	}
 }
 
@@ -315,10 +315,10 @@ func (rule *Servers_FirewallRule) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}
-type Servers_FirewallRuleList struct {
+type ServersFirewallRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_FirewallRule `json:"items"`
+	Items           []ServersFirewallRule `json:"items"`
 }
 
 type Servers_FirewallRule_Spec struct {
@@ -714,5 +714,5 @@ func (rule *Servers_FirewallRule_STATUS) AssignProperties_To_Servers_FirewallRul
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_FirewallRule{}, &Servers_FirewallRuleList{})
+	SchemeBuilder.Register(&ServersFirewallRule{}, &ServersFirewallRuleList{})
 }

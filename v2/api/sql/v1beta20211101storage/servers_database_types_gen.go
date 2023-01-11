@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_databases,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_databases/status,servers_databases/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversdatabases,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversdatabases/status,serversdatabases/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Database
+// Storage version of v1beta20211101.ServersDatabase
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/Databases.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}
-type Servers_Database struct {
+type ServersDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Database_Spec   `json:"spec,omitempty"`
 	Status            Servers_Database_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Database{}
+var _ conditions.Conditioner = &ServersDatabase{}
 
 // GetConditions returns the conditions of the resource
-func (database *Servers_Database) GetConditions() conditions.Conditions {
+func (database *ServersDatabase) GetConditions() conditions.Conditions {
 	return database.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (database *Servers_Database) SetConditions(conditions conditions.Conditions) {
+func (database *ServersDatabase) SetConditions(conditions conditions.Conditions) {
 	database.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Database{}
+var _ genruntime.KubernetesResource = &ServersDatabase{}
 
 // AzureName returns the Azure name of the resource
-func (database *Servers_Database) AzureName() string {
+func (database *ServersDatabase) AzureName() string {
 	return database.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (database Servers_Database) GetAPIVersion() string {
+func (database ServersDatabase) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (database *Servers_Database) GetResourceScope() genruntime.ResourceScope {
+func (database *ServersDatabase) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (database *Servers_Database) GetSpec() genruntime.ConvertibleSpec {
+func (database *ServersDatabase) GetSpec() genruntime.ConvertibleSpec {
 	return &database.Spec
 }
 
 // GetStatus returns the status of this resource
-func (database *Servers_Database) GetStatus() genruntime.ConvertibleStatus {
+func (database *ServersDatabase) GetStatus() genruntime.ConvertibleStatus {
 	return &database.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases"
-func (database *Servers_Database) GetType() string {
+func (database *ServersDatabase) GetType() string {
 	return "Microsoft.Sql/servers/databases"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (database *Servers_Database) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (database *ServersDatabase) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Database_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (database *Servers_Database) Owner() *genruntime.ResourceReference {
+func (database *ServersDatabase) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(database.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (database *Servers_Database) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (database *Servers_Database) SetStatus(status genruntime.ConvertibleStatus) error {
+func (database *ServersDatabase) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Database_STATUS); ok {
 		database.Status = *st
@@ -110,27 +110,27 @@ func (database *Servers_Database) SetStatus(status genruntime.ConvertibleStatus)
 	return nil
 }
 
-// Hub marks that this Servers_Database is the hub type for conversion
-func (database *Servers_Database) Hub() {}
+// Hub marks that this ServersDatabase is the hub type for conversion
+func (database *ServersDatabase) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (database *Servers_Database) OriginalGVK() *schema.GroupVersionKind {
+func (database *ServersDatabase) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: database.Spec.OriginalVersion,
-		Kind:    "Servers_Database",
+		Kind:    "ServersDatabase",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Database
+// Storage version of v1beta20211101.ServersDatabase
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/Databases.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}
-type Servers_DatabaseList struct {
+type ServersDatabaseList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Database `json:"items"`
+	Items           []ServersDatabase `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Database_Spec
@@ -319,6 +319,28 @@ type DatabaseIdentity_STATUS struct {
 	UserAssignedIdentities map[string]DatabaseUserIdentity_STATUS `json:"userAssignedIdentities,omitempty"`
 }
 
+// Storage version of v1beta20211101.Sku
+// An ARM Resource SKU.
+type Sku struct {
+	Capacity    *int                   `json:"capacity,omitempty"`
+	Family      *string                `json:"family,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	PropertyBag genruntime.PropertyBag `json:"$propertyBag,omitempty"`
+	Size        *string                `json:"size,omitempty"`
+	Tier        *string                `json:"tier,omitempty"`
+}
+
+// Storage version of v1beta20211101.Sku_STATUS
+// An ARM Resource SKU.
+type Sku_STATUS struct {
+	Capacity    *int                   `json:"capacity,omitempty"`
+	Family      *string                `json:"family,omitempty"`
+	Name        *string                `json:"name,omitempty"`
+	PropertyBag genruntime.PropertyBag `json:"$propertyBag,omitempty"`
+	Size        *string                `json:"size,omitempty"`
+	Tier        *string                `json:"tier,omitempty"`
+}
+
 // Storage version of v1beta20211101.DatabaseUserIdentity_STATUS
 // Azure Active Directory identity configuration for a resource.
 type DatabaseUserIdentity_STATUS struct {
@@ -328,5 +350,5 @@ type DatabaseUserIdentity_STATUS struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Database{}, &Servers_DatabaseList{})
+	SchemeBuilder.Register(&ServersDatabase{}, &ServersDatabaseList{})
 }

@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_VirtualNetworkRuleExtension struct {
+type ServersVirtualNetworkRuleExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_VirtualNetworkRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersVirtualNetworkRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_VirtualNetworkRule{},
-		&v20211101s.Servers_VirtualNetworkRule{}}
+		&v20211101.ServersVirtualNetworkRule{},
+		&v20211101s.ServersVirtualNetworkRule{}}
 }

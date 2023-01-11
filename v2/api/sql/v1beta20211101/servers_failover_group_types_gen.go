@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FailoverGroups.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}
-type Servers_FailoverGroup struct {
+type ServersFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_FailoverGroup_Spec   `json:"spec,omitempty"`
 	Status            Servers_FailoverGroup_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_FailoverGroup{}
+var _ conditions.Conditioner = &ServersFailoverGroup{}
 
 // GetConditions returns the conditions of the resource
-func (group *Servers_FailoverGroup) GetConditions() conditions.Conditions {
+func (group *ServersFailoverGroup) GetConditions() conditions.Conditions {
 	return group.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (group *Servers_FailoverGroup) SetConditions(conditions conditions.Conditions) {
+func (group *ServersFailoverGroup) SetConditions(conditions conditions.Conditions) {
 	group.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_FailoverGroup{}
+var _ conversion.Convertible = &ServersFailoverGroup{}
 
-// ConvertFrom populates our Servers_FailoverGroup from the provided hub Servers_FailoverGroup
-func (group *Servers_FailoverGroup) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_FailoverGroup)
+// ConvertFrom populates our ServersFailoverGroup from the provided hub ServersFailoverGroup
+func (group *ServersFailoverGroup) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersFailoverGroup)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_FailoverGroup but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersFailoverGroup but received %T instead", hub)
 	}
 
-	return group.AssignProperties_From_Servers_FailoverGroup(source)
+	return group.AssignProperties_From_ServersFailoverGroup(source)
 }
 
-// ConvertTo populates the provided hub Servers_FailoverGroup from our Servers_FailoverGroup
-func (group *Servers_FailoverGroup) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_FailoverGroup)
+// ConvertTo populates the provided hub ServersFailoverGroup from our ServersFailoverGroup
+func (group *ServersFailoverGroup) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersFailoverGroup)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_FailoverGroup but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersFailoverGroup but received %T instead", hub)
 	}
 
-	return group.AssignProperties_To_Servers_FailoverGroup(destination)
+	return group.AssignProperties_To_ServersFailoverGroup(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_failovergroup,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_failovergroups,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_failovergroups.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversfailovergroup,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversfailovergroups,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversfailovergroups.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_FailoverGroup{}
+var _ admission.Defaulter = &ServersFailoverGroup{}
 
-// Default applies defaults to the Servers_FailoverGroup resource
-func (group *Servers_FailoverGroup) Default() {
+// Default applies defaults to the ServersFailoverGroup resource
+func (group *ServersFailoverGroup) Default() {
 	group.defaultImpl()
 	var temp interface{} = group
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -82,54 +82,54 @@ func (group *Servers_FailoverGroup) Default() {
 }
 
 // defaultAzureName defaults the Azure name of the resource to the Kubernetes name
-func (group *Servers_FailoverGroup) defaultAzureName() {
+func (group *ServersFailoverGroup) defaultAzureName() {
 	if group.Spec.AzureName == "" {
 		group.Spec.AzureName = group.Name
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_FailoverGroup resource
-func (group *Servers_FailoverGroup) defaultImpl() { group.defaultAzureName() }
+// defaultImpl applies the code generated defaults to the ServersFailoverGroup resource
+func (group *ServersFailoverGroup) defaultImpl() { group.defaultAzureName() }
 
-var _ genruntime.KubernetesResource = &Servers_FailoverGroup{}
+var _ genruntime.KubernetesResource = &ServersFailoverGroup{}
 
 // AzureName returns the Azure name of the resource
-func (group *Servers_FailoverGroup) AzureName() string {
+func (group *ServersFailoverGroup) AzureName() string {
 	return group.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (group Servers_FailoverGroup) GetAPIVersion() string {
+func (group ServersFailoverGroup) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (group *Servers_FailoverGroup) GetResourceScope() genruntime.ResourceScope {
+func (group *ServersFailoverGroup) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (group *Servers_FailoverGroup) GetSpec() genruntime.ConvertibleSpec {
+func (group *ServersFailoverGroup) GetSpec() genruntime.ConvertibleSpec {
 	return &group.Spec
 }
 
 // GetStatus returns the status of this resource
-func (group *Servers_FailoverGroup) GetStatus() genruntime.ConvertibleStatus {
+func (group *ServersFailoverGroup) GetStatus() genruntime.ConvertibleStatus {
 	return &group.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/failoverGroups"
-func (group *Servers_FailoverGroup) GetType() string {
+func (group *ServersFailoverGroup) GetType() string {
 	return "Microsoft.Sql/servers/failoverGroups"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (group *Servers_FailoverGroup) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (group *ServersFailoverGroup) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_FailoverGroup_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (group *Servers_FailoverGroup) Owner() *genruntime.ResourceReference {
+func (group *ServersFailoverGroup) Owner() *genruntime.ResourceReference {
 	ownerGroup, ownerKind := genruntime.LookupOwnerGroupKind(group.Spec)
 	return &genruntime.ResourceReference{
 		Group: ownerGroup,
@@ -139,7 +139,7 @@ func (group *Servers_FailoverGroup) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (group *Servers_FailoverGroup) SetStatus(status genruntime.ConvertibleStatus) error {
+func (group *ServersFailoverGroup) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_FailoverGroup_STATUS); ok {
 		group.Status = *st
@@ -157,12 +157,12 @@ func (group *Servers_FailoverGroup) SetStatus(status genruntime.ConvertibleStatu
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_failovergroup,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_failovergroups,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_failovergroups.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversfailovergroup,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversfailovergroups,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversfailovergroups.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_FailoverGroup{}
+var _ admission.Validator = &ServersFailoverGroup{}
 
 // ValidateCreate validates the creation of the resource
-func (group *Servers_FailoverGroup) ValidateCreate() error {
+func (group *ServersFailoverGroup) ValidateCreate() error {
 	validations := group.createValidations()
 	var temp interface{} = group
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -179,7 +179,7 @@ func (group *Servers_FailoverGroup) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (group *Servers_FailoverGroup) ValidateDelete() error {
+func (group *ServersFailoverGroup) ValidateDelete() error {
 	validations := group.deleteValidations()
 	var temp interface{} = group
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -196,7 +196,7 @@ func (group *Servers_FailoverGroup) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (group *Servers_FailoverGroup) ValidateUpdate(old runtime.Object) error {
+func (group *ServersFailoverGroup) ValidateUpdate(old runtime.Object) error {
 	validations := group.updateValidations()
 	var temp interface{} = group
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -213,17 +213,17 @@ func (group *Servers_FailoverGroup) ValidateUpdate(old runtime.Object) error {
 }
 
 // createValidations validates the creation of the resource
-func (group *Servers_FailoverGroup) createValidations() []func() error {
+func (group *ServersFailoverGroup) createValidations() []func() error {
 	return []func() error{group.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (group *Servers_FailoverGroup) deleteValidations() []func() error {
+func (group *ServersFailoverGroup) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (group *Servers_FailoverGroup) updateValidations() []func(old runtime.Object) error {
+func (group *ServersFailoverGroup) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return group.validateResourceReferences()
@@ -232,7 +232,7 @@ func (group *Servers_FailoverGroup) updateValidations() []func(old runtime.Objec
 }
 
 // validateResourceReferences validates all resource references
-func (group *Servers_FailoverGroup) validateResourceReferences() error {
+func (group *ServersFailoverGroup) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&group.Spec)
 	if err != nil {
 		return err
@@ -241,8 +241,8 @@ func (group *Servers_FailoverGroup) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (group *Servers_FailoverGroup) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_FailoverGroup)
+func (group *ServersFailoverGroup) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersFailoverGroup)
 	if !ok {
 		return nil
 	}
@@ -250,8 +250,8 @@ func (group *Servers_FailoverGroup) validateWriteOnceProperties(old runtime.Obje
 	return genruntime.ValidateWriteOnceProperties(oldObj, group)
 }
 
-// AssignProperties_From_Servers_FailoverGroup populates our Servers_FailoverGroup from the provided source Servers_FailoverGroup
-func (group *Servers_FailoverGroup) AssignProperties_From_Servers_FailoverGroup(source *v20211101s.Servers_FailoverGroup) error {
+// AssignProperties_From_ServersFailoverGroup populates our ServersFailoverGroup from the provided source ServersFailoverGroup
+func (group *ServersFailoverGroup) AssignProperties_From_ServersFailoverGroup(source *v20211101s.ServersFailoverGroup) error {
 
 	// ObjectMeta
 	group.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -276,8 +276,8 @@ func (group *Servers_FailoverGroup) AssignProperties_From_Servers_FailoverGroup(
 	return nil
 }
 
-// AssignProperties_To_Servers_FailoverGroup populates the provided destination Servers_FailoverGroup from our Servers_FailoverGroup
-func (group *Servers_FailoverGroup) AssignProperties_To_Servers_FailoverGroup(destination *v20211101s.Servers_FailoverGroup) error {
+// AssignProperties_To_ServersFailoverGroup populates the provided destination ServersFailoverGroup from our ServersFailoverGroup
+func (group *ServersFailoverGroup) AssignProperties_To_ServersFailoverGroup(destination *v20211101s.ServersFailoverGroup) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *group.ObjectMeta.DeepCopy()
@@ -303,11 +303,11 @@ func (group *Servers_FailoverGroup) AssignProperties_To_Servers_FailoverGroup(de
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (group *Servers_FailoverGroup) OriginalGVK() *schema.GroupVersionKind {
+func (group *ServersFailoverGroup) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: group.Spec.OriginalVersion(),
-		Kind:    "Servers_FailoverGroup",
+		Kind:    "ServersFailoverGroup",
 	}
 }
 
@@ -315,10 +315,10 @@ func (group *Servers_FailoverGroup) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FailoverGroups.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}
-type Servers_FailoverGroupList struct {
+type ServersFailoverGroupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_FailoverGroup `json:"items"`
+	Items           []ServersFailoverGroup `json:"items"`
 }
 
 type Servers_FailoverGroup_Spec struct {
@@ -1641,5 +1641,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_FailoverGroup{}, &Servers_FailoverGroupList{})
+	SchemeBuilder.Register(&ServersFailoverGroup{}, &ServersFailoverGroupList{})
 }

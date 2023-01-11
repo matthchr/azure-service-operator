@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/default
-type Servers_AuditingSetting struct {
+type ServersAuditingSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_AuditingSetting_Spec   `json:"spec,omitempty"`
 	Status            Servers_AuditingSetting_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_AuditingSetting{}
+var _ conditions.Conditioner = &ServersAuditingSetting{}
 
 // GetConditions returns the conditions of the resource
-func (setting *Servers_AuditingSetting) GetConditions() conditions.Conditions {
+func (setting *ServersAuditingSetting) GetConditions() conditions.Conditions {
 	return setting.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (setting *Servers_AuditingSetting) SetConditions(conditions conditions.Conditions) {
+func (setting *ServersAuditingSetting) SetConditions(conditions conditions.Conditions) {
 	setting.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_AuditingSetting{}
+var _ conversion.Convertible = &ServersAuditingSetting{}
 
-// ConvertFrom populates our Servers_AuditingSetting from the provided hub Servers_AuditingSetting
-func (setting *Servers_AuditingSetting) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_AuditingSetting)
+// ConvertFrom populates our ServersAuditingSetting from the provided hub ServersAuditingSetting
+func (setting *ServersAuditingSetting) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersAuditingSetting)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_AuditingSetting but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersAuditingSetting but received %T instead", hub)
 	}
 
-	return setting.AssignProperties_From_Servers_AuditingSetting(source)
+	return setting.AssignProperties_From_ServersAuditingSetting(source)
 }
 
-// ConvertTo populates the provided hub Servers_AuditingSetting from our Servers_AuditingSetting
-func (setting *Servers_AuditingSetting) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_AuditingSetting)
+// ConvertTo populates the provided hub ServersAuditingSetting from our ServersAuditingSetting
+func (setting *ServersAuditingSetting) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersAuditingSetting)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_AuditingSetting but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersAuditingSetting but received %T instead", hub)
 	}
 
-	return setting.AssignProperties_To_Servers_AuditingSetting(destination)
+	return setting.AssignProperties_To_ServersAuditingSetting(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_auditingsetting,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_auditingsettings,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_auditingsettings.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversauditingsetting,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversauditingsettings,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversauditingsettings.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_AuditingSetting{}
+var _ admission.Defaulter = &ServersAuditingSetting{}
 
-// Default applies defaults to the Servers_AuditingSetting resource
-func (setting *Servers_AuditingSetting) Default() {
+// Default applies defaults to the ServersAuditingSetting resource
+func (setting *ServersAuditingSetting) Default() {
 	setting.defaultImpl()
 	var temp interface{} = setting
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -81,48 +81,48 @@ func (setting *Servers_AuditingSetting) Default() {
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_AuditingSetting resource
-func (setting *Servers_AuditingSetting) defaultImpl() {}
+// defaultImpl applies the code generated defaults to the ServersAuditingSetting resource
+func (setting *ServersAuditingSetting) defaultImpl() {}
 
-var _ genruntime.KubernetesResource = &Servers_AuditingSetting{}
+var _ genruntime.KubernetesResource = &ServersAuditingSetting{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (setting *Servers_AuditingSetting) AzureName() string {
+func (setting *ServersAuditingSetting) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (setting Servers_AuditingSetting) GetAPIVersion() string {
+func (setting ServersAuditingSetting) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (setting *Servers_AuditingSetting) GetResourceScope() genruntime.ResourceScope {
+func (setting *ServersAuditingSetting) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (setting *Servers_AuditingSetting) GetSpec() genruntime.ConvertibleSpec {
+func (setting *ServersAuditingSetting) GetSpec() genruntime.ConvertibleSpec {
 	return &setting.Spec
 }
 
 // GetStatus returns the status of this resource
-func (setting *Servers_AuditingSetting) GetStatus() genruntime.ConvertibleStatus {
+func (setting *ServersAuditingSetting) GetStatus() genruntime.ConvertibleStatus {
 	return &setting.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/auditingSettings"
-func (setting *Servers_AuditingSetting) GetType() string {
+func (setting *ServersAuditingSetting) GetType() string {
 	return "Microsoft.Sql/servers/auditingSettings"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (setting *Servers_AuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (setting *ServersAuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_AuditingSetting_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (setting *Servers_AuditingSetting) Owner() *genruntime.ResourceReference {
+func (setting *ServersAuditingSetting) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(setting.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -132,7 +132,7 @@ func (setting *Servers_AuditingSetting) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (setting *Servers_AuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
+func (setting *ServersAuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_AuditingSetting_STATUS); ok {
 		setting.Status = *st
@@ -150,12 +150,12 @@ func (setting *Servers_AuditingSetting) SetStatus(status genruntime.ConvertibleS
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_auditingsetting,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_auditingsettings,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_auditingsettings.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversauditingsetting,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversauditingsettings,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversauditingsettings.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_AuditingSetting{}
+var _ admission.Validator = &ServersAuditingSetting{}
 
 // ValidateCreate validates the creation of the resource
-func (setting *Servers_AuditingSetting) ValidateCreate() error {
+func (setting *ServersAuditingSetting) ValidateCreate() error {
 	validations := setting.createValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -172,7 +172,7 @@ func (setting *Servers_AuditingSetting) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (setting *Servers_AuditingSetting) ValidateDelete() error {
+func (setting *ServersAuditingSetting) ValidateDelete() error {
 	validations := setting.deleteValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -189,7 +189,7 @@ func (setting *Servers_AuditingSetting) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (setting *Servers_AuditingSetting) ValidateUpdate(old runtime.Object) error {
+func (setting *ServersAuditingSetting) ValidateUpdate(old runtime.Object) error {
 	validations := setting.updateValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -206,17 +206,17 @@ func (setting *Servers_AuditingSetting) ValidateUpdate(old runtime.Object) error
 }
 
 // createValidations validates the creation of the resource
-func (setting *Servers_AuditingSetting) createValidations() []func() error {
+func (setting *ServersAuditingSetting) createValidations() []func() error {
 	return []func() error{setting.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (setting *Servers_AuditingSetting) deleteValidations() []func() error {
+func (setting *ServersAuditingSetting) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (setting *Servers_AuditingSetting) updateValidations() []func(old runtime.Object) error {
+func (setting *ServersAuditingSetting) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return setting.validateResourceReferences()
@@ -225,7 +225,7 @@ func (setting *Servers_AuditingSetting) updateValidations() []func(old runtime.O
 }
 
 // validateResourceReferences validates all resource references
-func (setting *Servers_AuditingSetting) validateResourceReferences() error {
+func (setting *ServersAuditingSetting) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&setting.Spec)
 	if err != nil {
 		return err
@@ -234,8 +234,8 @@ func (setting *Servers_AuditingSetting) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (setting *Servers_AuditingSetting) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_AuditingSetting)
+func (setting *ServersAuditingSetting) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersAuditingSetting)
 	if !ok {
 		return nil
 	}
@@ -243,8 +243,8 @@ func (setting *Servers_AuditingSetting) validateWriteOnceProperties(old runtime.
 	return genruntime.ValidateWriteOnceProperties(oldObj, setting)
 }
 
-// AssignProperties_From_Servers_AuditingSetting populates our Servers_AuditingSetting from the provided source Servers_AuditingSetting
-func (setting *Servers_AuditingSetting) AssignProperties_From_Servers_AuditingSetting(source *v20211101s.Servers_AuditingSetting) error {
+// AssignProperties_From_ServersAuditingSetting populates our ServersAuditingSetting from the provided source ServersAuditingSetting
+func (setting *ServersAuditingSetting) AssignProperties_From_ServersAuditingSetting(source *v20211101s.ServersAuditingSetting) error {
 
 	// ObjectMeta
 	setting.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -269,8 +269,8 @@ func (setting *Servers_AuditingSetting) AssignProperties_From_Servers_AuditingSe
 	return nil
 }
 
-// AssignProperties_To_Servers_AuditingSetting populates the provided destination Servers_AuditingSetting from our Servers_AuditingSetting
-func (setting *Servers_AuditingSetting) AssignProperties_To_Servers_AuditingSetting(destination *v20211101s.Servers_AuditingSetting) error {
+// AssignProperties_To_ServersAuditingSetting populates the provided destination ServersAuditingSetting from our ServersAuditingSetting
+func (setting *ServersAuditingSetting) AssignProperties_To_ServersAuditingSetting(destination *v20211101s.ServersAuditingSetting) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *setting.ObjectMeta.DeepCopy()
@@ -296,11 +296,11 @@ func (setting *Servers_AuditingSetting) AssignProperties_To_Servers_AuditingSett
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (setting *Servers_AuditingSetting) OriginalGVK() *schema.GroupVersionKind {
+func (setting *ServersAuditingSetting) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: setting.Spec.OriginalVersion(),
-		Kind:    "Servers_AuditingSetting",
+		Kind:    "ServersAuditingSetting",
 	}
 }
 
@@ -308,10 +308,10 @@ func (setting *Servers_AuditingSetting) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingSettings/default
-type Servers_AuditingSettingList struct {
+type ServersAuditingSettingList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_AuditingSetting `json:"items"`
+	Items           []ServersAuditingSetting `json:"items"`
 }
 
 type Servers_AuditingSetting_Spec struct {
@@ -1334,5 +1334,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_AuditingSetting{}, &Servers_AuditingSettingList{})
+	SchemeBuilder.Register(&ServersAuditingSetting{}, &ServersAuditingSettingList{})
 }

@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_Databases_AuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersDatabasesAuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_Databases_AuditingSetting via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_Databases_AuditingSetting, Servers_Databases_AuditingSettingGenerator()))
+		"Round trip of ServersDatabasesAuditingSetting via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesAuditingSetting, ServersDatabasesAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_Databases_AuditingSetting runs a test to see if a specific instance of Servers_Databases_AuditingSetting round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Servers_Databases_AuditingSetting) string {
+// RunJSONSerializationTestForServersDatabasesAuditingSetting runs a test to see if a specific instance of ServersDatabasesAuditingSetting round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesAuditingSetting(subject ServersDatabasesAuditingSetting) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Server
 	}
 
 	// Deserialize back into memory
-	var actual Servers_Databases_AuditingSetting
+	var actual ServersDatabasesAuditingSetting
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_Databases_AuditingSetting(subject Server
 	return ""
 }
 
-// Generator of Servers_Databases_AuditingSetting instances for property testing - lazily instantiated by
-// Servers_Databases_AuditingSettingGenerator()
-var servers_Databases_AuditingSettingGenerator gopter.Gen
+// Generator of ServersDatabasesAuditingSetting instances for property testing - lazily instantiated by
+// ServersDatabasesAuditingSettingGenerator()
+var serversDatabasesAuditingSettingGenerator gopter.Gen
 
-// Servers_Databases_AuditingSettingGenerator returns a generator of Servers_Databases_AuditingSetting instances for property testing.
-func Servers_Databases_AuditingSettingGenerator() gopter.Gen {
-	if servers_Databases_AuditingSettingGenerator != nil {
-		return servers_Databases_AuditingSettingGenerator
+// ServersDatabasesAuditingSettingGenerator returns a generator of ServersDatabasesAuditingSetting instances for property testing.
+func ServersDatabasesAuditingSettingGenerator() gopter.Gen {
+	if serversDatabasesAuditingSettingGenerator != nil {
+		return serversDatabasesAuditingSettingGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting(generators)
-	servers_Databases_AuditingSettingGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_AuditingSetting{}), generators)
+	AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting(generators)
+	serversDatabasesAuditingSettingGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesAuditingSetting{}), generators)
 
-	return servers_Databases_AuditingSettingGenerator
+	return serversDatabasesAuditingSettingGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_Databases_AuditingSetting_SpecGenerator()
 	gens["Status"] = Servers_Databases_AuditingSetting_STATUSGenerator()
 }

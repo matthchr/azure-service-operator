@@ -330,6 +330,70 @@ func AddRelatedPropertyGeneratorsForDatabaseProperties_STATUS_ARM(gens map[strin
 	gens["CurrentSku"] = gen.PtrOf(Sku_STATUS_ARMGenerator())
 }
 
+func Test_Sku_STATUS_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 80
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of Sku_STATUS_ARM via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForSku_STATUS_ARM, Sku_STATUS_ARMGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForSku_STATUS_ARM runs a test to see if a specific instance of Sku_STATUS_ARM round trips to JSON and back losslessly
+func RunJSONSerializationTestForSku_STATUS_ARM(subject Sku_STATUS_ARM) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual Sku_STATUS_ARM
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of Sku_STATUS_ARM instances for property testing - lazily instantiated by Sku_STATUS_ARMGenerator()
+var sku_STATUS_ARMGenerator gopter.Gen
+
+// Sku_STATUS_ARMGenerator returns a generator of Sku_STATUS_ARM instances for property testing.
+func Sku_STATUS_ARMGenerator() gopter.Gen {
+	if sku_STATUS_ARMGenerator != nil {
+		return sku_STATUS_ARMGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForSku_STATUS_ARM(generators)
+	sku_STATUS_ARMGenerator = gen.Struct(reflect.TypeOf(Sku_STATUS_ARM{}), generators)
+
+	return sku_STATUS_ARMGenerator
+}
+
+// AddIndependentPropertyGeneratorsForSku_STATUS_ARM is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForSku_STATUS_ARM(gens map[string]gopter.Gen) {
+	gens["Capacity"] = gen.PtrOf(gen.Int())
+	gens["Family"] = gen.PtrOf(gen.AlphaString())
+	gens["Name"] = gen.PtrOf(gen.AlphaString())
+	gens["Size"] = gen.PtrOf(gen.AlphaString())
+	gens["Tier"] = gen.PtrOf(gen.AlphaString())
+}
+
 func Test_DatabaseUserIdentity_STATUS_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()

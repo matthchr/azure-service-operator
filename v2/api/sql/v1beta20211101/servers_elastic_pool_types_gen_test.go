@@ -18,32 +18,32 @@ import (
 	"testing"
 )
 
-func Test_Servers_ElasticPool_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersElasticPool_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	parameters.MinSuccessfulTests = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_ElasticPool to hub returns original",
-		prop.ForAll(RunResourceConversionTestForServers_ElasticPool, Servers_ElasticPoolGenerator()))
+		"Round trip from ServersElasticPool to hub returns original",
+		prop.ForAll(RunResourceConversionTestForServersElasticPool, ServersElasticPoolGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunResourceConversionTestForServers_ElasticPool tests if a specific instance of Servers_ElasticPool round trips to the hub storage version and back losslessly
-func RunResourceConversionTestForServers_ElasticPool(subject Servers_ElasticPool) string {
+// RunResourceConversionTestForServersElasticPool tests if a specific instance of ServersElasticPool round trips to the hub storage version and back losslessly
+func RunResourceConversionTestForServersElasticPool(subject ServersElasticPool) string {
 	// Copy subject to make sure conversion doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Convert to our hub version
-	var hub v20211101s.Servers_ElasticPool
+	var hub v20211101s.ServersElasticPool
 	err := copied.ConvertTo(&hub)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Convert from our hub version
-	var actual Servers_ElasticPool
+	var actual ServersElasticPool
 	err = actual.ConvertFrom(&hub)
 	if err != nil {
 		return err.Error()
@@ -61,32 +61,32 @@ func RunResourceConversionTestForServers_ElasticPool(subject Servers_ElasticPool
 	return ""
 }
 
-func Test_Servers_ElasticPool_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersElasticPool_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_ElasticPool to Servers_ElasticPool via AssignProperties_To_Servers_ElasticPool & AssignProperties_From_Servers_ElasticPool returns original",
-		prop.ForAll(RunPropertyAssignmentTestForServers_ElasticPool, Servers_ElasticPoolGenerator()))
+		"Round trip from ServersElasticPool to ServersElasticPool via AssignProperties_To_ServersElasticPool & AssignProperties_From_ServersElasticPool returns original",
+		prop.ForAll(RunPropertyAssignmentTestForServersElasticPool, ServersElasticPoolGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunPropertyAssignmentTestForServers_ElasticPool tests if a specific instance of Servers_ElasticPool can be assigned to v1beta20211101storage and back losslessly
-func RunPropertyAssignmentTestForServers_ElasticPool(subject Servers_ElasticPool) string {
+// RunPropertyAssignmentTestForServersElasticPool tests if a specific instance of ServersElasticPool can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForServersElasticPool(subject ServersElasticPool) string {
 	// Copy subject to make sure assignment doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Use AssignPropertiesTo() for the first stage of conversion
-	var other v20211101s.Servers_ElasticPool
-	err := copied.AssignProperties_To_Servers_ElasticPool(&other)
+	var other v20211101s.ServersElasticPool
+	err := copied.AssignProperties_To_ServersElasticPool(&other)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Use AssignPropertiesFrom() to convert back to our original type
-	var actual Servers_ElasticPool
-	err = actual.AssignProperties_From_Servers_ElasticPool(&other)
+	var actual ServersElasticPool
+	err = actual.AssignProperties_From_ServersElasticPool(&other)
 	if err != nil {
 		return err.Error()
 	}
@@ -103,20 +103,20 @@ func RunPropertyAssignmentTestForServers_ElasticPool(subject Servers_ElasticPool
 	return ""
 }
 
-func Test_Servers_ElasticPool_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersElasticPool_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_ElasticPool via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_ElasticPool, Servers_ElasticPoolGenerator()))
+		"Round trip of ServersElasticPool via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersElasticPool, ServersElasticPoolGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_ElasticPool runs a test to see if a specific instance of Servers_ElasticPool round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_ElasticPool(subject Servers_ElasticPool) string {
+// RunJSONSerializationTestForServersElasticPool runs a test to see if a specific instance of ServersElasticPool round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersElasticPool(subject ServersElasticPool) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -124,7 +124,7 @@ func RunJSONSerializationTestForServers_ElasticPool(subject Servers_ElasticPool)
 	}
 
 	// Deserialize back into memory
-	var actual Servers_ElasticPool
+	var actual ServersElasticPool
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -142,25 +142,24 @@ func RunJSONSerializationTestForServers_ElasticPool(subject Servers_ElasticPool)
 	return ""
 }
 
-// Generator of Servers_ElasticPool instances for property testing - lazily instantiated by
-// Servers_ElasticPoolGenerator()
-var servers_ElasticPoolGenerator gopter.Gen
+// Generator of ServersElasticPool instances for property testing - lazily instantiated by ServersElasticPoolGenerator()
+var serversElasticPoolGenerator gopter.Gen
 
-// Servers_ElasticPoolGenerator returns a generator of Servers_ElasticPool instances for property testing.
-func Servers_ElasticPoolGenerator() gopter.Gen {
-	if servers_ElasticPoolGenerator != nil {
-		return servers_ElasticPoolGenerator
+// ServersElasticPoolGenerator returns a generator of ServersElasticPool instances for property testing.
+func ServersElasticPoolGenerator() gopter.Gen {
+	if serversElasticPoolGenerator != nil {
+		return serversElasticPoolGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_ElasticPool(generators)
-	servers_ElasticPoolGenerator = gen.Struct(reflect.TypeOf(Servers_ElasticPool{}), generators)
+	AddRelatedPropertyGeneratorsForServersElasticPool(generators)
+	serversElasticPoolGenerator = gen.Struct(reflect.TypeOf(ServersElasticPool{}), generators)
 
-	return servers_ElasticPoolGenerator
+	return serversElasticPoolGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_ElasticPool is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_ElasticPool(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersElasticPool is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersElasticPool(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_ElasticPool_SpecGenerator()
 	gens["Status"] = Servers_ElasticPool_STATUSGenerator()
 }

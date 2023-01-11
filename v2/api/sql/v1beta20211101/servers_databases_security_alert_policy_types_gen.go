@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/DatabaseSecurityAlertPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/default
-type Servers_Databases_SecurityAlertPolicy struct {
+type ServersDatabasesSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_SecurityAlertPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_SecurityAlertPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_SecurityAlertPolicy{}
+var _ conditions.Conditioner = &ServersDatabasesSecurityAlertPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersDatabasesSecurityAlertPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_Databases_SecurityAlertPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersDatabasesSecurityAlertPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_Databases_SecurityAlertPolicy{}
+var _ conversion.Convertible = &ServersDatabasesSecurityAlertPolicy{}
 
-// ConvertFrom populates our Servers_Databases_SecurityAlertPolicy from the provided hub Servers_Databases_SecurityAlertPolicy
-func (policy *Servers_Databases_SecurityAlertPolicy) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_Databases_SecurityAlertPolicy)
+// ConvertFrom populates our ServersDatabasesSecurityAlertPolicy from the provided hub ServersDatabasesSecurityAlertPolicy
+func (policy *ServersDatabasesSecurityAlertPolicy) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersDatabasesSecurityAlertPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_SecurityAlertPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesSecurityAlertPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_From_Servers_Databases_SecurityAlertPolicy(source)
+	return policy.AssignProperties_From_ServersDatabasesSecurityAlertPolicy(source)
 }
 
-// ConvertTo populates the provided hub Servers_Databases_SecurityAlertPolicy from our Servers_Databases_SecurityAlertPolicy
-func (policy *Servers_Databases_SecurityAlertPolicy) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_Databases_SecurityAlertPolicy)
+// ConvertTo populates the provided hub ServersDatabasesSecurityAlertPolicy from our ServersDatabasesSecurityAlertPolicy
+func (policy *ServersDatabasesSecurityAlertPolicy) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersDatabasesSecurityAlertPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_SecurityAlertPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesSecurityAlertPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_To_Servers_Databases_SecurityAlertPolicy(destination)
+	return policy.AssignProperties_To_ServersDatabasesSecurityAlertPolicy(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_databases_securityalertpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_securityalertpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_databases_securityalertpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversdatabasessecurityalertpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasessecurityalertpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversdatabasessecurityalertpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_Databases_SecurityAlertPolicy{}
+var _ admission.Defaulter = &ServersDatabasesSecurityAlertPolicy{}
 
-// Default applies defaults to the Servers_Databases_SecurityAlertPolicy resource
-func (policy *Servers_Databases_SecurityAlertPolicy) Default() {
+// Default applies defaults to the ServersDatabasesSecurityAlertPolicy resource
+func (policy *ServersDatabasesSecurityAlertPolicy) Default() {
 	policy.defaultImpl()
 	var temp interface{} = policy
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -81,48 +81,48 @@ func (policy *Servers_Databases_SecurityAlertPolicy) Default() {
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_Databases_SecurityAlertPolicy resource
-func (policy *Servers_Databases_SecurityAlertPolicy) defaultImpl() {}
+// defaultImpl applies the code generated defaults to the ServersDatabasesSecurityAlertPolicy resource
+func (policy *ServersDatabasesSecurityAlertPolicy) defaultImpl() {}
 
-var _ genruntime.KubernetesResource = &Servers_Databases_SecurityAlertPolicy{}
+var _ genruntime.KubernetesResource = &ServersDatabasesSecurityAlertPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_Databases_SecurityAlertPolicy) AzureName() string {
+func (policy *ServersDatabasesSecurityAlertPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_Databases_SecurityAlertPolicy) GetAPIVersion() string {
+func (policy ServersDatabasesSecurityAlertPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersDatabasesSecurityAlertPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_Databases_SecurityAlertPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersDatabasesSecurityAlertPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_Databases_SecurityAlertPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesSecurityAlertPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/securityAlertPolicies"
-func (policy *Servers_Databases_SecurityAlertPolicy) GetType() string {
+func (policy *ServersDatabasesSecurityAlertPolicy) GetType() string {
 	return "Microsoft.Sql/servers/databases/securityAlertPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_Databases_SecurityAlertPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesSecurityAlertPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_SecurityAlertPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_Databases_SecurityAlertPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersDatabasesSecurityAlertPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -132,7 +132,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy) Owner() *genruntime.Resourc
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_Databases_SecurityAlertPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersDatabasesSecurityAlertPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_SecurityAlertPolicy_STATUS); ok {
 		policy.Status = *st
@@ -150,12 +150,12 @@ func (policy *Servers_Databases_SecurityAlertPolicy) SetStatus(status genruntime
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_databases_securityalertpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_securityalertpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_databases_securityalertpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversdatabasessecurityalertpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasessecurityalertpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversdatabasessecurityalertpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_Databases_SecurityAlertPolicy{}
+var _ admission.Validator = &ServersDatabasesSecurityAlertPolicy{}
 
 // ValidateCreate validates the creation of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) ValidateCreate() error {
+func (policy *ServersDatabasesSecurityAlertPolicy) ValidateCreate() error {
 	validations := policy.createValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -172,7 +172,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) ValidateDelete() error {
+func (policy *ServersDatabasesSecurityAlertPolicy) ValidateDelete() error {
 	validations := policy.deleteValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -189,7 +189,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) ValidateUpdate(old runtime.Object) error {
+func (policy *ServersDatabasesSecurityAlertPolicy) ValidateUpdate(old runtime.Object) error {
 	validations := policy.updateValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -206,17 +206,17 @@ func (policy *Servers_Databases_SecurityAlertPolicy) ValidateUpdate(old runtime.
 }
 
 // createValidations validates the creation of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) createValidations() []func() error {
+func (policy *ServersDatabasesSecurityAlertPolicy) createValidations() []func() error {
 	return []func() error{policy.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) deleteValidations() []func() error {
+func (policy *ServersDatabasesSecurityAlertPolicy) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) updateValidations() []func(old runtime.Object) error {
+func (policy *ServersDatabasesSecurityAlertPolicy) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return policy.validateResourceReferences()
@@ -225,7 +225,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy) updateValidations() []func(
 }
 
 // validateResourceReferences validates all resource references
-func (policy *Servers_Databases_SecurityAlertPolicy) validateResourceReferences() error {
+func (policy *ServersDatabasesSecurityAlertPolicy) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&policy.Spec)
 	if err != nil {
 		return err
@@ -234,8 +234,8 @@ func (policy *Servers_Databases_SecurityAlertPolicy) validateResourceReferences(
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (policy *Servers_Databases_SecurityAlertPolicy) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_Databases_SecurityAlertPolicy)
+func (policy *ServersDatabasesSecurityAlertPolicy) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersDatabasesSecurityAlertPolicy)
 	if !ok {
 		return nil
 	}
@@ -243,8 +243,8 @@ func (policy *Servers_Databases_SecurityAlertPolicy) validateWriteOnceProperties
 	return genruntime.ValidateWriteOnceProperties(oldObj, policy)
 }
 
-// AssignProperties_From_Servers_Databases_SecurityAlertPolicy populates our Servers_Databases_SecurityAlertPolicy from the provided source Servers_Databases_SecurityAlertPolicy
-func (policy *Servers_Databases_SecurityAlertPolicy) AssignProperties_From_Servers_Databases_SecurityAlertPolicy(source *v20211101s.Servers_Databases_SecurityAlertPolicy) error {
+// AssignProperties_From_ServersDatabasesSecurityAlertPolicy populates our ServersDatabasesSecurityAlertPolicy from the provided source ServersDatabasesSecurityAlertPolicy
+func (policy *ServersDatabasesSecurityAlertPolicy) AssignProperties_From_ServersDatabasesSecurityAlertPolicy(source *v20211101s.ServersDatabasesSecurityAlertPolicy) error {
 
 	// ObjectMeta
 	policy.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -269,8 +269,8 @@ func (policy *Servers_Databases_SecurityAlertPolicy) AssignProperties_From_Serve
 	return nil
 }
 
-// AssignProperties_To_Servers_Databases_SecurityAlertPolicy populates the provided destination Servers_Databases_SecurityAlertPolicy from our Servers_Databases_SecurityAlertPolicy
-func (policy *Servers_Databases_SecurityAlertPolicy) AssignProperties_To_Servers_Databases_SecurityAlertPolicy(destination *v20211101s.Servers_Databases_SecurityAlertPolicy) error {
+// AssignProperties_To_ServersDatabasesSecurityAlertPolicy populates the provided destination ServersDatabasesSecurityAlertPolicy from our ServersDatabasesSecurityAlertPolicy
+func (policy *ServersDatabasesSecurityAlertPolicy) AssignProperties_To_ServersDatabasesSecurityAlertPolicy(destination *v20211101s.ServersDatabasesSecurityAlertPolicy) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *policy.ObjectMeta.DeepCopy()
@@ -296,11 +296,11 @@ func (policy *Servers_Databases_SecurityAlertPolicy) AssignProperties_To_Servers
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_Databases_SecurityAlertPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersDatabasesSecurityAlertPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion(),
-		Kind:    "Servers_Databases_SecurityAlertPolicy",
+		Kind:    "ServersDatabasesSecurityAlertPolicy",
 	}
 }
 
@@ -308,10 +308,10 @@ func (policy *Servers_Databases_SecurityAlertPolicy) OriginalGVK() *schema.Group
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/DatabaseSecurityAlertPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/securityAlertPolicies/default
-type Servers_Databases_SecurityAlertPolicyList struct {
+type ServersDatabasesSecurityAlertPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_SecurityAlertPolicy `json:"items"`
+	Items           []ServersDatabasesSecurityAlertPolicy `json:"items"`
 }
 
 type Servers_Databases_SecurityAlertPolicy_Spec struct {
@@ -328,8 +328,8 @@ type Servers_Databases_SecurityAlertPolicy_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 
 	// RetentionDays: Specifies the number of days to keep in the Threat Detection audit logs.
 	RetentionDays *int `json:"retentionDays,omitempty"`
@@ -337,10 +337,10 @@ type Servers_Databases_SecurityAlertPolicy_Spec struct {
 	// +kubebuilder:validation:Required
 	// State: Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the
 	// specific database.
-	State *SecurityAlertsPolicyProperties_State `json:"state,omitempty"`
+	State *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State `json:"state,omitempty"`
 
 	// StorageAccountAccessKey: Specifies the identifier key of the Threat Detection audit storage account.
-	StorageAccountAccessKey *string `json:"storageAccountAccessKey,omitempty"`
+	StorageAccountAccessKey *genruntime.SecretReference `json:"storageAccountAccessKey,omitempty"`
 
 	// StorageEndpoint: Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage
 	// will hold all Threat Detection audit logs.
@@ -367,7 +367,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec) ConvertToARM(resolved 
 		policy.State != nil ||
 		policy.StorageAccountAccessKey != nil ||
 		policy.StorageEndpoint != nil {
-		result.Properties = &SecurityAlertsPolicyProperties_ARM{}
+		result.Properties = &DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM{}
 	}
 	for _, item := range policy.DisabledAlerts {
 		result.Properties.DisabledAlerts = append(result.Properties.DisabledAlerts, item)
@@ -388,7 +388,11 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec) ConvertToARM(resolved 
 		result.Properties.State = &state
 	}
 	if policy.StorageAccountAccessKey != nil {
-		storageAccountAccessKey := *policy.StorageAccountAccessKey
+		storageAccountAccessKeySecret, err := resolved.ResolvedSecrets.Lookup(*policy.StorageAccountAccessKey)
+		if err != nil {
+			return nil, errors.Wrap(err, "looking up secret for property StorageAccountAccessKey")
+		}
+		storageAccountAccessKey := storageAccountAccessKeySecret
 		result.Properties.StorageAccountAccessKey = &storageAccountAccessKey
 	}
 	if policy.StorageEndpoint != nil {
@@ -456,14 +460,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec) PopulateFromARM(owner 
 		}
 	}
 
-	// Set property ‘StorageAccountAccessKey’:
-	// copying flattened property:
-	if typedInput.Properties != nil {
-		if typedInput.Properties.StorageAccountAccessKey != nil {
-			storageAccountAccessKey := *typedInput.Properties.StorageAccountAccessKey
-			policy.StorageAccountAccessKey = &storageAccountAccessKey
-		}
-	}
+	// no assignment for property ‘StorageAccountAccessKey’
 
 	// Set property ‘StorageEndpoint’:
 	// copying flattened property:
@@ -558,14 +555,19 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec) AssignProperties_From_
 
 	// State
 	if source.State != nil {
-		state := SecurityAlertsPolicyProperties_State(*source.State)
+		state := DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State(*source.State)
 		policy.State = &state
 	} else {
 		policy.State = nil
 	}
 
 	// StorageAccountAccessKey
-	policy.StorageAccountAccessKey = genruntime.ClonePointerToString(source.StorageAccountAccessKey)
+	if source.StorageAccountAccessKey != nil {
+		storageAccountAccessKey := source.StorageAccountAccessKey.Copy()
+		policy.StorageAccountAccessKey = &storageAccountAccessKey
+	} else {
+		policy.StorageAccountAccessKey = nil
+	}
 
 	// StorageEndpoint
 	policy.StorageEndpoint = genruntime.ClonePointerToString(source.StorageEndpoint)
@@ -616,7 +618,12 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec) AssignProperties_To_Se
 	}
 
 	// StorageAccountAccessKey
-	destination.StorageAccountAccessKey = genruntime.ClonePointerToString(policy.StorageAccountAccessKey)
+	if policy.StorageAccountAccessKey != nil {
+		storageAccountAccessKey := policy.StorageAccountAccessKey.Copy()
+		destination.StorageAccountAccessKey = &storageAccountAccessKey
+	} else {
+		destination.StorageAccountAccessKey = nil
+	}
 
 	// StorageEndpoint
 	destination.StorageEndpoint = genruntime.ClonePointerToString(policy.StorageEndpoint)
@@ -665,10 +672,7 @@ type Servers_Databases_SecurityAlertPolicy_STATUS struct {
 
 	// State: Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the
 	// specific database.
-	State *SecurityAlertsPolicyProperties_State_STATUS `json:"state,omitempty"`
-
-	// StorageAccountAccessKey: Specifies the identifier key of the Threat Detection audit storage account.
-	StorageAccountAccessKey *string `json:"storageAccountAccessKey,omitempty"`
+	State *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS `json:"state,omitempty"`
 
 	// StorageEndpoint: Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage
 	// will hold all Threat Detection audit logs.
@@ -811,15 +815,6 @@ func (policy *Servers_Databases_SecurityAlertPolicy_STATUS) PopulateFromARM(owne
 		}
 	}
 
-	// Set property ‘StorageAccountAccessKey’:
-	// copying flattened property:
-	if typedInput.Properties != nil {
-		if typedInput.Properties.StorageAccountAccessKey != nil {
-			storageAccountAccessKey := *typedInput.Properties.StorageAccountAccessKey
-			policy.StorageAccountAccessKey = &storageAccountAccessKey
-		}
-	}
-
 	// Set property ‘StorageEndpoint’:
 	// copying flattened property:
 	if typedInput.Properties != nil {
@@ -884,14 +879,11 @@ func (policy *Servers_Databases_SecurityAlertPolicy_STATUS) AssignProperties_Fro
 
 	// State
 	if source.State != nil {
-		state := SecurityAlertsPolicyProperties_State_STATUS(*source.State)
+		state := DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS(*source.State)
 		policy.State = &state
 	} else {
 		policy.State = nil
 	}
-
-	// StorageAccountAccessKey
-	policy.StorageAccountAccessKey = genruntime.ClonePointerToString(source.StorageAccountAccessKey)
 
 	// StorageEndpoint
 	policy.StorageEndpoint = genruntime.ClonePointerToString(source.StorageEndpoint)
@@ -957,9 +949,6 @@ func (policy *Servers_Databases_SecurityAlertPolicy_STATUS) AssignProperties_To_
 		destination.State = nil
 	}
 
-	// StorageAccountAccessKey
-	destination.StorageAccountAccessKey = genruntime.ClonePointerToString(policy.StorageAccountAccessKey)
-
 	// StorageEndpoint
 	destination.StorageEndpoint = genruntime.ClonePointerToString(policy.StorageEndpoint)
 
@@ -990,174 +979,20 @@ func (policy *Servers_Databases_SecurityAlertPolicy_STATUS) AssignProperties_To_
 }
 
 // +kubebuilder:validation:Enum={"Disabled","Enabled"}
-type SecurityAlertsPolicyProperties_State string
+type DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State string
 
 const (
-	SecurityAlertsPolicyProperties_State_Disabled = SecurityAlertsPolicyProperties_State("Disabled")
-	SecurityAlertsPolicyProperties_State_Enabled  = SecurityAlertsPolicyProperties_State("Enabled")
+	DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_Disabled = DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State("Disabled")
+	DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_Enabled  = DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State("Enabled")
 )
 
-type SecurityAlertsPolicyProperties_State_STATUS string
+type DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS string
 
 const (
-	SecurityAlertsPolicyProperties_State_STATUS_Disabled = SecurityAlertsPolicyProperties_State_STATUS("Disabled")
-	SecurityAlertsPolicyProperties_State_STATUS_Enabled  = SecurityAlertsPolicyProperties_State_STATUS("Enabled")
+	DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS_Disabled = DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS("Disabled")
+	DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS_Enabled  = DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS("Enabled")
 )
-
-// Metadata pertaining to creation and last modification of the resource.
-type SystemData_STATUS struct {
-	// CreatedAt: The timestamp of resource creation (UTC).
-	CreatedAt *string `json:"createdAt,omitempty"`
-
-	// CreatedBy: The identity that created the resource.
-	CreatedBy *string `json:"createdBy,omitempty"`
-
-	// CreatedByType: The type of identity that created the resource.
-	CreatedByType *SystemData_CreatedByType_STATUS `json:"createdByType,omitempty"`
-
-	// LastModifiedAt: The timestamp of resource last modification (UTC)
-	LastModifiedAt *string `json:"lastModifiedAt,omitempty"`
-
-	// LastModifiedBy: The identity that last modified the resource.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-
-	// LastModifiedByType: The type of identity that last modified the resource.
-	LastModifiedByType *SystemData_LastModifiedByType_STATUS `json:"lastModifiedByType,omitempty"`
-}
-
-var _ genruntime.FromARMConverter = &SystemData_STATUS{}
-
-// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
-func (data *SystemData_STATUS) NewEmptyARMValue() genruntime.ARMResourceStatus {
-	return &SystemData_STATUS_ARM{}
-}
-
-// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
-func (data *SystemData_STATUS) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
-	typedInput, ok := armInput.(SystemData_STATUS_ARM)
-	if !ok {
-		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected SystemData_STATUS_ARM, got %T", armInput)
-	}
-
-	// Set property ‘CreatedAt’:
-	if typedInput.CreatedAt != nil {
-		createdAt := *typedInput.CreatedAt
-		data.CreatedAt = &createdAt
-	}
-
-	// Set property ‘CreatedBy’:
-	if typedInput.CreatedBy != nil {
-		createdBy := *typedInput.CreatedBy
-		data.CreatedBy = &createdBy
-	}
-
-	// Set property ‘CreatedByType’:
-	if typedInput.CreatedByType != nil {
-		createdByType := *typedInput.CreatedByType
-		data.CreatedByType = &createdByType
-	}
-
-	// Set property ‘LastModifiedAt’:
-	if typedInput.LastModifiedAt != nil {
-		lastModifiedAt := *typedInput.LastModifiedAt
-		data.LastModifiedAt = &lastModifiedAt
-	}
-
-	// Set property ‘LastModifiedBy’:
-	if typedInput.LastModifiedBy != nil {
-		lastModifiedBy := *typedInput.LastModifiedBy
-		data.LastModifiedBy = &lastModifiedBy
-	}
-
-	// Set property ‘LastModifiedByType’:
-	if typedInput.LastModifiedByType != nil {
-		lastModifiedByType := *typedInput.LastModifiedByType
-		data.LastModifiedByType = &lastModifiedByType
-	}
-
-	// No error
-	return nil
-}
-
-// AssignProperties_From_SystemData_STATUS populates our SystemData_STATUS from the provided source SystemData_STATUS
-func (data *SystemData_STATUS) AssignProperties_From_SystemData_STATUS(source *v20211101s.SystemData_STATUS) error {
-
-	// CreatedAt
-	data.CreatedAt = genruntime.ClonePointerToString(source.CreatedAt)
-
-	// CreatedBy
-	data.CreatedBy = genruntime.ClonePointerToString(source.CreatedBy)
-
-	// CreatedByType
-	if source.CreatedByType != nil {
-		createdByType := SystemData_CreatedByType_STATUS(*source.CreatedByType)
-		data.CreatedByType = &createdByType
-	} else {
-		data.CreatedByType = nil
-	}
-
-	// LastModifiedAt
-	data.LastModifiedAt = genruntime.ClonePointerToString(source.LastModifiedAt)
-
-	// LastModifiedBy
-	data.LastModifiedBy = genruntime.ClonePointerToString(source.LastModifiedBy)
-
-	// LastModifiedByType
-	if source.LastModifiedByType != nil {
-		lastModifiedByType := SystemData_LastModifiedByType_STATUS(*source.LastModifiedByType)
-		data.LastModifiedByType = &lastModifiedByType
-	} else {
-		data.LastModifiedByType = nil
-	}
-
-	// No error
-	return nil
-}
-
-// AssignProperties_To_SystemData_STATUS populates the provided destination SystemData_STATUS from our SystemData_STATUS
-func (data *SystemData_STATUS) AssignProperties_To_SystemData_STATUS(destination *v20211101s.SystemData_STATUS) error {
-	// Create a new property bag
-	propertyBag := genruntime.NewPropertyBag()
-
-	// CreatedAt
-	destination.CreatedAt = genruntime.ClonePointerToString(data.CreatedAt)
-
-	// CreatedBy
-	destination.CreatedBy = genruntime.ClonePointerToString(data.CreatedBy)
-
-	// CreatedByType
-	if data.CreatedByType != nil {
-		createdByType := string(*data.CreatedByType)
-		destination.CreatedByType = &createdByType
-	} else {
-		destination.CreatedByType = nil
-	}
-
-	// LastModifiedAt
-	destination.LastModifiedAt = genruntime.ClonePointerToString(data.LastModifiedAt)
-
-	// LastModifiedBy
-	destination.LastModifiedBy = genruntime.ClonePointerToString(data.LastModifiedBy)
-
-	// LastModifiedByType
-	if data.LastModifiedByType != nil {
-		lastModifiedByType := string(*data.LastModifiedByType)
-		destination.LastModifiedByType = &lastModifiedByType
-	} else {
-		destination.LastModifiedByType = nil
-	}
-
-	// Update the property bag
-	if len(propertyBag) > 0 {
-		destination.PropertyBag = propertyBag
-	} else {
-		destination.PropertyBag = nil
-	}
-
-	// No error
-	return nil
-}
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_SecurityAlertPolicy{}, &Servers_Databases_SecurityAlertPolicyList{})
+	SchemeBuilder.Register(&ServersDatabasesSecurityAlertPolicy{}, &ServersDatabasesSecurityAlertPolicyList{})
 }

@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_Databases_BackupLongTermRetentionPolicyExtension struct {
+type ServersDatabasesBackupLongTermRetentionPolicyExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_Databases_BackupLongTermRetentionPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersDatabasesBackupLongTermRetentionPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_Databases_BackupLongTermRetentionPolicy{},
-		&v20211101s.Servers_Databases_BackupLongTermRetentionPolicy{}}
+		&v20211101.ServersDatabasesBackupLongTermRetentionPolicy{},
+		&v20211101s.ServersDatabasesBackupLongTermRetentionPolicy{}}
 }

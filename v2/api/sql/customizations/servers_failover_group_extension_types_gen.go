@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_FailoverGroupExtension struct {
+type ServersFailoverGroupExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_FailoverGroupExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersFailoverGroupExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_FailoverGroup{},
-		&v20211101s.Servers_FailoverGroup{}}
+		&v20211101.ServersFailoverGroup{},
+		&v20211101s.ServersFailoverGroup{}}
 }

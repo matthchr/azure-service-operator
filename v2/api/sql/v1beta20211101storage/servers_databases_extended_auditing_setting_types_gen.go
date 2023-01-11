@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_databases_extendedauditingsettings,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_databases_extendedauditingsettings/status,servers_databases_extendedauditingsettings/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversdatabasesextendedauditingsettings,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversdatabasesextendedauditingsettings/status,serversdatabasesextendedauditingsettings/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Databases_ExtendedAuditingSetting
+// Storage version of v1beta20211101.ServersDatabasesExtendedAuditingSetting
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/default
-type Servers_Databases_ExtendedAuditingSetting struct {
+type ServersDatabasesExtendedAuditingSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_ExtendedAuditingSetting_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_ExtendedAuditingSetting_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_ExtendedAuditingSetting{}
+var _ conditions.Conditioner = &ServersDatabasesExtendedAuditingSetting{}
 
 // GetConditions returns the conditions of the resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) GetConditions() conditions.Conditions {
+func (setting *ServersDatabasesExtendedAuditingSetting) GetConditions() conditions.Conditions {
 	return setting.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (setting *Servers_Databases_ExtendedAuditingSetting) SetConditions(conditions conditions.Conditions) {
+func (setting *ServersDatabasesExtendedAuditingSetting) SetConditions(conditions conditions.Conditions) {
 	setting.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Databases_ExtendedAuditingSetting{}
+var _ genruntime.KubernetesResource = &ServersDatabasesExtendedAuditingSetting{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (setting *Servers_Databases_ExtendedAuditingSetting) AzureName() string {
+func (setting *ServersDatabasesExtendedAuditingSetting) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (setting Servers_Databases_ExtendedAuditingSetting) GetAPIVersion() string {
+func (setting ServersDatabasesExtendedAuditingSetting) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) GetResourceScope() genruntime.ResourceScope {
+func (setting *ServersDatabasesExtendedAuditingSetting) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) GetSpec() genruntime.ConvertibleSpec {
+func (setting *ServersDatabasesExtendedAuditingSetting) GetSpec() genruntime.ConvertibleSpec {
 	return &setting.Spec
 }
 
 // GetStatus returns the status of this resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) GetStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesExtendedAuditingSetting) GetStatus() genruntime.ConvertibleStatus {
 	return &setting.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/extendedAuditingSettings"
-func (setting *Servers_Databases_ExtendedAuditingSetting) GetType() string {
+func (setting *ServersDatabasesExtendedAuditingSetting) GetType() string {
 	return "Microsoft.Sql/servers/databases/extendedAuditingSettings"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (setting *Servers_Databases_ExtendedAuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesExtendedAuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_ExtendedAuditingSetting_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (setting *Servers_Databases_ExtendedAuditingSetting) Owner() *genruntime.ResourceReference {
+func (setting *ServersDatabasesExtendedAuditingSetting) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(setting.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (setting *Servers_Databases_ExtendedAuditingSetting) Owner() *genruntime.Re
 }
 
 // SetStatus sets the status of this resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
+func (setting *ServersDatabasesExtendedAuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_ExtendedAuditingSetting_STATUS); ok {
 		setting.Status = *st
@@ -110,27 +110,27 @@ func (setting *Servers_Databases_ExtendedAuditingSetting) SetStatus(status genru
 	return nil
 }
 
-// Hub marks that this Servers_Databases_ExtendedAuditingSetting is the hub type for conversion
-func (setting *Servers_Databases_ExtendedAuditingSetting) Hub() {}
+// Hub marks that this ServersDatabasesExtendedAuditingSetting is the hub type for conversion
+func (setting *ServersDatabasesExtendedAuditingSetting) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (setting *Servers_Databases_ExtendedAuditingSetting) OriginalGVK() *schema.GroupVersionKind {
+func (setting *ServersDatabasesExtendedAuditingSetting) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: setting.Spec.OriginalVersion,
-		Kind:    "Servers_Databases_ExtendedAuditingSetting",
+		Kind:    "ServersDatabasesExtendedAuditingSetting",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Databases_ExtendedAuditingSetting
+// Storage version of v1beta20211101.ServersDatabasesExtendedAuditingSetting
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extendedAuditingSettings/default
-type Servers_Databases_ExtendedAuditingSettingList struct {
+type ServersDatabasesExtendedAuditingSettingList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_ExtendedAuditingSetting `json:"items"`
+	Items           []ServersDatabasesExtendedAuditingSetting `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Databases_ExtendedAuditingSetting_Spec
@@ -144,8 +144,8 @@ type Servers_Databases_ExtendedAuditingSetting_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner                        *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner                        *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 	PredicateExpression          *string                            `json:"predicateExpression,omitempty"`
 	PropertyBag                  genruntime.PropertyBag             `json:"$propertyBag,omitempty"`
 	QueueDelayMs                 *int                               `json:"queueDelayMs,omitempty"`
@@ -216,5 +216,5 @@ func (setting *Servers_Databases_ExtendedAuditingSetting_STATUS) ConvertStatusTo
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_ExtendedAuditingSetting{}, &Servers_Databases_ExtendedAuditingSettingList{})
+	SchemeBuilder.Register(&ServersDatabasesExtendedAuditingSetting{}, &ServersDatabasesExtendedAuditingSettingList{})
 }

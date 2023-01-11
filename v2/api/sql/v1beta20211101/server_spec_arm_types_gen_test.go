@@ -94,6 +94,71 @@ func AddRelatedPropertyGeneratorsForServer_Spec_ARM(gens map[string]gopter.Gen) 
 	gens["Properties"] = gen.PtrOf(ServerProperties_ARMGenerator())
 }
 
+func Test_ResourceIdentity_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ResourceIdentity_ARM via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForResourceIdentity_ARM, ResourceIdentity_ARMGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForResourceIdentity_ARM runs a test to see if a specific instance of ResourceIdentity_ARM round trips to JSON and back losslessly
+func RunJSONSerializationTestForResourceIdentity_ARM(subject ResourceIdentity_ARM) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ResourceIdentity_ARM
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ResourceIdentity_ARM instances for property testing - lazily instantiated by
+// ResourceIdentity_ARMGenerator()
+var resourceIdentity_ARMGenerator gopter.Gen
+
+// ResourceIdentity_ARMGenerator returns a generator of ResourceIdentity_ARM instances for property testing.
+func ResourceIdentity_ARMGenerator() gopter.Gen {
+	if resourceIdentity_ARMGenerator != nil {
+		return resourceIdentity_ARMGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForResourceIdentity_ARM(generators)
+	resourceIdentity_ARMGenerator = gen.Struct(reflect.TypeOf(ResourceIdentity_ARM{}), generators)
+
+	return resourceIdentity_ARMGenerator
+}
+
+// AddIndependentPropertyGeneratorsForResourceIdentity_ARM is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForResourceIdentity_ARM(gens map[string]gopter.Gen) {
+	gens["Type"] = gen.PtrOf(gen.OneConstOf(
+		ResourceIdentity_Type_None,
+		ResourceIdentity_Type_SystemAssigned,
+		ResourceIdentity_Type_SystemAssignedUserAssigned,
+		ResourceIdentity_Type_UserAssigned))
+}
+
 func Test_ServerProperties_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()

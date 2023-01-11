@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_Databases_BackupShortTermRetentionPolicy_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersDatabasesBackupShortTermRetentionPolicy_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_Databases_BackupShortTermRetentionPolicy via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_Databases_BackupShortTermRetentionPolicy, Servers_Databases_BackupShortTermRetentionPolicyGenerator()))
+		"Round trip of ServersDatabasesBackupShortTermRetentionPolicy via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesBackupShortTermRetentionPolicy, ServersDatabasesBackupShortTermRetentionPolicyGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_Databases_BackupShortTermRetentionPolicy runs a test to see if a specific instance of Servers_Databases_BackupShortTermRetentionPolicy round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_Databases_BackupShortTermRetentionPolicy(subject Servers_Databases_BackupShortTermRetentionPolicy) string {
+// RunJSONSerializationTestForServersDatabasesBackupShortTermRetentionPolicy runs a test to see if a specific instance of ServersDatabasesBackupShortTermRetentionPolicy round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesBackupShortTermRetentionPolicy(subject ServersDatabasesBackupShortTermRetentionPolicy) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_Databases_BackupShortTermRetentionPolicy
 	}
 
 	// Deserialize back into memory
-	var actual Servers_Databases_BackupShortTermRetentionPolicy
+	var actual ServersDatabasesBackupShortTermRetentionPolicy
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_Databases_BackupShortTermRetentionPolicy
 	return ""
 }
 
-// Generator of Servers_Databases_BackupShortTermRetentionPolicy instances for property testing - lazily instantiated by
-// Servers_Databases_BackupShortTermRetentionPolicyGenerator()
-var servers_Databases_BackupShortTermRetentionPolicyGenerator gopter.Gen
+// Generator of ServersDatabasesBackupShortTermRetentionPolicy instances for property testing - lazily instantiated by
+// ServersDatabasesBackupShortTermRetentionPolicyGenerator()
+var serversDatabasesBackupShortTermRetentionPolicyGenerator gopter.Gen
 
-// Servers_Databases_BackupShortTermRetentionPolicyGenerator returns a generator of Servers_Databases_BackupShortTermRetentionPolicy instances for property testing.
-func Servers_Databases_BackupShortTermRetentionPolicyGenerator() gopter.Gen {
-	if servers_Databases_BackupShortTermRetentionPolicyGenerator != nil {
-		return servers_Databases_BackupShortTermRetentionPolicyGenerator
+// ServersDatabasesBackupShortTermRetentionPolicyGenerator returns a generator of ServersDatabasesBackupShortTermRetentionPolicy instances for property testing.
+func ServersDatabasesBackupShortTermRetentionPolicyGenerator() gopter.Gen {
+	if serversDatabasesBackupShortTermRetentionPolicyGenerator != nil {
+		return serversDatabasesBackupShortTermRetentionPolicyGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_Databases_BackupShortTermRetentionPolicy(generators)
-	servers_Databases_BackupShortTermRetentionPolicyGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_BackupShortTermRetentionPolicy{}), generators)
+	AddRelatedPropertyGeneratorsForServersDatabasesBackupShortTermRetentionPolicy(generators)
+	serversDatabasesBackupShortTermRetentionPolicyGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesBackupShortTermRetentionPolicy{}), generators)
 
-	return servers_Databases_BackupShortTermRetentionPolicyGenerator
+	return serversDatabasesBackupShortTermRetentionPolicyGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_Databases_BackupShortTermRetentionPolicy is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_Databases_BackupShortTermRetentionPolicy(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersDatabasesBackupShortTermRetentionPolicy is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersDatabasesBackupShortTermRetentionPolicy(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_Databases_BackupShortTermRetentionPolicy_SpecGenerator()
 	gens["Status"] = Servers_Databases_BackupShortTermRetentionPolicy_STATUSGenerator()
 }

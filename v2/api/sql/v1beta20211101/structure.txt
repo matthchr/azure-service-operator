@@ -1,741 +1,6 @@
 github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 ├── APIVersion: Enum (1 value)
 │   └── "2021-11-01"
-├── ManagedInstance: Resource
-│   ├── Owner: github.com/Azure/azure-service-operator/v2/api/resources/v1betav20191001.ResourceGroup
-│   ├── Spec: Object (29 properties)
-│   │   ├── AdministratorLogin: *string
-│   │   ├── AdministratorLoginPassword: *genruntime.SecretReference
-│   │   ├── Administrators: *Object (6 properties)
-│   │   │   ├── AdministratorType: *Enum (1 value)
-│   │   │   │   └── "ActiveDirectory"
-│   │   │   ├── AzureADOnlyAuthentication: *bool
-│   │   │   ├── Login: *string
-│   │   │   ├── PrincipalType: *Enum (3 values)
-│   │   │   │   ├── "Application"
-│   │   │   │   ├── "Group"
-│   │   │   │   └── "User"
-│   │   │   ├── Sid: Validated<*string> (1 rule)
-│   │   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-│   │   │   └── TenantId: Validated<*string> (1 rule)
-│   │   │       └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-│   │   ├── AzureName: string
-│   │   ├── Collation: *string
-│   │   ├── DnsZonePartnerReference: *genruntime.ResourceReference
-│   │   ├── Identity: *Object (1 property)
-│   │   │   └── Type: *Enum (4 values)
-│   │   │       ├── "None"
-│   │   │       ├── "SystemAssigned"
-│   │   │       ├── "SystemAssigned,UserAssigned"
-│   │   │       └── "UserAssigned"
-│   │   ├── InstancePoolId: *string
-│   │   ├── KeyId: *string
-│   │   ├── LicenseType: *Enum (2 values)
-│   │   │   ├── "BasePrice"
-│   │   │   └── "LicenseIncluded"
-│   │   ├── Location: *string
-│   │   ├── MaintenanceConfigurationId: *string
-│   │   ├── ManagedInstanceCreateMode: *Enum (2 values)
-│   │   │   ├── "Default"
-│   │   │   └── "PointInTimeRestore"
-│   │   ├── MinimalTlsVersion: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── PrimaryUserAssignedIdentityReference: *genruntime.ResourceReference
-│   │   ├── ProxyOverride: *Enum (3 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "Proxy"
-│   │   │   └── "Redirect"
-│   │   ├── PublicDataEndpointEnabled: *bool
-│   │   ├── RequestedBackupStorageRedundancy: *Enum (4 values)
-│   │   │   ├── "Geo"
-│   │   │   ├── "GeoZone"
-│   │   │   ├── "Local"
-│   │   │   └── "Zone"
-│   │   ├── RestorePointInTime: Validated<*string> (0 rules)
-│   │   ├── ServicePrincipal: *Object (1 property)
-│   │   │   └── Type: *Enum (2 values)
-│   │   │       ├── "None"
-│   │   │       └── "SystemAssigned"
-│   │   ├── Sku: *Object (5 properties)
-│   │   │   ├── Capacity: *int
-│   │   │   ├── Family: *string
-│   │   │   ├── Name: *string
-│   │   │   ├── Size: *string
-│   │   │   └── Tier: *string
-│   │   ├── SourceManagedInstanceReference: *genruntime.ResourceReference
-│   │   ├── StorageSizeInGB: *int
-│   │   ├── SubnetReference: *genruntime.ResourceReference
-│   │   ├── Tags: map[string]string
-│   │   ├── TimezoneId: *string
-│   │   ├── VCores: *int
-│   │   └── ZoneRedundant: *bool
-│   └── Status: Object (36 properties)
-│       ├── AdministratorLogin: *string
-│       ├── Administrators: *Object (6 properties)
-│       │   ├── AdministratorType: *Enum (1 value)
-│       │   │   └── "ActiveDirectory"
-│       │   ├── AzureADOnlyAuthentication: *bool
-│       │   ├── Login: *string
-│       │   ├── PrincipalType: *Enum (3 values)
-│       │   │   ├── "Application"
-│       │   │   ├── "Group"
-│       │   │   └── "User"
-│       │   ├── Sid: *string
-│       │   └── TenantId: *string
-│       ├── Collation: *string
-│       ├── Conditions: conditions.Condition[]
-│       ├── CurrentBackupStorageRedundancy: *Enum (4 values)
-│       │   ├── "Geo"
-│       │   ├── "GeoZone"
-│       │   ├── "Local"
-│       │   └── "Zone"
-│       ├── DnsZone: *string
-│       ├── DnsZonePartner: *string
-│       ├── FullyQualifiedDomainName: *string
-│       ├── Id: *string
-│       ├── Identity: *Object (4 properties)
-│       │   ├── PrincipalId: *string
-│       │   ├── TenantId: *string
-│       │   ├── Type: *Enum (4 values)
-│       │   │   ├── "None"
-│       │   │   ├── "SystemAssigned"
-│       │   │   ├── "SystemAssigned,UserAssigned"
-│       │   │   └── "UserAssigned"
-│       │   └── UserAssignedIdentities: map[string]Object (2 properties)
-│       │       ├── ClientId: *string
-│       │       └── PrincipalId: *string
-│       ├── InstancePoolId: *string
-│       ├── KeyId: *string
-│       ├── LicenseType: *Enum (2 values)
-│       │   ├── "BasePrice"
-│       │   └── "LicenseIncluded"
-│       ├── Location: *string
-│       ├── MaintenanceConfigurationId: *string
-│       ├── ManagedInstanceCreateMode: *Enum (2 values)
-│       │   ├── "Default"
-│       │   └── "PointInTimeRestore"
-│       ├── MinimalTlsVersion: *string
-│       ├── Name: *string
-│       ├── PrimaryUserAssignedIdentityId: *string
-│       ├── PrivateEndpointConnections: Object (2 properties)[]
-│       │   ├── Id: *string
-│       │   └── Properties: *Object (3 properties)
-│       │       ├── PrivateEndpoint: *Object (1 property)
-│       │       │   └── Id: *string
-│       │       ├── PrivateLinkServiceConnectionState: *Object (3 properties)
-│       │       │   ├── ActionsRequired: *string
-│       │       │   ├── Description: *string
-│       │       │   └── Status: *string
-│       │       └── ProvisioningState: *string
-│       ├── ProvisioningState: *Enum (15 values)
-│       │   ├── "Accepted"
-│       │   ├── "Canceled"
-│       │   ├── "Created"
-│       │   ├── "Creating"
-│       │   ├── "Deleted"
-│       │   ├── "Deleting"
-│       │   ├── "Failed"
-│       │   ├── "NotSpecified"
-│       │   ├── "Registering"
-│       │   ├── "Running"
-│       │   ├── "Succeeded"
-│       │   ├── "TimedOut"
-│       │   ├── "Unknown"
-│       │   ├── "Unrecognized"
-│       │   └── "Updating"
-│       ├── ProxyOverride: *Enum (3 values)
-│       │   ├── "Default"
-│       │   ├── "Proxy"
-│       │   └── "Redirect"
-│       ├── PublicDataEndpointEnabled: *bool
-│       ├── RequestedBackupStorageRedundancy: *Enum (4 values)
-│       │   ├── "Geo"
-│       │   ├── "GeoZone"
-│       │   ├── "Local"
-│       │   └── "Zone"
-│       ├── RestorePointInTime: *string
-│       ├── ServicePrincipal: *Object (4 properties)
-│       │   ├── ClientId: *string
-│       │   ├── PrincipalId: *string
-│       │   ├── TenantId: *string
-│       │   └── Type: *Enum (2 values)
-│       │       ├── "None"
-│       │       └── "SystemAssigned"
-│       ├── Sku: *Object (5 properties)
-│       │   ├── Capacity: *int
-│       │   ├── Family: *string
-│       │   ├── Name: *string
-│       │   ├── Size: *string
-│       │   └── Tier: *string
-│       ├── SourceManagedInstanceId: *string
-│       ├── State: *string
-│       ├── StorageSizeInGB: *int
-│       ├── SubnetId: *string
-│       ├── Tags: map[string]string
-│       ├── TimezoneId: *string
-│       ├── Type: *string
-│       ├── VCores: *int
-│       └── ZoneRedundant: *bool
-├── ManagedInstance_STATUS_ARM: Object (8 properties)
-│   ├── Id: *string
-│   ├── Identity: *Object (4 properties)
-│   │   ├── PrincipalId: *string
-│   │   ├── TenantId: *string
-│   │   ├── Type: *Enum (4 values)
-│   │   │   ├── "None"
-│   │   │   ├── "SystemAssigned"
-│   │   │   ├── "SystemAssigned,UserAssigned"
-│   │   │   └── "UserAssigned"
-│   │   └── UserAssignedIdentities: map[string]Object (2 properties)
-│   │       ├── ClientId: *string
-│   │       └── PrincipalId: *string
-│   ├── Location: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (28 properties)
-│   │   ├── AdministratorLogin: *string
-│   │   ├── Administrators: *Object (6 properties)
-│   │   │   ├── AdministratorType: *Enum (1 value)
-│   │   │   │   └── "ActiveDirectory"
-│   │   │   ├── AzureADOnlyAuthentication: *bool
-│   │   │   ├── Login: *string
-│   │   │   ├── PrincipalType: *Enum (3 values)
-│   │   │   │   ├── "Application"
-│   │   │   │   ├── "Group"
-│   │   │   │   └── "User"
-│   │   │   ├── Sid: *string
-│   │   │   └── TenantId: *string
-│   │   ├── Collation: *string
-│   │   ├── CurrentBackupStorageRedundancy: *Enum (4 values)
-│   │   │   ├── "Geo"
-│   │   │   ├── "GeoZone"
-│   │   │   ├── "Local"
-│   │   │   └── "Zone"
-│   │   ├── DnsZone: *string
-│   │   ├── DnsZonePartner: *string
-│   │   ├── FullyQualifiedDomainName: *string
-│   │   ├── InstancePoolId: *string
-│   │   ├── KeyId: *string
-│   │   ├── LicenseType: *Enum (2 values)
-│   │   │   ├── "BasePrice"
-│   │   │   └── "LicenseIncluded"
-│   │   ├── MaintenanceConfigurationId: *string
-│   │   ├── ManagedInstanceCreateMode: *Enum (2 values)
-│   │   │   ├── "Default"
-│   │   │   └── "PointInTimeRestore"
-│   │   ├── MinimalTlsVersion: *string
-│   │   ├── PrimaryUserAssignedIdentityId: *string
-│   │   ├── PrivateEndpointConnections: Object (2 properties)[]
-│   │   │   ├── Id: *string
-│   │   │   └── Properties: *Object (3 properties)
-│   │   │       ├── PrivateEndpoint: *Object (1 property)
-│   │   │       │   └── Id: *string
-│   │   │       ├── PrivateLinkServiceConnectionState: *Object (3 properties)
-│   │   │       │   ├── ActionsRequired: *string
-│   │   │       │   ├── Description: *string
-│   │   │       │   └── Status: *string
-│   │   │       └── ProvisioningState: *string
-│   │   ├── ProvisioningState: *Enum (15 values)
-│   │   │   ├── "Accepted"
-│   │   │   ├── "Canceled"
-│   │   │   ├── "Created"
-│   │   │   ├── "Creating"
-│   │   │   ├── "Deleted"
-│   │   │   ├── "Deleting"
-│   │   │   ├── "Failed"
-│   │   │   ├── "NotSpecified"
-│   │   │   ├── "Registering"
-│   │   │   ├── "Running"
-│   │   │   ├── "Succeeded"
-│   │   │   ├── "TimedOut"
-│   │   │   ├── "Unknown"
-│   │   │   ├── "Unrecognized"
-│   │   │   └── "Updating"
-│   │   ├── ProxyOverride: *Enum (3 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "Proxy"
-│   │   │   └── "Redirect"
-│   │   ├── PublicDataEndpointEnabled: *bool
-│   │   ├── RequestedBackupStorageRedundancy: *Enum (4 values)
-│   │   │   ├── "Geo"
-│   │   │   ├── "GeoZone"
-│   │   │   ├── "Local"
-│   │   │   └── "Zone"
-│   │   ├── RestorePointInTime: *string
-│   │   ├── ServicePrincipal: *Object (4 properties)
-│   │   │   ├── ClientId: *string
-│   │   │   ├── PrincipalId: *string
-│   │   │   ├── TenantId: *string
-│   │   │   └── Type: *Enum (2 values)
-│   │   │       ├── "None"
-│   │   │       └── "SystemAssigned"
-│   │   ├── SourceManagedInstanceId: *string
-│   │   ├── State: *string
-│   │   ├── StorageSizeInGB: *int
-│   │   ├── SubnetId: *string
-│   │   ├── TimezoneId: *string
-│   │   ├── VCores: *int
-│   │   └── ZoneRedundant: *bool
-│   ├── Sku: *Object (5 properties)
-│   │   ├── Capacity: *int
-│   │   ├── Family: *string
-│   │   ├── Name: *string
-│   │   ├── Size: *string
-│   │   └── Tier: *string
-│   ├── Tags: map[string]string
-│   └── Type: *string
-├── ManagedInstance_Spec_ARM: Object (6 properties)
-│   ├── Identity: *Object (1 property)
-│   │   └── Type: *Enum (4 values)
-│   │       ├── "None"
-│   │       ├── "SystemAssigned"
-│   │       ├── "SystemAssigned,UserAssigned"
-│   │       └── "UserAssigned"
-│   ├── Location: *string
-│   ├── Name: string
-│   ├── Properties: *Object (23 properties)
-│   │   ├── AdministratorLogin: *string
-│   │   ├── AdministratorLoginPassword: *string
-│   │   ├── Administrators: *Object (6 properties)
-│   │   │   ├── AdministratorType: *Enum (1 value)
-│   │   │   │   └── "ActiveDirectory"
-│   │   │   ├── AzureADOnlyAuthentication: *bool
-│   │   │   ├── Login: *string
-│   │   │   ├── PrincipalType: *Enum (3 values)
-│   │   │   │   ├── "Application"
-│   │   │   │   ├── "Group"
-│   │   │   │   └── "User"
-│   │   │   ├── Sid: *string
-│   │   │   └── TenantId: *string
-│   │   ├── Collation: *string
-│   │   ├── DnsZonePartner: *string
-│   │   ├── InstancePoolId: *string
-│   │   ├── KeyId: *string
-│   │   ├── LicenseType: *Enum (2 values)
-│   │   │   ├── "BasePrice"
-│   │   │   └── "LicenseIncluded"
-│   │   ├── MaintenanceConfigurationId: *string
-│   │   ├── ManagedInstanceCreateMode: *Enum (2 values)
-│   │   │   ├── "Default"
-│   │   │   └── "PointInTimeRestore"
-│   │   ├── MinimalTlsVersion: *string
-│   │   ├── PrimaryUserAssignedIdentityId: *string
-│   │   ├── ProxyOverride: *Enum (3 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "Proxy"
-│   │   │   └── "Redirect"
-│   │   ├── PublicDataEndpointEnabled: *bool
-│   │   ├── RequestedBackupStorageRedundancy: *Enum (4 values)
-│   │   │   ├── "Geo"
-│   │   │   ├── "GeoZone"
-│   │   │   ├── "Local"
-│   │   │   └── "Zone"
-│   │   ├── RestorePointInTime: *string
-│   │   ├── ServicePrincipal: *Object (1 property)
-│   │   │   └── Type: *Enum (2 values)
-│   │   │       ├── "None"
-│   │   │       └── "SystemAssigned"
-│   │   ├── SourceManagedInstanceId: *string
-│   │   ├── StorageSizeInGB: *int
-│   │   ├── SubnetId: *string
-│   │   ├── TimezoneId: *string
-│   │   ├── VCores: *int
-│   │   └── ZoneRedundant: *bool
-│   ├── Sku: *Object (5 properties)
-│   │   ├── Capacity: *int
-│   │   ├── Family: *string
-│   │   ├── Name: *string
-│   │   ├── Size: *string
-│   │   └── Tier: *string
-│   └── Tags: map[string]string
-├── ManagedInstances_Database: Resource
-│   ├── Owner: ManagedInstance
-│   ├── Spec: Object (16 properties)
-│   │   ├── AutoCompleteRestore: *bool
-│   │   ├── AzureName: string
-│   │   ├── CatalogCollation: *Enum (2 values)
-│   │   │   ├── "DATABASE_DEFAULT"
-│   │   │   └── "SQL_Latin1_General_CP1_CI_AS"
-│   │   ├── Collation: *string
-│   │   ├── CreateMode: *Enum (5 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "PointInTimeRestore"
-│   │   │   ├── "Recovery"
-│   │   │   ├── "RestoreExternalBackup"
-│   │   │   └── "RestoreLongTermRetentionBackup"
-│   │   ├── LastBackupName: *string
-│   │   ├── Location: *string
-│   │   ├── LongTermRetentionBackupResourceReference: *genruntime.ResourceReference
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RecoverableDatabaseReference: *genruntime.ResourceReference
-│   │   ├── RestorableDroppedDatabaseReference: *genruntime.ResourceReference
-│   │   ├── RestorePointInTime: Validated<*string> (0 rules)
-│   │   ├── SourceDatabaseReference: *genruntime.ResourceReference
-│   │   ├── StorageContainerSasToken: *string
-│   │   ├── StorageContainerUri: *string
-│   │   └── Tags: map[string]string
-│   └── Status: Object (23 properties)
-│       ├── AutoCompleteRestore: *bool
-│       ├── CatalogCollation: *Enum (2 values)
-│       │   ├── "DATABASE_DEFAULT"
-│       │   └── "SQL_Latin1_General_CP1_CI_AS"
-│       ├── Collation: *string
-│       ├── Conditions: conditions.Condition[]
-│       ├── CreateMode: *Enum (5 values)
-│       │   ├── "Default"
-│       │   ├── "PointInTimeRestore"
-│       │   ├── "Recovery"
-│       │   ├── "RestoreExternalBackup"
-│       │   └── "RestoreLongTermRetentionBackup"
-│       ├── CreationDate: *string
-│       ├── DefaultSecondaryLocation: *string
-│       ├── EarliestRestorePoint: *string
-│       ├── FailoverGroupId: *string
-│       ├── Id: *string
-│       ├── LastBackupName: *string
-│       ├── Location: *string
-│       ├── LongTermRetentionBackupResourceId: *string
-│       ├── Name: *string
-│       ├── RecoverableDatabaseId: *string
-│       ├── RestorableDroppedDatabaseId: *string
-│       ├── RestorePointInTime: *string
-│       ├── SourceDatabaseId: *string
-│       ├── Status: *Enum (7 values)
-│       │   ├── "Creating"
-│       │   ├── "Inaccessible"
-│       │   ├── "Offline"
-│       │   ├── "Online"
-│       │   ├── "Restoring"
-│       │   ├── "Shutdown"
-│       │   └── "Updating"
-│       ├── StorageContainerSasToken: *string
-│       ├── StorageContainerUri: *string
-│       ├── Tags: map[string]string
-│       └── Type: *string
-├── ManagedInstances_Database_STATUS_ARM: Object (6 properties)
-│   ├── Id: *string
-│   ├── Location: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (17 properties)
-│   │   ├── AutoCompleteRestore: *bool
-│   │   ├── CatalogCollation: *Enum (2 values)
-│   │   │   ├── "DATABASE_DEFAULT"
-│   │   │   └── "SQL_Latin1_General_CP1_CI_AS"
-│   │   ├── Collation: *string
-│   │   ├── CreateMode: *Enum (5 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "PointInTimeRestore"
-│   │   │   ├── "Recovery"
-│   │   │   ├── "RestoreExternalBackup"
-│   │   │   └── "RestoreLongTermRetentionBackup"
-│   │   ├── CreationDate: *string
-│   │   ├── DefaultSecondaryLocation: *string
-│   │   ├── EarliestRestorePoint: *string
-│   │   ├── FailoverGroupId: *string
-│   │   ├── LastBackupName: *string
-│   │   ├── LongTermRetentionBackupResourceId: *string
-│   │   ├── RecoverableDatabaseId: *string
-│   │   ├── RestorableDroppedDatabaseId: *string
-│   │   ├── RestorePointInTime: *string
-│   │   ├── SourceDatabaseId: *string
-│   │   ├── Status: *Enum (7 values)
-│   │   │   ├── "Creating"
-│   │   │   ├── "Inaccessible"
-│   │   │   ├── "Offline"
-│   │   │   ├── "Online"
-│   │   │   ├── "Restoring"
-│   │   │   ├── "Shutdown"
-│   │   │   └── "Updating"
-│   │   ├── StorageContainerSasToken: *string
-│   │   └── StorageContainerUri: *string
-│   ├── Tags: map[string]string
-│   └── Type: *string
-├── ManagedInstances_Database_Spec_ARM: Object (4 properties)
-│   ├── Location: *string
-│   ├── Name: string
-│   ├── Properties: *Object (12 properties)
-│   │   ├── AutoCompleteRestore: *bool
-│   │   ├── CatalogCollation: *Enum (2 values)
-│   │   │   ├── "DATABASE_DEFAULT"
-│   │   │   └── "SQL_Latin1_General_CP1_CI_AS"
-│   │   ├── Collation: *string
-│   │   ├── CreateMode: *Enum (5 values)
-│   │   │   ├── "Default"
-│   │   │   ├── "PointInTimeRestore"
-│   │   │   ├── "Recovery"
-│   │   │   ├── "RestoreExternalBackup"
-│   │   │   └── "RestoreLongTermRetentionBackup"
-│   │   ├── LastBackupName: *string
-│   │   ├── LongTermRetentionBackupResourceId: *string
-│   │   ├── RecoverableDatabaseId: *string
-│   │   ├── RestorableDroppedDatabaseId: *string
-│   │   ├── RestorePointInTime: *string
-│   │   ├── SourceDatabaseId: *string
-│   │   ├── StorageContainerSasToken: *string
-│   │   └── StorageContainerUri: *string
-│   └── Tags: map[string]string
-├── ManagedInstances_Databases_BackupLongTermRetentionPolicy: Resource
-│   ├── Owner: ManagedInstances_Database
-│   ├── Spec: Object (5 properties)
-│   │   ├── MonthlyRetention: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── WeekOfYear: *int
-│   │   ├── WeeklyRetention: *string
-│   │   └── YearlyRetention: *string
-│   └── Status: Object (8 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── MonthlyRetention: *string
-│       ├── Name: *string
-│       ├── Type: *string
-│       ├── WeekOfYear: *int
-│       ├── WeeklyRetention: *string
-│       └── YearlyRetention: *string
-├── ManagedInstances_Databases_BackupLongTermRetentionPolicy_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (4 properties)
-│   │   ├── MonthlyRetention: *string
-│   │   ├── WeekOfYear: *int
-│   │   ├── WeeklyRetention: *string
-│   │   └── YearlyRetention: *string
-│   └── Type: *string
-├── ManagedInstances_Databases_BackupLongTermRetentionPolicy_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (4 properties)
-│       ├── MonthlyRetention: *string
-│       ├── WeekOfYear: *int
-│       ├── WeeklyRetention: *string
-│       └── YearlyRetention: *string
-├── ManagedInstances_Databases_BackupShortTermRetentionPolicy: Resource
-│   ├── Owner: ManagedInstances_Database
-│   ├── Spec: Object (2 properties)
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── RetentionDays: *int
-│   └── Status: Object (5 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RetentionDays: *int
-│       └── Type: *string
-├── ManagedInstances_Databases_BackupShortTermRetentionPolicy_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (1 property)
-│   │   └── RetentionDays: *int
-│   └── Type: *string
-├── ManagedInstances_Databases_BackupShortTermRetentionPolicy_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (1 property)
-│       └── RetentionDays: *int
-├── ManagedInstances_Databases_SecurityAlertPolicy: Resource
-│   ├── Owner: ManagedInstances_Database
-│   ├── Spec: Object (8 properties)
-│   │   ├── DisabledAlerts: string[]
-│   │   ├── EmailAccountAdmins: *bool
-│   │   ├── EmailAddresses: string[]
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RetentionDays: *int
-│   │   ├── State: *Enum (3 values)
-│   │   │   ├── "Disabled"
-│   │   │   ├── "Enabled"
-│   │   │   └── "New"
-│   │   ├── StorageAccountAccessKey: *string
-│   │   └── StorageEndpoint: *string
-│   └── Status: Object (12 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── CreationTime: *string
-│       ├── DisabledAlerts: string[]
-│       ├── EmailAccountAdmins: *bool
-│       ├── EmailAddresses: string[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (3 values)
-│       │   ├── "Disabled"
-│       │   ├── "Enabled"
-│       │   └── "New"
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageEndpoint: *string
-│       └── Type: *string
-├── ManagedInstances_Databases_SecurityAlertPolicy_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (8 properties)
-│   │   ├── CreationTime: *string
-│   │   ├── DisabledAlerts: string[]
-│   │   ├── EmailAccountAdmins: *bool
-│   │   ├── EmailAddresses: string[]
-│   │   ├── RetentionDays: *int
-│   │   ├── State: *Enum (3 values)
-│   │   │   ├── "Disabled"
-│   │   │   ├── "Enabled"
-│   │   │   └── "New"
-│   │   ├── StorageAccountAccessKey: *string
-│   │   └── StorageEndpoint: *string
-│   └── Type: *string
-├── ManagedInstances_Databases_SecurityAlertPolicy_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (7 properties)
-│       ├── DisabledAlerts: string[]
-│       ├── EmailAccountAdmins: *bool
-│       ├── EmailAddresses: string[]
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (3 values)
-│       │   ├── "Disabled"
-│       │   ├── "Enabled"
-│       │   └── "New"
-│       ├── StorageAccountAccessKey: *string
-│       └── StorageEndpoint: *string
-├── ManagedInstances_DistributedAvailabilityGroup: Resource
-│   ├── Owner: ManagedInstance
-│   ├── Spec: Object (7 properties)
-│   │   ├── AzureName: string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── PrimaryAvailabilityGroupName: *string
-│   │   ├── ReplicationMode: *Enum (2 values)
-│   │   │   ├── "Async"
-│   │   │   └── "Sync"
-│   │   ├── SecondaryAvailabilityGroupName: *string
-│   │   ├── SourceEndpoint: *string
-│   │   └── TargetDatabase: *string
-│   └── Status: Object (14 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── DistributedAvailabilityGroupId: *string
-│       ├── Id: *string
-│       ├── LastHardenedLsn: *string
-│       ├── LinkState: *string
-│       ├── Name: *string
-│       ├── PrimaryAvailabilityGroupName: *string
-│       ├── ReplicationMode: *Enum (2 values)
-│       │   ├── "Async"
-│       │   └── "Sync"
-│       ├── SecondaryAvailabilityGroupName: *string
-│       ├── SourceEndpoint: *string
-│       ├── SourceReplicaId: *string
-│       ├── TargetDatabase: *string
-│       ├── TargetReplicaId: *string
-│       └── Type: *string
-├── ManagedInstances_DistributedAvailabilityGroup_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (10 properties)
-│   │   ├── DistributedAvailabilityGroupId: *string
-│   │   ├── LastHardenedLsn: *string
-│   │   ├── LinkState: *string
-│   │   ├── PrimaryAvailabilityGroupName: *string
-│   │   ├── ReplicationMode: *Enum (2 values)
-│   │   │   ├── "Async"
-│   │   │   └── "Sync"
-│   │   ├── SecondaryAvailabilityGroupName: *string
-│   │   ├── SourceEndpoint: *string
-│   │   ├── SourceReplicaId: *string
-│   │   ├── TargetDatabase: *string
-│   │   └── TargetReplicaId: *string
-│   └── Type: *string
-├── ManagedInstances_DistributedAvailabilityGroup_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (5 properties)
-│       ├── PrimaryAvailabilityGroupName: *string
-│       ├── ReplicationMode: *Enum (2 values)
-│       │   ├── "Async"
-│       │   └── "Sync"
-│       ├── SecondaryAvailabilityGroupName: *string
-│       ├── SourceEndpoint: *string
-│       └── TargetDatabase: *string
-├── ManagedInstances_DnsAliase: Resource
-│   ├── Owner: ManagedInstance
-│   ├── Spec: Object (3 properties)
-│   │   ├── AzureName: string
-│   │   ├── CreateDnsRecord: *bool
-│   │   └── Owner: *genruntime.KnownResourceReference
-│   └── Status: Object (6 properties)
-│       ├── AzureDnsRecord: *string
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── PublicAzureDnsRecord: *string
-│       └── Type: *string
-├── ManagedInstances_DnsAliase_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (2 properties)
-│   │   ├── AzureDnsRecord: *string
-│   │   └── PublicAzureDnsRecord: *string
-│   └── Type: *string
-├── ManagedInstances_DnsAliase_Spec_ARM: Object (2 properties)
-│   ├── CreateDnsRecord: *bool
-│   └── Name: string
-├── ManagedInstances_ServerTrustCertificate: Resource
-│   ├── Owner: ManagedInstance
-│   ├── Spec: Object (3 properties)
-│   │   ├── AzureName: string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── PublicBlob: *string
-│   └── Status: Object (7 properties)
-│       ├── CertificateName: *string
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── PublicBlob: *string
-│       ├── Thumbprint: *string
-│       └── Type: *string
-├── ManagedInstances_ServerTrustCertificate_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (3 properties)
-│   │   ├── CertificateName: *string
-│   │   ├── PublicBlob: *string
-│   │   └── Thumbprint: *string
-│   └── Type: *string
-├── ManagedInstances_ServerTrustCertificate_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (1 property)
-│       └── PublicBlob: *string
-├── ManagedInstances_VulnerabilityAssessment: Resource
-│   ├── Owner: ManagedInstance
-│   ├── Spec: Object (5 properties)
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RecurringScans: *Object (3 properties)
-│   │   │   ├── EmailSubscriptionAdmins: *bool
-│   │   │   ├── Emails: string[]
-│   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
-│   └── Status: Object (8 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RecurringScans: *Object (3 properties)
-│       │   ├── EmailSubscriptionAdmins: *bool
-│       │   ├── Emails: string[]
-│       │   └── IsEnabled: *bool
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageContainerPath: *string
-│       ├── StorageContainerSasKey: *string
-│       └── Type: *string
-├── ManagedInstances_VulnerabilityAssessment_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (4 properties)
-│   │   ├── RecurringScans: *Object (3 properties)
-│   │   │   ├── EmailSubscriptionAdmins: *bool
-│   │   │   ├── Emails: string[]
-│   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
-│   └── Type: *string
-├── ManagedInstances_VulnerabilityAssessment_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (4 properties)
-│       ├── RecurringScans: *Object (3 properties)
-│       │   ├── EmailSubscriptionAdmins: *bool
-│       │   ├── Emails: string[]
-│       │   └── IsEnabled: *bool
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageContainerPath: *string
-│       └── StorageContainerSasKey: *string
 ├── Server: Resource
 │   ├── Owner: github.com/Azure/azure-service-operator/v2/api/resources/v1betav20191001.ResourceGroup
 │   ├── Spec: Object (15 properties)
@@ -947,7 +212,64 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   │   │   └── "Enabled"
 │   │   └── Version: *string
 │   └── Tags: map[string]string
-├── Servers_AuditingSetting: Resource
+├── ServersAdministrator: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (7 properties)
+│   │   ├── AdministratorType: *Enum (1 value)
+│   │   │   └── "ActiveDirectory"
+│   │   ├── Login: *string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── Sid: Validated<*string> (1 rule)
+│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+│   │   ├── SidFromConfig: *genruntime.ConfigMapReference
+│   │   ├── TenantId: Validated<*string> (1 rule)
+│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+│   │   └── TenantIdFromConfig: *genruntime.ConfigMapReference
+│   └── Status: Object (9 properties)
+│       ├── AdministratorType: *Enum (1 value)
+│       │   └── "ActiveDirectory"
+│       ├── AzureADOnlyAuthentication: *bool
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Login: *string
+│       ├── Name: *string
+│       ├── Sid: *string
+│       ├── TenantId: *string
+│       └── Type: *string
+├── ServersAdvancedThreatProtectionSetting: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (2 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── State: *Enum (3 values)
+│   │       ├── "Disabled"
+│   │       ├── "Enabled"
+│   │       └── "New"
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── State: *Enum (3 values)
+│       │   ├── "Disabled"
+│       │   ├── "Enabled"
+│       │   └── "New"
+│       ├── SystemData: *Object (6 properties)
+│       │   ├── CreatedAt: *string
+│       │   ├── CreatedBy: *string
+│       │   ├── CreatedByType: *Enum (4 values)
+│       │   │   ├── "Application"
+│       │   │   ├── "Key"
+│       │   │   ├── "ManagedIdentity"
+│       │   │   └── "User"
+│       │   ├── LastModifiedAt: *string
+│       │   ├── LastModifiedBy: *string
+│       │   └── LastModifiedByType: *Enum (4 values)
+│       │       ├── "Application"
+│       │       ├── "Key"
+│       │       ├── "ManagedIdentity"
+│       │       └── "User"
+│       └── Type: *string
+├── ServersAuditingSetting: Resource
 │   ├── Owner: Server
 │   ├── Spec: Object (12 properties)
 │   │   ├── AuditActionsAndGroups: string[]
@@ -982,40 +304,18 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── StorageAccountSubscriptionId: *string
 │       ├── StorageEndpoint: *string
 │       └── Type: *string
-├── Servers_AuditingSetting_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (10 properties)
-│   │   ├── AuditActionsAndGroups: string[]
-│   │   ├── IsAzureMonitorTargetEnabled: *bool
-│   │   ├── IsDevopsAuditEnabled: *bool
-│   │   ├── IsManagedIdentityInUse: *bool
-│   │   ├── IsStorageSecondaryKeyInUse: *bool
-│   │   ├── QueueDelayMs: *int
-│   │   ├── RetentionDays: *int
-│   │   ├── State: *Enum (2 values)
-│   │   │   ├── "Disabled"
-│   │   │   └── "Enabled"
-│   │   ├── StorageAccountSubscriptionId: *string
-│   │   └── StorageEndpoint: *string
-│   └── Type: *string
-├── Servers_AuditingSetting_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (11 properties)
-│       ├── AuditActionsAndGroups: string[]
-│       ├── IsAzureMonitorTargetEnabled: *bool
-│       ├── IsDevopsAuditEnabled: *bool
-│       ├── IsManagedIdentityInUse: *bool
-│       ├── IsStorageSecondaryKeyInUse: *bool
-│       ├── QueueDelayMs: *int
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (2 values)
-│       │   ├── "Disabled"
-│       │   └── "Enabled"
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageAccountSubscriptionId: *string
-│       └── StorageEndpoint: *string
-├── Servers_ConnectionPolicy: Resource
+├── ServersAzureADOnlyAuthentication: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (2 properties)
+│   │   ├── AzureADOnlyAuthentication: *bool
+│   │   └── Owner: *genruntime.KnownResourceReference
+│   └── Status: Object (5 properties)
+│       ├── AzureADOnlyAuthentication: *bool
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       └── Type: *string
+├── ServersConnectionPolicy: Resource
 │   ├── Owner: Server
 │   ├── Spec: Object (2 properties)
 │   │   ├── ConnectionType: *Enum (3 values)
@@ -1034,25 +334,7 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── Location: *string
 │       ├── Name: *string
 │       └── Type: *string
-├── Servers_ConnectionPolicy_STATUS_ARM: Object (6 properties)
-│   ├── Id: *string
-│   ├── Kind: *string
-│   ├── Location: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (1 property)
-│   │   └── ConnectionType: *Enum (3 values)
-│   │       ├── "Default"
-│   │       ├── "Proxy"
-│   │       └── "Redirect"
-│   └── Type: *string
-├── Servers_ConnectionPolicy_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (1 property)
-│       └── ConnectionType: *Enum (3 values)
-│           ├── "Default"
-│           ├── "Proxy"
-│           └── "Redirect"
-├── Servers_Database: Resource
+├── ServersDatabase: Resource
 │   ├── Owner: Server
 │   ├── Spec: Object (31 properties)
 │   │   ├── AutoPauseDelay: *int
@@ -1240,6 +522,574 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── Tags: map[string]string
 │       ├── Type: *string
 │       └── ZoneRedundant: *bool
+├── ServersDatabasesAdvancedThreatProtectionSetting: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (2 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── State: *Enum (3 values)
+│   │       ├── "Disabled"
+│   │       ├── "Enabled"
+│   │       └── "New"
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── State: *Enum (3 values)
+│       │   ├── "Disabled"
+│       │   ├── "Enabled"
+│       │   └── "New"
+│       ├── SystemData: *Object (6 properties)
+│       │   ├── CreatedAt: *string
+│       │   ├── CreatedBy: *string
+│       │   ├── CreatedByType: *Enum (4 values)
+│       │   │   ├── "Application"
+│       │   │   ├── "Key"
+│       │   │   ├── "ManagedIdentity"
+│       │   │   └── "User"
+│       │   ├── LastModifiedAt: *string
+│       │   ├── LastModifiedBy: *string
+│       │   └── LastModifiedByType: *Enum (4 values)
+│       │       ├── "Application"
+│       │       ├── "Key"
+│       │       ├── "ManagedIdentity"
+│       │       └── "User"
+│       └── Type: *string
+├── ServersDatabasesAuditingSetting: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (11 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageAccountSubscriptionId: Validated<*string> (1 rule)
+│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (14 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── Kind: *string
+│       ├── Name: *string
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageAccountSubscriptionId: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── ServersDatabasesBackupLongTermRetentionPolicy: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (5 properties)
+│   │   ├── MonthlyRetention: *string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── WeekOfYear: *int
+│   │   ├── WeeklyRetention: *string
+│   │   └── YearlyRetention: *string
+│   └── Status: Object (8 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── MonthlyRetention: *string
+│       ├── Name: *string
+│       ├── Type: *string
+│       ├── WeekOfYear: *int
+│       ├── WeeklyRetention: *string
+│       └── YearlyRetention: *string
+├── ServersDatabasesBackupShortTermRetentionPolicy: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (3 properties)
+│   │   ├── DiffBackupIntervalInHours: *Enum (2 values)
+│   │   │   ├── 12
+│   │   │   └── 24
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── RetentionDays: *int
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── DiffBackupIntervalInHours: *Enum (2 values)
+│       │   ├── 12
+│       │   └── 24
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── RetentionDays: *int
+│       └── Type: *string
+├── ServersDatabasesExtendedAuditingSetting: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (12 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PredicateExpression: *string
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageAccountSubscriptionId: Validated<*string> (1 rule)
+│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (14 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── Name: *string
+│       ├── PredicateExpression: *string
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageAccountSubscriptionId: *string
+│       ├── StorageEndpoint: *string
+│       └── Type: *string
+├── ServersDatabasesGeoBackupPolicy: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (2 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── State: *Enum (2 values)
+│   │       ├── "Disabled"
+│   │       └── "Enabled"
+│   └── Status: Object (8 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Kind: *string
+│       ├── Location: *string
+│       ├── Name: *string
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageType: *string
+│       └── Type: *string
+├── ServersDatabasesSecurityAlertPolicy: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (8 properties)
+│   │   ├── DisabledAlerts: string[]
+│   │   ├── EmailAccountAdmins: *bool
+│   │   ├── EmailAddresses: string[]
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (12 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── DisabledAlerts: string[]
+│       ├── EmailAccountAdmins: *bool
+│       ├── EmailAddresses: string[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageEndpoint: *string
+│       ├── SystemData: *Object (6 properties)
+│       │   ├── CreatedAt: *string
+│       │   ├── CreatedBy: *string
+│       │   ├── CreatedByType: *Enum (4 values)
+│       │   │   ├── "Application"
+│       │   │   ├── "Key"
+│       │   │   ├── "ManagedIdentity"
+│       │   │   └── "User"
+│       │   ├── LastModifiedAt: *string
+│       │   ├── LastModifiedBy: *string
+│       │   └── LastModifiedByType: *Enum (4 values)
+│       │       ├── "Application"
+│       │       ├── "Key"
+│       │       ├── "ManagedIdentity"
+│       │       └── "User"
+│       └── Type: *string
+├── ServersDatabasesTransparentDataEncryption: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (2 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── State: *Enum (2 values)
+│   │       ├── "Disabled"
+│   │       └── "Enabled"
+│   └── Status: Object (5 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       └── Type: *string
+├── ServersDatabasesVulnerabilityAssessment: Resource
+│   ├── Owner: ServersDatabase
+│   ├── Spec: Object (6 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── RecurringScans: *Object (3 properties)
+│   │   │   ├── EmailSubscriptionAdmins: *bool
+│   │   │   ├── Emails: string[]
+│   │   │   └── IsEnabled: *bool
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageContainerPath: *string
+│   │   ├── StorageContainerPathFromConfig: *genruntime.ConfigMapReference
+│   │   └── StorageContainerSasKey: *genruntime.SecretReference
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── RecurringScans: *Object (3 properties)
+│       │   ├── EmailSubscriptionAdmins: *bool
+│       │   ├── Emails: string[]
+│       │   └── IsEnabled: *bool
+│       ├── StorageContainerPath: *string
+│       └── Type: *string
+├── ServersElasticPool: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (12 properties)
+│   │   ├── AzureName: string
+│   │   ├── HighAvailabilityReplicaCount: *int
+│   │   ├── LicenseType: *Enum (2 values)
+│   │   │   ├── "BasePrice"
+│   │   │   └── "LicenseIncluded"
+│   │   ├── Location: *string
+│   │   ├── MaintenanceConfigurationId: *string
+│   │   ├── MaxSizeBytes: *int
+│   │   ├── MinCapacity: *float64
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PerDatabaseSettings: *Object (2 properties)
+│   │   │   ├── MaxCapacity: *float64
+│   │   │   └── MinCapacity: *float64
+│   │   ├── Sku: *Object (5 properties)
+│   │   │   ├── Capacity: *int
+│   │   │   ├── Family: *string
+│   │   │   ├── Name: *string
+│   │   │   ├── Size: *string
+│   │   │   └── Tier: *string
+│   │   ├── Tags: map[string]string
+│   │   └── ZoneRedundant: *bool
+│   └── Status: Object (17 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationDate: *string
+│       ├── HighAvailabilityReplicaCount: *int
+│       ├── Id: *string
+│       ├── Kind: *string
+│       ├── LicenseType: *Enum (2 values)
+│       │   ├── "BasePrice"
+│       │   └── "LicenseIncluded"
+│       ├── Location: *string
+│       ├── MaintenanceConfigurationId: *string
+│       ├── MaxSizeBytes: *int
+│       ├── MinCapacity: *float64
+│       ├── Name: *string
+│       ├── PerDatabaseSettings: *Object (2 properties)
+│       │   ├── MaxCapacity: *float64
+│       │   └── MinCapacity: *float64
+│       ├── Sku: *Object (5 properties)
+│       │   ├── Capacity: *int
+│       │   ├── Family: *string
+│       │   ├── Name: *string
+│       │   ├── Size: *string
+│       │   └── Tier: *string
+│       ├── State: *Enum (3 values)
+│       │   ├── "Creating"
+│       │   ├── "Disabled"
+│       │   └── "Ready"
+│       ├── Tags: map[string]string
+│       ├── Type: *string
+│       └── ZoneRedundant: *bool
+├── ServersFailoverGroup: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (7 properties)
+│   │   ├── AzureName: string
+│   │   ├── Databases: string[]
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── PartnerServers: Object (1 property)[]
+│   │   │   └── Reference: *genruntime.ResourceReference
+│   │   ├── ReadOnlyEndpoint: *Object (1 property)
+│   │   │   └── FailoverPolicy: *Enum (2 values)
+│   │   │       ├── "Disabled"
+│   │   │       └── "Enabled"
+│   │   ├── ReadWriteEndpoint: *Object (2 properties)
+│   │   │   ├── FailoverPolicy: *Enum (2 values)
+│   │   │   │   ├── "Automatic"
+│   │   │   │   └── "Manual"
+│   │   │   └── FailoverWithDataLossGracePeriodMinutes: *int
+│   │   └── Tags: map[string]string
+│   └── Status: Object (12 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Databases: string[]
+│       ├── Id: *string
+│       ├── Location: *string
+│       ├── Name: *string
+│       ├── PartnerServers: Object (3 properties)[]
+│       │   ├── Id: *string
+│       │   ├── Location: *string
+│       │   └── ReplicationRole: *Enum (2 values)
+│       │       ├── "Primary"
+│       │       └── "Secondary"
+│       ├── ReadOnlyEndpoint: *Object (1 property)
+│       │   └── FailoverPolicy: *Enum (2 values)
+│       │       ├── "Disabled"
+│       │       └── "Enabled"
+│       ├── ReadWriteEndpoint: *Object (2 properties)
+│       │   ├── FailoverPolicy: *Enum (2 values)
+│       │   │   ├── "Automatic"
+│       │   │   └── "Manual"
+│       │   └── FailoverWithDataLossGracePeriodMinutes: *int
+│       ├── ReplicationRole: *Enum (2 values)
+│       │   ├── "Primary"
+│       │   └── "Secondary"
+│       ├── ReplicationState: *string
+│       ├── Tags: map[string]string
+│       └── Type: *string
+├── ServersFirewallRule: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── AzureName: string
+│   │   ├── EndIpAddress: *string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── StartIpAddress: *string
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── EndIpAddress: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── StartIpAddress: *string
+│       └── Type: *string
+├── ServersIPV6FirewallRule: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── AzureName: string
+│   │   ├── EndIPv6Address: *string
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── StartIPv6Address: *string
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── EndIPv6Address: *string
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── StartIPv6Address: *string
+│       └── Type: *string
+├── ServersOutboundFirewallRule: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (2 properties)
+│   │   ├── AzureName: string
+│   │   └── Owner: *genruntime.KnownResourceReference
+│   └── Status: Object (5 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── ProvisioningState: *string
+│       └── Type: *string
+├── ServersSecurityAlertPolicy: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (8 properties)
+│   │   ├── DisabledAlerts: string[]
+│   │   ├── EmailAccountAdmins: *bool
+│   │   ├── EmailAddresses: string[]
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   └── StorageEndpoint: *string
+│   └── Status: Object (12 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── CreationTime: *string
+│       ├── DisabledAlerts: string[]
+│       ├── EmailAccountAdmins: *bool
+│       ├── EmailAddresses: string[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageEndpoint: *string
+│       ├── SystemData: *Object (6 properties)
+│       │   ├── CreatedAt: *string
+│       │   ├── CreatedBy: *string
+│       │   ├── CreatedByType: *Enum (4 values)
+│       │   │   ├── "Application"
+│       │   │   ├── "Key"
+│       │   │   ├── "ManagedIdentity"
+│       │   │   └── "User"
+│       │   ├── LastModifiedAt: *string
+│       │   ├── LastModifiedBy: *string
+│       │   └── LastModifiedByType: *Enum (4 values)
+│       │       ├── "Application"
+│       │       ├── "Key"
+│       │       ├── "ManagedIdentity"
+│       │       └── "User"
+│       └── Type: *string
+├── ServersVirtualNetworkRule: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (4 properties)
+│   │   ├── AzureName: string
+│   │   ├── IgnoreMissingVnetServiceEndpoint: *bool
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   └── VirtualNetworkSubnetReference: *genruntime.ResourceReference
+│   └── Status: Object (7 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── IgnoreMissingVnetServiceEndpoint: *bool
+│       ├── Name: *string
+│       ├── State: *Enum (6 values)
+│       │   ├── "Deleting"
+│       │   ├── "Failed"
+│       │   ├── "InProgress"
+│       │   ├── "Initializing"
+│       │   ├── "Ready"
+│       │   └── "Unknown"
+│       ├── Type: *string
+│       └── VirtualNetworkSubnetId: *string
+├── ServersVulnerabilityAssessment: Resource
+│   ├── Owner: Server
+│   ├── Spec: Object (6 properties)
+│   │   ├── Owner: *genruntime.KnownResourceReference
+│   │   ├── RecurringScans: *Object (3 properties)
+│   │   │   ├── EmailSubscriptionAdmins: *bool
+│   │   │   ├── Emails: string[]
+│   │   │   └── IsEnabled: *bool
+│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
+│   │   ├── StorageContainerPath: *string
+│   │   ├── StorageContainerPathFromConfig: *genruntime.ConfigMapReference
+│   │   └── StorageContainerSasKey: *genruntime.SecretReference
+│   └── Status: Object (6 properties)
+│       ├── Conditions: conditions.Condition[]
+│       ├── Id: *string
+│       ├── Name: *string
+│       ├── RecurringScans: *Object (3 properties)
+│       │   ├── EmailSubscriptionAdmins: *bool
+│       │   ├── Emails: string[]
+│       │   └── IsEnabled: *bool
+│       ├── StorageContainerPath: *string
+│       └── Type: *string
+├── Servers_Administrator_STATUS_ARM: Object (4 properties)
+│   ├── Id: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (5 properties)
+│   │   ├── AdministratorType: *Enum (1 value)
+│   │   │   └── "ActiveDirectory"
+│   │   ├── AzureADOnlyAuthentication: *bool
+│   │   ├── Login: *string
+│   │   ├── Sid: *string
+│   │   └── TenantId: *string
+│   └── Type: *string
+├── Servers_Administrator_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (4 properties)
+│       ├── AdministratorType: *Enum (1 value)
+│       │   └── "ActiveDirectory"
+│       ├── Login: *string
+│       ├── Sid: *string
+│       └── TenantId: *string
+├── Servers_AdvancedThreatProtectionSetting_STATUS_ARM: Object (5 properties)
+│   ├── Id: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (2 properties)
+│   │   ├── CreationTime: *string
+│   │   └── State: *Enum (3 values)
+│   │       ├── "Disabled"
+│   │       ├── "Enabled"
+│   │       └── "New"
+│   ├── SystemData: *Object (6 properties)
+│   │   ├── CreatedAt: *string
+│   │   ├── CreatedBy: *string
+│   │   ├── CreatedByType: *Enum (4 values)
+│   │   │   ├── "Application"
+│   │   │   ├── "Key"
+│   │   │   ├── "ManagedIdentity"
+│   │   │   └── "User"
+│   │   ├── LastModifiedAt: *string
+│   │   ├── LastModifiedBy: *string
+│   │   └── LastModifiedByType: *Enum (4 values)
+│   │       ├── "Application"
+│   │       ├── "Key"
+│   │       ├── "ManagedIdentity"
+│   │       └── "User"
+│   └── Type: *string
+├── Servers_AdvancedThreatProtectionSetting_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (1 property)
+│       └── State: *Enum (3 values)
+│           ├── "Disabled"
+│           ├── "Enabled"
+│           └── "New"
+├── Servers_AuditingSetting_STATUS_ARM: Object (4 properties)
+│   ├── Id: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (10 properties)
+│   │   ├── AuditActionsAndGroups: string[]
+│   │   ├── IsAzureMonitorTargetEnabled: *bool
+│   │   ├── IsDevopsAuditEnabled: *bool
+│   │   ├── IsManagedIdentityInUse: *bool
+│   │   ├── IsStorageSecondaryKeyInUse: *bool
+│   │   ├── QueueDelayMs: *int
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   ├── StorageAccountSubscriptionId: *string
+│   │   └── StorageEndpoint: *string
+│   └── Type: *string
+├── Servers_AuditingSetting_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (11 properties)
+│       ├── AuditActionsAndGroups: string[]
+│       ├── IsAzureMonitorTargetEnabled: *bool
+│       ├── IsDevopsAuditEnabled: *bool
+│       ├── IsManagedIdentityInUse: *bool
+│       ├── IsStorageSecondaryKeyInUse: *bool
+│       ├── QueueDelayMs: *int
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageAccountAccessKey: *string
+│       ├── StorageAccountSubscriptionId: *string
+│       └── StorageEndpoint: *string
+├── Servers_AzureADOnlyAuthentication_STATUS_ARM: Object (4 properties)
+│   ├── Id: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (1 property)
+│   │   └── AzureADOnlyAuthentication: *bool
+│   └── Type: *string
+├── Servers_AzureADOnlyAuthentication_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (1 property)
+│       └── AzureADOnlyAuthentication: *bool
+├── Servers_ConnectionPolicy_STATUS_ARM: Object (6 properties)
+│   ├── Id: *string
+│   ├── Kind: *string
+│   ├── Location: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (1 property)
+│   │   └── ConnectionType: *Enum (3 values)
+│   │       ├── "Default"
+│   │       ├── "Proxy"
+│   │       └── "Redirect"
+│   └── Type: *string
+├── Servers_ConnectionPolicy_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (1 property)
+│       └── ConnectionType: *Enum (3 values)
+│           ├── "Default"
+│           ├── "Proxy"
+│           └── "Redirect"
 ├── Servers_Database_STATUS_ARM: Object (10 properties)
 │   ├── Id: *string
 │   ├── Identity: *Object (3 properties)
@@ -1425,40 +1275,38 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   │   ├── Size: *string
 │   │   └── Tier: *string
 │   └── Tags: map[string]string
-├── Servers_Databases_AuditingSetting: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (11 properties)
-│   │   ├── AuditActionsAndGroups: string[]
-│   │   ├── IsAzureMonitorTargetEnabled: *bool
-│   │   ├── IsManagedIdentityInUse: *bool
-│   │   ├── IsStorageSecondaryKeyInUse: *bool
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── QueueDelayMs: *int
-│   │   ├── RetentionDays: *int
-│   │   ├── State: *Enum (2 values)
-│   │   │   ├── "Disabled"
-│   │   │   └── "Enabled"
-│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
-│   │   ├── StorageAccountSubscriptionId: Validated<*string> (1 rule)
-│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-│   │   └── StorageEndpoint: *string
-│   └── Status: Object (14 properties)
-│       ├── AuditActionsAndGroups: string[]
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── IsAzureMonitorTargetEnabled: *bool
-│       ├── IsManagedIdentityInUse: *bool
-│       ├── IsStorageSecondaryKeyInUse: *bool
-│       ├── Kind: *string
-│       ├── Name: *string
-│       ├── QueueDelayMs: *int
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (2 values)
-│       │   ├── "Disabled"
-│       │   └── "Enabled"
-│       ├── StorageAccountSubscriptionId: *string
-│       ├── StorageEndpoint: *string
-│       └── Type: *string
+├── Servers_Databases_AdvancedThreatProtectionSetting_STATUS_ARM: Object (5 properties)
+│   ├── Id: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (2 properties)
+│   │   ├── CreationTime: *string
+│   │   └── State: *Enum (3 values)
+│   │       ├── "Disabled"
+│   │       ├── "Enabled"
+│   │       └── "New"
+│   ├── SystemData: *Object (6 properties)
+│   │   ├── CreatedAt: *string
+│   │   ├── CreatedBy: *string
+│   │   ├── CreatedByType: *Enum (4 values)
+│   │   │   ├── "Application"
+│   │   │   ├── "Key"
+│   │   │   ├── "ManagedIdentity"
+│   │   │   └── "User"
+│   │   ├── LastModifiedAt: *string
+│   │   ├── LastModifiedBy: *string
+│   │   └── LastModifiedByType: *Enum (4 values)
+│   │       ├── "Application"
+│   │       ├── "Key"
+│   │       ├── "ManagedIdentity"
+│   │       └── "User"
+│   └── Type: *string
+├── Servers_Databases_AdvancedThreatProtectionSetting_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (1 property)
+│       └── State: *Enum (3 values)
+│           ├── "Disabled"
+│           ├── "Enabled"
+│           └── "New"
 ├── Servers_Databases_AuditingSetting_STATUS_ARM: Object (5 properties)
 │   ├── Id: *string
 │   ├── Kind: *string
@@ -1491,23 +1339,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── StorageAccountAccessKey: *string
 │       ├── StorageAccountSubscriptionId: *string
 │       └── StorageEndpoint: *string
-├── Servers_Databases_BackupLongTermRetentionPolicy: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (5 properties)
-│   │   ├── MonthlyRetention: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── WeekOfYear: *int
-│   │   ├── WeeklyRetention: *string
-│   │   └── YearlyRetention: *string
-│   └── Status: Object (8 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── MonthlyRetention: *string
-│       ├── Name: *string
-│       ├── Type: *string
-│       ├── WeekOfYear: *int
-│       ├── WeeklyRetention: *string
-│       └── YearlyRetention: *string
 ├── Servers_Databases_BackupLongTermRetentionPolicy_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -1524,23 +1355,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── WeekOfYear: *int
 │       ├── WeeklyRetention: *string
 │       └── YearlyRetention: *string
-├── Servers_Databases_BackupShortTermRetentionPolicy: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (3 properties)
-│   │   ├── DiffBackupIntervalInHours: *Enum (2 values)
-│   │   │   ├── 12
-│   │   │   └── 24
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── RetentionDays: *int
-│   └── Status: Object (6 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── DiffBackupIntervalInHours: *Enum (2 values)
-│       │   ├── 12
-│       │   └── 24
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RetentionDays: *int
-│       └── Type: *string
 ├── Servers_Databases_BackupShortTermRetentionPolicy_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -1557,41 +1371,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       │   ├── 12
 │       │   └── 24
 │       └── RetentionDays: *int
-├── Servers_Databases_ExtendedAuditingSetting: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (12 properties)
-│   │   ├── AuditActionsAndGroups: string[]
-│   │   ├── IsAzureMonitorTargetEnabled: *bool
-│   │   ├── IsManagedIdentityInUse: *bool
-│   │   ├── IsStorageSecondaryKeyInUse: *bool
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── PredicateExpression: *string
-│   │   ├── QueueDelayMs: *int
-│   │   ├── RetentionDays: *int
-│   │   ├── State: *Enum (2 values)
-│   │   │   ├── "Disabled"
-│   │   │   └── "Enabled"
-│   │   ├── StorageAccountAccessKey: *genruntime.SecretReference
-│   │   ├── StorageAccountSubscriptionId: Validated<*string> (1 rule)
-│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-│   │   └── StorageEndpoint: *string
-│   └── Status: Object (14 properties)
-│       ├── AuditActionsAndGroups: string[]
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── IsAzureMonitorTargetEnabled: *bool
-│       ├── IsManagedIdentityInUse: *bool
-│       ├── IsStorageSecondaryKeyInUse: *bool
-│       ├── Name: *string
-│       ├── PredicateExpression: *string
-│       ├── QueueDelayMs: *int
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (2 values)
-│       │   ├── "Disabled"
-│       │   └── "Enabled"
-│       ├── StorageAccountSubscriptionId: *string
-│       ├── StorageEndpoint: *string
-│       └── Type: *string
 ├── Servers_Databases_ExtendedAuditingSetting_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -1625,53 +1404,27 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── StorageAccountAccessKey: *string
 │       ├── StorageAccountSubscriptionId: *string
 │       └── StorageEndpoint: *string
-├── Servers_Databases_SecurityAlertPolicy: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (8 properties)
-│   │   ├── DisabledAlerts: string[]
-│   │   ├── EmailAccountAdmins: *bool
-│   │   ├── EmailAddresses: string[]
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RetentionDays: *int
+├── Servers_Databases_GeoBackupPolicy_STATUS_ARM: Object (6 properties)
+│   ├── Id: *string
+│   ├── Kind: *string
+│   ├── Location: *string
+│   ├── Name: *string
+│   ├── Properties: *Object (2 properties)
 │   │   ├── State: *Enum (2 values)
 │   │   │   ├── "Disabled"
 │   │   │   └── "Enabled"
-│   │   ├── StorageAccountAccessKey: *string
-│   │   └── StorageEndpoint: *string
-│   └── Status: Object (13 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── CreationTime: *string
-│       ├── DisabledAlerts: string[]
-│       ├── EmailAccountAdmins: *bool
-│       ├── EmailAddresses: string[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RetentionDays: *int
-│       ├── State: *Enum (2 values)
-│       │   ├── "Disabled"
-│       │   └── "Enabled"
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageEndpoint: *string
-│       ├── SystemData: *Object (6 properties)
-│       │   ├── CreatedAt: *string
-│       │   ├── CreatedBy: *string
-│       │   ├── CreatedByType: *Enum (4 values)
-│       │   │   ├── "Application"
-│       │   │   ├── "Key"
-│       │   │   ├── "ManagedIdentity"
-│       │   │   └── "User"
-│       │   ├── LastModifiedAt: *string
-│       │   ├── LastModifiedBy: *string
-│       │   └── LastModifiedByType: *Enum (4 values)
-│       │       ├── "Application"
-│       │       ├── "Key"
-│       │       ├── "ManagedIdentity"
-│       │       └── "User"
-│       └── Type: *string
+│   │   └── StorageType: *string
+│   └── Type: *string
+├── Servers_Databases_GeoBackupPolicy_Spec_ARM: Object (2 properties)
+│   ├── Name: string
+│   └── Properties: *Object (1 property)
+│       └── State: *Enum (2 values)
+│           ├── "Disabled"
+│           └── "Enabled"
 ├── Servers_Databases_SecurityAlertPolicy_STATUS_ARM: Object (5 properties)
 │   ├── Id: *string
 │   ├── Name: *string
-│   ├── Properties: *Object (8 properties)
+│   ├── Properties: *Object (7 properties)
 │   │   ├── CreationTime: *string
 │   │   ├── DisabledAlerts: string[]
 │   │   ├── EmailAccountAdmins: *bool
@@ -1680,7 +1433,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   │   ├── State: *Enum (2 values)
 │   │   │   ├── "Disabled"
 │   │   │   └── "Enabled"
-│   │   ├── StorageAccountAccessKey: *string
 │   │   └── StorageEndpoint: *string
 │   ├── SystemData: *Object (6 properties)
 │   │   ├── CreatedAt: *string
@@ -1710,287 +1462,29 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       │   └── "Enabled"
 │       ├── StorageAccountAccessKey: *string
 │       └── StorageEndpoint: *string
-├── Servers_Databases_SyncGroup: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (12 properties)
-│   │   ├── AzureName: string
-│   │   ├── ConflictLoggingRetentionInDays: *int
-│   │   ├── ConflictResolutionPolicy: *Enum (2 values)
-│   │   │   ├── "HubWin"
-│   │   │   └── "MemberWin"
-│   │   ├── EnableConflictLogging: *bool
-│   │   ├── HubDatabasePassword: *genruntime.SecretReference
-│   │   ├── HubDatabaseUserName: *string
-│   │   ├── Interval: *int
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── Schema: *Object (2 properties)
-│   │   │   ├── MasterSyncMemberName: *string
-│   │   │   └── Tables: Object (2 properties)[]
-│   │   │       ├── Columns: Object (3 properties)[]
-│   │   │       │   ├── DataSize: *string
-│   │   │       │   ├── DataType: *string
-│   │   │       │   └── QuotedName: *string
-│   │   │       └── QuotedName: *string
-│   │   ├── Sku: *Object (5 properties)
-│   │   │   ├── Capacity: *int
-│   │   │   ├── Family: *string
-│   │   │   ├── Name: *string
-│   │   │   ├── Size: *string
-│   │   │   └── Tier: *string
-│   │   ├── SyncDatabaseReference: *genruntime.ResourceReference
-│   │   └── UsePrivateLinkConnection: *bool
-│   └── Status: Object (16 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── ConflictLoggingRetentionInDays: *int
-│       ├── ConflictResolutionPolicy: *Enum (2 values)
-│       │   ├── "HubWin"
-│       │   └── "MemberWin"
-│       ├── EnableConflictLogging: *bool
-│       ├── HubDatabaseUserName: *string
-│       ├── Id: *string
-│       ├── Interval: *int
-│       ├── LastSyncTime: *string
-│       ├── Name: *string
-│       ├── PrivateEndpointName: *string
-│       ├── Schema: *Object (2 properties)
-│       │   ├── MasterSyncMemberName: *string
-│       │   └── Tables: Object (2 properties)[]
-│       │       ├── Columns: Object (3 properties)[]
-│       │       │   ├── DataSize: *string
-│       │       │   ├── DataType: *string
-│       │       │   └── QuotedName: *string
-│       │       └── QuotedName: *string
-│       ├── Sku: *Object (5 properties)
-│       │   ├── Capacity: *int
-│       │   ├── Family: *string
-│       │   ├── Name: *string
-│       │   ├── Size: *string
-│       │   └── Tier: *string
-│       ├── SyncDatabaseId: *string
-│       ├── SyncState: *Enum (5 values)
-│       │   ├── "Error"
-│       │   ├── "Good"
-│       │   ├── "NotReady"
-│       │   ├── "Progressing"
-│       │   └── "Warning"
-│       ├── Type: *string
-│       └── UsePrivateLinkConnection: *bool
-├── Servers_Databases_SyncGroup_STATUS_ARM: Object (5 properties)
+├── Servers_Databases_TransparentDataEncryption_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
-│   ├── Properties: *Object (11 properties)
-│   │   ├── ConflictLoggingRetentionInDays: *int
-│   │   ├── ConflictResolutionPolicy: *Enum (2 values)
-│   │   │   ├── "HubWin"
-│   │   │   └── "MemberWin"
-│   │   ├── EnableConflictLogging: *bool
-│   │   ├── HubDatabaseUserName: *string
-│   │   ├── Interval: *int
-│   │   ├── LastSyncTime: *string
-│   │   ├── PrivateEndpointName: *string
-│   │   ├── Schema: *Object (2 properties)
-│   │   │   ├── MasterSyncMemberName: *string
-│   │   │   └── Tables: Object (2 properties)[]
-│   │   │       ├── Columns: Object (3 properties)[]
-│   │   │       │   ├── DataSize: *string
-│   │   │       │   ├── DataType: *string
-│   │   │       │   └── QuotedName: *string
-│   │   │       └── QuotedName: *string
-│   │   ├── SyncDatabaseId: *string
-│   │   ├── SyncState: *Enum (5 values)
-│   │   │   ├── "Error"
-│   │   │   ├── "Good"
-│   │   │   ├── "NotReady"
-│   │   │   ├── "Progressing"
-│   │   │   └── "Warning"
-│   │   └── UsePrivateLinkConnection: *bool
-│   ├── Sku: *Object (5 properties)
-│   │   ├── Capacity: *int
-│   │   ├── Family: *string
-│   │   ├── Name: *string
-│   │   ├── Size: *string
-│   │   └── Tier: *string
+│   ├── Properties: *Object (1 property)
+│   │   └── State: *Enum (2 values)
+│   │       ├── "Disabled"
+│   │       └── "Enabled"
 │   └── Type: *string
-├── Servers_Databases_SyncGroup_Spec_ARM: Object (3 properties)
+├── Servers_Databases_TransparentDataEncryption_Spec_ARM: Object (2 properties)
 │   ├── Name: string
-│   ├── Properties: *Object (9 properties)
-│   │   ├── ConflictLoggingRetentionInDays: *int
-│   │   ├── ConflictResolutionPolicy: *Enum (2 values)
-│   │   │   ├── "HubWin"
-│   │   │   └── "MemberWin"
-│   │   ├── EnableConflictLogging: *bool
-│   │   ├── HubDatabasePassword: *string
-│   │   ├── HubDatabaseUserName: *string
-│   │   ├── Interval: *int
-│   │   ├── Schema: *Object (2 properties)
-│   │   │   ├── MasterSyncMemberName: *string
-│   │   │   └── Tables: Object (2 properties)[]
-│   │   │       ├── Columns: Object (3 properties)[]
-│   │   │       │   ├── DataSize: *string
-│   │   │       │   ├── DataType: *string
-│   │   │       │   └── QuotedName: *string
-│   │   │       └── QuotedName: *string
-│   │   ├── SyncDatabaseId: *string
-│   │   └── UsePrivateLinkConnection: *bool
-│   └── Sku: *Object (5 properties)
-│       ├── Capacity: *int
-│       ├── Family: *string
-│       ├── Name: *string
-│       ├── Size: *string
-│       └── Tier: *string
-├── Servers_Databases_SyncGroups_SyncMember: Resource
-│   ├── Owner: Servers_Databases_SyncGroup
-│   ├── Spec: Object (12 properties)
-│   │   ├── AzureName: string
-│   │   ├── DatabaseName: *string
-│   │   ├── DatabaseType: *Enum (2 values)
-│   │   │   ├── "AzureSqlDatabase"
-│   │   │   └── "SqlServerDatabase"
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── Password: *string
-│   │   ├── ServerName: *string
-│   │   ├── SqlServerDatabaseId: Validated<*string> (1 rule)
-│   │   │   └── Rule 0: Pattern: "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-│   │   ├── SyncAgentReference: *genruntime.ResourceReference
-│   │   ├── SyncDirection: *Enum (3 values)
-│   │   │   ├── "Bidirectional"
-│   │   │   ├── "OneWayHubToMember"
-│   │   │   └── "OneWayMemberToHub"
-│   │   ├── SyncMemberAzureDatabaseResourceReference: *genruntime.ResourceReference
-│   │   ├── UsePrivateLinkConnection: *bool
-│   │   └── UserName: *string
-│   └── Status: Object (16 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── DatabaseName: *string
-│       ├── DatabaseType: *Enum (2 values)
-│       │   ├── "AzureSqlDatabase"
-│       │   └── "SqlServerDatabase"
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── Password: *string
-│       ├── PrivateEndpointName: *string
-│       ├── ServerName: *string
-│       ├── SqlServerDatabaseId: *string
-│       ├── SyncAgentId: *string
-│       ├── SyncDirection: *Enum (3 values)
-│       │   ├── "Bidirectional"
-│       │   ├── "OneWayHubToMember"
-│       │   └── "OneWayMemberToHub"
-│       ├── SyncMemberAzureDatabaseResourceId: *string
-│       ├── SyncState: *Enum (18 values)
-│       │   ├── "DeProvisionFailed"
-│       │   ├── "DeProvisioned"
-│       │   ├── "DeProvisioning"
-│       │   ├── "DisabledBackupRestore"
-│       │   ├── "DisabledTombstoneCleanup"
-│       │   ├── "ProvisionFailed"
-│       │   ├── "Provisioned"
-│       │   ├── "Provisioning"
-│       │   ├── "ReprovisionFailed"
-│       │   ├── "Reprovisioning"
-│       │   ├── "SyncCancelled"
-│       │   ├── "SyncCancelling"
-│       │   ├── "SyncFailed"
-│       │   ├── "SyncInProgress"
-│       │   ├── "SyncSucceeded"
-│       │   ├── "SyncSucceededWithWarnings"
-│       │   ├── "UnProvisioned"
-│       │   └── "UnReprovisioned"
-│       ├── Type: *string
-│       ├── UsePrivateLinkConnection: *bool
-│       └── UserName: *string
-├── Servers_Databases_SyncGroups_SyncMember_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (12 properties)
-│   │   ├── DatabaseName: *string
-│   │   ├── DatabaseType: *Enum (2 values)
-│   │   │   ├── "AzureSqlDatabase"
-│   │   │   └── "SqlServerDatabase"
-│   │   ├── Password: *string
-│   │   ├── PrivateEndpointName: *string
-│   │   ├── ServerName: *string
-│   │   ├── SqlServerDatabaseId: *string
-│   │   ├── SyncAgentId: *string
-│   │   ├── SyncDirection: *Enum (3 values)
-│   │   │   ├── "Bidirectional"
-│   │   │   ├── "OneWayHubToMember"
-│   │   │   └── "OneWayMemberToHub"
-│   │   ├── SyncMemberAzureDatabaseResourceId: *string
-│   │   ├── SyncState: *Enum (18 values)
-│   │   │   ├── "DeProvisionFailed"
-│   │   │   ├── "DeProvisioned"
-│   │   │   ├── "DeProvisioning"
-│   │   │   ├── "DisabledBackupRestore"
-│   │   │   ├── "DisabledTombstoneCleanup"
-│   │   │   ├── "ProvisionFailed"
-│   │   │   ├── "Provisioned"
-│   │   │   ├── "Provisioning"
-│   │   │   ├── "ReprovisionFailed"
-│   │   │   ├── "Reprovisioning"
-│   │   │   ├── "SyncCancelled"
-│   │   │   ├── "SyncCancelling"
-│   │   │   ├── "SyncFailed"
-│   │   │   ├── "SyncInProgress"
-│   │   │   ├── "SyncSucceeded"
-│   │   │   ├── "SyncSucceededWithWarnings"
-│   │   │   ├── "UnProvisioned"
-│   │   │   └── "UnReprovisioned"
-│   │   ├── UsePrivateLinkConnection: *bool
-│   │   └── UserName: *string
-│   └── Type: *string
-├── Servers_Databases_SyncGroups_SyncMember_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (10 properties)
-│       ├── DatabaseName: *string
-│       ├── DatabaseType: *Enum (2 values)
-│       │   ├── "AzureSqlDatabase"
-│       │   └── "SqlServerDatabase"
-│       ├── Password: *string
-│       ├── ServerName: *string
-│       ├── SqlServerDatabaseId: *string
-│       ├── SyncAgentId: *string
-│       ├── SyncDirection: *Enum (3 values)
-│       │   ├── "Bidirectional"
-│       │   ├── "OneWayHubToMember"
-│       │   └── "OneWayMemberToHub"
-│       ├── SyncMemberAzureDatabaseResourceId: *string
-│       ├── UsePrivateLinkConnection: *bool
-│       └── UserName: *string
-├── Servers_Databases_VulnerabilityAssessment: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (5 properties)
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RecurringScans: *Object (3 properties)
-│   │   │   ├── EmailSubscriptionAdmins: *bool
-│   │   │   ├── Emails: string[]
-│   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
-│   └── Status: Object (8 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RecurringScans: *Object (3 properties)
-│       │   ├── EmailSubscriptionAdmins: *bool
-│       │   ├── Emails: string[]
-│       │   └── IsEnabled: *bool
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageContainerPath: *string
-│       ├── StorageContainerSasKey: *string
-│       └── Type: *string
+│   └── Properties: *Object (1 property)
+│       └── State: *Enum (2 values)
+│           ├── "Disabled"
+│           └── "Enabled"
 ├── Servers_Databases_VulnerabilityAssessment_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
-│   ├── Properties: *Object (4 properties)
+│   ├── Properties: *Object (2 properties)
 │   │   ├── RecurringScans: *Object (3 properties)
 │   │   │   ├── EmailSubscriptionAdmins: *bool
 │   │   │   ├── Emails: string[]
 │   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
+│   │   └── StorageContainerPath: *string
 │   └── Type: *string
 ├── Servers_Databases_VulnerabilityAssessment_Spec_ARM: Object (2 properties)
 │   ├── Name: string
@@ -2002,163 +1496,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │       ├── StorageAccountAccessKey: *string
 │       ├── StorageContainerPath: *string
 │       └── StorageContainerSasKey: *string
-├── Servers_Databases_WorkloadGroup: Resource
-│   ├── Owner: Servers_Database
-│   ├── Spec: Object (8 properties)
-│   │   ├── AzureName: string
-│   │   ├── Importance: *string
-│   │   ├── MaxResourcePercent: *int
-│   │   ├── MaxResourcePercentPerRequest: *float64
-│   │   ├── MinResourcePercent: *int
-│   │   ├── MinResourcePercentPerRequest: *float64
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── QueryExecutionTimeout: *int
-│   └── Status: Object (10 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Importance: *string
-│       ├── MaxResourcePercent: *int
-│       ├── MaxResourcePercentPerRequest: *float64
-│       ├── MinResourcePercent: *int
-│       ├── MinResourcePercentPerRequest: *float64
-│       ├── Name: *string
-│       ├── QueryExecutionTimeout: *int
-│       └── Type: *string
-├── Servers_Databases_WorkloadGroup_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (6 properties)
-│   │   ├── Importance: *string
-│   │   ├── MaxResourcePercent: *int
-│   │   ├── MaxResourcePercentPerRequest: *float64
-│   │   ├── MinResourcePercent: *int
-│   │   ├── MinResourcePercentPerRequest: *float64
-│   │   └── QueryExecutionTimeout: *int
-│   └── Type: *string
-├── Servers_Databases_WorkloadGroup_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (6 properties)
-│       ├── Importance: *string
-│       ├── MaxResourcePercent: *int
-│       ├── MaxResourcePercentPerRequest: *float64
-│       ├── MinResourcePercent: *int
-│       ├── MinResourcePercentPerRequest: *float64
-│       └── QueryExecutionTimeout: *int
-├── Servers_Databases_WorkloadGroups_WorkloadClassifier: Resource
-│   ├── Owner: Servers_Databases_WorkloadGroup
-│   ├── Spec: Object (8 properties)
-│   │   ├── AzureName: string
-│   │   ├── Context: *string
-│   │   ├── EndTime: *string
-│   │   ├── Importance: *string
-│   │   ├── Label: *string
-│   │   ├── MemberName: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── StartTime: *string
-│   └── Status: Object (10 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Context: *string
-│       ├── EndTime: *string
-│       ├── Id: *string
-│       ├── Importance: *string
-│       ├── Label: *string
-│       ├── MemberName: *string
-│       ├── Name: *string
-│       ├── StartTime: *string
-│       └── Type: *string
-├── Servers_Databases_WorkloadGroups_WorkloadClassifier_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (6 properties)
-│   │   ├── Context: *string
-│   │   ├── EndTime: *string
-│   │   ├── Importance: *string
-│   │   ├── Label: *string
-│   │   ├── MemberName: *string
-│   │   └── StartTime: *string
-│   └── Type: *string
-├── Servers_Databases_WorkloadGroups_WorkloadClassifier_Spec_ARM: Object (2 properties)
-│   ├── Name: string
-│   └── Properties: *Object (6 properties)
-│       ├── Context: *string
-│       ├── EndTime: *string
-│       ├── Importance: *string
-│       ├── Label: *string
-│       ├── MemberName: *string
-│       └── StartTime: *string
-├── Servers_DnsAliase: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (2 properties)
-│   │   ├── AzureName: string
-│   │   └── Owner: *genruntime.KnownResourceReference
-│   └── Status: Object (5 properties)
-│       ├── AzureDnsRecord: *string
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       └── Type: *string
-├── Servers_DnsAliase_STATUS_ARM: Object (4 properties)
-│   ├── Id: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (1 property)
-│   │   └── AzureDnsRecord: *string
-│   └── Type: *string
-├── Servers_DnsAliase_Spec_ARM: Object (1 property)
-│   └── Name: string
-├── Servers_ElasticPool: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (12 properties)
-│   │   ├── AzureName: string
-│   │   ├── HighAvailabilityReplicaCount: *int
-│   │   ├── LicenseType: *Enum (2 values)
-│   │   │   ├── "BasePrice"
-│   │   │   └── "LicenseIncluded"
-│   │   ├── Location: *string
-│   │   ├── MaintenanceConfigurationId: *string
-│   │   ├── MaxSizeBytes: *int
-│   │   ├── MinCapacity: *float64
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── PerDatabaseSettings: *Object (2 properties)
-│   │   │   ├── MaxCapacity: *float64
-│   │   │   └── MinCapacity: *float64
-│   │   ├── Sku: *Object (5 properties)
-│   │   │   ├── Capacity: *int
-│   │   │   ├── Family: *string
-│   │   │   ├── Name: *string
-│   │   │   ├── Size: *string
-│   │   │   └── Tier: *string
-│   │   ├── Tags: map[string]string
-│   │   └── ZoneRedundant: *bool
-│   └── Status: Object (17 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── CreationDate: *string
-│       ├── HighAvailabilityReplicaCount: *int
-│       ├── Id: *string
-│       ├── Kind: *string
-│       ├── LicenseType: *Enum (2 values)
-│       │   ├── "BasePrice"
-│       │   └── "LicenseIncluded"
-│       ├── Location: *string
-│       ├── MaintenanceConfigurationId: *string
-│       ├── MaxSizeBytes: *int
-│       ├── MinCapacity: *float64
-│       ├── Name: *string
-│       ├── PerDatabaseSettings: *Object (2 properties)
-│       │   ├── MaxCapacity: *float64
-│       │   └── MinCapacity: *float64
-│       ├── Sku: *Object (5 properties)
-│       │   ├── Capacity: *int
-│       │   ├── Family: *string
-│       │   ├── Name: *string
-│       │   ├── Size: *string
-│       │   └── Tier: *string
-│       ├── State: *Enum (3 values)
-│       │   ├── "Creating"
-│       │   ├── "Disabled"
-│       │   └── "Ready"
-│       ├── Tags: map[string]string
-│       ├── Type: *string
-│       └── ZoneRedundant: *bool
 ├── Servers_ElasticPool_STATUS_ARM: Object (8 properties)
 │   ├── Id: *string
 │   ├── Kind: *string
@@ -2211,51 +1548,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   │   ├── Size: *string
 │   │   └── Tier: *string
 │   └── Tags: map[string]string
-├── Servers_FailoverGroup: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (7 properties)
-│   │   ├── AzureName: string
-│   │   ├── Databases: string[]
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── PartnerServers: Object (1 property)[]
-│   │   │   └── Reference: *genruntime.ResourceReference
-│   │   ├── ReadOnlyEndpoint: *Object (1 property)
-│   │   │   └── FailoverPolicy: *Enum (2 values)
-│   │   │       ├── "Disabled"
-│   │   │       └── "Enabled"
-│   │   ├── ReadWriteEndpoint: *Object (2 properties)
-│   │   │   ├── FailoverPolicy: *Enum (2 values)
-│   │   │   │   ├── "Automatic"
-│   │   │   │   └── "Manual"
-│   │   │   └── FailoverWithDataLossGracePeriodMinutes: *int
-│   │   └── Tags: map[string]string
-│   └── Status: Object (12 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Databases: string[]
-│       ├── Id: *string
-│       ├── Location: *string
-│       ├── Name: *string
-│       ├── PartnerServers: Object (3 properties)[]
-│       │   ├── Id: *string
-│       │   ├── Location: *string
-│       │   └── ReplicationRole: *Enum (2 values)
-│       │       ├── "Primary"
-│       │       └── "Secondary"
-│       ├── ReadOnlyEndpoint: *Object (1 property)
-│       │   └── FailoverPolicy: *Enum (2 values)
-│       │       ├── "Disabled"
-│       │       └── "Enabled"
-│       ├── ReadWriteEndpoint: *Object (2 properties)
-│       │   ├── FailoverPolicy: *Enum (2 values)
-│       │   │   ├── "Automatic"
-│       │   │   └── "Manual"
-│       │   └── FailoverWithDataLossGracePeriodMinutes: *int
-│       ├── ReplicationRole: *Enum (2 values)
-│       │   ├── "Primary"
-│       │   └── "Secondary"
-│       ├── ReplicationState: *string
-│       ├── Tags: map[string]string
-│       └── Type: *string
 ├── Servers_FailoverGroup_STATUS_ARM: Object (6 properties)
 │   ├── Id: *string
 │   ├── Location: *string
@@ -2299,20 +1591,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   │       │   └── "Manual"
 │   │       └── FailoverWithDataLossGracePeriodMinutes: *int
 │   └── Tags: map[string]string
-├── Servers_FirewallRule: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (4 properties)
-│   │   ├── AzureName: string
-│   │   ├── EndIpAddress: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── StartIpAddress: *string
-│   └── Status: Object (6 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── EndIpAddress: *string
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── StartIpAddress: *string
-│       └── Type: *string
 ├── Servers_FirewallRule_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -2325,20 +1603,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   └── Properties: *Object (2 properties)
 │       ├── EndIpAddress: *string
 │       └── StartIpAddress: *string
-├── Servers_Ipv6FirewallRule: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (4 properties)
-│   │   ├── AzureName: string
-│   │   ├── EndIPv6Address: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── StartIPv6Address: *string
-│   └── Status: Object (6 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── EndIPv6Address: *string
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── StartIPv6Address: *string
-│       └── Type: *string
 ├── Servers_Ipv6FirewallRule_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -2351,83 +1615,6 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   └── Properties: *Object (2 properties)
 │       ├── EndIPv6Address: *string
 │       └── StartIPv6Address: *string
-├── Servers_JobAgent: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (6 properties)
-│   │   ├── AzureName: string
-│   │   ├── DatabaseReference: *genruntime.ResourceReference
-│   │   ├── Location: *string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── Sku: *Object (5 properties)
-│   │   │   ├── Capacity: *int
-│   │   │   ├── Family: *string
-│   │   │   ├── Name: *string
-│   │   │   ├── Size: *string
-│   │   │   └── Tier: *string
-│   │   └── Tags: map[string]string
-│   └── Status: Object (9 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── DatabaseId: *string
-│       ├── Id: *string
-│       ├── Location: *string
-│       ├── Name: *string
-│       ├── Sku: *Object (5 properties)
-│       │   ├── Capacity: *int
-│       │   ├── Family: *string
-│       │   ├── Name: *string
-│       │   ├── Size: *string
-│       │   └── Tier: *string
-│       ├── State: *Enum (5 values)
-│       │   ├── "Creating"
-│       │   ├── "Deleting"
-│       │   ├── "Disabled"
-│       │   ├── "Ready"
-│       │   └── "Updating"
-│       ├── Tags: map[string]string
-│       └── Type: *string
-├── Servers_JobAgent_STATUS_ARM: Object (7 properties)
-│   ├── Id: *string
-│   ├── Location: *string
-│   ├── Name: *string
-│   ├── Properties: *Object (2 properties)
-│   │   ├── DatabaseId: *string
-│   │   └── State: *Enum (5 values)
-│   │       ├── "Creating"
-│   │       ├── "Deleting"
-│   │       ├── "Disabled"
-│   │       ├── "Ready"
-│   │       └── "Updating"
-│   ├── Sku: *Object (5 properties)
-│   │   ├── Capacity: *int
-│   │   ├── Family: *string
-│   │   ├── Name: *string
-│   │   ├── Size: *string
-│   │   └── Tier: *string
-│   ├── Tags: map[string]string
-│   └── Type: *string
-├── Servers_JobAgent_Spec_ARM: Object (5 properties)
-│   ├── Location: *string
-│   ├── Name: string
-│   ├── Properties: *Object (1 property)
-│   │   └── DatabaseId: *string
-│   ├── Sku: *Object (5 properties)
-│   │   ├── Capacity: *int
-│   │   ├── Family: *string
-│   │   ├── Name: *string
-│   │   ├── Size: *string
-│   │   └── Tier: *string
-│   └── Tags: map[string]string
-├── Servers_OutboundFirewallRule: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (2 properties)
-│   │   ├── AzureName: string
-│   │   └── Owner: *genruntime.KnownResourceReference
-│   └── Status: Object (5 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── ProvisioningState: *string
-│       └── Type: *string
 ├── Servers_OutboundFirewallRule_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -2436,67 +1623,47 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   └── Type: *string
 ├── Servers_OutboundFirewallRule_Spec_ARM: Object (1 property)
 │   └── Name: string
-├── Servers_SyncAgent: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (3 properties)
-│   │   ├── AzureName: string
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── SyncDatabaseReference: *genruntime.ResourceReference
-│   └── Status: Object (11 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── ExpiryTime: *string
-│       ├── Id: *string
-│       ├── IsUpToDate: *bool
-│       ├── LastAliveTime: *string
-│       ├── Name: *string
-│       ├── PropertiesName: *string
-│       ├── State: *Enum (3 values)
-│       │   ├── "NeverConnected"
-│       │   ├── "Offline"
-│       │   └── "Online"
-│       ├── SyncDatabaseId: *string
-│       ├── Type: *string
-│       └── Version: *string
-├── Servers_SyncAgent_STATUS_ARM: Object (4 properties)
+├── Servers_SecurityAlertPolicy_STATUS_ARM: Object (5 properties)
 │   ├── Id: *string
 │   ├── Name: *string
 │   ├── Properties: *Object (7 properties)
-│   │   ├── ExpiryTime: *string
-│   │   ├── IsUpToDate: *bool
-│   │   ├── LastAliveTime: *string
-│   │   ├── Name: *string
-│   │   ├── State: *Enum (3 values)
-│   │   │   ├── "NeverConnected"
-│   │   │   ├── "Offline"
-│   │   │   └── "Online"
-│   │   ├── SyncDatabaseId: *string
-│   │   └── Version: *string
+│   │   ├── CreationTime: *string
+│   │   ├── DisabledAlerts: string[]
+│   │   ├── EmailAccountAdmins: *bool
+│   │   ├── EmailAddresses: string[]
+│   │   ├── RetentionDays: *int
+│   │   ├── State: *Enum (2 values)
+│   │   │   ├── "Disabled"
+│   │   │   └── "Enabled"
+│   │   └── StorageEndpoint: *string
+│   ├── SystemData: *Object (6 properties)
+│   │   ├── CreatedAt: *string
+│   │   ├── CreatedBy: *string
+│   │   ├── CreatedByType: *Enum (4 values)
+│   │   │   ├── "Application"
+│   │   │   ├── "Key"
+│   │   │   ├── "ManagedIdentity"
+│   │   │   └── "User"
+│   │   ├── LastModifiedAt: *string
+│   │   ├── LastModifiedBy: *string
+│   │   └── LastModifiedByType: *Enum (4 values)
+│   │       ├── "Application"
+│   │       ├── "Key"
+│   │       ├── "ManagedIdentity"
+│   │       └── "User"
 │   └── Type: *string
-├── Servers_SyncAgent_Spec_ARM: Object (2 properties)
+├── Servers_SecurityAlertPolicy_Spec_ARM: Object (2 properties)
 │   ├── Name: string
-│   └── Properties: *Object (1 property)
-│       └── SyncDatabaseId: *string
-├── Servers_VirtualNetworkRule: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (4 properties)
-│   │   ├── AzureName: string
-│   │   ├── IgnoreMissingVnetServiceEndpoint: *bool
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   └── VirtualNetworkSubnetReference: *genruntime.ResourceReference
-│   └── Status: Object (7 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── IgnoreMissingVnetServiceEndpoint: *bool
-│       ├── Name: *string
-│       ├── State: *Enum (6 values)
-│       │   ├── "Deleting"
-│       │   ├── "Failed"
-│       │   ├── "InProgress"
-│       │   ├── "Initializing"
-│       │   ├── "Ready"
-│       │   └── "Unknown"
-│       ├── Type: *string
-│       └── VirtualNetworkSubnetId: *string
+│   └── Properties: *Object (7 properties)
+│       ├── DisabledAlerts: string[]
+│       ├── EmailAccountAdmins: *bool
+│       ├── EmailAddresses: string[]
+│       ├── RetentionDays: *int
+│       ├── State: *Enum (2 values)
+│       │   ├── "Disabled"
+│       │   └── "Enabled"
+│       ├── StorageAccountAccessKey: *string
+│       └── StorageEndpoint: *string
 ├── Servers_VirtualNetworkRule_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
@@ -2516,40 +1683,15 @@ github.com/Azure/azure-service-operator/v2/api/sql/v1beta20211101
 │   └── Properties: *Object (2 properties)
 │       ├── IgnoreMissingVnetServiceEndpoint: *bool
 │       └── VirtualNetworkSubnetId: *string
-├── Servers_VulnerabilityAssessment: Resource
-│   ├── Owner: Server
-│   ├── Spec: Object (5 properties)
-│   │   ├── Owner: *genruntime.KnownResourceReference
-│   │   ├── RecurringScans: *Object (3 properties)
-│   │   │   ├── EmailSubscriptionAdmins: *bool
-│   │   │   ├── Emails: string[]
-│   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
-│   └── Status: Object (8 properties)
-│       ├── Conditions: conditions.Condition[]
-│       ├── Id: *string
-│       ├── Name: *string
-│       ├── RecurringScans: *Object (3 properties)
-│       │   ├── EmailSubscriptionAdmins: *bool
-│       │   ├── Emails: string[]
-│       │   └── IsEnabled: *bool
-│       ├── StorageAccountAccessKey: *string
-│       ├── StorageContainerPath: *string
-│       ├── StorageContainerSasKey: *string
-│       └── Type: *string
 ├── Servers_VulnerabilityAssessment_STATUS_ARM: Object (4 properties)
 │   ├── Id: *string
 │   ├── Name: *string
-│   ├── Properties: *Object (4 properties)
+│   ├── Properties: *Object (2 properties)
 │   │   ├── RecurringScans: *Object (3 properties)
 │   │   │   ├── EmailSubscriptionAdmins: *bool
 │   │   │   ├── Emails: string[]
 │   │   │   └── IsEnabled: *bool
-│   │   ├── StorageAccountAccessKey: *string
-│   │   ├── StorageContainerPath: *string
-│   │   └── StorageContainerSasKey: *string
+│   │   └── StorageContainerPath: *string
 │   └── Type: *string
 └── Servers_VulnerabilityAssessment_Spec_ARM: Object (2 properties)
     ├── Name: string

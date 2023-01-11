@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default
-type Servers_Databases_AuditingSetting struct {
+type ServersDatabasesAuditingSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_AuditingSetting_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_AuditingSetting_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_AuditingSetting{}
+var _ conditions.Conditioner = &ServersDatabasesAuditingSetting{}
 
 // GetConditions returns the conditions of the resource
-func (setting *Servers_Databases_AuditingSetting) GetConditions() conditions.Conditions {
+func (setting *ServersDatabasesAuditingSetting) GetConditions() conditions.Conditions {
 	return setting.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (setting *Servers_Databases_AuditingSetting) SetConditions(conditions conditions.Conditions) {
+func (setting *ServersDatabasesAuditingSetting) SetConditions(conditions conditions.Conditions) {
 	setting.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_Databases_AuditingSetting{}
+var _ conversion.Convertible = &ServersDatabasesAuditingSetting{}
 
-// ConvertFrom populates our Servers_Databases_AuditingSetting from the provided hub Servers_Databases_AuditingSetting
-func (setting *Servers_Databases_AuditingSetting) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_Databases_AuditingSetting)
+// ConvertFrom populates our ServersDatabasesAuditingSetting from the provided hub ServersDatabasesAuditingSetting
+func (setting *ServersDatabasesAuditingSetting) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersDatabasesAuditingSetting)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_AuditingSetting but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesAuditingSetting but received %T instead", hub)
 	}
 
-	return setting.AssignProperties_From_Servers_Databases_AuditingSetting(source)
+	return setting.AssignProperties_From_ServersDatabasesAuditingSetting(source)
 }
 
-// ConvertTo populates the provided hub Servers_Databases_AuditingSetting from our Servers_Databases_AuditingSetting
-func (setting *Servers_Databases_AuditingSetting) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_Databases_AuditingSetting)
+// ConvertTo populates the provided hub ServersDatabasesAuditingSetting from our ServersDatabasesAuditingSetting
+func (setting *ServersDatabasesAuditingSetting) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersDatabasesAuditingSetting)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_AuditingSetting but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesAuditingSetting but received %T instead", hub)
 	}
 
-	return setting.AssignProperties_To_Servers_Databases_AuditingSetting(destination)
+	return setting.AssignProperties_To_ServersDatabasesAuditingSetting(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_databases_auditingsetting,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_auditingsettings,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_databases_auditingsettings.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversdatabasesauditingsetting,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasesauditingsettings,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversdatabasesauditingsettings.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_Databases_AuditingSetting{}
+var _ admission.Defaulter = &ServersDatabasesAuditingSetting{}
 
-// Default applies defaults to the Servers_Databases_AuditingSetting resource
-func (setting *Servers_Databases_AuditingSetting) Default() {
+// Default applies defaults to the ServersDatabasesAuditingSetting resource
+func (setting *ServersDatabasesAuditingSetting) Default() {
 	setting.defaultImpl()
 	var temp interface{} = setting
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -81,48 +81,48 @@ func (setting *Servers_Databases_AuditingSetting) Default() {
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_Databases_AuditingSetting resource
-func (setting *Servers_Databases_AuditingSetting) defaultImpl() {}
+// defaultImpl applies the code generated defaults to the ServersDatabasesAuditingSetting resource
+func (setting *ServersDatabasesAuditingSetting) defaultImpl() {}
 
-var _ genruntime.KubernetesResource = &Servers_Databases_AuditingSetting{}
+var _ genruntime.KubernetesResource = &ServersDatabasesAuditingSetting{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (setting *Servers_Databases_AuditingSetting) AzureName() string {
+func (setting *ServersDatabasesAuditingSetting) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (setting Servers_Databases_AuditingSetting) GetAPIVersion() string {
+func (setting ServersDatabasesAuditingSetting) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (setting *Servers_Databases_AuditingSetting) GetResourceScope() genruntime.ResourceScope {
+func (setting *ServersDatabasesAuditingSetting) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (setting *Servers_Databases_AuditingSetting) GetSpec() genruntime.ConvertibleSpec {
+func (setting *ServersDatabasesAuditingSetting) GetSpec() genruntime.ConvertibleSpec {
 	return &setting.Spec
 }
 
 // GetStatus returns the status of this resource
-func (setting *Servers_Databases_AuditingSetting) GetStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesAuditingSetting) GetStatus() genruntime.ConvertibleStatus {
 	return &setting.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/auditingSettings"
-func (setting *Servers_Databases_AuditingSetting) GetType() string {
+func (setting *ServersDatabasesAuditingSetting) GetType() string {
 	return "Microsoft.Sql/servers/databases/auditingSettings"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (setting *Servers_Databases_AuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesAuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_AuditingSetting_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (setting *Servers_Databases_AuditingSetting) Owner() *genruntime.ResourceReference {
+func (setting *ServersDatabasesAuditingSetting) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(setting.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -132,7 +132,7 @@ func (setting *Servers_Databases_AuditingSetting) Owner() *genruntime.ResourceRe
 }
 
 // SetStatus sets the status of this resource
-func (setting *Servers_Databases_AuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
+func (setting *ServersDatabasesAuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_AuditingSetting_STATUS); ok {
 		setting.Status = *st
@@ -150,12 +150,12 @@ func (setting *Servers_Databases_AuditingSetting) SetStatus(status genruntime.Co
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_databases_auditingsetting,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_auditingsettings,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_databases_auditingsettings.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversdatabasesauditingsetting,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasesauditingsettings,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversdatabasesauditingsettings.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_Databases_AuditingSetting{}
+var _ admission.Validator = &ServersDatabasesAuditingSetting{}
 
 // ValidateCreate validates the creation of the resource
-func (setting *Servers_Databases_AuditingSetting) ValidateCreate() error {
+func (setting *ServersDatabasesAuditingSetting) ValidateCreate() error {
 	validations := setting.createValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -172,7 +172,7 @@ func (setting *Servers_Databases_AuditingSetting) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (setting *Servers_Databases_AuditingSetting) ValidateDelete() error {
+func (setting *ServersDatabasesAuditingSetting) ValidateDelete() error {
 	validations := setting.deleteValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -189,7 +189,7 @@ func (setting *Servers_Databases_AuditingSetting) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (setting *Servers_Databases_AuditingSetting) ValidateUpdate(old runtime.Object) error {
+func (setting *ServersDatabasesAuditingSetting) ValidateUpdate(old runtime.Object) error {
 	validations := setting.updateValidations()
 	var temp interface{} = setting
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -206,17 +206,17 @@ func (setting *Servers_Databases_AuditingSetting) ValidateUpdate(old runtime.Obj
 }
 
 // createValidations validates the creation of the resource
-func (setting *Servers_Databases_AuditingSetting) createValidations() []func() error {
+func (setting *ServersDatabasesAuditingSetting) createValidations() []func() error {
 	return []func() error{setting.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (setting *Servers_Databases_AuditingSetting) deleteValidations() []func() error {
+func (setting *ServersDatabasesAuditingSetting) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (setting *Servers_Databases_AuditingSetting) updateValidations() []func(old runtime.Object) error {
+func (setting *ServersDatabasesAuditingSetting) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return setting.validateResourceReferences()
@@ -225,7 +225,7 @@ func (setting *Servers_Databases_AuditingSetting) updateValidations() []func(old
 }
 
 // validateResourceReferences validates all resource references
-func (setting *Servers_Databases_AuditingSetting) validateResourceReferences() error {
+func (setting *ServersDatabasesAuditingSetting) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&setting.Spec)
 	if err != nil {
 		return err
@@ -234,8 +234,8 @@ func (setting *Servers_Databases_AuditingSetting) validateResourceReferences() e
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (setting *Servers_Databases_AuditingSetting) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_Databases_AuditingSetting)
+func (setting *ServersDatabasesAuditingSetting) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersDatabasesAuditingSetting)
 	if !ok {
 		return nil
 	}
@@ -243,8 +243,8 @@ func (setting *Servers_Databases_AuditingSetting) validateWriteOnceProperties(ol
 	return genruntime.ValidateWriteOnceProperties(oldObj, setting)
 }
 
-// AssignProperties_From_Servers_Databases_AuditingSetting populates our Servers_Databases_AuditingSetting from the provided source Servers_Databases_AuditingSetting
-func (setting *Servers_Databases_AuditingSetting) AssignProperties_From_Servers_Databases_AuditingSetting(source *v20211101s.Servers_Databases_AuditingSetting) error {
+// AssignProperties_From_ServersDatabasesAuditingSetting populates our ServersDatabasesAuditingSetting from the provided source ServersDatabasesAuditingSetting
+func (setting *ServersDatabasesAuditingSetting) AssignProperties_From_ServersDatabasesAuditingSetting(source *v20211101s.ServersDatabasesAuditingSetting) error {
 
 	// ObjectMeta
 	setting.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -269,8 +269,8 @@ func (setting *Servers_Databases_AuditingSetting) AssignProperties_From_Servers_
 	return nil
 }
 
-// AssignProperties_To_Servers_Databases_AuditingSetting populates the provided destination Servers_Databases_AuditingSetting from our Servers_Databases_AuditingSetting
-func (setting *Servers_Databases_AuditingSetting) AssignProperties_To_Servers_Databases_AuditingSetting(destination *v20211101s.Servers_Databases_AuditingSetting) error {
+// AssignProperties_To_ServersDatabasesAuditingSetting populates the provided destination ServersDatabasesAuditingSetting from our ServersDatabasesAuditingSetting
+func (setting *ServersDatabasesAuditingSetting) AssignProperties_To_ServersDatabasesAuditingSetting(destination *v20211101s.ServersDatabasesAuditingSetting) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *setting.ObjectMeta.DeepCopy()
@@ -296,11 +296,11 @@ func (setting *Servers_Databases_AuditingSetting) AssignProperties_To_Servers_Da
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (setting *Servers_Databases_AuditingSetting) OriginalGVK() *schema.GroupVersionKind {
+func (setting *ServersDatabasesAuditingSetting) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: setting.Spec.OriginalVersion(),
-		Kind:    "Servers_Databases_AuditingSetting",
+		Kind:    "ServersDatabasesAuditingSetting",
 	}
 }
 
@@ -308,10 +308,10 @@ func (setting *Servers_Databases_AuditingSetting) OriginalGVK() *schema.GroupVer
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default
-type Servers_Databases_AuditingSettingList struct {
+type ServersDatabasesAuditingSettingList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_AuditingSetting `json:"items"`
+	Items           []ServersDatabasesAuditingSetting `json:"items"`
 }
 
 type Servers_Databases_AuditingSetting_Spec struct {
@@ -394,8 +394,8 @@ type Servers_Databases_AuditingSetting_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 
 	// QueueDelayMs: Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be
 	// processed.
@@ -1268,5 +1268,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_AuditingSetting{}, &Servers_Databases_AuditingSettingList{})
+	SchemeBuilder.Register(&ServersDatabasesAuditingSetting{}, &ServersDatabasesAuditingSettingList{})
 }

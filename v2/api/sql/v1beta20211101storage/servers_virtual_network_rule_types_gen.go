@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_virtualnetworkrules,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_virtualnetworkrules/status,servers_virtualnetworkrules/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversvirtualnetworkrules,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversvirtualnetworkrules/status,serversvirtualnetworkrules/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_VirtualNetworkRule
+// Storage version of v1beta20211101.ServersVirtualNetworkRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/VirtualNetworkRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}
-type Servers_VirtualNetworkRule struct {
+type ServersVirtualNetworkRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_VirtualNetworkRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_VirtualNetworkRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_VirtualNetworkRule{}
+var _ conditions.Conditioner = &ServersVirtualNetworkRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_VirtualNetworkRule) GetConditions() conditions.Conditions {
+func (rule *ServersVirtualNetworkRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_VirtualNetworkRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersVirtualNetworkRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_VirtualNetworkRule{}
+var _ genruntime.KubernetesResource = &ServersVirtualNetworkRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_VirtualNetworkRule) AzureName() string {
+func (rule *ServersVirtualNetworkRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_VirtualNetworkRule) GetAPIVersion() string {
+func (rule ServersVirtualNetworkRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_VirtualNetworkRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersVirtualNetworkRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_VirtualNetworkRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersVirtualNetworkRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_VirtualNetworkRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersVirtualNetworkRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/virtualNetworkRules"
-func (rule *Servers_VirtualNetworkRule) GetType() string {
+func (rule *ServersVirtualNetworkRule) GetType() string {
 	return "Microsoft.Sql/servers/virtualNetworkRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_VirtualNetworkRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersVirtualNetworkRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_VirtualNetworkRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_VirtualNetworkRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersVirtualNetworkRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (rule *Servers_VirtualNetworkRule) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_VirtualNetworkRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersVirtualNetworkRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_VirtualNetworkRule_STATUS); ok {
 		rule.Status = *st
@@ -110,27 +110,27 @@ func (rule *Servers_VirtualNetworkRule) SetStatus(status genruntime.ConvertibleS
 	return nil
 }
 
-// Hub marks that this Servers_VirtualNetworkRule is the hub type for conversion
-func (rule *Servers_VirtualNetworkRule) Hub() {}
+// Hub marks that this ServersVirtualNetworkRule is the hub type for conversion
+func (rule *ServersVirtualNetworkRule) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_VirtualNetworkRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersVirtualNetworkRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion,
-		Kind:    "Servers_VirtualNetworkRule",
+		Kind:    "ServersVirtualNetworkRule",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_VirtualNetworkRule
+// Storage version of v1beta20211101.ServersVirtualNetworkRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/VirtualNetworkRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}
-type Servers_VirtualNetworkRuleList struct {
+type ServersVirtualNetworkRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_VirtualNetworkRule `json:"items"`
+	Items           []ServersVirtualNetworkRule `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_VirtualNetworkRule_Spec
@@ -206,5 +206,5 @@ func (rule *Servers_VirtualNetworkRule_STATUS) ConvertStatusTo(destination genru
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_VirtualNetworkRule{}, &Servers_VirtualNetworkRuleList{})
+	SchemeBuilder.Register(&ServersVirtualNetworkRule{}, &ServersVirtualNetworkRuleList{})
 }

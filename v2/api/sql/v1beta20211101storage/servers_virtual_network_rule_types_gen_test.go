@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_VirtualNetworkRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersVirtualNetworkRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_VirtualNetworkRule via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_VirtualNetworkRule, Servers_VirtualNetworkRuleGenerator()))
+		"Round trip of ServersVirtualNetworkRule via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersVirtualNetworkRule, ServersVirtualNetworkRuleGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_VirtualNetworkRule runs a test to see if a specific instance of Servers_VirtualNetworkRule round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_VirtualNetworkRule(subject Servers_VirtualNetworkRule) string {
+// RunJSONSerializationTestForServersVirtualNetworkRule runs a test to see if a specific instance of ServersVirtualNetworkRule round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersVirtualNetworkRule(subject ServersVirtualNetworkRule) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_VirtualNetworkRule(subject Servers_Virtu
 	}
 
 	// Deserialize back into memory
-	var actual Servers_VirtualNetworkRule
+	var actual ServersVirtualNetworkRule
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_VirtualNetworkRule(subject Servers_Virtu
 	return ""
 }
 
-// Generator of Servers_VirtualNetworkRule instances for property testing - lazily instantiated by
-// Servers_VirtualNetworkRuleGenerator()
-var servers_VirtualNetworkRuleGenerator gopter.Gen
+// Generator of ServersVirtualNetworkRule instances for property testing - lazily instantiated by
+// ServersVirtualNetworkRuleGenerator()
+var serversVirtualNetworkRuleGenerator gopter.Gen
 
-// Servers_VirtualNetworkRuleGenerator returns a generator of Servers_VirtualNetworkRule instances for property testing.
-func Servers_VirtualNetworkRuleGenerator() gopter.Gen {
-	if servers_VirtualNetworkRuleGenerator != nil {
-		return servers_VirtualNetworkRuleGenerator
+// ServersVirtualNetworkRuleGenerator returns a generator of ServersVirtualNetworkRule instances for property testing.
+func ServersVirtualNetworkRuleGenerator() gopter.Gen {
+	if serversVirtualNetworkRuleGenerator != nil {
+		return serversVirtualNetworkRuleGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_VirtualNetworkRule(generators)
-	servers_VirtualNetworkRuleGenerator = gen.Struct(reflect.TypeOf(Servers_VirtualNetworkRule{}), generators)
+	AddRelatedPropertyGeneratorsForServersVirtualNetworkRule(generators)
+	serversVirtualNetworkRuleGenerator = gen.Struct(reflect.TypeOf(ServersVirtualNetworkRule{}), generators)
 
-	return servers_VirtualNetworkRuleGenerator
+	return serversVirtualNetworkRuleGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_VirtualNetworkRule is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_VirtualNetworkRule(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersVirtualNetworkRule is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersVirtualNetworkRule(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_VirtualNetworkRule_SpecGenerator()
 	gens["Status"] = Servers_VirtualNetworkRule_STATUSGenerator()
 }

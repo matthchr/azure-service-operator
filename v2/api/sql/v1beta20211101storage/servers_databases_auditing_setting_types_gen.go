@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_databases_auditingsettings,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_databases_auditingsettings/status,servers_databases_auditingsettings/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversdatabasesauditingsettings,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversdatabasesauditingsettings/status,serversdatabasesauditingsettings/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Databases_AuditingSetting
+// Storage version of v1beta20211101.ServersDatabasesAuditingSetting
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default
-type Servers_Databases_AuditingSetting struct {
+type ServersDatabasesAuditingSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_AuditingSetting_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_AuditingSetting_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_AuditingSetting{}
+var _ conditions.Conditioner = &ServersDatabasesAuditingSetting{}
 
 // GetConditions returns the conditions of the resource
-func (setting *Servers_Databases_AuditingSetting) GetConditions() conditions.Conditions {
+func (setting *ServersDatabasesAuditingSetting) GetConditions() conditions.Conditions {
 	return setting.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (setting *Servers_Databases_AuditingSetting) SetConditions(conditions conditions.Conditions) {
+func (setting *ServersDatabasesAuditingSetting) SetConditions(conditions conditions.Conditions) {
 	setting.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Databases_AuditingSetting{}
+var _ genruntime.KubernetesResource = &ServersDatabasesAuditingSetting{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (setting *Servers_Databases_AuditingSetting) AzureName() string {
+func (setting *ServersDatabasesAuditingSetting) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (setting Servers_Databases_AuditingSetting) GetAPIVersion() string {
+func (setting ServersDatabasesAuditingSetting) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (setting *Servers_Databases_AuditingSetting) GetResourceScope() genruntime.ResourceScope {
+func (setting *ServersDatabasesAuditingSetting) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (setting *Servers_Databases_AuditingSetting) GetSpec() genruntime.ConvertibleSpec {
+func (setting *ServersDatabasesAuditingSetting) GetSpec() genruntime.ConvertibleSpec {
 	return &setting.Spec
 }
 
 // GetStatus returns the status of this resource
-func (setting *Servers_Databases_AuditingSetting) GetStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesAuditingSetting) GetStatus() genruntime.ConvertibleStatus {
 	return &setting.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/auditingSettings"
-func (setting *Servers_Databases_AuditingSetting) GetType() string {
+func (setting *ServersDatabasesAuditingSetting) GetType() string {
 	return "Microsoft.Sql/servers/databases/auditingSettings"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (setting *Servers_Databases_AuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (setting *ServersDatabasesAuditingSetting) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_AuditingSetting_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (setting *Servers_Databases_AuditingSetting) Owner() *genruntime.ResourceReference {
+func (setting *ServersDatabasesAuditingSetting) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(setting.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (setting *Servers_Databases_AuditingSetting) Owner() *genruntime.ResourceRe
 }
 
 // SetStatus sets the status of this resource
-func (setting *Servers_Databases_AuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
+func (setting *ServersDatabasesAuditingSetting) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_AuditingSetting_STATUS); ok {
 		setting.Status = *st
@@ -110,27 +110,27 @@ func (setting *Servers_Databases_AuditingSetting) SetStatus(status genruntime.Co
 	return nil
 }
 
-// Hub marks that this Servers_Databases_AuditingSetting is the hub type for conversion
-func (setting *Servers_Databases_AuditingSetting) Hub() {}
+// Hub marks that this ServersDatabasesAuditingSetting is the hub type for conversion
+func (setting *ServersDatabasesAuditingSetting) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (setting *Servers_Databases_AuditingSetting) OriginalGVK() *schema.GroupVersionKind {
+func (setting *ServersDatabasesAuditingSetting) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: setting.Spec.OriginalVersion,
-		Kind:    "Servers_Databases_AuditingSetting",
+		Kind:    "ServersDatabasesAuditingSetting",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Databases_AuditingSetting
+// Storage version of v1beta20211101.ServersDatabasesAuditingSetting
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BlobAuditing.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/auditingSettings/default
-type Servers_Databases_AuditingSettingList struct {
+type ServersDatabasesAuditingSettingList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_AuditingSetting `json:"items"`
+	Items           []ServersDatabasesAuditingSetting `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Databases_AuditingSetting_Spec
@@ -144,8 +144,8 @@ type Servers_Databases_AuditingSetting_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner                        *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner                        *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 	PropertyBag                  genruntime.PropertyBag             `json:"$propertyBag,omitempty"`
 	QueueDelayMs                 *int                               `json:"queueDelayMs,omitempty"`
 	RetentionDays                *int                               `json:"retentionDays,omitempty"`
@@ -215,5 +215,5 @@ func (setting *Servers_Databases_AuditingSetting_STATUS) ConvertStatusTo(destina
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_AuditingSetting{}, &Servers_Databases_AuditingSettingList{})
+	SchemeBuilder.Register(&ServersDatabasesAuditingSetting{}, &ServersDatabasesAuditingSettingList{})
 }

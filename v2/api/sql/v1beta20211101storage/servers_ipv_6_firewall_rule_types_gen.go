@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_ipv6firewallrules,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_ipv6firewallrules/status,servers_ipv6firewallrules/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversipv6firewallrules,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversipv6firewallrules/status,serversipv6firewallrules/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Ipv6FirewallRule
+// Storage version of v1beta20211101.ServersIPV6FirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/IPv6FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}
-type Servers_Ipv6FirewallRule struct {
+type ServersIPV6FirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Ipv6FirewallRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_Ipv6FirewallRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Ipv6FirewallRule{}
+var _ conditions.Conditioner = &ServersIPV6FirewallRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_Ipv6FirewallRule) GetConditions() conditions.Conditions {
+func (rule *ServersIPV6FirewallRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_Ipv6FirewallRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersIPV6FirewallRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Ipv6FirewallRule{}
+var _ genruntime.KubernetesResource = &ServersIPV6FirewallRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_Ipv6FirewallRule) AzureName() string {
+func (rule *ServersIPV6FirewallRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_Ipv6FirewallRule) GetAPIVersion() string {
+func (rule ServersIPV6FirewallRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_Ipv6FirewallRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersIPV6FirewallRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_Ipv6FirewallRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersIPV6FirewallRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_Ipv6FirewallRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersIPV6FirewallRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/ipv6FirewallRules"
-func (rule *Servers_Ipv6FirewallRule) GetType() string {
+func (rule *ServersIPV6FirewallRule) GetType() string {
 	return "Microsoft.Sql/servers/ipv6FirewallRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_Ipv6FirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersIPV6FirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Ipv6FirewallRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_Ipv6FirewallRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersIPV6FirewallRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (rule *Servers_Ipv6FirewallRule) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_Ipv6FirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersIPV6FirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Ipv6FirewallRule_STATUS); ok {
 		rule.Status = *st
@@ -110,27 +110,27 @@ func (rule *Servers_Ipv6FirewallRule) SetStatus(status genruntime.ConvertibleSta
 	return nil
 }
 
-// Hub marks that this Servers_Ipv6FirewallRule is the hub type for conversion
-func (rule *Servers_Ipv6FirewallRule) Hub() {}
+// Hub marks that this ServersIPV6FirewallRule is the hub type for conversion
+func (rule *ServersIPV6FirewallRule) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_Ipv6FirewallRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersIPV6FirewallRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion,
-		Kind:    "Servers_Ipv6FirewallRule",
+		Kind:    "ServersIPV6FirewallRule",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Ipv6FirewallRule
+// Storage version of v1beta20211101.ServersIPV6FirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/IPv6FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}
-type Servers_Ipv6FirewallRuleList struct {
+type ServersIPV6FirewallRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Ipv6FirewallRule `json:"items"`
+	Items           []ServersIPV6FirewallRule `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Ipv6FirewallRule_Spec
@@ -202,5 +202,5 @@ func (rule *Servers_Ipv6FirewallRule_STATUS) ConvertStatusTo(destination genrunt
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Ipv6FirewallRule{}, &Servers_Ipv6FirewallRuleList{})
+	SchemeBuilder.Register(&ServersIPV6FirewallRule{}, &ServersIPV6FirewallRuleList{})
 }

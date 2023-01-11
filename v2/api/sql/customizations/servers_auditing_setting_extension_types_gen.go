@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_AuditingSettingExtension struct {
+type ServersAuditingSettingExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_AuditingSettingExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersAuditingSettingExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_AuditingSetting{},
-		&v20211101s.Servers_AuditingSetting{}}
+		&v20211101.ServersAuditingSetting{},
+		&v20211101s.ServersAuditingSetting{}}
 }

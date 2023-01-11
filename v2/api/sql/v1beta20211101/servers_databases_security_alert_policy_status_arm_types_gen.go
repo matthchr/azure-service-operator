@@ -11,7 +11,7 @@ type Servers_Databases_SecurityAlertPolicy_STATUS_ARM struct {
 	Name *string `json:"name,omitempty"`
 
 	// Properties: Resource properties.
-	Properties *SecurityAlertsPolicyProperties_STATUS_ARM `json:"properties,omitempty"`
+	Properties *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_STATUS_ARM `json:"properties,omitempty"`
 
 	// SystemData: SystemData of SecurityAlertPolicyResource.
 	SystemData *SystemData_STATUS_ARM `json:"systemData,omitempty"`
@@ -21,7 +21,7 @@ type Servers_Databases_SecurityAlertPolicy_STATUS_ARM struct {
 }
 
 // Properties of a security alert policy.
-type SecurityAlertsPolicyProperties_STATUS_ARM struct {
+type DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_STATUS_ARM struct {
 	// CreationTime: Specifies the UTC creation time of the policy.
 	CreationTime *string `json:"creationTime,omitempty"`
 
@@ -40,51 +40,9 @@ type SecurityAlertsPolicyProperties_STATUS_ARM struct {
 
 	// State: Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the
 	// specific database.
-	State *SecurityAlertsPolicyProperties_State_STATUS `json:"state,omitempty"`
-
-	// StorageAccountAccessKey: Specifies the identifier key of the Threat Detection audit storage account.
-	StorageAccountAccessKey *string `json:"storageAccountAccessKey,omitempty"`
+	State *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_STATUS `json:"state,omitempty"`
 
 	// StorageEndpoint: Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage
 	// will hold all Threat Detection audit logs.
 	StorageEndpoint *string `json:"storageEndpoint,omitempty"`
 }
-
-// Metadata pertaining to creation and last modification of the resource.
-type SystemData_STATUS_ARM struct {
-	// CreatedAt: The timestamp of resource creation (UTC).
-	CreatedAt *string `json:"createdAt,omitempty"`
-
-	// CreatedBy: The identity that created the resource.
-	CreatedBy *string `json:"createdBy,omitempty"`
-
-	// CreatedByType: The type of identity that created the resource.
-	CreatedByType *SystemData_CreatedByType_STATUS `json:"createdByType,omitempty"`
-
-	// LastModifiedAt: The timestamp of resource last modification (UTC)
-	LastModifiedAt *string `json:"lastModifiedAt,omitempty"`
-
-	// LastModifiedBy: The identity that last modified the resource.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-
-	// LastModifiedByType: The type of identity that last modified the resource.
-	LastModifiedByType *SystemData_LastModifiedByType_STATUS `json:"lastModifiedByType,omitempty"`
-}
-
-type SystemData_CreatedByType_STATUS string
-
-const (
-	SystemData_CreatedByType_STATUS_Application     = SystemData_CreatedByType_STATUS("Application")
-	SystemData_CreatedByType_STATUS_Key             = SystemData_CreatedByType_STATUS("Key")
-	SystemData_CreatedByType_STATUS_ManagedIdentity = SystemData_CreatedByType_STATUS("ManagedIdentity")
-	SystemData_CreatedByType_STATUS_User            = SystemData_CreatedByType_STATUS("User")
-)
-
-type SystemData_LastModifiedByType_STATUS string
-
-const (
-	SystemData_LastModifiedByType_STATUS_Application     = SystemData_LastModifiedByType_STATUS("Application")
-	SystemData_LastModifiedByType_STATUS_Key             = SystemData_LastModifiedByType_STATUS("Key")
-	SystemData_LastModifiedByType_STATUS_ManagedIdentity = SystemData_LastModifiedByType_STATUS("ManagedIdentity")
-	SystemData_LastModifiedByType_STATUS_User            = SystemData_LastModifiedByType_STATUS("User")
-)

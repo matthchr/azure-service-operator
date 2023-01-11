@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_OutboundFirewallRuleExtension struct {
+type ServersOutboundFirewallRuleExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_OutboundFirewallRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersOutboundFirewallRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_OutboundFirewallRule{},
-		&v20211101s.Servers_OutboundFirewallRule{}}
+		&v20211101.ServersOutboundFirewallRule{},
+		&v20211101s.ServersOutboundFirewallRule{}}
 }

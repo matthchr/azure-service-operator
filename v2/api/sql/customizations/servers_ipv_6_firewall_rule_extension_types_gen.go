@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_Ipv6FirewallRuleExtension struct {
+type ServersIPV6FirewallRuleExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_Ipv6FirewallRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersIPV6FirewallRuleExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_Ipv6FirewallRule{},
-		&v20211101s.Servers_Ipv6FirewallRule{}}
+		&v20211101.ServersIPV6FirewallRule{},
+		&v20211101s.ServersIPV6FirewallRule{}}
 }

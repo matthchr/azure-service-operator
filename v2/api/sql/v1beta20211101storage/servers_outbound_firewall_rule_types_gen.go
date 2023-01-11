@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_outboundfirewallrules,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_outboundfirewallrules/status,servers_outboundfirewallrules/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversoutboundfirewallrules,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversoutboundfirewallrules/status,serversoutboundfirewallrules/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_OutboundFirewallRule
+// Storage version of v1beta20211101.ServersOutboundFirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/OutboundFirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/outboundFirewallRules/{outboundRuleFqdn}
-type Servers_OutboundFirewallRule struct {
+type ServersOutboundFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_OutboundFirewallRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_OutboundFirewallRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_OutboundFirewallRule{}
+var _ conditions.Conditioner = &ServersOutboundFirewallRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_OutboundFirewallRule) GetConditions() conditions.Conditions {
+func (rule *ServersOutboundFirewallRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_OutboundFirewallRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersOutboundFirewallRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_OutboundFirewallRule{}
+var _ genruntime.KubernetesResource = &ServersOutboundFirewallRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_OutboundFirewallRule) AzureName() string {
+func (rule *ServersOutboundFirewallRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_OutboundFirewallRule) GetAPIVersion() string {
+func (rule ServersOutboundFirewallRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_OutboundFirewallRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersOutboundFirewallRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_OutboundFirewallRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersOutboundFirewallRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_OutboundFirewallRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersOutboundFirewallRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/outboundFirewallRules"
-func (rule *Servers_OutboundFirewallRule) GetType() string {
+func (rule *ServersOutboundFirewallRule) GetType() string {
 	return "Microsoft.Sql/servers/outboundFirewallRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_OutboundFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersOutboundFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_OutboundFirewallRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_OutboundFirewallRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersOutboundFirewallRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (rule *Servers_OutboundFirewallRule) Owner() *genruntime.ResourceReference 
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_OutboundFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersOutboundFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_OutboundFirewallRule_STATUS); ok {
 		rule.Status = *st
@@ -110,27 +110,27 @@ func (rule *Servers_OutboundFirewallRule) SetStatus(status genruntime.Convertibl
 	return nil
 }
 
-// Hub marks that this Servers_OutboundFirewallRule is the hub type for conversion
-func (rule *Servers_OutboundFirewallRule) Hub() {}
+// Hub marks that this ServersOutboundFirewallRule is the hub type for conversion
+func (rule *ServersOutboundFirewallRule) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_OutboundFirewallRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersOutboundFirewallRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion,
-		Kind:    "Servers_OutboundFirewallRule",
+		Kind:    "ServersOutboundFirewallRule",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_OutboundFirewallRule
+// Storage version of v1beta20211101.ServersOutboundFirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/OutboundFirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/outboundFirewallRules/{outboundRuleFqdn}
-type Servers_OutboundFirewallRuleList struct {
+type ServersOutboundFirewallRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_OutboundFirewallRule `json:"items"`
+	Items           []ServersOutboundFirewallRule `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_OutboundFirewallRule_Spec
@@ -199,5 +199,5 @@ func (rule *Servers_OutboundFirewallRule_STATUS) ConvertStatusTo(destination gen
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_OutboundFirewallRule{}, &Servers_OutboundFirewallRuleList{})
+	SchemeBuilder.Register(&ServersOutboundFirewallRule{}, &ServersOutboundFirewallRuleList{})
 }

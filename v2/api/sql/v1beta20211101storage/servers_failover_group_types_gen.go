@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_failovergroups,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_failovergroups/status,servers_failovergroups/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversfailovergroups,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversfailovergroups/status,serversfailovergroups/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_FailoverGroup
+// Storage version of v1beta20211101.ServersFailoverGroup
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FailoverGroups.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}
-type Servers_FailoverGroup struct {
+type ServersFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_FailoverGroup_Spec   `json:"spec,omitempty"`
 	Status            Servers_FailoverGroup_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_FailoverGroup{}
+var _ conditions.Conditioner = &ServersFailoverGroup{}
 
 // GetConditions returns the conditions of the resource
-func (group *Servers_FailoverGroup) GetConditions() conditions.Conditions {
+func (group *ServersFailoverGroup) GetConditions() conditions.Conditions {
 	return group.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (group *Servers_FailoverGroup) SetConditions(conditions conditions.Conditions) {
+func (group *ServersFailoverGroup) SetConditions(conditions conditions.Conditions) {
 	group.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_FailoverGroup{}
+var _ genruntime.KubernetesResource = &ServersFailoverGroup{}
 
 // AzureName returns the Azure name of the resource
-func (group *Servers_FailoverGroup) AzureName() string {
+func (group *ServersFailoverGroup) AzureName() string {
 	return group.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (group Servers_FailoverGroup) GetAPIVersion() string {
+func (group ServersFailoverGroup) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (group *Servers_FailoverGroup) GetResourceScope() genruntime.ResourceScope {
+func (group *ServersFailoverGroup) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (group *Servers_FailoverGroup) GetSpec() genruntime.ConvertibleSpec {
+func (group *ServersFailoverGroup) GetSpec() genruntime.ConvertibleSpec {
 	return &group.Spec
 }
 
 // GetStatus returns the status of this resource
-func (group *Servers_FailoverGroup) GetStatus() genruntime.ConvertibleStatus {
+func (group *ServersFailoverGroup) GetStatus() genruntime.ConvertibleStatus {
 	return &group.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/failoverGroups"
-func (group *Servers_FailoverGroup) GetType() string {
+func (group *ServersFailoverGroup) GetType() string {
 	return "Microsoft.Sql/servers/failoverGroups"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (group *Servers_FailoverGroup) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (group *ServersFailoverGroup) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_FailoverGroup_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (group *Servers_FailoverGroup) Owner() *genruntime.ResourceReference {
+func (group *ServersFailoverGroup) Owner() *genruntime.ResourceReference {
 	ownerGroup, ownerKind := genruntime.LookupOwnerGroupKind(group.Spec)
 	return &genruntime.ResourceReference{
 		Group: ownerGroup,
@@ -92,7 +92,7 @@ func (group *Servers_FailoverGroup) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (group *Servers_FailoverGroup) SetStatus(status genruntime.ConvertibleStatus) error {
+func (group *ServersFailoverGroup) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_FailoverGroup_STATUS); ok {
 		group.Status = *st
@@ -110,27 +110,27 @@ func (group *Servers_FailoverGroup) SetStatus(status genruntime.ConvertibleStatu
 	return nil
 }
 
-// Hub marks that this Servers_FailoverGroup is the hub type for conversion
-func (group *Servers_FailoverGroup) Hub() {}
+// Hub marks that this ServersFailoverGroup is the hub type for conversion
+func (group *ServersFailoverGroup) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (group *Servers_FailoverGroup) OriginalGVK() *schema.GroupVersionKind {
+func (group *ServersFailoverGroup) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: group.Spec.OriginalVersion,
-		Kind:    "Servers_FailoverGroup",
+		Kind:    "ServersFailoverGroup",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_FailoverGroup
+// Storage version of v1beta20211101.ServersFailoverGroup
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FailoverGroups.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/failoverGroups/{failoverGroupName}
-type Servers_FailoverGroupList struct {
+type ServersFailoverGroupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_FailoverGroup `json:"items"`
+	Items           []ServersFailoverGroup `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_FailoverGroup_Spec
@@ -260,5 +260,5 @@ type PartnerInfo_STATUS struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_FailoverGroup{}, &Servers_FailoverGroupList{})
+	SchemeBuilder.Register(&ServersFailoverGroup{}, &ServersFailoverGroupList{})
 }

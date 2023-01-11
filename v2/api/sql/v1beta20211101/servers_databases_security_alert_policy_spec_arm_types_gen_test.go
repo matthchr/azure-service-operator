@@ -89,23 +89,23 @@ func AddIndependentPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Sp
 
 // AddRelatedPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec_ARM is a factory method for creating gopter generators
 func AddRelatedPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec_ARM(gens map[string]gopter.Gen) {
-	gens["Properties"] = gen.PtrOf(SecurityAlertsPolicyProperties_ARMGenerator())
+	gens["Properties"] = gen.PtrOf(DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator())
 }
 
-func Test_SecurityAlertsPolicyProperties_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 100
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of SecurityAlertsPolicyProperties_ARM via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForSecurityAlertsPolicyProperties_ARM, SecurityAlertsPolicyProperties_ARMGenerator()))
+		"Round trip of DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM, DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForSecurityAlertsPolicyProperties_ARM runs a test to see if a specific instance of SecurityAlertsPolicyProperties_ARM round trips to JSON and back losslessly
-func RunJSONSerializationTestForSecurityAlertsPolicyProperties_ARM(subject SecurityAlertsPolicyProperties_ARM) string {
+// RunJSONSerializationTestForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM runs a test to see if a specific instance of DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM round trips to JSON and back losslessly
+func RunJSONSerializationTestForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM(subject DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -113,7 +113,7 @@ func RunJSONSerializationTestForSecurityAlertsPolicyProperties_ARM(subject Secur
 	}
 
 	// Deserialize back into memory
-	var actual SecurityAlertsPolicyProperties_ARM
+	var actual DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -131,30 +131,30 @@ func RunJSONSerializationTestForSecurityAlertsPolicyProperties_ARM(subject Secur
 	return ""
 }
 
-// Generator of SecurityAlertsPolicyProperties_ARM instances for property testing - lazily instantiated by
-// SecurityAlertsPolicyProperties_ARMGenerator()
-var securityAlertsPolicyProperties_ARMGenerator gopter.Gen
+// Generator of DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM instances for property testing - lazily
+// instantiated by DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator()
+var databaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator gopter.Gen
 
-// SecurityAlertsPolicyProperties_ARMGenerator returns a generator of SecurityAlertsPolicyProperties_ARM instances for property testing.
-func SecurityAlertsPolicyProperties_ARMGenerator() gopter.Gen {
-	if securityAlertsPolicyProperties_ARMGenerator != nil {
-		return securityAlertsPolicyProperties_ARMGenerator
+// DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator returns a generator of DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM instances for property testing.
+func DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator() gopter.Gen {
+	if databaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator != nil {
+		return databaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddIndependentPropertyGeneratorsForSecurityAlertsPolicyProperties_ARM(generators)
-	securityAlertsPolicyProperties_ARMGenerator = gen.Struct(reflect.TypeOf(SecurityAlertsPolicyProperties_ARM{}), generators)
+	AddIndependentPropertyGeneratorsForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM(generators)
+	databaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator = gen.Struct(reflect.TypeOf(DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM{}), generators)
 
-	return securityAlertsPolicyProperties_ARMGenerator
+	return databaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARMGenerator
 }
 
-// AddIndependentPropertyGeneratorsForSecurityAlertsPolicyProperties_ARM is a factory method for creating gopter generators
-func AddIndependentPropertyGeneratorsForSecurityAlertsPolicyProperties_ARM(gens map[string]gopter.Gen) {
+// AddIndependentPropertyGeneratorsForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM is a factory method for creating gopter generators
+func AddIndependentPropertyGeneratorsForDatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM(gens map[string]gopter.Gen) {
 	gens["DisabledAlerts"] = gen.SliceOf(gen.AlphaString())
 	gens["EmailAccountAdmins"] = gen.PtrOf(gen.Bool())
 	gens["EmailAddresses"] = gen.SliceOf(gen.AlphaString())
 	gens["RetentionDays"] = gen.PtrOf(gen.Int())
-	gens["State"] = gen.PtrOf(gen.OneConstOf(SecurityAlertsPolicyProperties_State_Disabled, SecurityAlertsPolicyProperties_State_Enabled))
+	gens["State"] = gen.PtrOf(gen.OneConstOf(DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_Disabled, DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State_Enabled))
 	gens["StorageAccountAccessKey"] = gen.PtrOf(gen.AlphaString())
 	gens["StorageEndpoint"] = gen.PtrOf(gen.AlphaString())
 }

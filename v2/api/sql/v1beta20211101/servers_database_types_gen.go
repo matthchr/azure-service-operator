@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/Databases.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}
-type Servers_Database struct {
+type ServersDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Database_Spec   `json:"spec,omitempty"`
 	Status            Servers_Database_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Database{}
+var _ conditions.Conditioner = &ServersDatabase{}
 
 // GetConditions returns the conditions of the resource
-func (database *Servers_Database) GetConditions() conditions.Conditions {
+func (database *ServersDatabase) GetConditions() conditions.Conditions {
 	return database.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (database *Servers_Database) SetConditions(conditions conditions.Conditions) {
+func (database *ServersDatabase) SetConditions(conditions conditions.Conditions) {
 	database.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_Database{}
+var _ conversion.Convertible = &ServersDatabase{}
 
-// ConvertFrom populates our Servers_Database from the provided hub Servers_Database
-func (database *Servers_Database) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_Database)
+// ConvertFrom populates our ServersDatabase from the provided hub ServersDatabase
+func (database *ServersDatabase) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersDatabase)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Database but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabase but received %T instead", hub)
 	}
 
-	return database.AssignProperties_From_Servers_Database(source)
+	return database.AssignProperties_From_ServersDatabase(source)
 }
 
-// ConvertTo populates the provided hub Servers_Database from our Servers_Database
-func (database *Servers_Database) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_Database)
+// ConvertTo populates the provided hub ServersDatabase from our ServersDatabase
+func (database *ServersDatabase) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersDatabase)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Database but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabase but received %T instead", hub)
 	}
 
-	return database.AssignProperties_To_Servers_Database(destination)
+	return database.AssignProperties_To_ServersDatabase(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_database,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_databases.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversdatabase,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabases,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversdatabases.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_Database{}
+var _ admission.Defaulter = &ServersDatabase{}
 
-// Default applies defaults to the Servers_Database resource
-func (database *Servers_Database) Default() {
+// Default applies defaults to the ServersDatabase resource
+func (database *ServersDatabase) Default() {
 	database.defaultImpl()
 	var temp interface{} = database
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -82,54 +82,54 @@ func (database *Servers_Database) Default() {
 }
 
 // defaultAzureName defaults the Azure name of the resource to the Kubernetes name
-func (database *Servers_Database) defaultAzureName() {
+func (database *ServersDatabase) defaultAzureName() {
 	if database.Spec.AzureName == "" {
 		database.Spec.AzureName = database.Name
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_Database resource
-func (database *Servers_Database) defaultImpl() { database.defaultAzureName() }
+// defaultImpl applies the code generated defaults to the ServersDatabase resource
+func (database *ServersDatabase) defaultImpl() { database.defaultAzureName() }
 
-var _ genruntime.KubernetesResource = &Servers_Database{}
+var _ genruntime.KubernetesResource = &ServersDatabase{}
 
 // AzureName returns the Azure name of the resource
-func (database *Servers_Database) AzureName() string {
+func (database *ServersDatabase) AzureName() string {
 	return database.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (database Servers_Database) GetAPIVersion() string {
+func (database ServersDatabase) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (database *Servers_Database) GetResourceScope() genruntime.ResourceScope {
+func (database *ServersDatabase) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (database *Servers_Database) GetSpec() genruntime.ConvertibleSpec {
+func (database *ServersDatabase) GetSpec() genruntime.ConvertibleSpec {
 	return &database.Spec
 }
 
 // GetStatus returns the status of this resource
-func (database *Servers_Database) GetStatus() genruntime.ConvertibleStatus {
+func (database *ServersDatabase) GetStatus() genruntime.ConvertibleStatus {
 	return &database.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases"
-func (database *Servers_Database) GetType() string {
+func (database *ServersDatabase) GetType() string {
 	return "Microsoft.Sql/servers/databases"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (database *Servers_Database) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (database *ServersDatabase) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Database_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (database *Servers_Database) Owner() *genruntime.ResourceReference {
+func (database *ServersDatabase) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(database.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -139,7 +139,7 @@ func (database *Servers_Database) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (database *Servers_Database) SetStatus(status genruntime.ConvertibleStatus) error {
+func (database *ServersDatabase) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Database_STATUS); ok {
 		database.Status = *st
@@ -157,12 +157,12 @@ func (database *Servers_Database) SetStatus(status genruntime.ConvertibleStatus)
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_database,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_databases.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversdatabase,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabases,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversdatabases.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_Database{}
+var _ admission.Validator = &ServersDatabase{}
 
 // ValidateCreate validates the creation of the resource
-func (database *Servers_Database) ValidateCreate() error {
+func (database *ServersDatabase) ValidateCreate() error {
 	validations := database.createValidations()
 	var temp interface{} = database
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -179,7 +179,7 @@ func (database *Servers_Database) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (database *Servers_Database) ValidateDelete() error {
+func (database *ServersDatabase) ValidateDelete() error {
 	validations := database.deleteValidations()
 	var temp interface{} = database
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -196,7 +196,7 @@ func (database *Servers_Database) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (database *Servers_Database) ValidateUpdate(old runtime.Object) error {
+func (database *ServersDatabase) ValidateUpdate(old runtime.Object) error {
 	validations := database.updateValidations()
 	var temp interface{} = database
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -213,17 +213,17 @@ func (database *Servers_Database) ValidateUpdate(old runtime.Object) error {
 }
 
 // createValidations validates the creation of the resource
-func (database *Servers_Database) createValidations() []func() error {
+func (database *ServersDatabase) createValidations() []func() error {
 	return []func() error{database.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (database *Servers_Database) deleteValidations() []func() error {
+func (database *ServersDatabase) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (database *Servers_Database) updateValidations() []func(old runtime.Object) error {
+func (database *ServersDatabase) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return database.validateResourceReferences()
@@ -232,7 +232,7 @@ func (database *Servers_Database) updateValidations() []func(old runtime.Object)
 }
 
 // validateResourceReferences validates all resource references
-func (database *Servers_Database) validateResourceReferences() error {
+func (database *ServersDatabase) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&database.Spec)
 	if err != nil {
 		return err
@@ -241,8 +241,8 @@ func (database *Servers_Database) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (database *Servers_Database) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_Database)
+func (database *ServersDatabase) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersDatabase)
 	if !ok {
 		return nil
 	}
@@ -250,8 +250,8 @@ func (database *Servers_Database) validateWriteOnceProperties(old runtime.Object
 	return genruntime.ValidateWriteOnceProperties(oldObj, database)
 }
 
-// AssignProperties_From_Servers_Database populates our Servers_Database from the provided source Servers_Database
-func (database *Servers_Database) AssignProperties_From_Servers_Database(source *v20211101s.Servers_Database) error {
+// AssignProperties_From_ServersDatabase populates our ServersDatabase from the provided source ServersDatabase
+func (database *ServersDatabase) AssignProperties_From_ServersDatabase(source *v20211101s.ServersDatabase) error {
 
 	// ObjectMeta
 	database.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -276,8 +276,8 @@ func (database *Servers_Database) AssignProperties_From_Servers_Database(source 
 	return nil
 }
 
-// AssignProperties_To_Servers_Database populates the provided destination Servers_Database from our Servers_Database
-func (database *Servers_Database) AssignProperties_To_Servers_Database(destination *v20211101s.Servers_Database) error {
+// AssignProperties_To_ServersDatabase populates the provided destination ServersDatabase from our ServersDatabase
+func (database *ServersDatabase) AssignProperties_To_ServersDatabase(destination *v20211101s.ServersDatabase) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *database.ObjectMeta.DeepCopy()
@@ -303,11 +303,11 @@ func (database *Servers_Database) AssignProperties_To_Servers_Database(destinati
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (database *Servers_Database) OriginalGVK() *schema.GroupVersionKind {
+func (database *ServersDatabase) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: database.Spec.OriginalVersion(),
-		Kind:    "Servers_Database",
+		Kind:    "ServersDatabase",
 	}
 }
 
@@ -315,10 +315,10 @@ func (database *Servers_Database) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/Databases.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}
-type Servers_DatabaseList struct {
+type ServersDatabaseList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Database `json:"items"`
+	Items           []ServersDatabase `json:"items"`
 }
 
 type Servers_Database_Spec struct {
@@ -3008,6 +3008,284 @@ const (
 	DatabaseProperties_Status_STATUS_Suspect                           = DatabaseProperties_Status_STATUS("Suspect")
 )
 
+// An ARM Resource SKU.
+type Sku struct {
+	// Capacity: Capacity of the particular SKU.
+	Capacity *int `json:"capacity,omitempty"`
+
+	// Family: If the service has different generations of hardware, for the same SKU, then that can be captured here.
+	Family *string `json:"family,omitempty"`
+
+	// +kubebuilder:validation:Required
+	// Name: The name of the SKU, typically, a letter + Number code, e.g. P3.
+	Name *string `json:"name,omitempty"`
+
+	// Size: Size of the particular SKU
+	Size *string `json:"size,omitempty"`
+
+	// Tier: The tier or edition of the particular SKU, e.g. Basic, Premium.
+	Tier *string `json:"tier,omitempty"`
+}
+
+var _ genruntime.ARMTransformer = &Sku{}
+
+// ConvertToARM converts from a Kubernetes CRD object to an ARM object
+func (sku *Sku) ConvertToARM(resolved genruntime.ConvertToARMResolvedDetails) (interface{}, error) {
+	if sku == nil {
+		return nil, nil
+	}
+	result := &Sku_ARM{}
+
+	// Set property ‘Capacity’:
+	if sku.Capacity != nil {
+		capacity := *sku.Capacity
+		result.Capacity = &capacity
+	}
+
+	// Set property ‘Family’:
+	if sku.Family != nil {
+		family := *sku.Family
+		result.Family = &family
+	}
+
+	// Set property ‘Name’:
+	if sku.Name != nil {
+		name := *sku.Name
+		result.Name = &name
+	}
+
+	// Set property ‘Size’:
+	if sku.Size != nil {
+		size := *sku.Size
+		result.Size = &size
+	}
+
+	// Set property ‘Tier’:
+	if sku.Tier != nil {
+		tier := *sku.Tier
+		result.Tier = &tier
+	}
+	return result, nil
+}
+
+// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
+func (sku *Sku) NewEmptyARMValue() genruntime.ARMResourceStatus {
+	return &Sku_ARM{}
+}
+
+// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
+func (sku *Sku) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
+	typedInput, ok := armInput.(Sku_ARM)
+	if !ok {
+		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected Sku_ARM, got %T", armInput)
+	}
+
+	// Set property ‘Capacity’:
+	if typedInput.Capacity != nil {
+		capacity := *typedInput.Capacity
+		sku.Capacity = &capacity
+	}
+
+	// Set property ‘Family’:
+	if typedInput.Family != nil {
+		family := *typedInput.Family
+		sku.Family = &family
+	}
+
+	// Set property ‘Name’:
+	if typedInput.Name != nil {
+		name := *typedInput.Name
+		sku.Name = &name
+	}
+
+	// Set property ‘Size’:
+	if typedInput.Size != nil {
+		size := *typedInput.Size
+		sku.Size = &size
+	}
+
+	// Set property ‘Tier’:
+	if typedInput.Tier != nil {
+		tier := *typedInput.Tier
+		sku.Tier = &tier
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_From_Sku populates our Sku from the provided source Sku
+func (sku *Sku) AssignProperties_From_Sku(source *v20211101s.Sku) error {
+
+	// Capacity
+	sku.Capacity = genruntime.ClonePointerToInt(source.Capacity)
+
+	// Family
+	sku.Family = genruntime.ClonePointerToString(source.Family)
+
+	// Name
+	sku.Name = genruntime.ClonePointerToString(source.Name)
+
+	// Size
+	sku.Size = genruntime.ClonePointerToString(source.Size)
+
+	// Tier
+	sku.Tier = genruntime.ClonePointerToString(source.Tier)
+
+	// No error
+	return nil
+}
+
+// AssignProperties_To_Sku populates the provided destination Sku from our Sku
+func (sku *Sku) AssignProperties_To_Sku(destination *v20211101s.Sku) error {
+	// Create a new property bag
+	propertyBag := genruntime.NewPropertyBag()
+
+	// Capacity
+	destination.Capacity = genruntime.ClonePointerToInt(sku.Capacity)
+
+	// Family
+	destination.Family = genruntime.ClonePointerToString(sku.Family)
+
+	// Name
+	destination.Name = genruntime.ClonePointerToString(sku.Name)
+
+	// Size
+	destination.Size = genruntime.ClonePointerToString(sku.Size)
+
+	// Tier
+	destination.Tier = genruntime.ClonePointerToString(sku.Tier)
+
+	// Update the property bag
+	if len(propertyBag) > 0 {
+		destination.PropertyBag = propertyBag
+	} else {
+		destination.PropertyBag = nil
+	}
+
+	// No error
+	return nil
+}
+
+// An ARM Resource SKU.
+type Sku_STATUS struct {
+	// Capacity: Capacity of the particular SKU.
+	Capacity *int `json:"capacity,omitempty"`
+
+	// Family: If the service has different generations of hardware, for the same SKU, then that can be captured here.
+	Family *string `json:"family,omitempty"`
+
+	// Name: The name of the SKU, typically, a letter + Number code, e.g. P3.
+	Name *string `json:"name,omitempty"`
+
+	// Size: Size of the particular SKU
+	Size *string `json:"size,omitempty"`
+
+	// Tier: The tier or edition of the particular SKU, e.g. Basic, Premium.
+	Tier *string `json:"tier,omitempty"`
+}
+
+var _ genruntime.FromARMConverter = &Sku_STATUS{}
+
+// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
+func (sku *Sku_STATUS) NewEmptyARMValue() genruntime.ARMResourceStatus {
+	return &Sku_STATUS_ARM{}
+}
+
+// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
+func (sku *Sku_STATUS) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
+	typedInput, ok := armInput.(Sku_STATUS_ARM)
+	if !ok {
+		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected Sku_STATUS_ARM, got %T", armInput)
+	}
+
+	// Set property ‘Capacity’:
+	if typedInput.Capacity != nil {
+		capacity := *typedInput.Capacity
+		sku.Capacity = &capacity
+	}
+
+	// Set property ‘Family’:
+	if typedInput.Family != nil {
+		family := *typedInput.Family
+		sku.Family = &family
+	}
+
+	// Set property ‘Name’:
+	if typedInput.Name != nil {
+		name := *typedInput.Name
+		sku.Name = &name
+	}
+
+	// Set property ‘Size’:
+	if typedInput.Size != nil {
+		size := *typedInput.Size
+		sku.Size = &size
+	}
+
+	// Set property ‘Tier’:
+	if typedInput.Tier != nil {
+		tier := *typedInput.Tier
+		sku.Tier = &tier
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_From_Sku_STATUS populates our Sku_STATUS from the provided source Sku_STATUS
+func (sku *Sku_STATUS) AssignProperties_From_Sku_STATUS(source *v20211101s.Sku_STATUS) error {
+
+	// Capacity
+	sku.Capacity = genruntime.ClonePointerToInt(source.Capacity)
+
+	// Family
+	sku.Family = genruntime.ClonePointerToString(source.Family)
+
+	// Name
+	sku.Name = genruntime.ClonePointerToString(source.Name)
+
+	// Size
+	sku.Size = genruntime.ClonePointerToString(source.Size)
+
+	// Tier
+	sku.Tier = genruntime.ClonePointerToString(source.Tier)
+
+	// No error
+	return nil
+}
+
+// AssignProperties_To_Sku_STATUS populates the provided destination Sku_STATUS from our Sku_STATUS
+func (sku *Sku_STATUS) AssignProperties_To_Sku_STATUS(destination *v20211101s.Sku_STATUS) error {
+	// Create a new property bag
+	propertyBag := genruntime.NewPropertyBag()
+
+	// Capacity
+	destination.Capacity = genruntime.ClonePointerToInt(sku.Capacity)
+
+	// Family
+	destination.Family = genruntime.ClonePointerToString(sku.Family)
+
+	// Name
+	destination.Name = genruntime.ClonePointerToString(sku.Name)
+
+	// Size
+	destination.Size = genruntime.ClonePointerToString(sku.Size)
+
+	// Tier
+	destination.Tier = genruntime.ClonePointerToString(sku.Tier)
+
+	// Update the property bag
+	if len(propertyBag) > 0 {
+		destination.PropertyBag = propertyBag
+	} else {
+		destination.PropertyBag = nil
+	}
+
+	// No error
+	return nil
+}
+
 // Azure Active Directory identity configuration for a resource.
 type DatabaseUserIdentity_STATUS struct {
 	// ClientId: The Azure Active Directory client id.
@@ -3083,5 +3361,5 @@ func (identity *DatabaseUserIdentity_STATUS) AssignProperties_To_DatabaseUserIde
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Database{}, &Servers_DatabaseList{})
+	SchemeBuilder.Register(&ServersDatabase{}, &ServersDatabaseList{})
 }

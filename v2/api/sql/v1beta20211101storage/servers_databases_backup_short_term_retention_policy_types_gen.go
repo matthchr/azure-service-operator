@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_databases_backupshorttermretentionpolicies,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_databases_backupshorttermretentionpolicies/status,servers_databases_backupshorttermretentionpolicies/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversdatabasesbackupshorttermretentionpolicies,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversdatabasesbackupshorttermretentionpolicies/status,serversdatabasesbackupshorttermretentionpolicies/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Databases_BackupShortTermRetentionPolicy
+// Storage version of v1beta20211101.ServersDatabasesBackupShortTermRetentionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BackupShortTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/default
-type Servers_Databases_BackupShortTermRetentionPolicy struct {
+type ServersDatabasesBackupShortTermRetentionPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_BackupShortTermRetentionPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_BackupShortTermRetentionPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ conditions.Conditioner = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ genruntime.KubernetesResource = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AzureName() string {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_Databases_BackupShortTermRetentionPolicy) GetAPIVersion() string {
+func (policy ServersDatabasesBackupShortTermRetentionPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetType() string {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetType() string {
 	return "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_BackupShortTermRetentionPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Owner() *genrunt
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_BackupShortTermRetentionPolicy_STATUS); ok {
 		policy.Status = *st
@@ -110,27 +110,27 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetStatus(status
 	return nil
 }
 
-// Hub marks that this Servers_Databases_BackupShortTermRetentionPolicy is the hub type for conversion
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Hub() {}
+// Hub marks that this ServersDatabasesBackupShortTermRetentionPolicy is the hub type for conversion
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion,
-		Kind:    "Servers_Databases_BackupShortTermRetentionPolicy",
+		Kind:    "ServersDatabasesBackupShortTermRetentionPolicy",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Databases_BackupShortTermRetentionPolicy
+// Storage version of v1beta20211101.ServersDatabasesBackupShortTermRetentionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BackupShortTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/default
-type Servers_Databases_BackupShortTermRetentionPolicyList struct {
+type ServersDatabasesBackupShortTermRetentionPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_BackupShortTermRetentionPolicy `json:"items"`
+	Items           []ServersDatabasesBackupShortTermRetentionPolicy `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Databases_BackupShortTermRetentionPolicy_Spec
@@ -141,8 +141,8 @@ type Servers_Databases_BackupShortTermRetentionPolicy_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner         *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner         *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 	PropertyBag   genruntime.PropertyBag             `json:"$propertyBag,omitempty"`
 	RetentionDays *int                               `json:"retentionDays,omitempty"`
 }
@@ -199,5 +199,5 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy_STATUS) ConvertSt
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_BackupShortTermRetentionPolicy{}, &Servers_Databases_BackupShortTermRetentionPolicyList{})
+	SchemeBuilder.Register(&ServersDatabasesBackupShortTermRetentionPolicy{}, &ServersDatabasesBackupShortTermRetentionPolicyList{})
 }

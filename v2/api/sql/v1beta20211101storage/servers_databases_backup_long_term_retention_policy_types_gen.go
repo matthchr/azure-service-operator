@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_databases_backuplongtermretentionpolicies,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_databases_backuplongtermretentionpolicies/status,servers_databases_backuplongtermretentionpolicies/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversdatabasesbackuplongtermretentionpolicies,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversdatabasesbackuplongtermretentionpolicies/status,serversdatabasesbackuplongtermretentionpolicies/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_Databases_BackupLongTermRetentionPolicy
+// Storage version of v1beta20211101.ServersDatabasesBackupLongTermRetentionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/LongTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/default
-type Servers_Databases_BackupLongTermRetentionPolicy struct {
+type ServersDatabasesBackupLongTermRetentionPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_BackupLongTermRetentionPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_BackupLongTermRetentionPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_BackupLongTermRetentionPolicy{}
+var _ conditions.Conditioner = &ServersDatabasesBackupLongTermRetentionPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_Databases_BackupLongTermRetentionPolicy{}
+var _ genruntime.KubernetesResource = &ServersDatabasesBackupLongTermRetentionPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) AzureName() string {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_Databases_BackupLongTermRetentionPolicy) GetAPIVersion() string {
+func (policy ServersDatabasesBackupLongTermRetentionPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies"
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) GetType() string {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) GetType() string {
 	return "Microsoft.Sql/servers/databases/backupLongTermRetentionPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_BackupLongTermRetentionPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (policy *Servers_Databases_BackupLongTermRetentionPolicy) Owner() *genrunti
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_BackupLongTermRetentionPolicy_STATUS); ok {
 		policy.Status = *st
@@ -110,27 +110,27 @@ func (policy *Servers_Databases_BackupLongTermRetentionPolicy) SetStatus(status 
 	return nil
 }
 
-// Hub marks that this Servers_Databases_BackupLongTermRetentionPolicy is the hub type for conversion
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) Hub() {}
+// Hub marks that this ServersDatabasesBackupLongTermRetentionPolicy is the hub type for conversion
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_Databases_BackupLongTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersDatabasesBackupLongTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion,
-		Kind:    "Servers_Databases_BackupLongTermRetentionPolicy",
+		Kind:    "ServersDatabasesBackupLongTermRetentionPolicy",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_Databases_BackupLongTermRetentionPolicy
+// Storage version of v1beta20211101.ServersDatabasesBackupLongTermRetentionPolicy
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/LongTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupLongTermRetentionPolicies/default
-type Servers_Databases_BackupLongTermRetentionPolicyList struct {
+type ServersDatabasesBackupLongTermRetentionPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_BackupLongTermRetentionPolicy `json:"items"`
+	Items           []ServersDatabasesBackupLongTermRetentionPolicy `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_Databases_BackupLongTermRetentionPolicy_Spec
@@ -141,8 +141,8 @@ type Servers_Databases_BackupLongTermRetentionPolicy_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner           *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner           *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 	PropertyBag     genruntime.PropertyBag             `json:"$propertyBag,omitempty"`
 	WeekOfYear      *int                               `json:"weekOfYear,omitempty"`
 	WeeklyRetention *string                            `json:"weeklyRetention,omitempty"`
@@ -203,5 +203,5 @@ func (policy *Servers_Databases_BackupLongTermRetentionPolicy_STATUS) ConvertSta
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_BackupLongTermRetentionPolicy{}, &Servers_Databases_BackupLongTermRetentionPolicyList{})
+	SchemeBuilder.Register(&ServersDatabasesBackupLongTermRetentionPolicy{}, &ServersDatabasesBackupLongTermRetentionPolicyList{})
 }

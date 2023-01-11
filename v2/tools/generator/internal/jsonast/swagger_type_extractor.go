@@ -125,7 +125,7 @@ func (extractor *SwaggerTypeExtractor) ExtractResourceTypes(ctx context.Context,
 		nameParameterType := extractor.getNameParameterType(ctx, rawOperationPath, scanner, fullPutParameters)
 		operationPath := extractor.expandEnumsInPath(ctx, rawOperationPath, scanner, fullPutParameters)
 
-		armType, resourceName, err := extractor.resourceNameFromOperationPath(operationPath)
+		armType, resourceName, err := extractor.resourceNameFromOperationPath(rawOperationPath)
 		if err != nil {
 			klog.Errorf("Error extracting resource name (%s): %s", extractor.swaggerPath, err.Error())
 			continue

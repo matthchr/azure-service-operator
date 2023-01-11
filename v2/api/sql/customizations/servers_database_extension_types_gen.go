@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_DatabaseExtension struct {
+type ServersDatabaseExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_DatabaseExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersDatabaseExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_Database{},
-		&v20211101s.Servers_Database{}}
+		&v20211101.ServersDatabase{},
+		&v20211101s.ServersDatabase{}}
 }

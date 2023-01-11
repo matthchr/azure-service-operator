@@ -321,6 +321,11 @@ type ServerList struct {
 	Items           []Server `json:"items"`
 }
 
+// +kubebuilder:validation:Enum={"2021-11-01"}
+type APIVersion string
+
+const APIVersion_Value = APIVersion("2021-11-01")
+
 type Server_Spec struct {
 	// AdministratorLogin: Administrator username for the server. Once created it cannot be changed.
 	AdministratorLogin *string `json:"administratorLogin,omitempty"`
@@ -1436,6 +1441,243 @@ func (server *Server_STATUS) AssignProperties_To_Server_STATUS(destination *v202
 	return nil
 }
 
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity struct {
+	// Type: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active
+	// Directory principal for the resource.
+	Type *ResourceIdentity_Type `json:"type,omitempty"`
+}
+
+var _ genruntime.ARMTransformer = &ResourceIdentity{}
+
+// ConvertToARM converts from a Kubernetes CRD object to an ARM object
+func (identity *ResourceIdentity) ConvertToARM(resolved genruntime.ConvertToARMResolvedDetails) (interface{}, error) {
+	if identity == nil {
+		return nil, nil
+	}
+	result := &ResourceIdentity_ARM{}
+
+	// Set property ‘Type’:
+	if identity.Type != nil {
+		typeVar := *identity.Type
+		result.Type = &typeVar
+	}
+	return result, nil
+}
+
+// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
+func (identity *ResourceIdentity) NewEmptyARMValue() genruntime.ARMResourceStatus {
+	return &ResourceIdentity_ARM{}
+}
+
+// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
+func (identity *ResourceIdentity) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
+	typedInput, ok := armInput.(ResourceIdentity_ARM)
+	if !ok {
+		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected ResourceIdentity_ARM, got %T", armInput)
+	}
+
+	// Set property ‘Type’:
+	if typedInput.Type != nil {
+		typeVar := *typedInput.Type
+		identity.Type = &typeVar
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_From_ResourceIdentity populates our ResourceIdentity from the provided source ResourceIdentity
+func (identity *ResourceIdentity) AssignProperties_From_ResourceIdentity(source *v20211101s.ResourceIdentity) error {
+
+	// Type
+	if source.Type != nil {
+		typeVar := ResourceIdentity_Type(*source.Type)
+		identity.Type = &typeVar
+	} else {
+		identity.Type = nil
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_To_ResourceIdentity populates the provided destination ResourceIdentity from our ResourceIdentity
+func (identity *ResourceIdentity) AssignProperties_To_ResourceIdentity(destination *v20211101s.ResourceIdentity) error {
+	// Create a new property bag
+	propertyBag := genruntime.NewPropertyBag()
+
+	// Type
+	if identity.Type != nil {
+		typeVar := string(*identity.Type)
+		destination.Type = &typeVar
+	} else {
+		destination.Type = nil
+	}
+
+	// Update the property bag
+	if len(propertyBag) > 0 {
+		destination.PropertyBag = propertyBag
+	} else {
+		destination.PropertyBag = nil
+	}
+
+	// No error
+	return nil
+}
+
+// Azure Active Directory identity configuration for a resource.
+type ResourceIdentity_STATUS struct {
+	// PrincipalId: The Azure Active Directory principal id.
+	PrincipalId *string `json:"principalId,omitempty"`
+
+	// TenantId: The Azure Active Directory tenant id.
+	TenantId *string `json:"tenantId,omitempty"`
+
+	// Type: The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active
+	// Directory principal for the resource.
+	Type *ResourceIdentity_Type_STATUS `json:"type,omitempty"`
+
+	// UserAssignedIdentities: The resource ids of the user assigned identities to use
+	UserAssignedIdentities map[string]UserIdentity_STATUS `json:"userAssignedIdentities,omitempty"`
+}
+
+var _ genruntime.FromARMConverter = &ResourceIdentity_STATUS{}
+
+// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
+func (identity *ResourceIdentity_STATUS) NewEmptyARMValue() genruntime.ARMResourceStatus {
+	return &ResourceIdentity_STATUS_ARM{}
+}
+
+// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
+func (identity *ResourceIdentity_STATUS) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
+	typedInput, ok := armInput.(ResourceIdentity_STATUS_ARM)
+	if !ok {
+		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected ResourceIdentity_STATUS_ARM, got %T", armInput)
+	}
+
+	// Set property ‘PrincipalId’:
+	if typedInput.PrincipalId != nil {
+		principalId := *typedInput.PrincipalId
+		identity.PrincipalId = &principalId
+	}
+
+	// Set property ‘TenantId’:
+	if typedInput.TenantId != nil {
+		tenantId := *typedInput.TenantId
+		identity.TenantId = &tenantId
+	}
+
+	// Set property ‘Type’:
+	if typedInput.Type != nil {
+		typeVar := *typedInput.Type
+		identity.Type = &typeVar
+	}
+
+	// Set property ‘UserAssignedIdentities’:
+	if typedInput.UserAssignedIdentities != nil {
+		identity.UserAssignedIdentities = make(map[string]UserIdentity_STATUS, len(typedInput.UserAssignedIdentities))
+		for key, value := range typedInput.UserAssignedIdentities {
+			var value1 UserIdentity_STATUS
+			err := value1.PopulateFromARM(owner, value)
+			if err != nil {
+				return err
+			}
+			identity.UserAssignedIdentities[key] = value1
+		}
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_From_ResourceIdentity_STATUS populates our ResourceIdentity_STATUS from the provided source ResourceIdentity_STATUS
+func (identity *ResourceIdentity_STATUS) AssignProperties_From_ResourceIdentity_STATUS(source *v20211101s.ResourceIdentity_STATUS) error {
+
+	// PrincipalId
+	identity.PrincipalId = genruntime.ClonePointerToString(source.PrincipalId)
+
+	// TenantId
+	identity.TenantId = genruntime.ClonePointerToString(source.TenantId)
+
+	// Type
+	if source.Type != nil {
+		typeVar := ResourceIdentity_Type_STATUS(*source.Type)
+		identity.Type = &typeVar
+	} else {
+		identity.Type = nil
+	}
+
+	// UserAssignedIdentities
+	if source.UserAssignedIdentities != nil {
+		userAssignedIdentityMap := make(map[string]UserIdentity_STATUS, len(source.UserAssignedIdentities))
+		for userAssignedIdentityKey, userAssignedIdentityValue := range source.UserAssignedIdentities {
+			// Shadow the loop variable to avoid aliasing
+			userAssignedIdentityValue := userAssignedIdentityValue
+			var userAssignedIdentity UserIdentity_STATUS
+			err := userAssignedIdentity.AssignProperties_From_UserIdentity_STATUS(&userAssignedIdentityValue)
+			if err != nil {
+				return errors.Wrap(err, "calling AssignProperties_From_UserIdentity_STATUS() to populate field UserAssignedIdentities")
+			}
+			userAssignedIdentityMap[userAssignedIdentityKey] = userAssignedIdentity
+		}
+		identity.UserAssignedIdentities = userAssignedIdentityMap
+	} else {
+		identity.UserAssignedIdentities = nil
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_To_ResourceIdentity_STATUS populates the provided destination ResourceIdentity_STATUS from our ResourceIdentity_STATUS
+func (identity *ResourceIdentity_STATUS) AssignProperties_To_ResourceIdentity_STATUS(destination *v20211101s.ResourceIdentity_STATUS) error {
+	// Create a new property bag
+	propertyBag := genruntime.NewPropertyBag()
+
+	// PrincipalId
+	destination.PrincipalId = genruntime.ClonePointerToString(identity.PrincipalId)
+
+	// TenantId
+	destination.TenantId = genruntime.ClonePointerToString(identity.TenantId)
+
+	// Type
+	if identity.Type != nil {
+		typeVar := string(*identity.Type)
+		destination.Type = &typeVar
+	} else {
+		destination.Type = nil
+	}
+
+	// UserAssignedIdentities
+	if identity.UserAssignedIdentities != nil {
+		userAssignedIdentityMap := make(map[string]v20211101s.UserIdentity_STATUS, len(identity.UserAssignedIdentities))
+		for userAssignedIdentityKey, userAssignedIdentityValue := range identity.UserAssignedIdentities {
+			// Shadow the loop variable to avoid aliasing
+			userAssignedIdentityValue := userAssignedIdentityValue
+			var userAssignedIdentity v20211101s.UserIdentity_STATUS
+			err := userAssignedIdentityValue.AssignProperties_To_UserIdentity_STATUS(&userAssignedIdentity)
+			if err != nil {
+				return errors.Wrap(err, "calling AssignProperties_To_UserIdentity_STATUS() to populate field UserAssignedIdentities")
+			}
+			userAssignedIdentityMap[userAssignedIdentityKey] = userAssignedIdentity
+		}
+		destination.UserAssignedIdentities = userAssignedIdentityMap
+	} else {
+		destination.UserAssignedIdentities = nil
+	}
+
+	// Update the property bag
+	if len(propertyBag) > 0 {
+		destination.PropertyBag = propertyBag
+	} else {
+		destination.PropertyBag = nil
+	}
+
+	// No error
+	return nil
+}
+
 // Properties of a active directory administrator.
 type ServerExternalAdministrator struct {
 	// AdministratorType: Type of the sever administrator.
@@ -2149,6 +2391,80 @@ const (
 	ServerExternalAdministrator_PrincipalType_STATUS_Group       = ServerExternalAdministrator_PrincipalType_STATUS("Group")
 	ServerExternalAdministrator_PrincipalType_STATUS_User        = ServerExternalAdministrator_PrincipalType_STATUS("User")
 )
+
+// Azure Active Directory identity configuration for a resource.
+type UserIdentity_STATUS struct {
+	// ClientId: The Azure Active Directory client id.
+	ClientId *string `json:"clientId,omitempty"`
+
+	// PrincipalId: The Azure Active Directory principal id.
+	PrincipalId *string `json:"principalId,omitempty"`
+}
+
+var _ genruntime.FromARMConverter = &UserIdentity_STATUS{}
+
+// NewEmptyARMValue returns an empty ARM value suitable for deserializing into
+func (identity *UserIdentity_STATUS) NewEmptyARMValue() genruntime.ARMResourceStatus {
+	return &UserIdentity_STATUS_ARM{}
+}
+
+// PopulateFromARM populates a Kubernetes CRD object from an Azure ARM object
+func (identity *UserIdentity_STATUS) PopulateFromARM(owner genruntime.ArbitraryOwnerReference, armInput interface{}) error {
+	typedInput, ok := armInput.(UserIdentity_STATUS_ARM)
+	if !ok {
+		return fmt.Errorf("unexpected type supplied for PopulateFromARM() function. Expected UserIdentity_STATUS_ARM, got %T", armInput)
+	}
+
+	// Set property ‘ClientId’:
+	if typedInput.ClientId != nil {
+		clientId := *typedInput.ClientId
+		identity.ClientId = &clientId
+	}
+
+	// Set property ‘PrincipalId’:
+	if typedInput.PrincipalId != nil {
+		principalId := *typedInput.PrincipalId
+		identity.PrincipalId = &principalId
+	}
+
+	// No error
+	return nil
+}
+
+// AssignProperties_From_UserIdentity_STATUS populates our UserIdentity_STATUS from the provided source UserIdentity_STATUS
+func (identity *UserIdentity_STATUS) AssignProperties_From_UserIdentity_STATUS(source *v20211101s.UserIdentity_STATUS) error {
+
+	// ClientId
+	identity.ClientId = genruntime.ClonePointerToString(source.ClientId)
+
+	// PrincipalId
+	identity.PrincipalId = genruntime.ClonePointerToString(source.PrincipalId)
+
+	// No error
+	return nil
+}
+
+// AssignProperties_To_UserIdentity_STATUS populates the provided destination UserIdentity_STATUS from our UserIdentity_STATUS
+func (identity *UserIdentity_STATUS) AssignProperties_To_UserIdentity_STATUS(destination *v20211101s.UserIdentity_STATUS) error {
+	// Create a new property bag
+	propertyBag := genruntime.NewPropertyBag()
+
+	// ClientId
+	destination.ClientId = genruntime.ClonePointerToString(identity.ClientId)
+
+	// PrincipalId
+	destination.PrincipalId = genruntime.ClonePointerToString(identity.PrincipalId)
+
+	// Update the property bag
+	if len(propertyBag) > 0 {
+		destination.PropertyBag = propertyBag
+	} else {
+		destination.PropertyBag = nil
+	}
+
+	// No error
+	return nil
+}
 
 type PrivateEndpointConnectionProperties_ProvisioningState_STATUS string
 

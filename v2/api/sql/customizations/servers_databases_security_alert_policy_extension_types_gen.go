@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_Databases_SecurityAlertPolicyExtension struct {
+type ServersDatabasesSecurityAlertPolicyExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_Databases_SecurityAlertPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersDatabasesSecurityAlertPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_Databases_SecurityAlertPolicy{},
-		&v20211101s.Servers_Databases_SecurityAlertPolicy{}}
+		&v20211101.ServersDatabasesSecurityAlertPolicy{},
+		&v20211101s.ServersDatabasesSecurityAlertPolicy{}}
 }

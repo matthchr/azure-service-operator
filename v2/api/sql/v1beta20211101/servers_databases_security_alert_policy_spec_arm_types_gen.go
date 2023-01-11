@@ -9,7 +9,7 @@ type Servers_Databases_SecurityAlertPolicy_Spec_ARM struct {
 	Name string `json:"name,omitempty"`
 
 	// Properties: Resource properties.
-	Properties *SecurityAlertsPolicyProperties_ARM `json:"properties,omitempty"`
+	Properties *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM `json:"properties,omitempty"`
 }
 
 var _ genruntime.ARMResourceSpec = &Servers_Databases_SecurityAlertPolicy_Spec_ARM{}
@@ -30,7 +30,7 @@ func (policy *Servers_Databases_SecurityAlertPolicy_Spec_ARM) GetType() string {
 }
 
 // Properties of a security alert policy.
-type SecurityAlertsPolicyProperties_ARM struct {
+type DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_ARM struct {
 	// DisabledAlerts: Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection,
 	// Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force
 	DisabledAlerts []string `json:"disabledAlerts,omitempty"`
@@ -46,7 +46,7 @@ type SecurityAlertsPolicyProperties_ARM struct {
 
 	// State: Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the
 	// specific database.
-	State *SecurityAlertsPolicyProperties_State `json:"state,omitempty"`
+	State *DatabaseSecurityAlertPoliciesSecurityAlertsPolicyProperties_State `json:"state,omitempty"`
 
 	// StorageAccountAccessKey: Specifies the identifier key of the Threat Detection audit storage account.
 	StorageAccountAccessKey *string `json:"storageAccountAccessKey,omitempty"`

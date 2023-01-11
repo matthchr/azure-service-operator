@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_elasticpools,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_elasticpools/status,servers_elasticpools/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serverselasticpools,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serverselasticpools/status,serverselasticpools/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_ElasticPool
+// Storage version of v1beta20211101.ServersElasticPool
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ElasticPools.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}
-type Servers_ElasticPool struct {
+type ServersElasticPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_ElasticPool_Spec   `json:"spec,omitempty"`
 	Status            Servers_ElasticPool_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_ElasticPool{}
+var _ conditions.Conditioner = &ServersElasticPool{}
 
 // GetConditions returns the conditions of the resource
-func (pool *Servers_ElasticPool) GetConditions() conditions.Conditions {
+func (pool *ServersElasticPool) GetConditions() conditions.Conditions {
 	return pool.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (pool *Servers_ElasticPool) SetConditions(conditions conditions.Conditions) {
+func (pool *ServersElasticPool) SetConditions(conditions conditions.Conditions) {
 	pool.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_ElasticPool{}
+var _ genruntime.KubernetesResource = &ServersElasticPool{}
 
 // AzureName returns the Azure name of the resource
-func (pool *Servers_ElasticPool) AzureName() string {
+func (pool *ServersElasticPool) AzureName() string {
 	return pool.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (pool Servers_ElasticPool) GetAPIVersion() string {
+func (pool ServersElasticPool) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (pool *Servers_ElasticPool) GetResourceScope() genruntime.ResourceScope {
+func (pool *ServersElasticPool) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (pool *Servers_ElasticPool) GetSpec() genruntime.ConvertibleSpec {
+func (pool *ServersElasticPool) GetSpec() genruntime.ConvertibleSpec {
 	return &pool.Spec
 }
 
 // GetStatus returns the status of this resource
-func (pool *Servers_ElasticPool) GetStatus() genruntime.ConvertibleStatus {
+func (pool *ServersElasticPool) GetStatus() genruntime.ConvertibleStatus {
 	return &pool.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/elasticPools"
-func (pool *Servers_ElasticPool) GetType() string {
+func (pool *ServersElasticPool) GetType() string {
 	return "Microsoft.Sql/servers/elasticPools"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (pool *Servers_ElasticPool) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (pool *ServersElasticPool) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_ElasticPool_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (pool *Servers_ElasticPool) Owner() *genruntime.ResourceReference {
+func (pool *ServersElasticPool) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(pool.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (pool *Servers_ElasticPool) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (pool *Servers_ElasticPool) SetStatus(status genruntime.ConvertibleStatus) error {
+func (pool *ServersElasticPool) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_ElasticPool_STATUS); ok {
 		pool.Status = *st
@@ -110,27 +110,27 @@ func (pool *Servers_ElasticPool) SetStatus(status genruntime.ConvertibleStatus) 
 	return nil
 }
 
-// Hub marks that this Servers_ElasticPool is the hub type for conversion
-func (pool *Servers_ElasticPool) Hub() {}
+// Hub marks that this ServersElasticPool is the hub type for conversion
+func (pool *ServersElasticPool) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (pool *Servers_ElasticPool) OriginalGVK() *schema.GroupVersionKind {
+func (pool *ServersElasticPool) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: pool.Spec.OriginalVersion,
-		Kind:    "Servers_ElasticPool",
+		Kind:    "ServersElasticPool",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_ElasticPool
+// Storage version of v1beta20211101.ServersElasticPool
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ElasticPools.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}
-type Servers_ElasticPoolList struct {
+type ServersElasticPoolList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_ElasticPool `json:"items"`
+	Items           []ServersElasticPool `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_ElasticPool_Spec
@@ -237,5 +237,5 @@ type ElasticPoolPerDatabaseSettings_STATUS struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_ElasticPool{}, &Servers_ElasticPoolList{})
+	SchemeBuilder.Register(&ServersElasticPool{}, &ServersElasticPoolList{})
 }

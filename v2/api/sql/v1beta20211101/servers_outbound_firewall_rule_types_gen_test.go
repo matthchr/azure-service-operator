@@ -18,32 +18,32 @@ import (
 	"testing"
 )
 
-func Test_Servers_OutboundFirewallRule_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersOutboundFirewallRule_WhenConvertedToHub_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	parameters.MinSuccessfulTests = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_OutboundFirewallRule to hub returns original",
-		prop.ForAll(RunResourceConversionTestForServers_OutboundFirewallRule, Servers_OutboundFirewallRuleGenerator()))
+		"Round trip from ServersOutboundFirewallRule to hub returns original",
+		prop.ForAll(RunResourceConversionTestForServersOutboundFirewallRule, ServersOutboundFirewallRuleGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunResourceConversionTestForServers_OutboundFirewallRule tests if a specific instance of Servers_OutboundFirewallRule round trips to the hub storage version and back losslessly
-func RunResourceConversionTestForServers_OutboundFirewallRule(subject Servers_OutboundFirewallRule) string {
+// RunResourceConversionTestForServersOutboundFirewallRule tests if a specific instance of ServersOutboundFirewallRule round trips to the hub storage version and back losslessly
+func RunResourceConversionTestForServersOutboundFirewallRule(subject ServersOutboundFirewallRule) string {
 	// Copy subject to make sure conversion doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Convert to our hub version
-	var hub v20211101s.Servers_OutboundFirewallRule
+	var hub v20211101s.ServersOutboundFirewallRule
 	err := copied.ConvertTo(&hub)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Convert from our hub version
-	var actual Servers_OutboundFirewallRule
+	var actual ServersOutboundFirewallRule
 	err = actual.ConvertFrom(&hub)
 	if err != nil {
 		return err.Error()
@@ -61,32 +61,32 @@ func RunResourceConversionTestForServers_OutboundFirewallRule(subject Servers_Ou
 	return ""
 }
 
-func Test_Servers_OutboundFirewallRule_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+func Test_ServersOutboundFirewallRule_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MaxSize = 10
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip from Servers_OutboundFirewallRule to Servers_OutboundFirewallRule via AssignProperties_To_Servers_OutboundFirewallRule & AssignProperties_From_Servers_OutboundFirewallRule returns original",
-		prop.ForAll(RunPropertyAssignmentTestForServers_OutboundFirewallRule, Servers_OutboundFirewallRuleGenerator()))
+		"Round trip from ServersOutboundFirewallRule to ServersOutboundFirewallRule via AssignProperties_To_ServersOutboundFirewallRule & AssignProperties_From_ServersOutboundFirewallRule returns original",
+		prop.ForAll(RunPropertyAssignmentTestForServersOutboundFirewallRule, ServersOutboundFirewallRuleGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
 }
 
-// RunPropertyAssignmentTestForServers_OutboundFirewallRule tests if a specific instance of Servers_OutboundFirewallRule can be assigned to v1beta20211101storage and back losslessly
-func RunPropertyAssignmentTestForServers_OutboundFirewallRule(subject Servers_OutboundFirewallRule) string {
+// RunPropertyAssignmentTestForServersOutboundFirewallRule tests if a specific instance of ServersOutboundFirewallRule can be assigned to v1beta20211101storage and back losslessly
+func RunPropertyAssignmentTestForServersOutboundFirewallRule(subject ServersOutboundFirewallRule) string {
 	// Copy subject to make sure assignment doesn't modify it
 	copied := subject.DeepCopy()
 
 	// Use AssignPropertiesTo() for the first stage of conversion
-	var other v20211101s.Servers_OutboundFirewallRule
-	err := copied.AssignProperties_To_Servers_OutboundFirewallRule(&other)
+	var other v20211101s.ServersOutboundFirewallRule
+	err := copied.AssignProperties_To_ServersOutboundFirewallRule(&other)
 	if err != nil {
 		return err.Error()
 	}
 
 	// Use AssignPropertiesFrom() to convert back to our original type
-	var actual Servers_OutboundFirewallRule
-	err = actual.AssignProperties_From_Servers_OutboundFirewallRule(&other)
+	var actual ServersOutboundFirewallRule
+	err = actual.AssignProperties_From_ServersOutboundFirewallRule(&other)
 	if err != nil {
 		return err.Error()
 	}
@@ -103,20 +103,20 @@ func RunPropertyAssignmentTestForServers_OutboundFirewallRule(subject Servers_Ou
 	return ""
 }
 
-func Test_Servers_OutboundFirewallRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersOutboundFirewallRule_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_OutboundFirewallRule via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_OutboundFirewallRule, Servers_OutboundFirewallRuleGenerator()))
+		"Round trip of ServersOutboundFirewallRule via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersOutboundFirewallRule, ServersOutboundFirewallRuleGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_OutboundFirewallRule runs a test to see if a specific instance of Servers_OutboundFirewallRule round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_OutboundFirewallRule(subject Servers_OutboundFirewallRule) string {
+// RunJSONSerializationTestForServersOutboundFirewallRule runs a test to see if a specific instance of ServersOutboundFirewallRule round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersOutboundFirewallRule(subject ServersOutboundFirewallRule) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -124,7 +124,7 @@ func RunJSONSerializationTestForServers_OutboundFirewallRule(subject Servers_Out
 	}
 
 	// Deserialize back into memory
-	var actual Servers_OutboundFirewallRule
+	var actual ServersOutboundFirewallRule
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -142,25 +142,25 @@ func RunJSONSerializationTestForServers_OutboundFirewallRule(subject Servers_Out
 	return ""
 }
 
-// Generator of Servers_OutboundFirewallRule instances for property testing - lazily instantiated by
-// Servers_OutboundFirewallRuleGenerator()
-var servers_OutboundFirewallRuleGenerator gopter.Gen
+// Generator of ServersOutboundFirewallRule instances for property testing - lazily instantiated by
+// ServersOutboundFirewallRuleGenerator()
+var serversOutboundFirewallRuleGenerator gopter.Gen
 
-// Servers_OutboundFirewallRuleGenerator returns a generator of Servers_OutboundFirewallRule instances for property testing.
-func Servers_OutboundFirewallRuleGenerator() gopter.Gen {
-	if servers_OutboundFirewallRuleGenerator != nil {
-		return servers_OutboundFirewallRuleGenerator
+// ServersOutboundFirewallRuleGenerator returns a generator of ServersOutboundFirewallRule instances for property testing.
+func ServersOutboundFirewallRuleGenerator() gopter.Gen {
+	if serversOutboundFirewallRuleGenerator != nil {
+		return serversOutboundFirewallRuleGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_OutboundFirewallRule(generators)
-	servers_OutboundFirewallRuleGenerator = gen.Struct(reflect.TypeOf(Servers_OutboundFirewallRule{}), generators)
+	AddRelatedPropertyGeneratorsForServersOutboundFirewallRule(generators)
+	serversOutboundFirewallRuleGenerator = gen.Struct(reflect.TypeOf(ServersOutboundFirewallRule{}), generators)
 
-	return servers_OutboundFirewallRuleGenerator
+	return serversOutboundFirewallRuleGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_OutboundFirewallRule is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_OutboundFirewallRule(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersOutboundFirewallRule is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersOutboundFirewallRule(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_OutboundFirewallRule_SpecGenerator()
 	gens["Status"] = Servers_OutboundFirewallRule_STATUSGenerator()
 }

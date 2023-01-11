@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_FailoverGroup_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersFailoverGroup_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_FailoverGroup via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_FailoverGroup, Servers_FailoverGroupGenerator()))
+		"Round trip of ServersFailoverGroup via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersFailoverGroup, ServersFailoverGroupGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_FailoverGroup runs a test to see if a specific instance of Servers_FailoverGroup round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_FailoverGroup(subject Servers_FailoverGroup) string {
+// RunJSONSerializationTestForServersFailoverGroup runs a test to see if a specific instance of ServersFailoverGroup round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersFailoverGroup(subject ServersFailoverGroup) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_FailoverGroup(subject Servers_FailoverGr
 	}
 
 	// Deserialize back into memory
-	var actual Servers_FailoverGroup
+	var actual ServersFailoverGroup
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_FailoverGroup(subject Servers_FailoverGr
 	return ""
 }
 
-// Generator of Servers_FailoverGroup instances for property testing - lazily instantiated by
-// Servers_FailoverGroupGenerator()
-var servers_FailoverGroupGenerator gopter.Gen
+// Generator of ServersFailoverGroup instances for property testing - lazily instantiated by
+// ServersFailoverGroupGenerator()
+var serversFailoverGroupGenerator gopter.Gen
 
-// Servers_FailoverGroupGenerator returns a generator of Servers_FailoverGroup instances for property testing.
-func Servers_FailoverGroupGenerator() gopter.Gen {
-	if servers_FailoverGroupGenerator != nil {
-		return servers_FailoverGroupGenerator
+// ServersFailoverGroupGenerator returns a generator of ServersFailoverGroup instances for property testing.
+func ServersFailoverGroupGenerator() gopter.Gen {
+	if serversFailoverGroupGenerator != nil {
+		return serversFailoverGroupGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_FailoverGroup(generators)
-	servers_FailoverGroupGenerator = gen.Struct(reflect.TypeOf(Servers_FailoverGroup{}), generators)
+	AddRelatedPropertyGeneratorsForServersFailoverGroup(generators)
+	serversFailoverGroupGenerator = gen.Struct(reflect.TypeOf(ServersFailoverGroup{}), generators)
 
-	return servers_FailoverGroupGenerator
+	return serversFailoverGroupGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_FailoverGroup is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_FailoverGroup(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersFailoverGroup is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersFailoverGroup(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_FailoverGroup_SpecGenerator()
 	gens["Status"] = Servers_FailoverGroup_STATUSGenerator()
 }

@@ -17,20 +17,20 @@ import (
 	"testing"
 )
 
-func Test_Servers_AuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+func Test_ServersAuditingSetting_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
 	parameters.MinSuccessfulTests = 20
 	parameters.MaxSize = 3
 	properties := gopter.NewProperties(parameters)
 	properties.Property(
-		"Round trip of Servers_AuditingSetting via JSON returns original",
-		prop.ForAll(RunJSONSerializationTestForServers_AuditingSetting, Servers_AuditingSettingGenerator()))
+		"Round trip of ServersAuditingSetting via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersAuditingSetting, ServersAuditingSettingGenerator()))
 	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
 }
 
-// RunJSONSerializationTestForServers_AuditingSetting runs a test to see if a specific instance of Servers_AuditingSetting round trips to JSON and back losslessly
-func RunJSONSerializationTestForServers_AuditingSetting(subject Servers_AuditingSetting) string {
+// RunJSONSerializationTestForServersAuditingSetting runs a test to see if a specific instance of ServersAuditingSetting round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersAuditingSetting(subject ServersAuditingSetting) string {
 	// Serialize to JSON
 	bin, err := json.Marshal(subject)
 	if err != nil {
@@ -38,7 +38,7 @@ func RunJSONSerializationTestForServers_AuditingSetting(subject Servers_Auditing
 	}
 
 	// Deserialize back into memory
-	var actual Servers_AuditingSetting
+	var actual ServersAuditingSetting
 	err = json.Unmarshal(bin, &actual)
 	if err != nil {
 		return err.Error()
@@ -56,25 +56,25 @@ func RunJSONSerializationTestForServers_AuditingSetting(subject Servers_Auditing
 	return ""
 }
 
-// Generator of Servers_AuditingSetting instances for property testing - lazily instantiated by
-// Servers_AuditingSettingGenerator()
-var servers_AuditingSettingGenerator gopter.Gen
+// Generator of ServersAuditingSetting instances for property testing - lazily instantiated by
+// ServersAuditingSettingGenerator()
+var serversAuditingSettingGenerator gopter.Gen
 
-// Servers_AuditingSettingGenerator returns a generator of Servers_AuditingSetting instances for property testing.
-func Servers_AuditingSettingGenerator() gopter.Gen {
-	if servers_AuditingSettingGenerator != nil {
-		return servers_AuditingSettingGenerator
+// ServersAuditingSettingGenerator returns a generator of ServersAuditingSetting instances for property testing.
+func ServersAuditingSettingGenerator() gopter.Gen {
+	if serversAuditingSettingGenerator != nil {
+		return serversAuditingSettingGenerator
 	}
 
 	generators := make(map[string]gopter.Gen)
-	AddRelatedPropertyGeneratorsForServers_AuditingSetting(generators)
-	servers_AuditingSettingGenerator = gen.Struct(reflect.TypeOf(Servers_AuditingSetting{}), generators)
+	AddRelatedPropertyGeneratorsForServersAuditingSetting(generators)
+	serversAuditingSettingGenerator = gen.Struct(reflect.TypeOf(ServersAuditingSetting{}), generators)
 
-	return servers_AuditingSettingGenerator
+	return serversAuditingSettingGenerator
 }
 
-// AddRelatedPropertyGeneratorsForServers_AuditingSetting is a factory method for creating gopter generators
-func AddRelatedPropertyGeneratorsForServers_AuditingSetting(gens map[string]gopter.Gen) {
+// AddRelatedPropertyGeneratorsForServersAuditingSetting is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServersAuditingSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = Servers_AuditingSetting_SpecGenerator()
 	gens["Status"] = Servers_AuditingSetting_STATUSGenerator()
 }

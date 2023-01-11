@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BackupShortTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/default
-type Servers_Databases_BackupShortTermRetentionPolicy struct {
+type ServersDatabasesBackupShortTermRetentionPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_Databases_BackupShortTermRetentionPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_Databases_BackupShortTermRetentionPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ conditions.Conditioner = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ conversion.Convertible = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
-// ConvertFrom populates our Servers_Databases_BackupShortTermRetentionPolicy from the provided hub Servers_Databases_BackupShortTermRetentionPolicy
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_Databases_BackupShortTermRetentionPolicy)
+// ConvertFrom populates our ServersDatabasesBackupShortTermRetentionPolicy from the provided hub ServersDatabasesBackupShortTermRetentionPolicy
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersDatabasesBackupShortTermRetentionPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_BackupShortTermRetentionPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesBackupShortTermRetentionPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_From_Servers_Databases_BackupShortTermRetentionPolicy(source)
+	return policy.AssignProperties_From_ServersDatabasesBackupShortTermRetentionPolicy(source)
 }
 
-// ConvertTo populates the provided hub Servers_Databases_BackupShortTermRetentionPolicy from our Servers_Databases_BackupShortTermRetentionPolicy
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_Databases_BackupShortTermRetentionPolicy)
+// ConvertTo populates the provided hub ServersDatabasesBackupShortTermRetentionPolicy from our ServersDatabasesBackupShortTermRetentionPolicy
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersDatabasesBackupShortTermRetentionPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_Databases_BackupShortTermRetentionPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersDatabasesBackupShortTermRetentionPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_To_Servers_Databases_BackupShortTermRetentionPolicy(destination)
+	return policy.AssignProperties_To_ServersDatabasesBackupShortTermRetentionPolicy(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_databases_backupshorttermretentionpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_backupshorttermretentionpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_databases_backupshorttermretentionpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversdatabasesbackupshorttermretentionpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasesbackupshorttermretentionpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversdatabasesbackupshorttermretentionpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ admission.Defaulter = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
-// Default applies defaults to the Servers_Databases_BackupShortTermRetentionPolicy resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Default() {
+// Default applies defaults to the ServersDatabasesBackupShortTermRetentionPolicy resource
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) Default() {
 	policy.defaultImpl()
 	var temp interface{} = policy
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -81,48 +81,48 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Default() {
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_Databases_BackupShortTermRetentionPolicy resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) defaultImpl() {}
+// defaultImpl applies the code generated defaults to the ServersDatabasesBackupShortTermRetentionPolicy resource
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) defaultImpl() {}
 
-var _ genruntime.KubernetesResource = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ genruntime.KubernetesResource = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AzureName() string {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_Databases_BackupShortTermRetentionPolicy) GetAPIVersion() string {
+func (policy ServersDatabasesBackupShortTermRetentionPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) GetType() string {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) GetType() string {
 	return "Microsoft.Sql/servers/databases/backupShortTermRetentionPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_Databases_BackupShortTermRetentionPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -132,7 +132,7 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) Owner() *genrunt
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_Databases_BackupShortTermRetentionPolicy_STATUS); ok {
 		policy.Status = *st
@@ -150,12 +150,12 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) SetStatus(status
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_databases_backupshorttermretentionpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_databases_backupshorttermretentionpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_databases_backupshorttermretentionpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversdatabasesbackupshorttermretentionpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversdatabasesbackupshorttermretentionpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversdatabasesbackupshorttermretentionpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_Databases_BackupShortTermRetentionPolicy{}
+var _ admission.Validator = &ServersDatabasesBackupShortTermRetentionPolicy{}
 
 // ValidateCreate validates the creation of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateCreate() error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) ValidateCreate() error {
 	validations := policy.createValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -172,7 +172,7 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateCreate()
 }
 
 // ValidateDelete validates the deletion of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateDelete() error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) ValidateDelete() error {
 	validations := policy.deleteValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -189,7 +189,7 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateDelete()
 }
 
 // ValidateUpdate validates an update of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateUpdate(old runtime.Object) error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) ValidateUpdate(old runtime.Object) error {
 	validations := policy.updateValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -206,17 +206,17 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) ValidateUpdate(o
 }
 
 // createValidations validates the creation of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) createValidations() []func() error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) createValidations() []func() error {
 	return []func() error{policy.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) deleteValidations() []func() error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) updateValidations() []func(old runtime.Object) error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return policy.validateResourceReferences()
@@ -225,7 +225,7 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) updateValidation
 }
 
 // validateResourceReferences validates all resource references
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) validateResourceReferences() error {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&policy.Spec)
 	if err != nil {
 		return err
@@ -234,8 +234,8 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) validateResource
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_Databases_BackupShortTermRetentionPolicy)
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersDatabasesBackupShortTermRetentionPolicy)
 	if !ok {
 		return nil
 	}
@@ -243,8 +243,8 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) validateWriteOnc
 	return genruntime.ValidateWriteOnceProperties(oldObj, policy)
 }
 
-// AssignProperties_From_Servers_Databases_BackupShortTermRetentionPolicy populates our Servers_Databases_BackupShortTermRetentionPolicy from the provided source Servers_Databases_BackupShortTermRetentionPolicy
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AssignProperties_From_Servers_Databases_BackupShortTermRetentionPolicy(source *v20211101s.Servers_Databases_BackupShortTermRetentionPolicy) error {
+// AssignProperties_From_ServersDatabasesBackupShortTermRetentionPolicy populates our ServersDatabasesBackupShortTermRetentionPolicy from the provided source ServersDatabasesBackupShortTermRetentionPolicy
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) AssignProperties_From_ServersDatabasesBackupShortTermRetentionPolicy(source *v20211101s.ServersDatabasesBackupShortTermRetentionPolicy) error {
 
 	// ObjectMeta
 	policy.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -269,8 +269,8 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AssignProperties
 	return nil
 }
 
-// AssignProperties_To_Servers_Databases_BackupShortTermRetentionPolicy populates the provided destination Servers_Databases_BackupShortTermRetentionPolicy from our Servers_Databases_BackupShortTermRetentionPolicy
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AssignProperties_To_Servers_Databases_BackupShortTermRetentionPolicy(destination *v20211101s.Servers_Databases_BackupShortTermRetentionPolicy) error {
+// AssignProperties_To_ServersDatabasesBackupShortTermRetentionPolicy populates the provided destination ServersDatabasesBackupShortTermRetentionPolicy from our ServersDatabasesBackupShortTermRetentionPolicy
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) AssignProperties_To_ServersDatabasesBackupShortTermRetentionPolicy(destination *v20211101s.ServersDatabasesBackupShortTermRetentionPolicy) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *policy.ObjectMeta.DeepCopy()
@@ -296,11 +296,11 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) AssignProperties
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_Databases_BackupShortTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersDatabasesBackupShortTermRetentionPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion(),
-		Kind:    "Servers_Databases_BackupShortTermRetentionPolicy",
+		Kind:    "ServersDatabasesBackupShortTermRetentionPolicy",
 	}
 }
 
@@ -308,10 +308,10 @@ func (policy *Servers_Databases_BackupShortTermRetentionPolicy) OriginalGVK() *s
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/BackupShortTermRetentionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/default
-type Servers_Databases_BackupShortTermRetentionPolicyList struct {
+type ServersDatabasesBackupShortTermRetentionPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_Databases_BackupShortTermRetentionPolicy `json:"items"`
+	Items           []ServersDatabasesBackupShortTermRetentionPolicy `json:"items"`
 }
 
 type Servers_Databases_BackupShortTermRetentionPolicy_Spec struct {
@@ -322,8 +322,8 @@ type Servers_Databases_BackupShortTermRetentionPolicy_Spec struct {
 	// +kubebuilder:validation:Required
 	// Owner: The owner of the resource. The owner controls where the resource goes when it is deployed. The owner also
 	// controls the resources lifecycle. When the owner is deleted the resource will also be deleted. Owner is expected to be a
-	// reference to a sql.azure.com/Servers_Database resource
-	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"Servers_Database"`
+	// reference to a sql.azure.com/ServersDatabase resource
+	Owner *genruntime.KnownResourceReference `group:"sql.azure.com" json:"owner,omitempty" kind:"ServersDatabase"`
 
 	// RetentionDays: The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	RetentionDays *int `json:"retentionDays,omitempty"`
@@ -724,5 +724,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_Databases_BackupShortTermRetentionPolicy{}, &Servers_Databases_BackupShortTermRetentionPolicyList{})
+	SchemeBuilder.Register(&ServersDatabasesBackupShortTermRetentionPolicy{}, &ServersDatabasesBackupShortTermRetentionPolicyList{})
 }

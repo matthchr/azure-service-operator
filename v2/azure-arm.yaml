@@ -597,6 +597,12 @@ status:
 #     The value should be the name of the parent resource which owns the lifecycle of the
 #     sub-resource.
 #
+# $importConfigMapMode: <optional|required>
+#     Specifies that the property can be imported from a config map.
+#     Optional: The property may be specified as string or imported from a config map.
+#               To achieve this in a non-breaking way, a new property is added to the object living alongside
+#               the existing property. The new property is called <propName>FromConfig.
+#     Required: The property must be specified from a config map, it cannot be given as a raw string.
 objectModelConfiguration:
   appconfiguration:
     2022-05-01:
@@ -1322,144 +1328,165 @@ objectModelConfiguration:
         $supportedFrom: v2.0.0-alpha.4
   sql:
     2021-11-01:
-      ManagedInstance:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      ManagedInstances_Administrator: -- for some reason can't find status
+#      ManagedInstance:
 #        $export: true
 #        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_Database:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_Databases_BackupLongTermRetentionPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_Databases_BackupShortTermRetentionPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_Databases_SecurityAlertPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      ManagedInstances_Databases_TransparentDataEncryption:  -- Can't find status
+#      # TODO: For admin below, we need these params from config:
+#      # // +kubebuilder:validation:Required
+#      #	// +kubebuilder:validation:Pattern="^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+#      #	// Sid: SID (object ID) of the managed instance administrator.
+#      #	Sid *string `json:"sid,omitempty"`
+#      #
+#      #	// +kubebuilder:validation:Pattern="^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+#      #	// TenantId: Tenant ID of the managed instance administrator.
+#      #	TenantId *string `json:"tenantId,omitempty"`
+#      ManagedInstances_Administrator:
+#        $exportAs: ManagedInstancesAdministrator
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Database:
+#        $exportAs: ManagedInstancesDatabase
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Databases_BackupLongTermRetentionPolicy:
+#        $exportAs: ManagedInstancesDatabasesBackupLongTermRetentionPolicy
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Databases_BackupShortTermRetentionPolicy:
+#        $exportAs: ManagedInstancesDatabasesBackupShortTermRetentionPolicy
+#        $supportedFrom: v2.0.0-beta.4
+# TODO: Not enabling the below yet because they're hard to test (ManagedInstance is slow to deploy)
+#      ManagedInstances_Databases_SecurityAlertPolicy:
+#        $exportAs: ManagedInstancesDatabasesSecurityAlertPolicy
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_Databases_TransparentDataEncryption:
+#        $exportAs: ManagedInstancesDatabasesTransparentDataEncryption
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_DistributedAvailabilityGroup:
+#        $exportAs: ManagedInstancesTransparentDataEncryption
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_DnsAliase: # TODO: Name fix
+#        $exportAs: ManagedInstancesDnsAlias
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_EncryptionProtector:
+#        $exportAs: ManagedInstancesEncryptionProtector
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_SecurityAlertPolicy:
+#        $exportAs: ManagedInstancesSecurityAlertPolicy
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_ServerTrustCertificate:
+#        $exportAs: ManagedInstancesServerTrustCertificate
+#        $supportedFrom: v2.0.0-beta.4
+#      ManagedInstances_VulnerabilityAssessment: # TODO: This seems to cause an issue with
 #        $export: true
 #        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_DistributedAvailabilityGroup:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_DnsAliase: # TODO: Name fix
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      ManagedInstances_EncryptionProtector: -- Can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-#      ManagedInstances_SecurityAlertPolicy: -- Cant find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_ServerTrustCertificate:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      ManagedInstances_VulnerabilityAssessment:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
       Server:
         $export: true
+        $supportedFrom: v2.0.0
+      Servers_Administrator:
+        $exportAs: ServersAdministrator
         $supportedFrom: v2.0.0-beta.4
-#      Servers_Administrator: -- Can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-#      Servers_AdvancedThreatProtectionSetting: -- Can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      Servers_AuditingSetting:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      Servers_AzureADOnlyAuthentication:  -- can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
+      Servers_SecurityAlertPolicy:
+        $exportAs: ServersSecurityAlertPolicy
+        $supportedFrom: v2.0.0
+      AdministratorProperties:
+        Sid:
+          $importConfigMapMode: optional
+        TenantId:
+          $importConfigMapMode: optional
+      Servers_AdvancedThreatProtectionSetting:
+        $exportAs: ServersAdvancedThreatProtectionSetting
+        $supportedFrom: v2.0.0
+      Servers_AuditingSetting: # TODO: StorageEndpoint may need configmap import or secret import?
+        $exportAs: ServersAuditingSetting
+        $supportedFrom: v2.0.0
+      Servers_AzureADOnlyAuthentication:
+        $exportAs: ServersAzureADOnlyAuthentication
+        $supportedFrom: v2.0.0
       Servers_ConnectionPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Database:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_AdvancedThreatProtectionSetting: -- can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_AuditingSetting:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_BackupLongTermRetentionPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_BackupShortTermRetentionPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_DataMaskingPolicy: -- Cant find status -- there's also a "Rules" subresource here
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_ExtendedAuditingSetting:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_Extension: -- Testing removing this
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_GeoBackupPolicy: -- Can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_MaintenanceWindow: -- Can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_SecurityAlertPolicy:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_SyncGroup:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_SyncGroups_SyncMember:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-#      Servers_Databases_TransparentDataEncryption: -- can't find status
-#        $export: true
-#        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_VulnerabilityAssessment:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_WorkloadGroup:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_Databases_WorkloadGroups_WorkloadClassifier:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_DnsAliase: # TODO: Name fix
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersConnectionPolicy
+        $supportedFrom: v2.0.0
+#      Servers_DnsAliase: # TODO: Not following how this works - it has no properties but name
+#        $exportAs: ServersDnsAliases
+#        $supportedFrom: v2.0.0
       Servers_ElasticPool:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_FailoverGroup:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersElasticPool
+        $supportedFrom: v2.0.0
+      Servers_FailoverGroup: # TODO: Could maybe test this
+        $exportAs: ServersFailoverGroup
+        $supportedFrom: v2.0.0
       Servers_FirewallRule:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersFirewallRule
+        $supportedFrom: v2.0.0
       Servers_Ipv6FirewallRule:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_JobAgent:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersIPV6FirewallRule
+        $supportedFrom: v2.0.0
+#      Servers_JobAgent:
+#        $exportAs: ServersJobAgent
+#        $supportedFrom: v2.0.0
       Servers_OutboundFirewallRule:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
-      Servers_SyncAgent:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersOutboundFirewallRule
+        $supportedFrom: v2.0.0
+#      Servers_SyncAgent:
+#        $exportAs: ServersSyncAgent
+#        $supportedFrom: v2.0.0
       Servers_VirtualNetworkRule:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersVirtualNetworkRule
+        $supportedFrom: v2.0.0
       Servers_VulnerabilityAssessment:
-        $export: true
-        $supportedFrom: v2.0.0-beta.4
+        $exportAs: ServersVulnerabilityAssessment
+        $supportedFrom: v2.0.0
+      ServerVulnerabilityAssessmentProperties:
+        StorageContainerPath:
+          $importConfigMapMode: optional
+      Servers_Database:
+        $exportAs: ServersDatabase
+        $supportedFrom: v2.0.0
+      Servers_Databases_BackupLongTermRetentionPolicy:
+        $exportAs: ServersDatabasesBackupLongTermRetentionPolicy
+        $supportedFrom: v2.0.0
+      Servers_Databases_BackupShortTermRetentionPolicy:
+        $exportAs: ServersDatabasesBackupShortTermRetentionPolicy
+        $supportedFrom: v2.0.0
+      Servers_Databases_AdvancedThreatProtectionSetting:
+        $exportAs: ServersDatabasesAdvancedThreatProtectionSetting
+        $supportedFrom: v2.0.0
+      Servers_Databases_AuditingSetting:
+        $exportAs: ServersDatabasesAuditingSetting
+        $supportedFrom: v2.0.0
+#      Servers_Databases_DataMaskingPolicy: # TODO: there's also a "Rules" subresource here
+#        $exportAs: ServersDatabasesDataMaskingPolicy
+#        $supportedFrom: v2.0.0
+      Servers_Databases_ExtendedAuditingSetting:
+        $exportAs: ServersDatabasesExtendedAuditingSetting
+        $supportedFrom: v2.0.0
+      Servers_Databases_GeoBackupPolicy:
+        $exportAs: ServersDatabasesGeoBackupPolicy
+        $supportedFrom: v2.0.0
+#      Servers_Databases_MaintenanceWindow: # TODO: Seems to have name Servers_Databases_MaintenanceWindows_Current, not sure why
+#        $exportAs: ServersDatabasesMaintenanceWindow
+#        $supportedFrom: v2.0.0
+      Servers_Databases_SecurityAlertPolicy:
+        $exportAs: ServersDatabasesSecurityAlertPolicy
+        $supportedFrom: v2.0.0
+#      Servers_Databases_SyncGroup:
+#        $exportAs: ServersDatabasesSyncGroups
+#        $supportedFrom: v2.0.0
+#      Servers_Databases_SyncGroups_SyncMember:
+#        $exportAs: ServersDatabasesSyncGroupsSyncMember
+#        $supportedFrom: v2.0.0
+      Servers_Databases_TransparentDataEncryption:
+        $exportAs: ServersDatabasesTransparentDataEncryption
+        $supportedFrom: v2.0.0
+      Servers_Databases_VulnerabilityAssessment:
+        $exportAs: ServersDatabasesVulnerabilityAssessment
+        $supportedFrom: v2.0.0
+      DatabaseVulnerabilityAssessmentsDatabaseVulnerabilityAssessmentProperties:
+        StorageContainerPath:
+          $importConfigMapMode: optional
+#      Servers_Databases_WorkloadGroup:
+#        $exportAs: ServersDatabasesWorkloadGroup
+#        $supportedFrom: v2.0.0
+#      Servers_Databases_WorkloadGroups_WorkloadClassifier:
+#        $exportAs: ServersDatabasesWorkloadGroupsWorkloadClassifier
+#        $supportedFrom: v2.0.0
   storage:
     2021-04-01:
       EncryptionIdentity:

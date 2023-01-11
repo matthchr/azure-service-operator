@@ -11,8 +11,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-// +kubebuilder:rbac:groups=sql.azure.com,resources=servers_firewallrules,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=sql.azure.com,resources={servers_firewallrules/status,servers_firewallrules/finalizers},verbs=get;update;patch
+// +kubebuilder:rbac:groups=sql.azure.com,resources=serversfirewallrules,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=sql.azure.com,resources={serversfirewallrules/status,serversfirewallrules/finalizers},verbs=get;update;patch
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
@@ -21,68 +21,68 @@ import (
 // +kubebuilder:printcolumn:name="Severity",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].severity"
 // +kubebuilder:printcolumn:name="Reason",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].reason"
 // +kubebuilder:printcolumn:name="Message",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].message"
-// Storage version of v1beta20211101.Servers_FirewallRule
+// Storage version of v1beta20211101.ServersFirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}
-type Servers_FirewallRule struct {
+type ServersFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_FirewallRule_Spec   `json:"spec,omitempty"`
 	Status            Servers_FirewallRule_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_FirewallRule{}
+var _ conditions.Conditioner = &ServersFirewallRule{}
 
 // GetConditions returns the conditions of the resource
-func (rule *Servers_FirewallRule) GetConditions() conditions.Conditions {
+func (rule *ServersFirewallRule) GetConditions() conditions.Conditions {
 	return rule.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (rule *Servers_FirewallRule) SetConditions(conditions conditions.Conditions) {
+func (rule *ServersFirewallRule) SetConditions(conditions conditions.Conditions) {
 	rule.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesResource = &Servers_FirewallRule{}
+var _ genruntime.KubernetesResource = &ServersFirewallRule{}
 
 // AzureName returns the Azure name of the resource
-func (rule *Servers_FirewallRule) AzureName() string {
+func (rule *ServersFirewallRule) AzureName() string {
 	return rule.Spec.AzureName
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (rule Servers_FirewallRule) GetAPIVersion() string {
+func (rule ServersFirewallRule) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (rule *Servers_FirewallRule) GetResourceScope() genruntime.ResourceScope {
+func (rule *ServersFirewallRule) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (rule *Servers_FirewallRule) GetSpec() genruntime.ConvertibleSpec {
+func (rule *ServersFirewallRule) GetSpec() genruntime.ConvertibleSpec {
 	return &rule.Spec
 }
 
 // GetStatus returns the status of this resource
-func (rule *Servers_FirewallRule) GetStatus() genruntime.ConvertibleStatus {
+func (rule *ServersFirewallRule) GetStatus() genruntime.ConvertibleStatus {
 	return &rule.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/firewallRules"
-func (rule *Servers_FirewallRule) GetType() string {
+func (rule *ServersFirewallRule) GetType() string {
 	return "Microsoft.Sql/servers/firewallRules"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (rule *Servers_FirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (rule *ServersFirewallRule) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_FirewallRule_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (rule *Servers_FirewallRule) Owner() *genruntime.ResourceReference {
+func (rule *ServersFirewallRule) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(rule.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -92,7 +92,7 @@ func (rule *Servers_FirewallRule) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (rule *Servers_FirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
+func (rule *ServersFirewallRule) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_FirewallRule_STATUS); ok {
 		rule.Status = *st
@@ -110,27 +110,27 @@ func (rule *Servers_FirewallRule) SetStatus(status genruntime.ConvertibleStatus)
 	return nil
 }
 
-// Hub marks that this Servers_FirewallRule is the hub type for conversion
-func (rule *Servers_FirewallRule) Hub() {}
+// Hub marks that this ServersFirewallRule is the hub type for conversion
+func (rule *ServersFirewallRule) Hub() {}
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (rule *Servers_FirewallRule) OriginalGVK() *schema.GroupVersionKind {
+func (rule *ServersFirewallRule) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: rule.Spec.OriginalVersion,
-		Kind:    "Servers_FirewallRule",
+		Kind:    "ServersFirewallRule",
 	}
 }
 
 // +kubebuilder:object:root=true
-// Storage version of v1beta20211101.Servers_FirewallRule
+// Storage version of v1beta20211101.ServersFirewallRule
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}
-type Servers_FirewallRuleList struct {
+type ServersFirewallRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_FirewallRule `json:"items"`
+	Items           []ServersFirewallRule `json:"items"`
 }
 
 // Storage version of v1beta20211101.Servers_FirewallRule_Spec
@@ -202,5 +202,5 @@ func (rule *Servers_FirewallRule_STATUS) ConvertStatusTo(destination genruntime.
 }
 
 func init() {
-	SchemeBuilder.Register(&Servers_FirewallRule{}, &Servers_FirewallRuleList{})
+	SchemeBuilder.Register(&ServersFirewallRule{}, &ServersFirewallRuleList{})
 }

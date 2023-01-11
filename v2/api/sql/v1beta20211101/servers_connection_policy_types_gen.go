@@ -27,53 +27,53 @@ import (
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ServerConnectionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/default
-type Servers_ConnectionPolicy struct {
+type ServersConnectionPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Spec              Servers_ConnectionPolicy_Spec   `json:"spec,omitempty"`
 	Status            Servers_ConnectionPolicy_STATUS `json:"status,omitempty"`
 }
 
-var _ conditions.Conditioner = &Servers_ConnectionPolicy{}
+var _ conditions.Conditioner = &ServersConnectionPolicy{}
 
 // GetConditions returns the conditions of the resource
-func (policy *Servers_ConnectionPolicy) GetConditions() conditions.Conditions {
+func (policy *ServersConnectionPolicy) GetConditions() conditions.Conditions {
 	return policy.Status.Conditions
 }
 
 // SetConditions sets the conditions on the resource status
-func (policy *Servers_ConnectionPolicy) SetConditions(conditions conditions.Conditions) {
+func (policy *ServersConnectionPolicy) SetConditions(conditions conditions.Conditions) {
 	policy.Status.Conditions = conditions
 }
 
-var _ conversion.Convertible = &Servers_ConnectionPolicy{}
+var _ conversion.Convertible = &ServersConnectionPolicy{}
 
-// ConvertFrom populates our Servers_ConnectionPolicy from the provided hub Servers_ConnectionPolicy
-func (policy *Servers_ConnectionPolicy) ConvertFrom(hub conversion.Hub) error {
-	source, ok := hub.(*v20211101s.Servers_ConnectionPolicy)
+// ConvertFrom populates our ServersConnectionPolicy from the provided hub ServersConnectionPolicy
+func (policy *ServersConnectionPolicy) ConvertFrom(hub conversion.Hub) error {
+	source, ok := hub.(*v20211101s.ServersConnectionPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_ConnectionPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersConnectionPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_From_Servers_ConnectionPolicy(source)
+	return policy.AssignProperties_From_ServersConnectionPolicy(source)
 }
 
-// ConvertTo populates the provided hub Servers_ConnectionPolicy from our Servers_ConnectionPolicy
-func (policy *Servers_ConnectionPolicy) ConvertTo(hub conversion.Hub) error {
-	destination, ok := hub.(*v20211101s.Servers_ConnectionPolicy)
+// ConvertTo populates the provided hub ServersConnectionPolicy from our ServersConnectionPolicy
+func (policy *ServersConnectionPolicy) ConvertTo(hub conversion.Hub) error {
+	destination, ok := hub.(*v20211101s.ServersConnectionPolicy)
 	if !ok {
-		return fmt.Errorf("expected sql/v1beta20211101storage/Servers_ConnectionPolicy but received %T instead", hub)
+		return fmt.Errorf("expected sql/v1beta20211101storage/ServersConnectionPolicy but received %T instead", hub)
 	}
 
-	return policy.AssignProperties_To_Servers_ConnectionPolicy(destination)
+	return policy.AssignProperties_To_ServersConnectionPolicy(destination)
 }
 
-// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-servers_connectionpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_connectionpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.servers_connectionpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/mutate-sql-azure-com-v1beta20211101-serversconnectionpolicy,mutating=true,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversconnectionpolicies,verbs=create;update,versions=v1beta20211101,name=default.v1beta20211101.serversconnectionpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Defaulter = &Servers_ConnectionPolicy{}
+var _ admission.Defaulter = &ServersConnectionPolicy{}
 
-// Default applies defaults to the Servers_ConnectionPolicy resource
-func (policy *Servers_ConnectionPolicy) Default() {
+// Default applies defaults to the ServersConnectionPolicy resource
+func (policy *ServersConnectionPolicy) Default() {
 	policy.defaultImpl()
 	var temp interface{} = policy
 	if runtimeDefaulter, ok := temp.(genruntime.Defaulter); ok {
@@ -81,48 +81,48 @@ func (policy *Servers_ConnectionPolicy) Default() {
 	}
 }
 
-// defaultImpl applies the code generated defaults to the Servers_ConnectionPolicy resource
-func (policy *Servers_ConnectionPolicy) defaultImpl() {}
+// defaultImpl applies the code generated defaults to the ServersConnectionPolicy resource
+func (policy *ServersConnectionPolicy) defaultImpl() {}
 
-var _ genruntime.KubernetesResource = &Servers_ConnectionPolicy{}
+var _ genruntime.KubernetesResource = &ServersConnectionPolicy{}
 
 // AzureName returns the Azure name of the resource (always "default")
-func (policy *Servers_ConnectionPolicy) AzureName() string {
+func (policy *ServersConnectionPolicy) AzureName() string {
 	return "default"
 }
 
 // GetAPIVersion returns the ARM API version of the resource. This is always "2021-11-01"
-func (policy Servers_ConnectionPolicy) GetAPIVersion() string {
+func (policy ServersConnectionPolicy) GetAPIVersion() string {
 	return string(APIVersion_Value)
 }
 
 // GetResourceScope returns the scope of the resource
-func (policy *Servers_ConnectionPolicy) GetResourceScope() genruntime.ResourceScope {
+func (policy *ServersConnectionPolicy) GetResourceScope() genruntime.ResourceScope {
 	return genruntime.ResourceScopeResourceGroup
 }
 
 // GetSpec returns the specification of this resource
-func (policy *Servers_ConnectionPolicy) GetSpec() genruntime.ConvertibleSpec {
+func (policy *ServersConnectionPolicy) GetSpec() genruntime.ConvertibleSpec {
 	return &policy.Spec
 }
 
 // GetStatus returns the status of this resource
-func (policy *Servers_ConnectionPolicy) GetStatus() genruntime.ConvertibleStatus {
+func (policy *ServersConnectionPolicy) GetStatus() genruntime.ConvertibleStatus {
 	return &policy.Status
 }
 
 // GetType returns the ARM Type of the resource. This is always "Microsoft.Sql/servers/connectionPolicies"
-func (policy *Servers_ConnectionPolicy) GetType() string {
+func (policy *ServersConnectionPolicy) GetType() string {
 	return "Microsoft.Sql/servers/connectionPolicies"
 }
 
 // NewEmptyStatus returns a new empty (blank) status
-func (policy *Servers_ConnectionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
+func (policy *ServersConnectionPolicy) NewEmptyStatus() genruntime.ConvertibleStatus {
 	return &Servers_ConnectionPolicy_STATUS{}
 }
 
 // Owner returns the ResourceReference of the owner, or nil if there is no owner
-func (policy *Servers_ConnectionPolicy) Owner() *genruntime.ResourceReference {
+func (policy *ServersConnectionPolicy) Owner() *genruntime.ResourceReference {
 	group, kind := genruntime.LookupOwnerGroupKind(policy.Spec)
 	return &genruntime.ResourceReference{
 		Group: group,
@@ -132,7 +132,7 @@ func (policy *Servers_ConnectionPolicy) Owner() *genruntime.ResourceReference {
 }
 
 // SetStatus sets the status of this resource
-func (policy *Servers_ConnectionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
+func (policy *ServersConnectionPolicy) SetStatus(status genruntime.ConvertibleStatus) error {
 	// If we have exactly the right type of status, assign it
 	if st, ok := status.(*Servers_ConnectionPolicy_STATUS); ok {
 		policy.Status = *st
@@ -150,12 +150,12 @@ func (policy *Servers_ConnectionPolicy) SetStatus(status genruntime.ConvertibleS
 	return nil
 }
 
-// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-servers_connectionpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=servers_connectionpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.servers_connectionpolicies.sql.azure.com,admissionReviewVersions=v1
+// +kubebuilder:webhook:path=/validate-sql-azure-com-v1beta20211101-serversconnectionpolicy,mutating=false,sideEffects=None,matchPolicy=Exact,failurePolicy=fail,groups=sql.azure.com,resources=serversconnectionpolicies,verbs=create;update,versions=v1beta20211101,name=validate.v1beta20211101.serversconnectionpolicies.sql.azure.com,admissionReviewVersions=v1
 
-var _ admission.Validator = &Servers_ConnectionPolicy{}
+var _ admission.Validator = &ServersConnectionPolicy{}
 
 // ValidateCreate validates the creation of the resource
-func (policy *Servers_ConnectionPolicy) ValidateCreate() error {
+func (policy *ServersConnectionPolicy) ValidateCreate() error {
 	validations := policy.createValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -172,7 +172,7 @@ func (policy *Servers_ConnectionPolicy) ValidateCreate() error {
 }
 
 // ValidateDelete validates the deletion of the resource
-func (policy *Servers_ConnectionPolicy) ValidateDelete() error {
+func (policy *ServersConnectionPolicy) ValidateDelete() error {
 	validations := policy.deleteValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -189,7 +189,7 @@ func (policy *Servers_ConnectionPolicy) ValidateDelete() error {
 }
 
 // ValidateUpdate validates an update of the resource
-func (policy *Servers_ConnectionPolicy) ValidateUpdate(old runtime.Object) error {
+func (policy *ServersConnectionPolicy) ValidateUpdate(old runtime.Object) error {
 	validations := policy.updateValidations()
 	var temp interface{} = policy
 	if runtimeValidator, ok := temp.(genruntime.Validator); ok {
@@ -206,17 +206,17 @@ func (policy *Servers_ConnectionPolicy) ValidateUpdate(old runtime.Object) error
 }
 
 // createValidations validates the creation of the resource
-func (policy *Servers_ConnectionPolicy) createValidations() []func() error {
+func (policy *ServersConnectionPolicy) createValidations() []func() error {
 	return []func() error{policy.validateResourceReferences}
 }
 
 // deleteValidations validates the deletion of the resource
-func (policy *Servers_ConnectionPolicy) deleteValidations() []func() error {
+func (policy *ServersConnectionPolicy) deleteValidations() []func() error {
 	return nil
 }
 
 // updateValidations validates the update of the resource
-func (policy *Servers_ConnectionPolicy) updateValidations() []func(old runtime.Object) error {
+func (policy *ServersConnectionPolicy) updateValidations() []func(old runtime.Object) error {
 	return []func(old runtime.Object) error{
 		func(old runtime.Object) error {
 			return policy.validateResourceReferences()
@@ -225,7 +225,7 @@ func (policy *Servers_ConnectionPolicy) updateValidations() []func(old runtime.O
 }
 
 // validateResourceReferences validates all resource references
-func (policy *Servers_ConnectionPolicy) validateResourceReferences() error {
+func (policy *ServersConnectionPolicy) validateResourceReferences() error {
 	refs, err := reflecthelpers.FindResourceReferences(&policy.Spec)
 	if err != nil {
 		return err
@@ -234,8 +234,8 @@ func (policy *Servers_ConnectionPolicy) validateResourceReferences() error {
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
-func (policy *Servers_ConnectionPolicy) validateWriteOnceProperties(old runtime.Object) error {
-	oldObj, ok := old.(*Servers_ConnectionPolicy)
+func (policy *ServersConnectionPolicy) validateWriteOnceProperties(old runtime.Object) error {
+	oldObj, ok := old.(*ServersConnectionPolicy)
 	if !ok {
 		return nil
 	}
@@ -243,8 +243,8 @@ func (policy *Servers_ConnectionPolicy) validateWriteOnceProperties(old runtime.
 	return genruntime.ValidateWriteOnceProperties(oldObj, policy)
 }
 
-// AssignProperties_From_Servers_ConnectionPolicy populates our Servers_ConnectionPolicy from the provided source Servers_ConnectionPolicy
-func (policy *Servers_ConnectionPolicy) AssignProperties_From_Servers_ConnectionPolicy(source *v20211101s.Servers_ConnectionPolicy) error {
+// AssignProperties_From_ServersConnectionPolicy populates our ServersConnectionPolicy from the provided source ServersConnectionPolicy
+func (policy *ServersConnectionPolicy) AssignProperties_From_ServersConnectionPolicy(source *v20211101s.ServersConnectionPolicy) error {
 
 	// ObjectMeta
 	policy.ObjectMeta = *source.ObjectMeta.DeepCopy()
@@ -269,8 +269,8 @@ func (policy *Servers_ConnectionPolicy) AssignProperties_From_Servers_Connection
 	return nil
 }
 
-// AssignProperties_To_Servers_ConnectionPolicy populates the provided destination Servers_ConnectionPolicy from our Servers_ConnectionPolicy
-func (policy *Servers_ConnectionPolicy) AssignProperties_To_Servers_ConnectionPolicy(destination *v20211101s.Servers_ConnectionPolicy) error {
+// AssignProperties_To_ServersConnectionPolicy populates the provided destination ServersConnectionPolicy from our ServersConnectionPolicy
+func (policy *ServersConnectionPolicy) AssignProperties_To_ServersConnectionPolicy(destination *v20211101s.ServersConnectionPolicy) error {
 
 	// ObjectMeta
 	destination.ObjectMeta = *policy.ObjectMeta.DeepCopy()
@@ -296,11 +296,11 @@ func (policy *Servers_ConnectionPolicy) AssignProperties_To_Servers_ConnectionPo
 }
 
 // OriginalGVK returns a GroupValueKind for the original API version used to create the resource
-func (policy *Servers_ConnectionPolicy) OriginalGVK() *schema.GroupVersionKind {
+func (policy *ServersConnectionPolicy) OriginalGVK() *schema.GroupVersionKind {
 	return &schema.GroupVersionKind{
 		Group:   GroupVersion.Group,
 		Version: policy.Spec.OriginalVersion(),
-		Kind:    "Servers_ConnectionPolicy",
+		Kind:    "ServersConnectionPolicy",
 	}
 }
 
@@ -308,10 +308,10 @@ func (policy *Servers_ConnectionPolicy) OriginalGVK() *schema.GroupVersionKind {
 // Generator information:
 // - Generated from: /sql/resource-manager/Microsoft.Sql/stable/2021-11-01/ServerConnectionPolicies.json
 // - ARM URI: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/connectionPolicies/default
-type Servers_ConnectionPolicyList struct {
+type ServersConnectionPolicyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Servers_ConnectionPolicy `json:"items"`
+	Items           []ServersConnectionPolicy `json:"items"`
 }
 
 type Servers_ConnectionPolicy_Spec struct {
@@ -715,5 +715,5 @@ const (
 )
 
 func init() {
-	SchemeBuilder.Register(&Servers_ConnectionPolicy{}, &Servers_ConnectionPolicyList{})
+	SchemeBuilder.Register(&ServersConnectionPolicy{}, &ServersConnectionPolicyList{})
 }

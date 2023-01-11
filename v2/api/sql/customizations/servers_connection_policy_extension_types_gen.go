@@ -9,12 +9,12 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 )
 
-type Servers_ConnectionPolicyExtension struct {
+type ServersConnectionPolicyExtension struct {
 }
 
 // GetExtendedResources Returns the KubernetesResource slice for Resource versions
-func (extension *Servers_ConnectionPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
+func (extension *ServersConnectionPolicyExtension) GetExtendedResources() []genruntime.KubernetesResource {
 	return []genruntime.KubernetesResource{
-		&v20211101.Servers_ConnectionPolicy{},
-		&v20211101s.Servers_ConnectionPolicy{}}
+		&v20211101.ServersConnectionPolicy{},
+		&v20211101s.ServersConnectionPolicy{}}
 }
