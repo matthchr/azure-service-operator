@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/go-logr/logr"
 	. "github.com/onsi/gomega"
 	v1 "k8s.io/api/core/v1"
 	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
@@ -34,7 +33,7 @@ func Test_ListChunked_OneChunk(t *testing.T) {
 	g.Expect(addSecrets(ctx, kubeClient, 100)).To(Succeed())
 
 	list := v1.SecretList{}
-	g.Expect(kubeClient.ListChunked(ctx, logr.Discard(), &list, client.Limit(200))).To(Succeed())
+	g.Expect(kubeClient.ListChunked(ctx, &list, client.Limit(200))).To(Succeed())
 	g.Expect(list.Items).To(HaveLen(100))
 }
 

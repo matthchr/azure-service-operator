@@ -8,7 +8,6 @@ package kubeclient
 import (
 	"context"
 
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -18,14 +17,13 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/Azure/azure-service-operator/v2/internal/reflecthelpers"
-	"github.com/Azure/azure-service-operator/v2/internal/util/to"
 )
 
 type Client interface {
 	client.Client
 
 	// Additional helpers
-	ListChunked(ctx context.Context, logr logr.Logger, list client.ObjectList, opts ...client.ListOption) error
+	ListChunked(ctx context.Context, list client.ObjectList, opts ...client.ListOption) error
 	GetObject(ctx context.Context, namespacedName types.NamespacedName, gvk schema.GroupVersionKind) (client.Object, error)
 	GetObjectOrDefault(ctx context.Context, namespacedName types.NamespacedName, gvk schema.GroupVersionKind) (client.Object, error)
 	CommitObject(ctx context.Context, obj client.Object) error
@@ -51,7 +49,7 @@ func (c *clientHelper) List(ctx context.Context, list client.ObjectList, opts ..
 	return c.client.List(ctx, list, opts...)
 }
 
-func (c *clientHelper) ListChunked(ctx context.Context, logr logr.Logger, list client.ObjectList, opts ...client.ListOption) error {
+func (c *clientHelper) ListChunked(ctx context.Context, list client.ObjectList, opts ...client.ListOption) error {
 	var continuationToken client.Continue
 	var results []client.Object
 	for {
@@ -61,7 +59,6 @@ func (c *clientHelper) ListChunked(ctx context.Context, logr logr.Logger, list c
 		if continuationToken != "" {
 			actualOpts = append(actualOpts, continuationToken)
 		}
-		logr.V(0).Info("About to list", "token", continuationToken)
 		err := c.List(ctx, chunk, actualOpts...)
 		if err != nil {
 			return err
@@ -73,15 +70,8 @@ func (c *clientHelper) ListChunked(ctx context.Context, logr logr.Logger, list c
 		if err != nil {
 			return err
 		}
+
 		results = append(results, chunkItems...)
-		remaining := chunk.GetRemainingItemCount()
-
-		logr.V(0).Info("Successfully listed", "remaining", to.Value(remaining), "chunksize", len(chunkItems))
-
-		for _, item := range chunkItems {
-			logr.V(0).Info("Item", "name", item.GetName())
-		}
-
 		if continuationToken == "" {
 			break
 		}
