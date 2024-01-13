@@ -144,7 +144,9 @@ func (u *localUser) connectToDB(ctx context.Context, secrets genruntime.Resolved
 		}
 
 		return db, nil
+	} else {
+		// If ServerAdminPassword is nil, we use the standard ASO identity lookup to try to log in to the server with
+		// that identity.
+		return connectToDBAAD(ctx, u.credentialProvider, u.log, u.user, details)
 	}
-
-	return nil, errors.Errorf("local user does not have password")
 }

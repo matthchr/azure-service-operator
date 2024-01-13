@@ -309,6 +309,15 @@ func AzureSQL_User_CRUD(tc *testcommon.KubePerTestContext, server *sql.Server, d
 	tc.Expect(err).To(HaveOccurred())
 	tc.Expect(err.Error()).To(ContainSubstring("updating 'AzureName' is not allowed"))
 
+	// Confirm that we cannot change the user type from local to AAD
+	user = originalUser.DeepCopy()
+	old = user.DeepCopy()
+	user.Spec.LocalUser = nil
+	user.Spec.AADUser = &azuresqlv1.AADUserSpec{}
+	err = tc.PatchAndExpectError(old, user)
+	tc.Expect(err).To(HaveOccurred())
+	tc.Expect(err.Error()).To(ContainSubstring("cannot change from local user to AAD user"))
+
 	user = originalUser.DeepCopy()
 	tc.DeleteResourceAndWait(user)
 

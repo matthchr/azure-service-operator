@@ -121,7 +121,7 @@ func (user *User) ValidateUpdate(old runtime.Object) (admission.Warnings, error)
 
 // createValidations validates the creation of the resource
 func (user *User) createValidations() []func() (admission.Warnings, error) {
-	return nil
+	return []func() (admission.Warnings, error){user.validateIsLocalOrAAD}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -132,6 +132,10 @@ func (user *User) deleteValidations() []func() (admission.Warnings, error) {
 // updateValidations validates the update of the resource
 func (user *User) updateValidations() []func(old runtime.Object) (admission.Warnings, error) {
 	return []func(old runtime.Object) (admission.Warnings, error){
+		func(old runtime.Object) (admission.Warnings, error) {
+			return user.validateIsLocalOrAAD()
+		},
+		user.validateUserTypeNotChanged,
 		user.validateWriteOncePropertiesNotChanged,
 	}
 }
@@ -186,6 +190,38 @@ func (user *User) validateWriteOncePropertiesNotChanged(oldObj runtime.Object) (
 	return nil, kerrors.NewAggregate(errs)
 }
 
+func (user *User) validateUserTypeNotChanged(oldObj runtime.Object) (admission.Warnings, error) {
+	oldUser, ok := oldObj.(*User)
+	if !ok {
+		// This shouldn't happen, but if it does don't block things
+		return nil, nil
+	}
+
+	// Prevent change from AAD -> Local
+	if oldUser.Spec.AADUser != nil && user.Spec.AADUser == nil {
+		return nil, errors.Errorf("cannot change from AAD User to local user")
+	}
+
+	// Prevent change from Local -> AAD
+	if oldUser.Spec.LocalUser != nil && user.Spec.LocalUser == nil {
+		return nil, errors.Errorf("cannot change from local user to AAD user")
+	}
+
+	return nil, nil
+}
+
+func (user *User) validateIsLocalOrAAD() (admission.Warnings, error) {
+	if user.Spec.LocalUser == nil && user.Spec.AADUser == nil {
+		return nil, errors.Errorf("exactly one of spec.localuser or spec.aadUser must be set")
+	}
+
+	if user.Spec.LocalUser != nil && user.Spec.AADUser != nil {
+		return nil, errors.Errorf("exactly one of spec.localuser or spec.aadUser must be set")
+	}
+
+	return nil, nil
+}
+
 var _ conversion.Hub = &User{}
 
 // Hub marks that this userSpec is the hub type for conversion
@@ -228,6 +264,9 @@ type UserSpec struct {
 
 	// LocalUser contains details for creating a standard (non-aad) Azure SQL User
 	LocalUser *LocalUserSpec `json:"localUser,omitempty"`
+
+	// AADUser contains details for creating an AAD user.
+	AADUser *AADUserSpec `json:"aadUser,omitempty"`
 }
 
 // OriginalVersion returns the original API version used to create the resource.
@@ -266,13 +305,37 @@ type LocalUserSpec struct {
 	// a member of that group, the ServerAdminUsername should be "admin-group".
 	ServerAdminUsername string `json:"serverAdminUsername,omitempty"`
 
-	// +kubebuilder:validation:Required
 	// ServerAdminPassword is a reference to a secret containing the servers administrator password.
+	// If specified, the operator uses the ServerAdminUsername and ServerAdminPassword to log into the server
+	// as a local administrator.
+	// If NOT specified, the operator uses its identity to log into the server. The operator can only successfully
+	// log into the server if its identity is the administrator of the server or if its identity is a member of a
+	// group which is the administrator of the server. If the
+	// administrator is a group, the ServerAdminUsername should be the group name, not the actual username of the
+	// identity to log in with. For example if the administrator group is "admin-group" and identity "my-identity" is
+	// a member of that group, the ServerAdminUsername should be "admin-group"
 	ServerAdminPassword *genruntime.SecretReference `json:"serverAdminPassword,omitempty"`
 
 	// +kubebuilder:validation:Required
 	// Password is the password to use for the user
 	Password *genruntime.SecretReference `json:"password,omitempty"`
+}
+
+type AADUserSpec struct {
+	// TODO: REmove this
+	//// Alias is the short name associated with the user. This is required if the AzureName is longer than 32 characters.
+	//// Note that Alias denotes the name used to manage the SQL user in Azure SQL, NOT the name used to log in to the SQL server.
+	//// When logging in to the SQL server and prompted to provider the username, supply the AzureName.
+	//// +kubebuilder:validation:MaxLength=32
+	//Alias string `json:"alias,omitempty"`
+
+	// +kubebuilder:validation:Required
+	// ServerAdminUsername is the username of the Server administrator. If your server admin was configured with
+	// Azure Service Operator, this should match the value of the Administrator's $.spec.login field. If the
+	// administrator is a group, the ServerAdminUsername should be the group name, not the actual username of the
+	// identity to log in with. For example if the administrator group is "admin-group" and identity "my-identity" is
+	// a member of that group, the ServerAdminUsername should be "admin-group"
+	//ServerAdminUsername string `json:"serverAdminUsername,omitempty"`
 }
 
 type UserStatus struct {
