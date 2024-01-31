@@ -430,6 +430,64 @@ typeTransformers:
     remove: true
     because: it is supposed to be marked ReadOnly in Swagger
 
+  #
+  # In the group 'network.frontdoor'
+  # Mark properties as readonly
+  #
+  - group: network.frontdoor
+    name: FrontDoorProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: BackendPoolProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: FrontendEndpointProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: FrontendEndpointProperties
+    property: CustomHttpsProvisioningState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: HealthProbeSettingsProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: LoadBalancingSettingsProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: RulesEngineProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: RoutingRuleProperties
+    property: ResourceState
+    remove: true
+    because: This property should be marked readonly in Swagger
+
+  - group: network.frontdoor
+    name: FrontDoorWebApplicationFirewallPolicy
+    property: Etag
+    remove: true
+    because: This property should be marked readonly in Swagger
+
   - name: EventHubProperties;Namespaces_Eventhub_Properties_Spec
     group: eventhub
     property: Status
@@ -2434,6 +2492,40 @@ objectModelConfiguration:
       WorkspaceFeatures:
         ClusterResourceId:
           $armReference: true
+# TODO: Still need Microsoft.Network/frontDoorWebApplicationFirewallPolicies support
+  network.frontdoor:
+    2021-06-01:
+      FrontDoor:
+        $export: true
+        $supportedFrom: v2.6.0
+      FrontDoors_RulesEngine:
+        $exportAs: RulesEngine
+        $supportedFrom: v2.6.0
+      BackendPool:
+        $resourceEmbeddedInParent: FrontDoor
+      FrontendEndpoint:
+        $resourceEmbeddedInParent: FrontDoor
+      HealthProbeSettingsModel:
+        $resourceEmbeddedInParent: FrontDoor
+      LoadBalancingSettingsModel:
+        $resourceEmbeddedInParent: FrontDoor
+      RoutingRule:
+        $resourceEmbeddedInParent: FrontDoor
+      FrontendEndpointProperties_WebApplicationFirewallPolicyLink:
+        Id:
+          $armReference: true
+      RoutingRuleProperties_WebApplicationFirewallPolicyLink:
+        Id:
+          $armReference: true
+      Backend:
+        PrivateLinkLocation:
+          $armReference: false
+        PrivateLinkResourceId:
+          $armReference: true
+    2022-05-01:
+      FrontDoorWebApplicationFirewallPolicy:
+        $export: true
+        $supportedFrom: v2.6.0
   resources:
     2020-06-01:
       ResourceGroup:

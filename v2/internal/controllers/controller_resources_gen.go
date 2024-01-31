@@ -128,6 +128,11 @@ import (
 	managedidentity_v20220131ps "github.com/Azure/azure-service-operator/v2/api/managedidentity/v1api20220131preview/storage"
 	managedidentity_v20230131 "github.com/Azure/azure-service-operator/v2/api/managedidentity/v1api20230131"
 	managedidentity_v20230131s "github.com/Azure/azure-service-operator/v2/api/managedidentity/v1api20230131/storage"
+	networkfrontdoor_customizations "github.com/Azure/azure-service-operator/v2/api/network.frontdoor/customizations"
+	networkfrontdoor_v20210601 "github.com/Azure/azure-service-operator/v2/api/network.frontdoor/v1api20210601"
+	networkfrontdoor_v20210601s "github.com/Azure/azure-service-operator/v2/api/network.frontdoor/v1api20210601/storage"
+	networkfrontdoor_v20220501 "github.com/Azure/azure-service-operator/v2/api/network.frontdoor/v1api20220501"
+	networkfrontdoor_v20220501s "github.com/Azure/azure-service-operator/v2/api/network.frontdoor/v1api20220501/storage"
 	network_customizations "github.com/Azure/azure-service-operator/v2/api/network/customizations"
 	network_v20180501 "github.com/Azure/azure-service-operator/v2/api/network/v1api20180501"
 	network_v20180501s "github.com/Azure/azure-service-operator/v2/api/network/v1api20180501/storage"
@@ -829,6 +834,9 @@ func getKnownStorageTypes() []*registration.StorageType {
 	result = append(result, &registration.StorageType{Obj: new(network_v20220701s.PrivateEndpointsPrivateDnsZoneGroup)})
 	result = append(result, &registration.StorageType{Obj: new(network_v20220701s.PrivateLinkService)})
 	result = append(result, &registration.StorageType{Obj: new(network_v20220701s.PublicIPPrefix)})
+	result = append(result, &registration.StorageType{Obj: new(networkfrontdoor_v20210601s.FrontDoor)})
+	result = append(result, &registration.StorageType{Obj: new(networkfrontdoor_v20210601s.RulesEngine)})
+	result = append(result, &registration.StorageType{Obj: new(networkfrontdoor_v20220501s.FrontDoorWebApplicationFirewallPolicy)})
 	result = append(result, &registration.StorageType{Obj: new(operationalinsights_v20210601s.Workspace)})
 	result = append(result, &registration.StorageType{Obj: new(resources_v20200601s.ResourceGroup)})
 	result = append(result, &registration.StorageType{Obj: new(search_v20220901s.SearchService)})
@@ -1504,6 +1512,10 @@ func getKnownTypes() []client.Object {
 		new(network_v20220701s.PrivateEndpointsPrivateDnsZoneGroup),
 		new(network_v20220701s.PrivateLinkService),
 		new(network_v20220701s.PublicIPPrefix))
+	result = append(result, new(networkfrontdoor_v20210601.FrontDoor), new(networkfrontdoor_v20210601.RulesEngine))
+	result = append(result, new(networkfrontdoor_v20210601s.FrontDoor), new(networkfrontdoor_v20210601s.RulesEngine))
+	result = append(result, new(networkfrontdoor_v20220501.FrontDoorWebApplicationFirewallPolicy))
+	result = append(result, new(networkfrontdoor_v20220501s.FrontDoorWebApplicationFirewallPolicy))
 	result = append(result, new(operationalinsights_v20210601.Workspace))
 	result = append(result, new(operationalinsights_v20210601s.Workspace))
 	result = append(result, new(resources_v20200601.ResourceGroup))
@@ -1797,6 +1809,10 @@ func createScheme() *runtime.Scheme {
 	_ = network_v20220401s.AddToScheme(scheme)
 	_ = network_v20220701.AddToScheme(scheme)
 	_ = network_v20220701s.AddToScheme(scheme)
+	_ = networkfrontdoor_v20210601.AddToScheme(scheme)
+	_ = networkfrontdoor_v20210601s.AddToScheme(scheme)
+	_ = networkfrontdoor_v20220501.AddToScheme(scheme)
+	_ = networkfrontdoor_v20220501s.AddToScheme(scheme)
 	_ = operationalinsights_v20210601.AddToScheme(scheme)
 	_ = operationalinsights_v20210601s.AddToScheme(scheme)
 	_ = resources_v20200601.AddToScheme(scheme)
@@ -1970,6 +1986,9 @@ func getResourceExtensions() []genruntime.ResourceExtension {
 	result = append(result, &network_customizations.VirtualNetworkGatewayExtension{})
 	result = append(result, &network_customizations.VirtualNetworksSubnetExtension{})
 	result = append(result, &network_customizations.VirtualNetworksVirtualNetworkPeeringExtension{})
+	result = append(result, &networkfrontdoor_customizations.FrontDoorExtension{})
+	result = append(result, &networkfrontdoor_customizations.FrontDoorWebApplicationFirewallPolicyExtension{})
+	result = append(result, &networkfrontdoor_customizations.RulesEngineExtension{})
 	result = append(result, &operationalinsights_customizations.WorkspaceExtension{})
 	result = append(result, &resources_customizations.ResourceGroupExtension{})
 	result = append(result, &search_customizations.SearchServiceExtension{})
