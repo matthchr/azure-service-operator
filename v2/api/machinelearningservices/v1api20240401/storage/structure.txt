@@ -82,8 +82,10 @@ Workspace: Resource
 │   │       ├── PropertyBag: genruntime.PropertyBag
 │   │       ├── SparkReady: *bool
 │   │       └── Status: *string
-│   ├── OperatorSpec: *Object (2 properties)
+│   ├── OperatorSpec: *Object (4 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
 │   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   ├── SecretExpressions: *core.DestinationExpression[]
 │   │   └── Secrets: *Object (8 properties)
 │   │       ├── AppInsightsInstrumentationKey: *genruntime.SecretDestination
 │   │       ├── ContainerRegistryPassword: *genruntime.SecretDestination
@@ -274,7 +276,7 @@ Workspace: Resource
     └── WorkspaceId: *string
 WorkspacesCompute: Resource
 ├── Owner: machinelearningservices/v1api20240401.Workspace
-├── Spec: Object (9 properties)
+├── Spec: Object (10 properties)
 │   ├── AzureName: string
 │   ├── Identity: *Object (3 properties)
 │   │   ├── PropertyBag: genruntime.PropertyBag
@@ -283,6 +285,10 @@ WorkspacesCompute: Resource
 │   │       ├── PropertyBag: genruntime.PropertyBag
 │   │       └── Reference: genruntime.ResourceReference
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (3 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── OriginalVersion: string
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Properties: *Object (11 properties)
@@ -1249,8 +1255,12 @@ WorkspacesCompute: Resource
     └── Type: *string
 WorkspacesConnection: Resource
 ├── Owner: machinelearningservices/v1api20240401.Workspace
-├── Spec: Object (5 properties)
+├── Spec: Object (6 properties)
 │   ├── AzureName: string
+│   ├── OperatorSpec: *Object (3 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   ├── PropertyBag: genruntime.PropertyBag
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── OriginalVersion: string
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Properties: *Object (13 properties)

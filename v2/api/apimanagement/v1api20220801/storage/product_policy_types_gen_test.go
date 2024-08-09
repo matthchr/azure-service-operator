@@ -78,6 +78,61 @@ func AddRelatedPropertyGeneratorsForProductPolicy(gens map[string]gopter.Gen) {
 	gens["Status"] = Service_Products_Policy_STATUSGenerator()
 }
 
+func Test_ProductPolicyOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ProductPolicyOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForProductPolicyOperatorSpec, ProductPolicyOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForProductPolicyOperatorSpec runs a test to see if a specific instance of ProductPolicyOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForProductPolicyOperatorSpec(subject ProductPolicyOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ProductPolicyOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ProductPolicyOperatorSpec instances for property testing - lazily instantiated by
+// ProductPolicyOperatorSpecGenerator()
+var productPolicyOperatorSpecGenerator gopter.Gen
+
+// ProductPolicyOperatorSpecGenerator returns a generator of ProductPolicyOperatorSpec instances for property testing.
+func ProductPolicyOperatorSpecGenerator() gopter.Gen {
+	if productPolicyOperatorSpecGenerator != nil {
+		return productPolicyOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	productPolicyOperatorSpecGenerator = gen.Struct(reflect.TypeOf(ProductPolicyOperatorSpec{}), generators)
+
+	return productPolicyOperatorSpecGenerator
+}
+
 func Test_Service_Products_Policy_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -187,6 +242,9 @@ func RunJSONSerializationTestForService_Products_Policy_Spec(subject Service_Pro
 var service_Products_Policy_SpecGenerator gopter.Gen
 
 // Service_Products_Policy_SpecGenerator returns a generator of Service_Products_Policy_Spec instances for property testing.
+// We first initialize service_Products_Policy_SpecGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
 func Service_Products_Policy_SpecGenerator() gopter.Gen {
 	if service_Products_Policy_SpecGenerator != nil {
 		return service_Products_Policy_SpecGenerator
@@ -194,6 +252,12 @@ func Service_Products_Policy_SpecGenerator() gopter.Gen {
 
 	generators := make(map[string]gopter.Gen)
 	AddIndependentPropertyGeneratorsForService_Products_Policy_Spec(generators)
+	service_Products_Policy_SpecGenerator = gen.Struct(reflect.TypeOf(Service_Products_Policy_Spec{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForService_Products_Policy_Spec(generators)
+	AddRelatedPropertyGeneratorsForService_Products_Policy_Spec(generators)
 	service_Products_Policy_SpecGenerator = gen.Struct(reflect.TypeOf(Service_Products_Policy_Spec{}), generators)
 
 	return service_Products_Policy_SpecGenerator
@@ -204,4 +268,9 @@ func AddIndependentPropertyGeneratorsForService_Products_Policy_Spec(gens map[st
 	gens["Format"] = gen.PtrOf(gen.AlphaString())
 	gens["OriginalVersion"] = gen.AlphaString()
 	gens["Value"] = gen.PtrOf(gen.AlphaString())
+}
+
+// AddRelatedPropertyGeneratorsForService_Products_Policy_Spec is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForService_Products_Policy_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(ProductPolicyOperatorSpecGenerator())
 }

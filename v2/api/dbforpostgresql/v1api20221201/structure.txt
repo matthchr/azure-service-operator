@@ -61,9 +61,11 @@ FlexibleServer: Resource
 │   ├── Network: *Object (2 properties)
 │   │   ├── DelegatedSubnetResourceReference: *genruntime.ResourceReference
 │   │   └── PrivateDnsZoneArmResourceReference: *genruntime.ResourceReference
-│   ├── OperatorSpec: *Object (2 properties)
+│   ├── OperatorSpec: *Object (4 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
 │   │   ├── ConfigMaps: *Object (1 property)
 │   │   │   └── FullyQualifiedDomainName: *genruntime.ConfigMapDestination
+│   │   ├── SecretExpressions: *core.DestinationExpression[]
 │   │   └── Secrets: *Object (1 property)
 │   │       └── FullyQualifiedDomainName: *genruntime.SecretDestination
 │   ├── Owner: *genruntime.KnownResourceReference
@@ -391,10 +393,13 @@ FlexibleServer_Spec_ARM: Object (6 properties)
 └── Tags: map[string]string
 FlexibleServersConfiguration: Resource
 ├── Owner: FlexibleServer
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MinLength: 1
 │   │   └── Rule 1: Pattern: "^[-\\w\\._]+$"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Source: *string
 │   └── Value: *string
@@ -435,7 +440,7 @@ FlexibleServersConfiguration: Resource
     └── Value: *string
 FlexibleServersDatabase: Resource
 ├── Owner: FlexibleServer
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MinLength: 1
 │   │   └── Rule 1: Pattern: "^[-\\w\\._]+$"
@@ -443,6 +448,9 @@ FlexibleServersDatabase: Resource
 │   │   └── Rule 0: Pattern: "^[a-zA-Z]+\\w*$"
 │   ├── Collation: Validated<*string> (1 rule)
 │   │   └── Rule 0: Pattern: "^[a-zA-Z\\-]+([. ]|\\w)*$"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (7 properties)
     ├── Charset: *string
@@ -468,12 +476,15 @@ FlexibleServersDatabase: Resource
     └── Type: *string
 FlexibleServersFirewallRule: Resource
 ├── Owner: FlexibleServer
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MinLength: 1
 │   │   └── Rule 1: Pattern: "^[-\\w\\._]+$"
 │   ├── EndIpAddress: Validated<*string> (1 rule)
 │   │   └── Rule 0: Pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── StartIpAddress: Validated<*string> (1 rule)
 │       └── Rule 0: Pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"

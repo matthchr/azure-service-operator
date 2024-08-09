@@ -174,6 +174,7 @@ func AddIndependentPropertyGeneratorsForDatabaseAccounts_MongodbDatabases_Throug
 
 // AddRelatedPropertyGeneratorsForDatabaseAccounts_MongodbDatabases_ThroughputSetting_Spec is a factory method for creating gopter generators
 func AddRelatedPropertyGeneratorsForDatabaseAccounts_MongodbDatabases_ThroughputSetting_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(MongodbDatabaseThroughputSettingOperatorSpecGenerator())
 	gens["Resource"] = gen.PtrOf(ThroughputSettingsResourceGenerator())
 }
 
@@ -237,4 +238,59 @@ func MongodbDatabaseThroughputSettingGenerator() gopter.Gen {
 func AddRelatedPropertyGeneratorsForMongodbDatabaseThroughputSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = DatabaseAccounts_MongodbDatabases_ThroughputSetting_SpecGenerator()
 	gens["Status"] = DatabaseAccounts_MongodbDatabases_ThroughputSetting_STATUSGenerator()
+}
+
+func Test_MongodbDatabaseThroughputSettingOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of MongodbDatabaseThroughputSettingOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForMongodbDatabaseThroughputSettingOperatorSpec, MongodbDatabaseThroughputSettingOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForMongodbDatabaseThroughputSettingOperatorSpec runs a test to see if a specific instance of MongodbDatabaseThroughputSettingOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForMongodbDatabaseThroughputSettingOperatorSpec(subject MongodbDatabaseThroughputSettingOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual MongodbDatabaseThroughputSettingOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of MongodbDatabaseThroughputSettingOperatorSpec instances for property testing - lazily instantiated by
+// MongodbDatabaseThroughputSettingOperatorSpecGenerator()
+var mongodbDatabaseThroughputSettingOperatorSpecGenerator gopter.Gen
+
+// MongodbDatabaseThroughputSettingOperatorSpecGenerator returns a generator of MongodbDatabaseThroughputSettingOperatorSpec instances for property testing.
+func MongodbDatabaseThroughputSettingOperatorSpecGenerator() gopter.Gen {
+	if mongodbDatabaseThroughputSettingOperatorSpecGenerator != nil {
+		return mongodbDatabaseThroughputSettingOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	mongodbDatabaseThroughputSettingOperatorSpecGenerator = gen.Struct(reflect.TypeOf(MongodbDatabaseThroughputSettingOperatorSpec{}), generators)
+
+	return mongodbDatabaseThroughputSettingOperatorSpecGenerator
 }

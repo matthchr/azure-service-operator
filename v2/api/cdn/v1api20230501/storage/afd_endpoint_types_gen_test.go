@@ -78,6 +78,61 @@ func AddRelatedPropertyGeneratorsForAfdEndpoint(gens map[string]gopter.Gen) {
 	gens["Status"] = Profiles_AfdEndpoint_STATUSGenerator()
 }
 
+func Test_AfdEndpointOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of AfdEndpointOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForAfdEndpointOperatorSpec, AfdEndpointOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForAfdEndpointOperatorSpec runs a test to see if a specific instance of AfdEndpointOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForAfdEndpointOperatorSpec(subject AfdEndpointOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual AfdEndpointOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of AfdEndpointOperatorSpec instances for property testing - lazily instantiated by
+// AfdEndpointOperatorSpecGenerator()
+var afdEndpointOperatorSpecGenerator gopter.Gen
+
+// AfdEndpointOperatorSpecGenerator returns a generator of AfdEndpointOperatorSpec instances for property testing.
+func AfdEndpointOperatorSpecGenerator() gopter.Gen {
+	if afdEndpointOperatorSpecGenerator != nil {
+		return afdEndpointOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	afdEndpointOperatorSpecGenerator = gen.Struct(reflect.TypeOf(AfdEndpointOperatorSpec{}), generators)
+
+	return afdEndpointOperatorSpecGenerator
+}
+
 func Test_Profiles_AfdEndpoint_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -209,6 +264,9 @@ func RunJSONSerializationTestForProfiles_AfdEndpoint_Spec(subject Profiles_AfdEn
 var profiles_AfdEndpoint_SpecGenerator gopter.Gen
 
 // Profiles_AfdEndpoint_SpecGenerator returns a generator of Profiles_AfdEndpoint_Spec instances for property testing.
+// We first initialize profiles_AfdEndpoint_SpecGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
 func Profiles_AfdEndpoint_SpecGenerator() gopter.Gen {
 	if profiles_AfdEndpoint_SpecGenerator != nil {
 		return profiles_AfdEndpoint_SpecGenerator
@@ -216,6 +274,12 @@ func Profiles_AfdEndpoint_SpecGenerator() gopter.Gen {
 
 	generators := make(map[string]gopter.Gen)
 	AddIndependentPropertyGeneratorsForProfiles_AfdEndpoint_Spec(generators)
+	profiles_AfdEndpoint_SpecGenerator = gen.Struct(reflect.TypeOf(Profiles_AfdEndpoint_Spec{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForProfiles_AfdEndpoint_Spec(generators)
+	AddRelatedPropertyGeneratorsForProfiles_AfdEndpoint_Spec(generators)
 	profiles_AfdEndpoint_SpecGenerator = gen.Struct(reflect.TypeOf(Profiles_AfdEndpoint_Spec{}), generators)
 
 	return profiles_AfdEndpoint_SpecGenerator
@@ -231,4 +295,9 @@ func AddIndependentPropertyGeneratorsForProfiles_AfdEndpoint_Spec(gens map[strin
 	gens["Tags"] = gen.MapOf(
 		gen.AlphaString(),
 		gen.AlphaString())
+}
+
+// AddRelatedPropertyGeneratorsForProfiles_AfdEndpoint_Spec is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForProfiles_AfdEndpoint_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(AfdEndpointOperatorSpecGenerator())
 }

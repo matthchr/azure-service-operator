@@ -91,7 +91,9 @@ DatabaseAccount: Resource
 │   │   ├── "AzureServices"
 │   │   └── "None"
 │   ├── NetworkAclBypassResourceIds: string[]
-│   ├── OperatorSpec: *Object (1 property)
+│   ├── OperatorSpec: *Object (3 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   ├── SecretExpressions: *core.DestinationExpression[]
 │   │   └── Secrets: *Object (5 properties)
 │   │       ├── DocumentEndpoint: *genruntime.SecretDestination
 │   │       ├── PrimaryMasterKey: *genruntime.SecretDestination
@@ -889,9 +891,12 @@ DatabaseAccounts_SqlRoleAssignment_Spec_ARM: Object (2 properties)
     └── Scope: *string
 MongodbDatabase: Resource
 ├── Owner: DatabaseAccount
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -918,9 +923,12 @@ MongodbDatabase: Resource
     └── Type: *string
 MongodbDatabaseCollection: Resource
 ├── Owner: MongodbDatabase
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -963,8 +971,11 @@ MongodbDatabaseCollection: Resource
     └── Type: *string
 MongodbDatabaseCollectionThroughputSetting: Resource
 ├── Owner: MongodbDatabaseCollection
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Resource: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (2 properties)
@@ -998,8 +1009,11 @@ MongodbDatabaseCollectionThroughputSetting: Resource
     └── Type: *string
 MongodbDatabaseThroughputSetting: Resource
 ├── Owner: MongodbDatabase
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Resource: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (2 properties)
@@ -1033,9 +1047,12 @@ MongodbDatabaseThroughputSetting: Resource
     └── Type: *string
 SqlDatabase: Resource
 ├── Owner: DatabaseAccount
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -1064,9 +1081,12 @@ SqlDatabase: Resource
     └── Type: *string
 SqlDatabaseContainer: Resource
 ├── Owner: SqlDatabase
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -1202,9 +1222,12 @@ SqlDatabaseContainer: Resource
     └── Type: *string
 SqlDatabaseContainerStoredProcedure: Resource
 ├── Owner: SqlDatabaseContainer
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -1229,8 +1252,11 @@ SqlDatabaseContainerStoredProcedure: Resource
     └── Type: *string
 SqlDatabaseContainerThroughputSetting: Resource
 ├── Owner: SqlDatabaseContainer
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Resource: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (2 properties)
@@ -1264,9 +1290,12 @@ SqlDatabaseContainerThroughputSetting: Resource
     └── Type: *string
 SqlDatabaseContainerTrigger: Resource
 ├── Owner: SqlDatabaseContainer
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -1309,9 +1338,12 @@ SqlDatabaseContainerTrigger: Resource
     └── Type: *string
 SqlDatabaseContainerUserDefinedFunction: Resource
 ├── Owner: SqlDatabaseContainer
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Options: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (1 property)
 │   │   │   └── MaxThroughput: *int
@@ -1336,8 +1368,11 @@ SqlDatabaseContainerUserDefinedFunction: Resource
     └── Type: *string
 SqlDatabaseThroughputSetting: Resource
 ├── Owner: SqlDatabase
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Resource: *Object (2 properties)
 │   │   ├── AutoscaleSettings: *Object (2 properties)
@@ -1371,8 +1406,11 @@ SqlDatabaseThroughputSetting: Resource
     └── Type: *string
 SqlRoleAssignment: Resource
 ├── Owner: DatabaseAccount
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AzureName: string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PrincipalId: *string
 │   ├── PrincipalIdFromConfig: *genruntime.ConfigMapReference

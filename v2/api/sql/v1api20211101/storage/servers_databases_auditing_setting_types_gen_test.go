@@ -79,6 +79,61 @@ func AddRelatedPropertyGeneratorsForServersDatabasesAuditingSetting(gens map[str
 	gens["Status"] = Servers_Databases_AuditingSetting_STATUSGenerator()
 }
 
+func Test_ServersDatabasesAuditingSettingOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ServersDatabasesAuditingSettingOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesAuditingSettingOperatorSpec, ServersDatabasesAuditingSettingOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForServersDatabasesAuditingSettingOperatorSpec runs a test to see if a specific instance of ServersDatabasesAuditingSettingOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesAuditingSettingOperatorSpec(subject ServersDatabasesAuditingSettingOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ServersDatabasesAuditingSettingOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ServersDatabasesAuditingSettingOperatorSpec instances for property testing - lazily instantiated by
+// ServersDatabasesAuditingSettingOperatorSpecGenerator()
+var serversDatabasesAuditingSettingOperatorSpecGenerator gopter.Gen
+
+// ServersDatabasesAuditingSettingOperatorSpecGenerator returns a generator of ServersDatabasesAuditingSettingOperatorSpec instances for property testing.
+func ServersDatabasesAuditingSettingOperatorSpecGenerator() gopter.Gen {
+	if serversDatabasesAuditingSettingOperatorSpecGenerator != nil {
+		return serversDatabasesAuditingSettingOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	serversDatabasesAuditingSettingOperatorSpecGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesAuditingSettingOperatorSpec{}), generators)
+
+	return serversDatabasesAuditingSettingOperatorSpecGenerator
+}
+
 func Test_Servers_Databases_AuditingSetting_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -196,6 +251,9 @@ func RunJSONSerializationTestForServers_Databases_AuditingSetting_Spec(subject S
 var servers_Databases_AuditingSetting_SpecGenerator gopter.Gen
 
 // Servers_Databases_AuditingSetting_SpecGenerator returns a generator of Servers_Databases_AuditingSetting_Spec instances for property testing.
+// We first initialize servers_Databases_AuditingSetting_SpecGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
 func Servers_Databases_AuditingSetting_SpecGenerator() gopter.Gen {
 	if servers_Databases_AuditingSetting_SpecGenerator != nil {
 		return servers_Databases_AuditingSetting_SpecGenerator
@@ -203,6 +261,12 @@ func Servers_Databases_AuditingSetting_SpecGenerator() gopter.Gen {
 
 	generators := make(map[string]gopter.Gen)
 	AddIndependentPropertyGeneratorsForServers_Databases_AuditingSetting_Spec(generators)
+	servers_Databases_AuditingSetting_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_AuditingSetting_Spec{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForServers_Databases_AuditingSetting_Spec(generators)
+	AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting_Spec(generators)
 	servers_Databases_AuditingSetting_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_AuditingSetting_Spec{}), generators)
 
 	return servers_Databases_AuditingSetting_SpecGenerator
@@ -220,4 +284,9 @@ func AddIndependentPropertyGeneratorsForServers_Databases_AuditingSetting_Spec(g
 	gens["State"] = gen.PtrOf(gen.AlphaString())
 	gens["StorageAccountSubscriptionId"] = gen.PtrOf(gen.AlphaString())
 	gens["StorageEndpoint"] = gen.PtrOf(gen.AlphaString())
+}
+
+// AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting_Spec is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServers_Databases_AuditingSetting_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(ServersDatabasesAuditingSettingOperatorSpecGenerator())
 }

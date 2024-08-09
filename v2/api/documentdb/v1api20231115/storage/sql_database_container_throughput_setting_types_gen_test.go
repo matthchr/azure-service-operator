@@ -174,6 +174,7 @@ func AddIndependentPropertyGeneratorsForDatabaseAccounts_SqlDatabases_Containers
 
 // AddRelatedPropertyGeneratorsForDatabaseAccounts_SqlDatabases_Containers_ThroughputSetting_Spec is a factory method for creating gopter generators
 func AddRelatedPropertyGeneratorsForDatabaseAccounts_SqlDatabases_Containers_ThroughputSetting_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(SqlDatabaseContainerThroughputSettingOperatorSpecGenerator())
 	gens["Resource"] = gen.PtrOf(ThroughputSettingsResourceGenerator())
 }
 
@@ -237,4 +238,59 @@ func SqlDatabaseContainerThroughputSettingGenerator() gopter.Gen {
 func AddRelatedPropertyGeneratorsForSqlDatabaseContainerThroughputSetting(gens map[string]gopter.Gen) {
 	gens["Spec"] = DatabaseAccounts_SqlDatabases_Containers_ThroughputSetting_SpecGenerator()
 	gens["Status"] = DatabaseAccounts_SqlDatabases_Containers_ThroughputSetting_STATUSGenerator()
+}
+
+func Test_SqlDatabaseContainerThroughputSettingOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of SqlDatabaseContainerThroughputSettingOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForSqlDatabaseContainerThroughputSettingOperatorSpec, SqlDatabaseContainerThroughputSettingOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForSqlDatabaseContainerThroughputSettingOperatorSpec runs a test to see if a specific instance of SqlDatabaseContainerThroughputSettingOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForSqlDatabaseContainerThroughputSettingOperatorSpec(subject SqlDatabaseContainerThroughputSettingOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual SqlDatabaseContainerThroughputSettingOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of SqlDatabaseContainerThroughputSettingOperatorSpec instances for property testing - lazily instantiated
+// by SqlDatabaseContainerThroughputSettingOperatorSpecGenerator()
+var sqlDatabaseContainerThroughputSettingOperatorSpecGenerator gopter.Gen
+
+// SqlDatabaseContainerThroughputSettingOperatorSpecGenerator returns a generator of SqlDatabaseContainerThroughputSettingOperatorSpec instances for property testing.
+func SqlDatabaseContainerThroughputSettingOperatorSpecGenerator() gopter.Gen {
+	if sqlDatabaseContainerThroughputSettingOperatorSpecGenerator != nil {
+		return sqlDatabaseContainerThroughputSettingOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	sqlDatabaseContainerThroughputSettingOperatorSpecGenerator = gen.Struct(reflect.TypeOf(SqlDatabaseContainerThroughputSettingOperatorSpec{}), generators)
+
+	return sqlDatabaseContainerThroughputSettingOperatorSpecGenerator
 }

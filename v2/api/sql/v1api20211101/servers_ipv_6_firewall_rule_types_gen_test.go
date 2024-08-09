@@ -165,6 +165,103 @@ func AddRelatedPropertyGeneratorsForServersIPV6FirewallRule(gens map[string]gopt
 	gens["Status"] = Servers_Ipv6FirewallRule_STATUSGenerator()
 }
 
+func Test_ServersIPV6FirewallRuleOperatorSpec_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MaxSize = 10
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip from ServersIPV6FirewallRuleOperatorSpec to ServersIPV6FirewallRuleOperatorSpec via AssignProperties_To_ServersIPV6FirewallRuleOperatorSpec & AssignProperties_From_ServersIPV6FirewallRuleOperatorSpec returns original",
+		prop.ForAll(RunPropertyAssignmentTestForServersIPV6FirewallRuleOperatorSpec, ServersIPV6FirewallRuleOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(false, 240, os.Stdout))
+}
+
+// RunPropertyAssignmentTestForServersIPV6FirewallRuleOperatorSpec tests if a specific instance of ServersIPV6FirewallRuleOperatorSpec can be assigned to storage and back losslessly
+func RunPropertyAssignmentTestForServersIPV6FirewallRuleOperatorSpec(subject ServersIPV6FirewallRuleOperatorSpec) string {
+	// Copy subject to make sure assignment doesn't modify it
+	copied := subject.DeepCopy()
+
+	// Use AssignPropertiesTo() for the first stage of conversion
+	var other storage.ServersIPV6FirewallRuleOperatorSpec
+	err := copied.AssignProperties_To_ServersIPV6FirewallRuleOperatorSpec(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Use AssignPropertiesFrom() to convert back to our original type
+	var actual ServersIPV6FirewallRuleOperatorSpec
+	err = actual.AssignProperties_From_ServersIPV6FirewallRuleOperatorSpec(&other)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for a match
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+func Test_ServersIPV6FirewallRuleOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ServersIPV6FirewallRuleOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersIPV6FirewallRuleOperatorSpec, ServersIPV6FirewallRuleOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForServersIPV6FirewallRuleOperatorSpec runs a test to see if a specific instance of ServersIPV6FirewallRuleOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersIPV6FirewallRuleOperatorSpec(subject ServersIPV6FirewallRuleOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ServersIPV6FirewallRuleOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ServersIPV6FirewallRuleOperatorSpec instances for property testing - lazily instantiated by
+// ServersIPV6FirewallRuleOperatorSpecGenerator()
+var serversIPV6FirewallRuleOperatorSpecGenerator gopter.Gen
+
+// ServersIPV6FirewallRuleOperatorSpecGenerator returns a generator of ServersIPV6FirewallRuleOperatorSpec instances for property testing.
+func ServersIPV6FirewallRuleOperatorSpecGenerator() gopter.Gen {
+	if serversIPV6FirewallRuleOperatorSpecGenerator != nil {
+		return serversIPV6FirewallRuleOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	serversIPV6FirewallRuleOperatorSpecGenerator = gen.Struct(reflect.TypeOf(ServersIPV6FirewallRuleOperatorSpec{}), generators)
+
+	return serversIPV6FirewallRuleOperatorSpecGenerator
+}
+
 func Test_Servers_Ipv6FirewallRule_STATUS_WhenPropertiesConverted_RoundTripsWithoutLoss(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -358,6 +455,9 @@ func RunJSONSerializationTestForServers_Ipv6FirewallRule_Spec(subject Servers_Ip
 var servers_Ipv6FirewallRule_SpecGenerator gopter.Gen
 
 // Servers_Ipv6FirewallRule_SpecGenerator returns a generator of Servers_Ipv6FirewallRule_Spec instances for property testing.
+// We first initialize servers_Ipv6FirewallRule_SpecGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
 func Servers_Ipv6FirewallRule_SpecGenerator() gopter.Gen {
 	if servers_Ipv6FirewallRule_SpecGenerator != nil {
 		return servers_Ipv6FirewallRule_SpecGenerator
@@ -365,6 +465,12 @@ func Servers_Ipv6FirewallRule_SpecGenerator() gopter.Gen {
 
 	generators := make(map[string]gopter.Gen)
 	AddIndependentPropertyGeneratorsForServers_Ipv6FirewallRule_Spec(generators)
+	servers_Ipv6FirewallRule_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Ipv6FirewallRule_Spec{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForServers_Ipv6FirewallRule_Spec(generators)
+	AddRelatedPropertyGeneratorsForServers_Ipv6FirewallRule_Spec(generators)
 	servers_Ipv6FirewallRule_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Ipv6FirewallRule_Spec{}), generators)
 
 	return servers_Ipv6FirewallRule_SpecGenerator
@@ -375,4 +481,9 @@ func AddIndependentPropertyGeneratorsForServers_Ipv6FirewallRule_Spec(gens map[s
 	gens["AzureName"] = gen.AlphaString()
 	gens["EndIPv6Address"] = gen.PtrOf(gen.AlphaString())
 	gens["StartIPv6Address"] = gen.PtrOf(gen.AlphaString())
+}
+
+// AddRelatedPropertyGeneratorsForServers_Ipv6FirewallRule_Spec is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServers_Ipv6FirewallRule_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(ServersIPV6FirewallRuleOperatorSpecGenerator())
 }

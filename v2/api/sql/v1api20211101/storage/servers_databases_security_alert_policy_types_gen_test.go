@@ -79,6 +79,61 @@ func AddRelatedPropertyGeneratorsForServersDatabasesSecurityAlertPolicy(gens map
 	gens["Status"] = Servers_Databases_SecurityAlertPolicy_STATUSGenerator()
 }
 
+func Test_ServersDatabasesSecurityAlertPolicyOperatorSpec_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
+	t.Parallel()
+	parameters := gopter.DefaultTestParameters()
+	parameters.MinSuccessfulTests = 100
+	parameters.MaxSize = 3
+	properties := gopter.NewProperties(parameters)
+	properties.Property(
+		"Round trip of ServersDatabasesSecurityAlertPolicyOperatorSpec via JSON returns original",
+		prop.ForAll(RunJSONSerializationTestForServersDatabasesSecurityAlertPolicyOperatorSpec, ServersDatabasesSecurityAlertPolicyOperatorSpecGenerator()))
+	properties.TestingRun(t, gopter.NewFormatedReporter(true, 240, os.Stdout))
+}
+
+// RunJSONSerializationTestForServersDatabasesSecurityAlertPolicyOperatorSpec runs a test to see if a specific instance of ServersDatabasesSecurityAlertPolicyOperatorSpec round trips to JSON and back losslessly
+func RunJSONSerializationTestForServersDatabasesSecurityAlertPolicyOperatorSpec(subject ServersDatabasesSecurityAlertPolicyOperatorSpec) string {
+	// Serialize to JSON
+	bin, err := json.Marshal(subject)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Deserialize back into memory
+	var actual ServersDatabasesSecurityAlertPolicyOperatorSpec
+	err = json.Unmarshal(bin, &actual)
+	if err != nil {
+		return err.Error()
+	}
+
+	// Check for outcome
+	match := cmp.Equal(subject, actual, cmpopts.EquateEmpty())
+	if !match {
+		actualFmt := pretty.Sprint(actual)
+		subjectFmt := pretty.Sprint(subject)
+		result := diff.Diff(subjectFmt, actualFmt)
+		return result
+	}
+
+	return ""
+}
+
+// Generator of ServersDatabasesSecurityAlertPolicyOperatorSpec instances for property testing - lazily instantiated by
+// ServersDatabasesSecurityAlertPolicyOperatorSpecGenerator()
+var serversDatabasesSecurityAlertPolicyOperatorSpecGenerator gopter.Gen
+
+// ServersDatabasesSecurityAlertPolicyOperatorSpecGenerator returns a generator of ServersDatabasesSecurityAlertPolicyOperatorSpec instances for property testing.
+func ServersDatabasesSecurityAlertPolicyOperatorSpecGenerator() gopter.Gen {
+	if serversDatabasesSecurityAlertPolicyOperatorSpecGenerator != nil {
+		return serversDatabasesSecurityAlertPolicyOperatorSpecGenerator
+	}
+
+	generators := make(map[string]gopter.Gen)
+	serversDatabasesSecurityAlertPolicyOperatorSpecGenerator = gen.Struct(reflect.TypeOf(ServersDatabasesSecurityAlertPolicyOperatorSpec{}), generators)
+
+	return serversDatabasesSecurityAlertPolicyOperatorSpecGenerator
+}
+
 func Test_Servers_Databases_SecurityAlertPolicy_STATUS_WhenSerializedToJson_DeserializesAsEqual(t *testing.T) {
 	t.Parallel()
 	parameters := gopter.DefaultTestParameters()
@@ -207,6 +262,9 @@ func RunJSONSerializationTestForServers_Databases_SecurityAlertPolicy_Spec(subje
 var servers_Databases_SecurityAlertPolicy_SpecGenerator gopter.Gen
 
 // Servers_Databases_SecurityAlertPolicy_SpecGenerator returns a generator of Servers_Databases_SecurityAlertPolicy_Spec instances for property testing.
+// We first initialize servers_Databases_SecurityAlertPolicy_SpecGenerator with a simplified generator based on the
+// fields with primitive types then replacing it with a more complex one that also handles complex fields
+// to ensure any cycles in the object graph properly terminate.
 func Servers_Databases_SecurityAlertPolicy_SpecGenerator() gopter.Gen {
 	if servers_Databases_SecurityAlertPolicy_SpecGenerator != nil {
 		return servers_Databases_SecurityAlertPolicy_SpecGenerator
@@ -214,6 +272,12 @@ func Servers_Databases_SecurityAlertPolicy_SpecGenerator() gopter.Gen {
 
 	generators := make(map[string]gopter.Gen)
 	AddIndependentPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec(generators)
+	servers_Databases_SecurityAlertPolicy_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_SecurityAlertPolicy_Spec{}), generators)
+
+	// The above call to gen.Struct() captures the map, so create a new one
+	generators = make(map[string]gopter.Gen)
+	AddIndependentPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec(generators)
+	AddRelatedPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec(generators)
 	servers_Databases_SecurityAlertPolicy_SpecGenerator = gen.Struct(reflect.TypeOf(Servers_Databases_SecurityAlertPolicy_Spec{}), generators)
 
 	return servers_Databases_SecurityAlertPolicy_SpecGenerator
@@ -228,4 +292,9 @@ func AddIndependentPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Sp
 	gens["RetentionDays"] = gen.PtrOf(gen.Int())
 	gens["State"] = gen.PtrOf(gen.AlphaString())
 	gens["StorageEndpoint"] = gen.PtrOf(gen.AlphaString())
+}
+
+// AddRelatedPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec is a factory method for creating gopter generators
+func AddRelatedPropertyGeneratorsForServers_Databases_SecurityAlertPolicy_Spec(gens map[string]gopter.Gen) {
+	gens["OperatorSpec"] = gen.PtrOf(ServersDatabasesSecurityAlertPolicyOperatorSpecGenerator())
 }
