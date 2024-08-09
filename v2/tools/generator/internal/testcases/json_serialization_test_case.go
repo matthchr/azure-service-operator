@@ -86,6 +86,8 @@ func (o *JSONSerializationTestCase) AsFuncs(
 
 	// Remove properties from our runtime
 	o.removeByPackage(properties, astmodel.GenRuntimeReference)
+	o.removeByPackage(properties, astmodel.GenRuntimeConfigMapsReference)
+	o.removeByPackage(properties, astmodel.GenRuntimeSecretsReference)
 
 	// Remove API machinery properties
 	o.removeByPackage(properties, astmodel.APIMachineryRuntimeReference)
