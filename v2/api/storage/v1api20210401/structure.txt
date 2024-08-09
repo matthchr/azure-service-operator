@@ -120,7 +120,8 @@ StorageAccount: Resource
 │   │           ├── "NetworkSourceDeleted"
 │   │           ├── "Provisioning"
 │   │           └── "Succeeded"
-│   ├── OperatorSpec: *Object (2 properties)
+│   ├── OperatorSpec: *Object (4 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
 │   │   ├── ConfigMaps: *Object (6 properties)
 │   │   │   ├── BlobEndpoint: *genruntime.ConfigMapDestination
 │   │   │   ├── DfsEndpoint: *genruntime.ConfigMapDestination
@@ -128,6 +129,7 @@ StorageAccount: Resource
 │   │   │   ├── QueueEndpoint: *genruntime.ConfigMapDestination
 │   │   │   ├── TableEndpoint: *genruntime.ConfigMapDestination
 │   │   │   └── WebEndpoint: *genruntime.ConfigMapDestination
+│   │   ├── SecretExpressions: *core.DestinationExpression[]
 │   │   └── Secrets: *Object (8 properties)
 │   │       ├── BlobEndpoint: *genruntime.SecretDestination
 │   │       ├── DfsEndpoint: *genruntime.SecretDestination
@@ -765,7 +767,7 @@ StorageAccount_Spec_ARM: Object (8 properties)
 └── Tags: map[string]string
 StorageAccountsBlobService: Resource
 ├── Owner: StorageAccount
-├── Spec: Object (10 properties)
+├── Spec: Object (11 properties)
 │   ├── AutomaticSnapshotPolicyEnabled: *bool
 │   ├── ChangeFeed: *Object (2 properties)
 │   │   ├── Enabled: *bool
@@ -804,6 +806,9 @@ StorageAccountsBlobService: Resource
 │   │   ├── Name: *Enum (1 value)
 │   │   │   └── "AccessTimeTracking"
 │   │   └── TrackingGranularityInDays: *int
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── RestorePolicy: *Object (2 properties)
 │       ├── Days: Validated<*int> (2 rules)
@@ -960,7 +965,7 @@ StorageAccountsBlobService_Spec_ARM: Object (2 properties)
         └── Enabled: *bool
 StorageAccountsBlobServicesContainer: Resource
 ├── Owner: StorageAccountsBlobService
-├── Spec: Object (7 properties)
+├── Spec: Object (8 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 63
 │   │   └── Rule 1: MinLength: 3
@@ -969,6 +974,9 @@ StorageAccountsBlobServicesContainer: Resource
 │   ├── ImmutableStorageWithVersioning: *Object (1 property)
 │   │   └── Enabled: *bool
 │   ├── Metadata: map[string]string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── PublicAccess: *Enum (3 values)
 │       ├── "Blob"
@@ -1115,7 +1123,10 @@ StorageAccountsBlobServicesContainer_Spec_ARM: Object (2 properties)
         └── "None"
 StorageAccountsManagementPolicy: Resource
 ├── Owner: StorageAccount
-├── Spec: Object (2 properties)
+├── Spec: Object (3 properties)
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Policy: *Object (1 property)
 │       └── Rules: Object (4 properties)[]
@@ -1322,7 +1333,7 @@ StorageAccountsManagementPolicy_Spec_ARM: Object (2 properties)
                 └── "Lifecycle"
 StorageAccountsQueueService: Resource
 ├── Owner: StorageAccount
-├── Spec: Object (2 properties)
+├── Spec: Object (3 properties)
 │   ├── Cors: *Object (1 property)
 │   │   └── CorsRules: Object (5 properties)[]
 │   │       ├── AllowedHeaders: string[]
@@ -1337,6 +1348,9 @@ StorageAccountsQueueService: Resource
 │   │       ├── AllowedOrigins: string[]
 │   │       ├── ExposedHeaders: string[]
 │   │       └── MaxAgeInSeconds: *int
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (5 properties)
     ├── Conditions: conditions.Condition[]
@@ -1395,11 +1409,14 @@ StorageAccountsQueueService_Spec_ARM: Object (2 properties)
             └── MaxAgeInSeconds: *int
 StorageAccountsQueueServicesQueue: Resource
 ├── Owner: StorageAccountsQueueService
-├── Spec: Object (3 properties)
+├── Spec: Object (4 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 63
 │   │   └── Rule 1: MinLength: 3
 │   ├── Metadata: map[string]string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (6 properties)
     ├── ApproximateMessageCount: *int

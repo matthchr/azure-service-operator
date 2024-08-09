@@ -5,7 +5,7 @@ APIVersion: Enum (1 value)
 └── "2020-11-01"
 LoadBalancer: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (13 properties)
+├── Spec: Object (14 properties)
 │   ├── AzureName: string
 │   ├── BackendAddressPools: Object (2 properties)[]
 │   │   ├── LoadBalancerBackendAddresses: Object (5 properties)[]
@@ -88,6 +88,9 @@ LoadBalancer: Resource
 │   │       ├── "Tcp"
 │   │       └── "Udp"
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── OutboundRules: Object (7 properties)[]
 │   │   ├── AllocatedOutboundPorts: *int
 │   │   ├── BackendAddressPool: *Object (1 property)
@@ -657,7 +660,7 @@ LoadBalancer_Spec_ARM: Object (6 properties)
 └── Tags: map[string]string
 LoadBalancersInboundNatRule: Resource
 ├── Owner: LoadBalancer
-├── Spec: Object (9 properties)
+├── Spec: Object (10 properties)
 │   ├── AzureName: string
 │   ├── BackendPort: *int
 │   ├── EnableFloatingIP: *bool
@@ -666,6 +669,9 @@ LoadBalancersInboundNatRule: Resource
 │   │   └── Reference: *genruntime.ResourceReference
 │   ├── FrontendPort: *int
 │   ├── IdleTimeoutInMinutes: *int
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Protocol: *Enum (3 values)
 │       ├── "All"
@@ -735,7 +741,7 @@ LoadBalancersInboundNatRule_Spec_ARM: Object (2 properties)
         └── "Udp"
 NetworkInterface: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (12 properties)
+├── Spec: Object (13 properties)
 │   ├── AzureName: string
 │   ├── DnsSettings: *Object (2 properties)
 │   │   ├── DnsServers: string[]
@@ -776,6 +782,9 @@ NetworkInterface: Resource
 │   ├── NicType: *Enum (2 values)
 │   │   ├── "Elastic"
 │   │   └── "Standard"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PrivateLinkService: *Object (1 property)
 │   │   └── Reference: *genruntime.ResourceReference
@@ -1001,9 +1010,12 @@ NetworkInterface_Spec_ARM: Object (5 properties)
 └── Tags: map[string]string
 NetworkSecurityGroup: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (4 properties)
+├── Spec: Object (5 properties)
 │   ├── AzureName: string
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Tags: map[string]string
 └── Status: Object (13 properties)
@@ -1089,7 +1101,7 @@ NetworkSecurityGroup_Spec_ARM: Object (4 properties)
 └── Tags: map[string]string
 NetworkSecurityGroupsSecurityRule: Resource
 ├── Owner: NetworkSecurityGroup
-├── Spec: Object (17 properties)
+├── Spec: Object (18 properties)
 │   ├── Access: *Enum (2 values)
 │   │   ├── "Allow"
 │   │   └── "Deny"
@@ -1104,6 +1116,9 @@ NetworkSecurityGroupsSecurityRule: Resource
 │   ├── Direction: *Enum (2 values)
 │   │   ├── "Inbound"
 │   │   └── "Outbound"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Priority: *int
 │   ├── Protocol: *Enum (6 values)
@@ -1227,7 +1242,7 @@ NetworkSecurityGroupsSecurityRule_Spec_ARM: Object (2 properties)
     └── SourcePortRanges: string[]
 PublicIPAddress: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (18 properties)
+├── Spec: Object (19 properties)
 │   ├── AzureName: string
 │   ├── DdosSettings: *Object (3 properties)
 │   │   ├── DdosCustomPolicy: *Object (1 property)
@@ -1254,6 +1269,9 @@ PublicIPAddress: Resource
 │   ├── Location: *string
 │   ├── NatGateway: *Object (1 property)
 │   │   └── Reference: *genruntime.ResourceReference
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PublicIPAddressVersion: *Enum (2 values)
 │   │   ├── "IPv4"
@@ -1443,10 +1461,13 @@ PublicIPAddress_Spec_ARM: Object (7 properties)
 └── Zones: string[]
 RouteTable: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (5 properties)
+├── Spec: Object (6 properties)
 │   ├── AzureName: string
 │   ├── DisableBgpRoutePropagation: *bool
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Tags: map[string]string
 └── Status: Object (10 properties)
@@ -1501,7 +1522,7 @@ RouteTable_Spec_ARM: Object (4 properties)
 └── Tags: map[string]string
 RouteTablesRoute: Resource
 ├── Owner: RouteTable
-├── Spec: Object (6 properties)
+├── Spec: Object (7 properties)
 │   ├── AddressPrefix: *string
 │   ├── AzureName: string
 │   ├── HasBgpOverride: *bool
@@ -1512,6 +1533,9 @@ RouteTablesRoute: Resource
 │   │   ├── "VirtualAppliance"
 │   │   ├── "VirtualNetworkGateway"
 │   │   └── "VnetLocal"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (10 properties)
     ├── AddressPrefix: *string
@@ -1567,7 +1591,7 @@ RouteTablesRoute_Spec_ARM: Object (2 properties)
         └── "VnetLocal"
 VirtualNetwork: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (12 properties)
+├── Spec: Object (13 properties)
 │   ├── AddressSpace: *Object (1 property)
 │   │   └── AddressPrefixes: string[]
 │   ├── AzureName: string
@@ -1586,6 +1610,9 @@ VirtualNetwork: Resource
 │   ├── IpAllocations: Object (1 property)[]
 │   │   └── Reference: *genruntime.ResourceReference
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Tags: map[string]string
 └── Status: Object (17 properties)
@@ -1621,7 +1648,7 @@ VirtualNetwork: Resource
     └── Type: *string
 VirtualNetworkGateway: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (19 properties)
+├── Spec: Object (20 properties)
 │   ├── ActiveActive: *bool
 │   ├── AzureName: string
 │   ├── BgpSettings: *Object (4 properties)
@@ -1656,6 +1683,9 @@ VirtualNetworkGateway: Resource
 │   │   └── Subnet: *Object (1 property)
 │   │       └── Reference: *genruntime.ResourceReference
 │   ├── Location: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Sku: *Object (2 properties)
 │   │   ├── Name: *Enum (17 values)
@@ -2451,7 +2481,7 @@ VirtualNetwork_Spec_ARM: Object (5 properties)
 └── Tags: map[string]string
 VirtualNetworksSubnet: Resource
 ├── Owner: VirtualNetwork
-├── Spec: Object (14 properties)
+├── Spec: Object (15 properties)
 │   ├── AddressPrefix: *string
 │   ├── AddressPrefixes: string[]
 │   ├── ApplicationGatewayIpConfigurations: Object (1 property)[]
@@ -2466,6 +2496,9 @@ VirtualNetworksSubnet: Resource
 │   │   └── Reference: *genruntime.ResourceReference
 │   ├── NetworkSecurityGroup: *Object (1 property)
 │   │   └── Reference: *genruntime.ResourceReference
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PrivateEndpointNetworkPolicies: *Enum (2 values)
 │   │   ├── "Disabled"
@@ -2637,12 +2670,15 @@ VirtualNetworksSubnet_Spec_ARM: Object (2 properties)
         └── Service: *string
 VirtualNetworksVirtualNetworkPeering: Resource
 ├── Owner: VirtualNetwork
-├── Spec: Object (11 properties)
+├── Spec: Object (12 properties)
 │   ├── AllowForwardedTraffic: *bool
 │   ├── AllowGatewayTransit: *bool
 │   ├── AllowVirtualNetworkAccess: *bool
 │   ├── AzureName: string
 │   ├── DoNotVerifyRemoteGateways: *bool
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PeeringState: *Enum (3 values)
 │   │   ├── "Connected"

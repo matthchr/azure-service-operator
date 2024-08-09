@@ -5,7 +5,7 @@ APIVersion: Enum (1 value)
 └── "2023-05-01-preview"
 Api: Resource
 ├── Owner: Service
-├── Spec: Object (27 properties)
+├── Spec: Object (28 properties)
 │   ├── APIVersion: Validated<*string> (1 rule)
 │   │   └── Rule 0: MaxLength: 100
 │   ├── ApiRevision: Validated<*string> (2 rules)
@@ -82,6 +82,9 @@ Api: Resource
 │   ├── License: *Object (2 properties)
 │   │   ├── Name: *string
 │   │   └── Url: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Path: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 400
@@ -185,7 +188,7 @@ Api: Resource
     └── Type: *string
 ApiVersionSet: Resource
 ├── Owner: Service
-├── Spec: Object (7 properties)
+├── Spec: Object (8 properties)
 │   ├── AzureName: Validated<string> (3 rules)
 │   │   ├── Rule 0: MaxLength: 80
 │   │   ├── Rule 1: MinLength: 1
@@ -194,6 +197,9 @@ ApiVersionSet: Resource
 │   ├── DisplayName: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 100
 │   │   └── Rule 1: MinLength: 1
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── VersionHeaderName: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 100
@@ -408,7 +414,7 @@ Api_Spec_ARM: Object (2 properties)
         └── WsdlServiceName: *string
 AuthorizationProvider: Resource
 ├── Owner: Service
-├── Spec: Object (5 properties)
+├── Spec: Object (6 properties)
 │   ├── AzureName: Validated<string> (3 rules)
 │   │   ├── Rule 0: MaxLength: 256
 │   │   ├── Rule 1: MinLength: 1
@@ -422,6 +428,9 @@ AuthorizationProvider: Resource
 │   │   │   ├── AuthorizationCode: *genruntime.SecretMapReference
 │   │   │   └── ClientCredentials: *genruntime.SecretMapReference
 │   │   └── RedirectUrl: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (7 properties)
     ├── Conditions: conditions.Condition[]
@@ -459,7 +468,7 @@ AuthorizationProvider_Spec_ARM: Object (2 properties)
         └── RedirectUrl: *string
 AuthorizationProvidersAuthorization: Resource
 ├── Owner: AuthorizationProvider
-├── Spec: Object (5 properties)
+├── Spec: Object (6 properties)
 │   ├── AuthorizationType: *Enum (1 value)
 │   │   └── "OAuth2"
 │   ├── AzureName: Validated<string> (3 rules)
@@ -469,6 +478,9 @@ AuthorizationProvidersAuthorization: Resource
 │   ├── Oauth2GrantType: *Enum (2 values)
 │   │   ├── "AuthorizationCode"
 │   │   └── "ClientCredentials"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Parameters: *genruntime.SecretMapReference
 └── Status: Object (9 properties)
@@ -512,7 +524,7 @@ AuthorizationProvidersAuthorization_Spec_ARM: Object (2 properties)
     └── Parameters: map[string]string
 AuthorizationProvidersAuthorizationsAccessPolicy: Resource
 ├── Owner: AuthorizationProvidersAuthorization
-├── Spec: Object (7 properties)
+├── Spec: Object (8 properties)
 │   ├── AppIds: string[]
 │   ├── AzureName: Validated<string> (3 rules)
 │   │   ├── Rule 0: MaxLength: 256
@@ -520,6 +532,9 @@ AuthorizationProvidersAuthorizationsAccessPolicy: Resource
 │   │   └── Rule 2: Pattern: "^[^*#&+:<>?]+$"
 │   ├── ObjectId: *string
 │   ├── ObjectIdFromConfig: *genruntime.ConfigMapReference
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── TenantId: *string
 │   └── TenantIdFromConfig: *genruntime.ConfigMapReference
@@ -547,7 +562,7 @@ AuthorizationProvidersAuthorizationsAccessPolicy_Spec_ARM: Object (2 properties)
     └── TenantId: *string
 Backend: Resource
 ├── Owner: Service
-├── Spec: Object (14 properties)
+├── Spec: Object (15 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 80
 │   │   └── Rule 1: MinLength: 1
@@ -588,6 +603,9 @@ Backend: Resource
 │   ├── Description: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 2000
 │   │   └── Rule 1: MinLength: 1
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Pool: *Object (1 property)
 │   │   └── Services: Validated<Object (1 property)[]> (1 rule)
@@ -795,7 +813,7 @@ Backend_Spec_ARM: Object (2 properties)
     └── Url: *string
 NamedValue: Resource
 ├── Owner: Service
-├── Spec: Object (7 properties)
+├── Spec: Object (8 properties)
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 256
 │   │   └── Rule 1: Pattern: "^[^*#&+:<>?]+$"
@@ -807,6 +825,9 @@ NamedValue: Resource
 │   │   ├── IdentityClientId: *string
 │   │   ├── IdentityClientIdFromConfig: *genruntime.ConfigMapReference
 │   │   └── SecretIdentifier: *string
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── Secret: *bool
 │   ├── Tags: Validated<string[]> (1 rule)
@@ -859,12 +880,15 @@ NamedValue_Spec_ARM: Object (2 properties)
     └── Value: *string
 Policy: Resource
 ├── Owner: Service
-├── Spec: Object (3 properties)
+├── Spec: Object (4 properties)
 │   ├── Format: *Enum (4 values)
 │   │   ├── "rawxml"
 │   │   ├── "rawxml-link"
 │   │   ├── "xml"
 │   │   └── "xml-link"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Value: *string
 └── Status: Object (6 properties)
@@ -880,7 +904,7 @@ Policy: Resource
     └── Value: *string
 PolicyFragment: Resource
 ├── Owner: Service
-├── Spec: Object (5 properties)
+├── Spec: Object (6 properties)
 │   ├── AzureName: Validated<string> (3 rules)
 │   │   ├── Rule 0: MaxLength: 80
 │   │   ├── Rule 1: MinLength: 1
@@ -891,6 +915,9 @@ PolicyFragment: Resource
 │   ├── Format: *Enum (2 values)
 │   │   ├── "rawxml"
 │   │   └── "xml"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Value: *string
 └── Status: Object (8 properties)
@@ -945,7 +972,7 @@ Policy_Spec_ARM: Object (2 properties)
     └── Value: *string
 Product: Resource
 ├── Owner: Service
-├── Spec: Object (9 properties)
+├── Spec: Object (10 properties)
 │   ├── ApprovalRequired: *bool
 │   ├── AzureName: Validated<string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 256
@@ -956,6 +983,9 @@ Product: Resource
 │   ├── DisplayName: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 300
 │   │   └── Rule 1: MinLength: 1
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── State: *Enum (2 values)
 │   │   ├── "notPublished"
@@ -979,11 +1009,14 @@ Product: Resource
     └── Type: *string
 ProductApi: Resource
 ├── Owner: Product
-├── Spec: Object (2 properties)
+├── Spec: Object (3 properties)
 │   ├── AzureName: Validated<string> (3 rules)
 │   │   ├── Rule 0: MaxLength: 256
 │   │   ├── Rule 1: MinLength: 1
 │   │   └── Rule 2: Pattern: "^[^*#&+:<>?]+$"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   └── Owner: *genruntime.KnownResourceReference
 └── Status: Object (1 property)
     └── Conditions: conditions.Condition[]
@@ -992,12 +1025,15 @@ ProductApi_Spec_ARM: Object (1 property)
 └── Name: string
 ProductPolicy: Resource
 ├── Owner: Product
-├── Spec: Object (3 properties)
+├── Spec: Object (4 properties)
 │   ├── Format: *Enum (4 values)
 │   │   ├── "rawxml"
 │   │   ├── "rawxml-link"
 │   │   ├── "xml"
 │   │   └── "xml-link"
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   └── Value: *string
 └── Status: Object (6 properties)
@@ -1059,7 +1095,7 @@ Product_Spec_ARM: Object (2 properties)
     └── Terms: *string
 Service: Resource
 ├── Owner: resources/v1apiv20191001.ResourceGroup
-├── Spec: Object (26 properties)
+├── Spec: Object (27 properties)
 │   ├── AdditionalLocations: Object (7 properties)[]
 │   │   ├── DisableGateway: *bool
 │   │   ├── Location: *string
@@ -1159,6 +1195,9 @@ Service: Resource
 │   │   └── "Enabled"
 │   ├── NotificationSenderEmail: Validated<*string> (1 rule)
 │   │   └── Rule 0: MaxLength: 100
+│   ├── OperatorSpec: *Object (2 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   └── SecretExpressions: *core.DestinationExpression[]
 │   ├── Owner: *genruntime.KnownResourceReference
 │   ├── PublicIpAddressReference: *genruntime.ResourceReference
 │   ├── PublicNetworkAccess: *Enum (2 values)
@@ -1678,7 +1717,9 @@ Subscription: Resource
 │   ├── DisplayName: Validated<*string> (2 rules)
 │   │   ├── Rule 0: MaxLength: 100
 │   │   └── Rule 1: MinLength: 1
-│   ├── OperatorSpec: *Object (1 property)
+│   ├── OperatorSpec: *Object (3 properties)
+│   │   ├── ConfigMapExpressions: *core.DestinationExpression[]
+│   │   ├── SecretExpressions: *core.DestinationExpression[]
 │   │   └── Secrets: *Object (2 properties)
 │   │       ├── PrimaryKey: *genruntime.SecretDestination
 │   │       └── SecondaryKey: *genruntime.SecretDestination

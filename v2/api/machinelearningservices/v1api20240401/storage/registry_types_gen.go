@@ -5,11 +5,11 @@ package storage
 
 import (
 	"context"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
-	"github.com/go-logr/logr"
+	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
+	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -49,10 +49,30 @@ func (registry *Registry) SetConditions(conditions conditions.Conditions) {
 	registry.Status.Conditions = conditions
 }
 
-var _ genruntime.KubernetesExporter = &Registry{}
+var _ configmaps.Exporter = &Registry{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (registry *Registry) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ConfigMapDestinationExpressions returns the Spec.OperatorSpec.ConfigMapExpressions property
+func (registry *Registry) ConfigMapDestinationExpressions() []*core.DestinationExpression {
+	if registry.Spec.OperatorSpec == nil {
+		return nil
+	}
+	return registry.Spec.OperatorSpec.ConfigMapExpressions
+}
+
+var _ secrets.Exporter = &Registry{}
+
+// SecretDestinationExpressions returns the Spec.OperatorSpec.SecretExpressions property
+func (registry *Registry) SecretDestinationExpressions() []*core.DestinationExpression {
+	if registry.Spec.OperatorSpec == nil {
+		return nil
+	}
+	return registry.Spec.OperatorSpec.SecretExpressions
+}
+
+var _ genruntime.KubernetesConfigExporter = &Registry{}
+
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (registry *Registry) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(registry.Namespace)
 	if registry.Spec.OperatorSpec != nil && registry.Spec.OperatorSpec.ConfigMaps != nil {
 		if registry.Status.DiscoveryUrl != nil {
@@ -301,8 +321,10 @@ type ManagedServiceIdentity_STATUS struct {
 // Storage version of v1api20240401.RegistryOperatorSpec
 // Details for configuring operator behavior. Fields in this struct are interpreted by the operator directly rather than being passed to Azure
 type RegistryOperatorSpec struct {
-	ConfigMaps  *RegistryOperatorConfigMaps `json:"configMaps,omitempty"`
-	PropertyBag genruntime.PropertyBag      `json:"$propertyBag,omitempty"`
+	ConfigMapExpressions []*core.DestinationExpression `json:"configMapExpressions,omitempty"`
+	ConfigMaps           *RegistryOperatorConfigMaps   `json:"configMaps,omitempty"`
+	PropertyBag          genruntime.PropertyBag        `json:"$propertyBag,omitempty"`
+	SecretExpressions    []*core.DestinationExpression `json:"secretExpressions,omitempty"`
 }
 
 // Storage version of v1api20240401.RegistryPrivateEndpointConnection
