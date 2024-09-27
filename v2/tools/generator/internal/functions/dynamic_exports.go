@@ -65,7 +65,7 @@ func NewConfigMapExporterInterface(
 		[][]string{{"Spec", astmodel.OperatorSpecProperty}},
 		[]string{"Spec", astmodel.OperatorSpecProperty, astmodel.OperatorSpecConfigMapExpressionsProperty},
 		"ConfigMapDestinationExpressions",
-		astmodel.NewOptionalType(astmodel.ConfigMapDestinationExpressionsType),
+		astmodel.DestinationExpressionCollectionType,
 		astmodel.ConfigMapExporterType)
 }
 
@@ -81,7 +81,7 @@ func NewSecretsExporterInterface(
 		[][]string{{"Spec", astmodel.OperatorSpecProperty}},
 		[]string{"Spec", astmodel.OperatorSpecProperty, astmodel.OperatorSpecSecretExpressionsProperty},
 		"SecretDestinationExpressions",
-		astmodel.NewOptionalType(astmodel.SecretDestinationExpressionsType),
+		astmodel.DestinationExpressionCollectionType,
 		astmodel.SecretExporterType)
 }
 
@@ -100,6 +100,7 @@ func (d *PropertyExporter) ToInterfaceImplementation() *astmodel.InterfaceImplem
 		funcs...)
 }
 
+// TODO: Docs
 func (d *PropertyExporter) getPropertyFunction(
 	f *ResourceFunction,
 	genContext *astmodel.CodeGenerationContext,

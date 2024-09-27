@@ -184,7 +184,7 @@ func (a *A) ValidateUpdate(old runtime.Object) (admission.Warnings, error) {
 
 // createValidations validates the creation of the resource
 func (a *A) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){a.validateResourceReferences, a.validateOwnerReference}
+	return []func() (admission.Warnings, error){a.validateResourceReferences, a.validateOwnerReference, a.validateSecretDestinations, a.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -202,7 +202,21 @@ func (a *A) updateValidations() []func(old runtime.Object) (admission.Warnings, 
 		func(old runtime.Object) (admission.Warnings, error) {
 			return a.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return a.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return a.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (a *A) validateConfigMapDestinations() (admission.Warnings, error) {
+	if a.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(nil, a.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -217,6 +231,14 @@ func (a *A) validateResourceReferences() (admission.Warnings, error) {
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (a *A) validateSecretDestinations() (admission.Warnings, error) {
+	if a.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(nil, a.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
@@ -470,7 +492,7 @@ func (b *B) ValidateUpdate(old runtime.Object) (admission.Warnings, error) {
 
 // createValidations validates the creation of the resource
 func (b *B) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){b.validateResourceReferences, b.validateOwnerReference}
+	return []func() (admission.Warnings, error){b.validateResourceReferences, b.validateOwnerReference, b.validateSecretDestinations, b.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -488,7 +510,21 @@ func (b *B) updateValidations() []func(old runtime.Object) (admission.Warnings, 
 		func(old runtime.Object) (admission.Warnings, error) {
 			return b.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return b.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return b.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (b *B) validateConfigMapDestinations() (admission.Warnings, error) {
+	if b.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(nil, b.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -503,6 +539,14 @@ func (b *B) validateResourceReferences() (admission.Warnings, error) {
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (b *B) validateSecretDestinations() (admission.Warnings, error) {
+	if b.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(nil, b.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
@@ -756,7 +800,7 @@ func (c *C) ValidateUpdate(old runtime.Object) (admission.Warnings, error) {
 
 // createValidations validates the creation of the resource
 func (c *C) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){c.validateResourceReferences, c.validateOwnerReference}
+	return []func() (admission.Warnings, error){c.validateResourceReferences, c.validateOwnerReference, c.validateSecretDestinations, c.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -774,7 +818,21 @@ func (c *C) updateValidations() []func(old runtime.Object) (admission.Warnings, 
 		func(old runtime.Object) (admission.Warnings, error) {
 			return c.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return c.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return c.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (c *C) validateConfigMapDestinations() (admission.Warnings, error) {
+	if c.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(nil, c.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -789,6 +847,14 @@ func (c *C) validateResourceReferences() (admission.Warnings, error) {
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (c *C) validateSecretDestinations() (admission.Warnings, error) {
+	if c.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(nil, c.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
@@ -1042,7 +1108,7 @@ func (d *D) ValidateUpdate(old runtime.Object) (admission.Warnings, error) {
 
 // createValidations validates the creation of the resource
 func (d *D) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){d.validateResourceReferences, d.validateOwnerReference}
+	return []func() (admission.Warnings, error){d.validateResourceReferences, d.validateOwnerReference, d.validateSecretDestinations, d.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -1060,7 +1126,21 @@ func (d *D) updateValidations() []func(old runtime.Object) (admission.Warnings, 
 		func(old runtime.Object) (admission.Warnings, error) {
 			return d.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return d.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return d.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (d *D) validateConfigMapDestinations() (admission.Warnings, error) {
+	if d.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(nil, d.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -1075,6 +1155,14 @@ func (d *D) validateResourceReferences() (admission.Warnings, error) {
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (d *D) validateSecretDestinations() (admission.Warnings, error) {
+	if d.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(nil, d.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties

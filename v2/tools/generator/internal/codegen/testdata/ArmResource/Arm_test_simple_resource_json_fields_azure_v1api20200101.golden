@@ -11,6 +11,7 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
+	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
 	"github.com/pkg/errors"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
@@ -93,7 +94,7 @@ func (resource *FakeResource) defaultImpl() { resource.defaultAzureName() }
 var _ configmaps.Exporter = &FakeResource{}
 
 // ConfigMapDestinationExpressions returns the Spec.OperatorSpec.ConfigMapExpressions property
-func (resource *FakeResource) ConfigMapDestinationExpressions() *configmaps.DestinationExpressions {
+func (resource *FakeResource) ConfigMapDestinationExpressions() []*core.DestinationExpression {
 	if resource.Spec.OperatorSpec == nil {
 		return nil
 	}
@@ -103,7 +104,7 @@ func (resource *FakeResource) ConfigMapDestinationExpressions() *configmaps.Dest
 var _ secrets.Exporter = &FakeResource{}
 
 // SecretDestinationExpressions returns the Spec.OperatorSpec.SecretExpressions property
-func (resource *FakeResource) SecretDestinationExpressions() *secrets.DestinationExpressions {
+func (resource *FakeResource) SecretDestinationExpressions() []*core.DestinationExpression {
 	if resource.Spec.OperatorSpec == nil {
 		return nil
 	}
@@ -188,7 +189,7 @@ func (resource *FakeResource) ValidateUpdate(old runtime.Object) (admission.Warn
 
 // createValidations validates the creation of the resource
 func (resource *FakeResource) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){resource.validateResourceReferences, resource.validateOwnerReference}
+	return []func() (admission.Warnings, error){resource.validateResourceReferences, resource.validateOwnerReference, resource.validateSecretDestinations, resource.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -206,7 +207,21 @@ func (resource *FakeResource) updateValidations() []func(old runtime.Object) (ad
 		func(old runtime.Object) (admission.Warnings, error) {
 			return resource.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return resource.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return resource.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (resource *FakeResource) validateConfigMapDestinations() (admission.Warnings, error) {
+	if resource.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(resource, nil, resource.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -221,6 +236,14 @@ func (resource *FakeResource) validateResourceReferences() (admission.Warnings, 
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (resource *FakeResource) validateSecretDestinations() (admission.Warnings, error) {
+	if resource.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(resource, nil, resource.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties
@@ -656,10 +679,10 @@ var fakeResource_Type_Spec_Values = map[string]FakeResource_Type_Spec{
 // Details for configuring operator behavior. Fields in this struct are interpreted by the operator directly rather than being passed to Azure
 type FakeResourceOperatorSpec struct {
 	// ConfigMapExpressions: configures where to place operator written dynamic ConfigMaps (created with CEL expressions).
-	ConfigMapExpressions *configmaps.DestinationExpressions `json:"configMapExpressions,omitempty"`
+	ConfigMapExpressions []*core.DestinationExpression `json:"configMapExpressions,omitempty"`
 
 	// SecretExpressions: configures where to place operator written dynamic secrets (created with CEL expressions).
-	SecretExpressions *secrets.DestinationExpressions `json:"secretExpressions,omitempty"`
+	SecretExpressions []*core.DestinationExpression `json:"secretExpressions,omitempty"`
 }
 
 // AssignProperties_From_FakeResourceOperatorSpec populates our FakeResourceOperatorSpec from the provided source FakeResourceOperatorSpec
@@ -667,16 +690,36 @@ func (operator *FakeResourceOperatorSpec) AssignProperties_From_FakeResourceOper
 
 	// ConfigMapExpressions
 	if source.ConfigMapExpressions != nil {
-		configMapExpression := *source.ConfigMapExpressions.DeepCopy()
-		operator.ConfigMapExpressions = &configMapExpression
+		configMapExpressionList := make([]*core.DestinationExpression, len(source.ConfigMapExpressions))
+		for configMapExpressionIndex, configMapExpressionItem := range source.ConfigMapExpressions {
+			// Shadow the loop variable to avoid aliasing
+			configMapExpressionItem := configMapExpressionItem
+			if configMapExpressionItem != nil {
+				configMapExpression := *configMapExpressionItem.DeepCopy()
+				configMapExpressionList[configMapExpressionIndex] = &configMapExpression
+			} else {
+				configMapExpressionList[configMapExpressionIndex] = nil
+			}
+		}
+		operator.ConfigMapExpressions = configMapExpressionList
 	} else {
 		operator.ConfigMapExpressions = nil
 	}
 
 	// SecretExpressions
 	if source.SecretExpressions != nil {
-		secretExpression := *source.SecretExpressions.DeepCopy()
-		operator.SecretExpressions = &secretExpression
+		secretExpressionList := make([]*core.DestinationExpression, len(source.SecretExpressions))
+		for secretExpressionIndex, secretExpressionItem := range source.SecretExpressions {
+			// Shadow the loop variable to avoid aliasing
+			secretExpressionItem := secretExpressionItem
+			if secretExpressionItem != nil {
+				secretExpression := *secretExpressionItem.DeepCopy()
+				secretExpressionList[secretExpressionIndex] = &secretExpression
+			} else {
+				secretExpressionList[secretExpressionIndex] = nil
+			}
+		}
+		operator.SecretExpressions = secretExpressionList
 	} else {
 		operator.SecretExpressions = nil
 	}
@@ -692,16 +735,36 @@ func (operator *FakeResourceOperatorSpec) AssignProperties_To_FakeResourceOperat
 
 	// ConfigMapExpressions
 	if operator.ConfigMapExpressions != nil {
-		configMapExpression := *operator.ConfigMapExpressions.DeepCopy()
-		destination.ConfigMapExpressions = &configMapExpression
+		configMapExpressionList := make([]*core.DestinationExpression, len(operator.ConfigMapExpressions))
+		for configMapExpressionIndex, configMapExpressionItem := range operator.ConfigMapExpressions {
+			// Shadow the loop variable to avoid aliasing
+			configMapExpressionItem := configMapExpressionItem
+			if configMapExpressionItem != nil {
+				configMapExpression := *configMapExpressionItem.DeepCopy()
+				configMapExpressionList[configMapExpressionIndex] = &configMapExpression
+			} else {
+				configMapExpressionList[configMapExpressionIndex] = nil
+			}
+		}
+		destination.ConfigMapExpressions = configMapExpressionList
 	} else {
 		destination.ConfigMapExpressions = nil
 	}
 
 	// SecretExpressions
 	if operator.SecretExpressions != nil {
-		secretExpression := *operator.SecretExpressions.DeepCopy()
-		destination.SecretExpressions = &secretExpression
+		secretExpressionList := make([]*core.DestinationExpression, len(operator.SecretExpressions))
+		for secretExpressionIndex, secretExpressionItem := range operator.SecretExpressions {
+			// Shadow the loop variable to avoid aliasing
+			secretExpressionItem := secretExpressionItem
+			if secretExpressionItem != nil {
+				secretExpression := *secretExpressionItem.DeepCopy()
+				secretExpressionList[secretExpressionIndex] = &secretExpression
+			} else {
+				secretExpressionList[secretExpressionIndex] = nil
+			}
+		}
+		destination.SecretExpressions = secretExpressionList
 	} else {
 		destination.SecretExpressions = nil
 	}

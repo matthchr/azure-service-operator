@@ -186,7 +186,7 @@ func (resource *AResource) ValidateUpdate(old runtime.Object) (admission.Warning
 
 // createValidations validates the creation of the resource
 func (resource *AResource) createValidations() []func() (admission.Warnings, error) {
-	return []func() (admission.Warnings, error){resource.validateResourceReferences, resource.validateOwnerReference}
+	return []func() (admission.Warnings, error){resource.validateResourceReferences, resource.validateOwnerReference, resource.validateSecretDestinations, resource.validateConfigMapDestinations}
 }
 
 // deleteValidations validates the deletion of the resource
@@ -204,7 +204,21 @@ func (resource *AResource) updateValidations() []func(old runtime.Object) (admis
 		func(old runtime.Object) (admission.Warnings, error) {
 			return resource.validateOwnerReference()
 		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return resource.validateSecretDestinations()
+		},
+		func(old runtime.Object) (admission.Warnings, error) {
+			return resource.validateConfigMapDestinations()
+		},
 	}
+}
+
+// validateConfigMapDestinations validates there are no colliding genruntime.ConfigMapDestinations
+func (resource *AResource) validateConfigMapDestinations() (admission.Warnings, error) {
+	if resource.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return configmaps.ValidateDestinations(nil, resource.Spec.OperatorSpec.ConfigMapExpressions)
 }
 
 // validateOwnerReference validates the owner field
@@ -219,6 +233,14 @@ func (resource *AResource) validateResourceReferences() (admission.Warnings, err
 		return nil, err
 	}
 	return genruntime.ValidateResourceReferences(refs)
+}
+
+// validateSecretDestinations validates there are no colliding genruntime.SecretDestination's
+func (resource *AResource) validateSecretDestinations() (admission.Warnings, error) {
+	if resource.Spec.OperatorSpec == nil {
+		return nil, nil
+	}
+	return secrets.ValidateDestinations(nil, resource.Spec.OperatorSpec.SecretExpressions)
 }
 
 // validateWriteOnceProperties validates all WriteOnce properties

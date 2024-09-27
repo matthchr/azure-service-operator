@@ -343,11 +343,11 @@ func (b *operatorSpecBuilder) newOperatorSpecProperty(operatorSpec astmodel.Type
 	return prop
 }
 
-func (b *operatorSpecBuilder) newProperty(typeName astmodel.TypeName, propertyName string, description string) *astmodel.PropertyDefinition {
+func (b *operatorSpecBuilder) newProperty(typ astmodel.Type, propertyName string, description string) *astmodel.PropertyDefinition {
 	prop := astmodel.NewPropertyDefinition(
 		b.idFactory.CreatePropertyName(propertyName, astmodel.Exported),
 		b.idFactory.CreateStringIdentifier(propertyName, astmodel.NotExported),
-		typeName)
+		typ)
 	prop = prop.WithDescription(description)
 	prop = prop.MakeTypeOptional()
 
@@ -370,14 +370,14 @@ func (b *operatorSpecBuilder) newConfigMapProperty(configMapTypeName astmodel.Ty
 
 func (b *operatorSpecBuilder) newDynamicConfigMapProperty() *astmodel.PropertyDefinition {
 	return b.newProperty(
-		astmodel.ConfigMapDestinationExpressionsType,
+		astmodel.DestinationExpressionCollectionType,
 		astmodel.OperatorSpecConfigMapExpressionsProperty,
 		"configures where to place operator written dynamic ConfigMaps (created with CEL expressions).")
 }
 
 func (b *operatorSpecBuilder) newDynamicSecretProperty() *astmodel.PropertyDefinition {
 	return b.newProperty(
-		astmodel.SecretDestinationExpressionsType,
+		astmodel.DestinationExpressionCollectionType,
 		astmodel.OperatorSpecSecretExpressionsProperty,
 		"configures where to place operator written dynamic secrets (created with CEL expressions).")
 }
