@@ -40,6 +40,7 @@ import (
 	"github.com/Azure/azure-service-operator/v2/internal/metrics"
 	"github.com/Azure/azure-service-operator/v2/internal/reconcilers/arm"
 	"github.com/Azure/azure-service-operator/v2/internal/reconcilers/generic"
+	asocel "github.com/Azure/azure-service-operator/v2/internal/util/cel"
 	"github.com/Azure/azure-service-operator/v2/internal/util/interval"
 	"github.com/Azure/azure-service-operator/v2/internal/util/kubeclient"
 	"github.com/Azure/azure-service-operator/v2/internal/util/lockedrand"
@@ -192,7 +193,10 @@ func createSharedEnvTest(cfg testConfig, namespaceResources *namespaceResources)
 	testIndexer := NewIndexer(mgr.GetScheme())
 	indexer := kubeclient.NewAndIndexer(mgr.GetFieldIndexer(), testIndexer)
 	kubeClient := kubeclient.NewClient(NewClient(mgr.GetClient(), testIndexer))
-
+	expressionEvaluator, err := asocel.NewExpressionEvaluator()
+	if err != nil {
+		return nil, errors.Wrapf(err, "creating expression evaluator")
+	}
 	credentialProviderWrapper := &credentialProviderWrapper{namespaceResources: namespaceResources}
 
 	var clientFactory arm.ARMConnectionFactory = func(ctx context.Context, mo genruntime.ARMMetaObject) (arm.Connection, error) {
@@ -245,6 +249,7 @@ func createSharedEnvTest(cfg testConfig, namespaceResources *namespaceResources)
 			credentialProviderWrapper,
 			kubeClient,
 			positiveConditions,
+			expressionEvaluator,
 			options)
 		if err != nil {
 			return nil, err

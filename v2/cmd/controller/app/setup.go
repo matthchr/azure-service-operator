@@ -44,6 +44,7 @@ import (
 	asometrics "github.com/Azure/azure-service-operator/v2/internal/metrics"
 	armreconciler "github.com/Azure/azure-service-operator/v2/internal/reconcilers/arm"
 	"github.com/Azure/azure-service-operator/v2/internal/reconcilers/generic"
+	asocel "github.com/Azure/azure-service-operator/v2/internal/util/cel"
 	"github.com/Azure/azure-service-operator/v2/internal/util/interval"
 	"github.com/Azure/azure-service-operator/v2/internal/util/kubeclient"
 	"github.com/Azure/azure-service-operator/v2/internal/util/lockedrand"
@@ -301,6 +302,7 @@ type clients struct {
 	armConnectionFactory armreconciler.ARMConnectionFactory
 	credentialProvider   identity.CredentialProvider
 	kubeClient           kubeclient.Client
+	expressionEvaluator  asocel.ExpressionEvaluator
 	log                  logr.Logger
 	options              generic.Options
 }
@@ -334,6 +336,11 @@ func initializeClients(cfg config.Values, mgr ctrl.Manager) (*clients, error) {
 
 	positiveConditions := conditions.NewPositiveConditionBuilder(clock.New())
 
+	expressionEvaluator, err := asocel.NewExpressionEvaluator()
+	if err != nil {
+		return nil, errors.Wrap(err, "error creating expression evaluator")
+	}
+
 	options := makeControllerOptions(log, cfg)
 
 	return &clients{
@@ -341,6 +348,7 @@ func initializeClients(cfg config.Values, mgr ctrl.Manager) (*clients, error) {
 		armConnectionFactory: connectionFactory,
 		credentialProvider:   credentialProvider,
 		kubeClient:           kubeClient,
+		expressionEvaluator:  expressionEvaluator,
 		log:                  log,
 		options:              options,
 	}, nil
@@ -355,6 +363,7 @@ func initializeWatchers(readyResources map[string]apiextensions.CustomResourceDe
 		clients.credentialProvider,
 		clients.kubeClient,
 		clients.positiveConditions,
+		clients.expressionEvaluator,
 		clients.options)
 	if err != nil {
 		return errors.Wrap(err, "failed getting storage types and reconcilers")
