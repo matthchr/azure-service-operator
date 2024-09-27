@@ -21,12 +21,7 @@ type keyPair struct {
 
 // ValidateDestinations checks that no two destinations are writing to the same secret/key, as that could cause
 // those secrets to overwrite one another.
-func ValidateDestinations(destinations []*genruntime.SecretDestination) (admission.Warnings, error) {
-	return ValidateDestinationsExt(destinations, nil)
-}
-
-// TODO: ValidateDestinationsExt will replace ValidateDestinations in a future PR.
-func ValidateDestinationsExt(
+func ValidateDestinations(
 	destinations []*genruntime.SecretDestination,
 	destinationExpressions []*core.DestinationExpression,
 ) (admission.Warnings, error) {

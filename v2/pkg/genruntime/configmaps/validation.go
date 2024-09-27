@@ -21,12 +21,7 @@ type keyPair struct {
 
 // ValidateDestinations checks that no two destinations are writing to the same configmap/key, as that could cause
 // those values to overwrite one another.
-func ValidateDestinations(destinations []*genruntime.ConfigMapDestination) (admission.Warnings, error) {
-	return ValidateDestinationsExt(destinations, nil)
-}
-
-// TODO: ValidateDestinationsExt will replace ValidateDestinations in a future PR.
-func ValidateDestinationsExt(
+func ValidateDestinations(
 	destinations []*genruntime.ConfigMapDestination,
 	destinationExpressions []*core.DestinationExpression,
 ) (admission.Warnings, error) {
