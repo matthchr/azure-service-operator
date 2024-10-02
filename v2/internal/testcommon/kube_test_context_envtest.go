@@ -93,10 +93,9 @@ func createSharedEnvTest(cfg testConfig, namespaceResources *namespaceResources)
 
 	// Switch logger below if we want controller-runtime logs in the tests.
 	// By default we've disabled controller runtime logs because they're very verbose and usually not useful.
-	// import (ctrl "sigs.k8s.io/controller-runtime")
-	// cfg := textlogger.NewConfig(textlogger.Verbosity(Debug)) // Use verbose logging in tests
-	// log := textlogger.NewLogger(cfg)
-	// ctrl.SetLogger(log)
+	// logConfig := textlogger.NewConfig(textlogger.Verbosity(logging.Debug)) // Use verbose logging in tests
+	// logger := textlogger.NewLogger(logConfig)
+	// ctrl.SetLogger(logger)
 	ctrl.SetLogger(logr.Discard())
 
 	log.Println("Starting envtest")

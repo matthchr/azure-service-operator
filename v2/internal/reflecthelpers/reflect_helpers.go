@@ -379,3 +379,46 @@ func setPropertyCore(obj any, propertyPath []string, value any) (err error) {
 	field.Set(reflect.ValueOf(value))
 	return nil
 }
+
+// TODO: This is far from complete/perfect and should not be used for anything important.
+// TODO: Tests are OK.
+func PopulateStruct(s any) {
+	val := reflect.ValueOf(s).Elem()
+	valType := val.Type()
+
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+		fieldType := valType.Field(i)
+
+		switch field.Kind() {
+		case reflect.Ptr:
+			newVal := reflect.New(fieldType.Type.Elem())
+			field.Set(newVal)
+			PopulateStruct(field.Interface())
+		case reflect.Struct:
+			PopulateStruct(field.Addr().Interface())
+		case reflect.String:
+			field.Set(reflect.ValueOf("exampleValue"))
+		case reflect.Map:
+			// skip
+		default:
+			panic(fmt.Sprintf("unsupported field type: %s", field.Kind()))
+		}
+	}
+}
+
+// GetJSONTags returns a set of JSON keys used in the `json` annotation of a struct
+func GetJSONTags(t reflect.Type) set.Set[string] {
+	tags := set.Make[string]()
+
+	for i := 0; i < t.NumField(); i++ {
+		fieldType := t.Field(i)
+		tag := fieldType.Tag.Get("json")
+		if tag != "" {
+			// Split the tag to handle omitempty and other options
+			tags.Add(strings.Split(tag, ",")[0])
+		}
+	}
+
+	return tags
+}

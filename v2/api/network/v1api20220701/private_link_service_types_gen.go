@@ -7,14 +7,12 @@ import (
 	"context"
 	"fmt"
 	storage "github.com/Azure/azure-service-operator/v2/api/network/v1api20220701/storage"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/internal/reflecthelpers"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -128,10 +126,10 @@ func (service *PrivateLinkService) InitializeSpec(status genruntime.ConvertibleS
 	return fmt.Errorf("expected Status of type PrivateLinkService_STATUS_PrivateLinkService_SubResourceEmbedded but received %T instead", status)
 }
 
-var _ genruntime.KubernetesExporter = &PrivateLinkService{}
+var _ genruntime.KubernetesConfigExporter = &PrivateLinkService{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (service *PrivateLinkService) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (service *PrivateLinkService) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(service.Namespace)
 	if service.Spec.OperatorSpec != nil && service.Spec.OperatorSpec.ConfigMaps != nil {
 		if service.Status.Alias != nil {

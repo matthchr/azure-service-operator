@@ -7,13 +7,11 @@ import (
 	"context"
 	"fmt"
 	storage "github.com/Azure/azure-service-operator/v2/api/dataprotection/v1api20231101/storage"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -92,10 +90,10 @@ func (vault *BackupVault) SecretDestinationExpressions() []*core.DestinationExpr
 	return vault.Spec.OperatorSpec.SecretExpressions
 }
 
-var _ genruntime.KubernetesExporter = &BackupVault{}
+var _ genruntime.KubernetesConfigExporter = &BackupVault{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (vault *BackupVault) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (vault *BackupVault) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(vault.Namespace)
 	if vault.Spec.OperatorSpec != nil && vault.Spec.OperatorSpec.ConfigMaps != nil {
 		if vault.Status.Identity != nil {

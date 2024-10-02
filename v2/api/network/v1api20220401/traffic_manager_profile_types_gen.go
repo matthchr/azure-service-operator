@@ -7,14 +7,12 @@ import (
 	"context"
 	"fmt"
 	storage "github.com/Azure/azure-service-operator/v2/api/network/v1api20220401/storage"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/internal/reflecthelpers"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -128,10 +126,10 @@ func (profile *TrafficManagerProfile) InitializeSpec(status genruntime.Convertib
 	return fmt.Errorf("expected Status of type TrafficManagerProfile_STATUS but received %T instead", status)
 }
 
-var _ genruntime.KubernetesExporter = &TrafficManagerProfile{}
+var _ genruntime.KubernetesConfigExporter = &TrafficManagerProfile{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (profile *TrafficManagerProfile) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (profile *TrafficManagerProfile) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(profile.Namespace)
 	if profile.Spec.OperatorSpec != nil && profile.Spec.OperatorSpec.ConfigMaps != nil {
 		if profile.Status.DnsConfig != nil {

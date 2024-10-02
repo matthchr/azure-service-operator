@@ -5,13 +5,11 @@ package storage
 
 import (
 	"context"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -71,10 +69,10 @@ func (topic *Topic) SecretDestinationExpressions() []*core.DestinationExpression
 	return topic.Spec.OperatorSpec.SecretExpressions
 }
 
-var _ genruntime.KubernetesExporter = &Topic{}
+var _ genruntime.KubernetesConfigExporter = &Topic{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (topic *Topic) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (topic *Topic) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(topic.Namespace)
 	if topic.Spec.OperatorSpec != nil && topic.Spec.OperatorSpec.ConfigMaps != nil {
 		if topic.Status.Endpoint != nil {

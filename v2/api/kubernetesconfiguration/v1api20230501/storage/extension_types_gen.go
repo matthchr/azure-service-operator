@@ -5,13 +5,11 @@ package storage
 
 import (
 	"context"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -72,10 +70,10 @@ func (extension *Extension) SecretDestinationExpressions() []*core.DestinationEx
 	return extension.Spec.OperatorSpec.SecretExpressions
 }
 
-var _ genruntime.KubernetesExporter = &Extension{}
+var _ genruntime.KubernetesConfigExporter = &Extension{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (extension *Extension) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (extension *Extension) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(extension.Namespace)
 	if extension.Spec.OperatorSpec != nil && extension.Spec.OperatorSpec.ConfigMaps != nil {
 		if extension.Status.AksAssignedIdentity != nil {
