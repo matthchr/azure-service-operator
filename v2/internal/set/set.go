@@ -107,3 +107,14 @@ func AsSortedSlice[T constraints.Ordered](set Set[T]) []T {
 	slices.Sort(result)
 	return result
 }
+
+// Union returns the union of the specified sets
+func Union[T comparable](sets ...Set[T]) Set[T] {
+	result := make(Set[T])
+
+	for _, set := range sets {
+		result.AddAll(set)
+	}
+
+	return result
+}

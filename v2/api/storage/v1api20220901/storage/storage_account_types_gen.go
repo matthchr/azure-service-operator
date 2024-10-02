@@ -7,13 +7,11 @@ import (
 	"context"
 	"fmt"
 	storage "github.com/Azure/azure-service-operator/v2/api/storage/v1api20230101/storage"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -92,10 +90,10 @@ func (account *StorageAccount) SecretDestinationExpressions() []*core.Destinatio
 	return account.Spec.OperatorSpec.SecretExpressions
 }
 
-var _ genruntime.KubernetesExporter = &StorageAccount{}
+var _ genruntime.KubernetesConfigExporter = &StorageAccount{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (account *StorageAccount) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (account *StorageAccount) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(account.Namespace)
 	if account.Spec.OperatorSpec != nil && account.Spec.OperatorSpec.ConfigMaps != nil {
 		if account.Status.PrimaryEndpoints != nil {

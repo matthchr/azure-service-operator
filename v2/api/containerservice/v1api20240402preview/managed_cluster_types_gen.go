@@ -8,14 +8,12 @@ import (
 	"fmt"
 	arm "github.com/Azure/azure-service-operator/v2/api/containerservice/v1api20240402preview/arm"
 	storage "github.com/Azure/azure-service-operator/v2/api/containerservice/v1api20240402preview/storage"
-	"github.com/Azure/azure-service-operator/v2/internal/genericarmclient"
 	"github.com/Azure/azure-service-operator/v2/internal/reflecthelpers"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/conditions"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/configmaps"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/secrets"
-	"github.com/go-logr/logr"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -132,10 +130,10 @@ func (cluster *ManagedCluster) SecretDestinationExpressions() []*core.Destinatio
 	return cluster.Spec.OperatorSpec.SecretExpressions
 }
 
-var _ genruntime.KubernetesExporter = &ManagedCluster{}
+var _ genruntime.KubernetesConfigExporter = &ManagedCluster{}
 
-// ExportKubernetesResources defines a resource which can create other resources in Kubernetes.
-func (cluster *ManagedCluster) ExportKubernetesResources(_ context.Context, _ genruntime.MetaObject, _ *genericarmclient.GenericClient, _ logr.Logger) ([]client.Object, error) {
+// ExportKubernetesConfigMaps defines a resource which can create ConfigMaps in Kubernetes.
+func (cluster *ManagedCluster) ExportKubernetesConfigMaps(_ context.Context) ([]client.Object, error) {
 	collector := configmaps.NewCollector(cluster.Namespace)
 	if cluster.Spec.OperatorSpec != nil && cluster.Spec.OperatorSpec.ConfigMaps != nil {
 		if cluster.Status.OidcIssuerProfile != nil {
