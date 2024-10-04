@@ -8,7 +8,6 @@ metadata:
   labels:
     app.kubernetes.io/name: azure-service-operator
     app.kubernetes.io/version: v2.9.0
-    control-plane: controller-manager
   name: azureserviceoperator-controller-manager
   namespace: {{ .Release.Namespace }}
 spec:
@@ -16,7 +15,7 @@ spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
-      control-plane: controller-manager
+      app.kubernetes.io/name: azure-service-operator
   template:
     metadata:
       annotations:
@@ -30,7 +29,6 @@ spec:
         {{- end }}
         app.kubernetes.io/name: azure-service-operator
         app.kubernetes.io/version: v2.9.0
-        control-plane: controller-manager
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
