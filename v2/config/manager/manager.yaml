@@ -17,13 +17,12 @@ metadata:
   name: controller-manager
   namespace: system
   labels:
-    control-plane: controller-manager
     app.kubernetes.io/name: azure-service-operator
     app.kubernetes.io/version: ${VERSION}
 spec:
   selector:
     matchLabels:
-      control-plane: controller-manager
+      app.kubernetes.io/name: azure-service-operator
   replicas: 1
   strategy:
     type: Recreate
@@ -31,7 +30,6 @@ spec:
   template:
     metadata:
       labels:
-        control-plane: controller-manager
         app.kubernetes.io/name: azure-service-operator
         app.kubernetes.io/version: ${VERSION}
       annotations:

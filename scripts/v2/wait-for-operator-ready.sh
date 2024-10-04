@@ -55,7 +55,7 @@ if [[ "$CHECK_ESTABLISHED" -eq 1 ]]; then
 fi
 
 echo "Waiting for pod ready..."
-kubectl wait --for=condition=ready --timeout=3m pod -n "$OPERATOR_NAMESPACE" -l control-plane=controller-manager
+kubectl wait --for=condition=ready --timeout=3m pod -n "$OPERATOR_NAMESPACE" -l 'app.kubernetes.io/name == azure-service-operator'
 
 echo "Waiting for CRD cabundle..."
 export -f all_crds_have_cabundle
