@@ -19,7 +19,7 @@ import (
 	"github.com/Azure/azure-service-operator/v2/pkg/genruntime/core"
 )
 
-func Test_ExpressionExporters_ShareBudget(t *testing.T) {
+func Test_ExpressionExporters_ShareCPUBudget(t *testing.T) {
 	t.Parallel()
 	g := NewGomegaWithT(t)
 	evaluator, err := asocel.NewExpressionEvaluator()
